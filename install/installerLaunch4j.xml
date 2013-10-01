@@ -1,0 +1,36 @@
+<launch4jConfig>
+  	<dontWrapJar>false</dontWrapJar>
+  	<headerType>gui</headerType>
+  	<jar>C:\Documents and Settings\stage\workspace\QSoftv2.3\install\Qsoftexe.jar</jar>
+  	<outfile>C:\Documents and Settings\stage\workspace\QSoftv2.3\install\QSoftv2.3.exe</outfile>
+  	<errTitle></errTitle>
+  	<cmdLine></cmdLine>
+  	<chdir></chdir>
+  	<priority>normal</priority>
+  	<downloadUrl>http://java.com/download</downloadUrl>
+  	<supportUrl></supportUrl>
+  	<customProcName>true</customProcName>
+  	<stayAlive>false</stayAlive>
+  	<icon>C:\Documents and Settings\stage\workspace\QSoftv2.3\picture\SD31632.ico</icon>
+  	<classPath>
+    	<mainClass>main.Program</mainClass>
+    	<cp>.</cp>
+  	</classPath>
+  	<jre>
+    	<path>jre1.6.0_02</path>
+    	<minVersion></minVersion>
+    	<maxVersion></maxVersion>
+  	</jre>
+  	<versionInfo>
+    	<fileVersion>2.3.0.0</fileVersion>
+    	<txtFileVersion>2.3</txtFileVersion>
+    	<fileDescription>Quotation software</fileDescription>
+   	 	<copyright>Copyright (c) 2011 SD3</copyright>
+    	<productVersion>2.3.0.0</productVersion>
+    	<txtProductVersion>2.3</txtProductVersion>
+    	<productName>QSoft</productName>
+    	<companyName>SD3</companyName>
+    	<internalName>QSoft</internalName>
+    	<originalFilename>QSoftv2.3.exe</originalFilename>
+  	</versionInfo>
+</launch4jConfig>

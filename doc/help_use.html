@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	
+	<title>User Guide QSoft 2.0</title>
+	<!--[if lt IE 9]>
+		<script src="includes/html5ie.js"></script>
+	<![endif]-->
+	<style>
+		body{
+			font-family:sans-serif;
+		}
+		section h2{
+			color:blue;
+		}
+		section h4{
+			color:red;
+			font-style:italic;
+			margin-left:25px;
+		}
+		section img{
+			margin-left:50px; 
+		}
+		section p{
+			margin-left:50px;
+		}
+		section ul{
+			margin-left:50px;
+		}
+		footer{
+			background:black;
+			margin:0;
+		}
+		footer p{
+			text-align:center;
+			color:#FFF;
+		}
+		div#hdp img { 
+			border:0;  
+			position:fixed;  
+			bottom:100px;  
+			right:50px; 
+		}
+		
+		.colGreen{
+			color:green;
+			font-weight:bold;
+		}
+	</style>
+	<link rel="icon" href="favicon.ico" />
+</head>
+<body>
+	<header role="banner">
+		<img src="img/logosd3.png" alt="logo SD3" />
+		<h1>User guide QSoft 2.0</h1>
+		<h3><u>In charge of the project</u> : Alexandre Philippon</h3>
+	</header>
+                
+	<nav role="navigation">
+		<h3>Summary</h3>
+		<ol>
+			<li><a href="#1">Configuration</a></li>
+			<li><a href="#2">First window</a></li>
+			<ol type="a">
+				<li><a href="#21">Load Selling price list</a></li>
+				<li><a href="#22">SD3 or Customer ?</a></li>
+				<li><a href="#23">Start</a></li>
+				<li><a href="#24">Exit QSoft</a></li>
+				<li><a href="#25">Restart QSoft</a></li>
+				<li><a href="#26">Visit the web site</a></li>
+			</ol>
+			<li><a href="#3">Second window</a></li>
+			<ol type="a">
+				<li><a href="#31">Load purchasing price list</a></li>
+				<li><a href="#32">Create a quotation</a></li>
+				<li><a href="#33">Export</a></li>
+				<li><a href="#34">Exit or Restart</a></li>
+			</ol>
+		</ol>
+	</nav>
+                
+	<section role="main">
+		<div id="hdp"> 
+			<a href="#"> 
+				<img src="img/flecheH.png" width="70" height="70"  alt="Haut de page." title="Revenir en haut de la page"> 
+			</a> 
+		</div>
+			
+		<h2 id="1">Configuration</h2>
+		<p>
+			At first use, you must configure the different information in software QSoft :
+		</p>
+		<ul>
+			<li>Language</li>
+			<li>User data</li>
+			<li>Company data</li>
+			<li>Mailing pathname</li>
+			<li>Logo</li>
+		</ul>
+		<p>
+			Read if necessary documentation about the software configuration <a href="help.html#3" title="link" target="_blank">here</a>.
+		</p>
+		
+		<h2 id="2">First window</h2>
+		
+		<img src="img/screen1.PNG" title="First Window" />
+		
+		<h4 id="21">- Load Selling price list</h4>
+		<p>
+			Click the button "Load Selling price list". <img src="img/btn_loadSellingPriceList.PNG" style="margin:0;padding:0;margin-left:8px;"/><br />
+			Load your list of products selling prices.<br />
+			This list must be in Excel format (.xls) and must be in the following form:<br />
+			<br />
+			<b>column 1 : </b>Reference <br />
+			<b>column 2 : </b>Decription <br />
+			<b>column 3 : </b>NET PRICES IN &euro; <br />
+			<br />
+			<img src="img/trame_sellingPriceList.PNG" title="example" />
+		</p>
+
+		<h4 id="22">- SD3 or Customer ?</h4>
+		<p>
+			<img src="img/sd3_or_customer.PNG" title="SD3 or Customer ?" style="border:1px solid black;"/><br />
+			<br />
+			Choose whether you're company SD3 or if you are a customer outside.
+		</p>
+				
+		<h4 id="23">- Start</h4>
+		<p>
+			Click the button "Start".<br />
+			<img src="img/btn_start.PNG" title="start" /><br />
+			This button is active only if you loaded the selling price list.
+		</p>
+				
+		<h4 id="24">- Exit QSoft</h4>
+		<p>
+			If you want to exit QSoft software, click on the red cross at the top right or go to the File menu -> Exit.<br />
+			<br />
+			<img src="img/exit_QSoft.PNG" title="exit QSoft" />
+		</p>
+		
+		<h4 id="25">- Restart QSoft</h4>
+		<p>
+			If you want to restart QSoft software, go to the File menu -> Restart.<br />
+			<br />
+			<img src="img/restart_QSoft.PNG" title="restart QSoft" />
+		</p>
+		
+		<h4 id="26">- Visit the web site</h4>
+		<p>
+			You can visit the website of the company SD3 by clicking on the blue link : <br />
+			<a href="http://www.sd3.fr" title="visit the website" target="_blank"><img src="img/link_website.PNG" /></a>
+		</p>
+		
+		<h2 id="3">Second window</h2>
+		
+		<img src="img/screen2.PNG" title="Second Window" />
+		
+		<h4 id="31">- Load purchasing price list</h4>
+		<p>
+			Click on <img src="img/icon_loadPurchasePrice.PNG" title="Load Purchasing price" style="margin:0;padding:0;" /> to load (if necessary) the
+			purchasing price list.<br />
+			This list must be in Excel format (.xls) and must be in the following form:<br />
+			<br />
+			<b>column A : </b>Reference <br />
+			<b>column B : </b>Decription <br />
+			<b>column C : </b>PP.... <br />
+			<br />
+			<u><i>Example for 2013</i></u>:
+			<br />
+			<br />
+			<img src="img/trame_buyingPriceList.PNG" title="Example" />
+			<br />
+			<br />
+			This list will allow QSoft software to make calculations to give you more information such as:<br />
+			<br />
+			<ul>
+				<li class="colGreen">The multiplier coefficient (KP) : </li>
+				<p>Selling price / Buying price</p>
+			
+				<li class="colGreen">The margin (Profit) in % : </li>
+				<p>((Selling price - Buying price) / Selling price) * 100</p>
+				
+				<li class="colGreen">The total multiplier coefficient (Total KP) : </li>
+				<p>Total Selling price / Total Buying price</p>
+				
+				<li class="colGreen">The total margin (Total Profit) in % : </li>
+				<p>((Total Selling price - Total Buying price) / Total Selling price) * 100</p>
+			</ul>
+		</p>
+		
+		<p>
+			<img src="img/warning.png" style="margin:0;padding:0;"/> 
+			<b>WARNING:</b> <br />
+			Loading the purchasing price list delete all the quotes that you have entered previously.
+		</p>
+		
+		<h4 id="32">- Create a quotation</h4>
+		<p>
+			To create your quotation : <br />
+			<ol>
+				<li>Search products using the search bar "Search Product:".</li>
+				<img src="img/searchProduct.PNG" />
+				<li>Select the product from the list that appears below.</li>
+				<li>Define the quantity in "Quantity".</li>
+				<img src="img/quantity.PNG" />
+				<li>Change the unit price (if necessary) in "Unit Price".</li>
+				<img src="img/unitPrice.PNG" />
+				<li>If you would like a discount on the product, check the "Discount (in %)" box.</li>
+				<img src="img/boxDiscount.PNG" />
+				<p style="margin:0;padding:0;">Leave the box checked so you can edit the quotation in PDF displaying the discount.</p>
+				<li>Click the button "Add".</li>
+			</ol>
+			Add all your products this way. <br />
+			<br />
+			In the end, you can add to the quotation : <br />
+			<ul type="square">
+				<li>A total discount:</li>
+				<p style="margin:0;padding:0;color:blue;font-style:italic;">Check the "Discount" box on the right, enter your discount in % and press the Enter key.</p>
+				<li>A transport price:</li>
+				<p style="margin:0;padding:0;color:blue;font-style:italic;">Check the "Transport" box, enter your price in &euro; and press the Enter key.</p>
+				<li>A start-up price: </li>
+				<p style="margin:0;padding:0;color:blue;font-style:italic;">Check the "Start-up" box, enter your price in &euro; and press the Enter key.</p>
+			</ul>
+			If you load the list of purchase price at the beginning, you can see the multiplier coefficient and the profit in %  <br />
+			by product, in the table, as well as the multiplier coefficient and the total profit in % made in the quote. <br />
+		</p>
+		
+		<h4 id="33">- Export</h4>
+		<img src="img/exportBar.PNG" />
+		<p>
+			Once the quotation is completed, you can:
+			
+			<ul>
+				<li>Create a proforma <img src="img/exportProforma.PNG" style="margin:0;padding:0;margin-left:100px;"/></li> 
+				<li>Export quotation in PDF <img src="img/exportPdf.PNG" style="margin:0;padding:0;margin-left:62px;"/></li>
+				<li>Export quotation in Excel <img src="img/exportXls.PNG" style="margin:0;padding:0;margin-left:57px;"/></li>
+				<li>Save your quotation in .data <img src="img/exportData.PNG" style="margin:0;padding:0;margin-left:37px;"/></li>
+				<li>Send the PDF quotation by mail <img src="img/sendMail.PNG" style="margin:0;padding:0;margin-left:10px;"/></li>
+			</ul>
+		</p>
+		<p>
+			<img src="img/warning.png" style="margin:0;padding:0;"/> 
+			<b>WARNING:</b> <br />
+			Safeguarding the quotation in PDF on a remote server will prevent the opening <br />
+			and direct visualization of the file. 
+			It will open manually.
+		</p>
+		<p>
+			For open an existing .data file, click to <img src="img/openData.PNG" style="margin:0;padding:0;margin-left:10px;"/>
+		</p>
+		
+		<h4 id="34">- Exit or Restart</h4>
+		<p>
+			If you want to exit QSoft software and you have not saved your work in .data,<br />
+			the software will ask you if you are sure you want to exit without saving.
+			<br /><br />
+			<img src="img/confirmQuit.PNG" />
+		</p>
+		
+	</section>
+                
+	<footer>
+		<p>
+			Software developed by SD3.
+		</p>
+	</footer>
+</body>
+</html>

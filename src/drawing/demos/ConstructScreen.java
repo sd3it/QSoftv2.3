@@ -1,0 +1,287 @@
+package drawing.demos;
+
+import ihm.Window;
+
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
+import drawing.FenetreAjoutTexte;
+import drawing.GUIHelper;
+import drawing.IDrawable;
+import drawing.ImgDrawable;
+import drawing.JCanvas;
+import drawing.LineDrawable;
+import drawing.TextDrawable;
+import drawing.listeners.NonOverlapMoveAdapter;
+
+/**
+ * @author KoA
+ * @version 0.1
+ * 
+ *          ConstructScreen : Class permettant la construction du JCanvas
+ * 
+ */
+public class ConstructScreen {
+
+	static JCanvas jc = new JCanvas();
+	static Image img;
+	static String parents = FileSystemView.getFileSystemView()
+			.getHomeDirectory().getAbsolutePath();
+	private static File f = null;
+	private static Boolean save = false;
+
+	private javax.swing.JLabel lb_logo;
+
+	public ConstructScreen() {
+
+		jc.setBackground(Color.WHITE);
+
+		int widthScreen = 800;
+		int heightScreen = 600;
+
+		int px = 80;
+		int py = 180;
+
+		jc.setPreferredSize(new Dimension(widthScreen, heightScreen));
+
+		Dimension dim = new Dimension(100, 100);
+
+		for (int row = 0; row <= Window.reference.size() - 1; row++) {
+			for (int column = 0; column <= 6; column++) {
+				if (column == 1) {
+					if (Window.reference.get(row).contains("/")) {
+						IDrawable img = new ImgDrawable(Color.BLACK, new Point(
+								px, py), dim, Window.reference.get(row)
+								.replace("/", ""), Window.quantity.get(row));
+						jc.addDrawable(img);
+					} else {
+						IDrawable img = new ImgDrawable(Color.BLACK, new Point(
+								px, py), dim, Window.reference.get(row),
+								Window.quantity.get(row));
+						jc.addDrawable(img);
+					}
+
+				}
+				px = px + 20;
+				if (px >= 750) {
+					py = py + 150;
+					px = 80;
+				}
+				System.out.println("px=" + px);
+			}
+			System.out.println();
+		}
+
+		lb_logo = new JLabel(new ImageIcon("logo.png"));
+		jc.add(lb_logo);
+		
+		IDrawable l = new LineDrawable(Color.black, new Point(10,20), new Point(80,356));
+		jc.addDrawable(l);
+		
+		new NonOverlapMoveAdapter(jc);
+		
+		GUIHelper.showOnFrame(jc, "QSoft - Schema");
+	}
+
+	/**
+	 * Methode d'ajout de Texte
+	 */
+	public static void addText(String lab) {
+		IDrawable txt3 = new TextDrawable(FenetreAjoutTexte.getColText(),
+				FenetreAjoutTexte.getStyle(),
+				FenetreAjoutTexte.getTaillePolice(), new Point(500, 100),
+				new Dimension(10, 30), lab);
+		jc.addDrawable(txt3);
+	}
+	
+	/**
+	 * Méthode d'ajout d'une image
+	 */
+	public static void addImg(String name) {
+		IDrawable img3 = new ImgDrawable(Color.BLACK, new Point(200,250), new Dimension(200,200), name, "1");
+		jc.addDrawable(img3);
+	}
+
+	/**
+	 * Sauvegarde en PNG du JCanvas
+	 */
+	public static void savePNG() {
+		JFileChooser chooser = new JFileChooser(parents) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void approveSelection() {
+
+				if (getSelectedFile().getAbsolutePath().endsWith(".png")) {
+					f = new File(getSelectedFile().getAbsolutePath());
+				} else {
+					f = new File(getSelectedFile().getAbsolutePath() + ".png");
+				}
+
+				if (f.exists()) {
+					parents = f.getParent();
+
+					int answer = JOptionPane.showConfirmDialog(this, f
+							+ " exists. Overwrite?", "Overwrite?",
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE);
+
+					if (answer != JOptionPane.OK_OPTION) {
+						return;
+					}
+				}
+				super.approveSelection();
+			}
+		};		
+		
+		chooser.setAcceptAllFileFilterUsed(false);
+
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"Fichier PNG (.png)", "png");
+		chooser.setFileFilter(filter);
+		chooser.setSelectedFile(new File("Schema_"
+				+ new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
+
+		int returnVal = chooser.showSaveDialog(null);
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				Rectangle r = jc.getBounds();
+				img = jc.createImage(r.width, r.height);
+				Graphics g = img.getGraphics();
+				jc.paint(g);
+				ImageIO.write((RenderedImage) img, "png", f);
+				setSave(true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Sauvegarder et Afficher le PNG du JCanvas
+	 */
+	public static void saveAndPrintPNG() {
+
+		JFileChooser chooser = new JFileChooser(parents) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void approveSelection() {
+
+				if (getSelectedFile().getAbsolutePath().endsWith(".png")) {
+					f = new File(getSelectedFile().getAbsolutePath());
+				} else {
+					f = new File(getSelectedFile().getAbsolutePath() + ".png");
+				}
+
+				if (f.exists()) {
+					parents = f.getParent();
+
+					int answer = JOptionPane.showConfirmDialog(this, f
+							+ " exists. Overwrite?", "Overwrite?",
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE);
+
+					if (answer != JOptionPane.OK_OPTION) {
+						return;
+					}
+				}
+				super.approveSelection();
+			}
+		};
+
+		chooser.setAcceptAllFileFilterUsed(false);
+
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"Fichier PNG (.png)", "png");
+		chooser.setFileFilter(filter);
+		chooser.setSelectedFile(new File("Schema_"
+				+ new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
+
+		int returnVal = chooser.showSaveDialog(null);
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				Rectangle r = jc.getBounds();
+				img = jc.createImage(r.width, r.height);
+				Graphics g = img.getGraphics();
+				jc.paint(g);
+				ImageIO.write((RenderedImage) img, "png", f);
+				setSave(true);
+				System.out.println("save = " + save);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (Desktop.isDesktopSupported()) {
+				Desktop desktop = Desktop.getDesktop();
+
+				if (desktop.isSupported(Desktop.Action.OPEN)) {
+					if (chooser.getSelectedFile().getAbsolutePath()
+							.endsWith(".png")) {
+						try {
+							desktop.open(new File(chooser.getSelectedFile()
+									.getAbsolutePath()));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else {
+						try {
+							desktop.open(new File(chooser.getSelectedFile()
+									.getAbsolutePath() + ".png"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Permet de vider le jCanvas quand on quitte
+	 */
+	public static void clear() {
+		jc.clear();
+		jc.removeAll();
+		System.out.println("clean frame");
+	}
+
+	/**
+	 * @param save
+	 *            the save to set
+	 */
+	public static void setSave(Boolean save) {
+		ConstructScreen.save = save;
+	}
+
+	/**
+	 * @return the save
+	 */
+	public static Boolean getSave() {
+		return save;
+	}
+}
