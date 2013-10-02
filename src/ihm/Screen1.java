@@ -677,9 +677,7 @@ public class Screen1 extends Window implements ComponentListener {
 			if (e.getSource().equals(menubar.getjMenuItem11())) {
 				try {
 					JFileChooser chooser = new JFileChooser(parents) {
-						/**
-						 * 
-						 */
+
 						private static final long serialVersionUID = 1L;
 
 						@Override

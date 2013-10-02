@@ -88,10 +88,12 @@ public class GUIHelper {
 		JMenuItem menuItem11 = new JMenuItem("Add Text");
 		JMenuItem menuItem12 = new JMenuItem("Add Line");
 		JMenuItem menuItem13 = new JMenuItem("Save to PNG file");
+		JMenuItem menuItem14 = new JMenuItem("Gomme");
 
 		Menu1.add(menuItem11);
 		Menu1.add(menuItem12);
 		Menu1.add(menuItem13);
+		Menu1.add(menuItem14);
 
 		JMenu Menu2 = new JMenu("Add");
 		JMenuItem menuItem21 = new JMenuItem("EoL (End of Line)");

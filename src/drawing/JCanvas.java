@@ -53,7 +53,6 @@ public class JCanvas extends JPanel {
 		for (Iterator iter = drawables.iterator(); iter.hasNext();) {
 			((IDrawable) iter.next()).draw(g);
 		}
-
 	}
 
 	public void clear() {

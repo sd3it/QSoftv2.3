@@ -23,12 +23,13 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
+import com.itextpdf.text.Font;
+
 import drawing.FenetreAjoutTexte;
 import drawing.GUIHelper;
 import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.JCanvas;
-import drawing.LineDrawable;
 import drawing.TextDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
 
@@ -48,7 +49,7 @@ public class ConstructScreen {
 	private static File f = null;
 	private static Boolean save = false;
 
-	private javax.swing.JLabel lb_logo;
+	private javax.swing.JLabel lb_logo, lb_date;
 
 	public ConstructScreen() {
 
@@ -90,14 +91,23 @@ public class ConstructScreen {
 			System.out.println();
 		}
 
+		IDrawable date = new TextDrawable(Color.BLACK, Font.NORMAL, 15,
+				new Point(20, 20), new Dimension(10, 10), new SimpleDateFormat(
+						"dd/MM/yyyy").format(new Date()));
+		jc.addDrawable(date);
+
+		if (!Window.referencequot.isEmpty()) {
+			IDrawable reference = new TextDrawable(Color.BLACK, Font.NORMAL,
+					15, new Point(20, 40), new Dimension(10, 10), "Reference: "
+							+ Window.referencequot);
+			jc.addDrawable(reference);
+		}
+
 		lb_logo = new JLabel(new ImageIcon("logo.png"));
 		jc.add(lb_logo);
-		
-		IDrawable l = new LineDrawable(Color.black, new Point(10,20), new Point(80,356));
-		jc.addDrawable(l);
-		
+
 		new NonOverlapMoveAdapter(jc);
-		
+
 		GUIHelper.showOnFrame(jc, "QSoft - Schema");
 	}
 
@@ -111,12 +121,13 @@ public class ConstructScreen {
 				new Dimension(10, 30), lab);
 		jc.addDrawable(txt3);
 	}
-	
+
 	/**
 	 * Méthode d'ajout d'une image
 	 */
 	public static void addImg(String name) {
-		IDrawable img3 = new ImgDrawable(Color.BLACK, new Point(200,250), new Dimension(200,200), name, "1");
+		IDrawable img3 = new ImgDrawable(Color.BLACK, new Point(200, 250),
+				new Dimension(200, 200), name, "1");
 		jc.addDrawable(img3);
 	}
 
@@ -150,8 +161,8 @@ public class ConstructScreen {
 				}
 				super.approveSelection();
 			}
-		};		
-		
+		};
+
 		chooser.setAcceptAllFileFilterUsed(false);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(

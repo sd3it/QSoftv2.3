@@ -99,6 +99,7 @@ public class FenetreAjoutTexte extends JDialog {
 
 		jRbBlack.setBounds(170, 70, 40, 20);
 		jRbBlack.setBackground(Color.BLACK);
+		jRbBlack.setSelected(true);
 		jLayeredPane1.add(jRbBlack, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		colorGroup.add(jRbRed);
@@ -116,10 +117,10 @@ public class FenetreAjoutTexte extends JDialog {
 
 		styleGroup.add(jRbBold);
 		styleGroup.add(jRbItalic);
-		
+
 		jCboxPolice.setBounds(350, 70, 50, 20);
 		jLayeredPane1.add(jCboxPolice, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
+
 		jCboxPolice.addItem("12");
 		jCboxPolice.addItem("15");
 		jCboxPolice.addItem("18");
@@ -147,6 +148,9 @@ public class FenetreAjoutTexte extends JDialog {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				ConstructScreen.addText(jTextField1.getText());
 				dispose();
+				setColText(Color.BLACK);
+				setStyle(0);
+				setTaillePolice(12);
 			}
 		});
 
@@ -185,13 +189,13 @@ public class FenetreAjoutTexte extends JDialog {
 				setStyle(Font.ITALIC);
 			}
 		});
-		
+
 		jCboxPolice.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				setTaillePolice(Integer.parseInt((String) jCboxPolice.getSelectedItem()));
+				setTaillePolice(Integer.parseInt((String) jCboxPolice
+						.getSelectedItem()));
 			}
 		});
-		
 	}
 
 	/**
@@ -223,19 +227,19 @@ public class FenetreAjoutTexte extends JDialog {
 	public static int getStyle() {
 		return style;
 	}
-	
+
 	/**
 	 * @param taillePolice
-	 * 			  the taillePolice to set
+	 *            the taillePolice to set
 	 */
-	public static void setTaillePolice(int taillePolice){
+	public static void setTaillePolice(int taillePolice) {
 		FenetreAjoutTexte.taillePolice = taillePolice;
 	}
-	
+
 	/**
 	 * @return taillePolice
 	 */
-	public static int getTaillePolice(){
+	public static int getTaillePolice() {
 		return taillePolice;
 	}
 }

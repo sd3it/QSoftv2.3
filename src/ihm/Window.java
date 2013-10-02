@@ -71,7 +71,7 @@ public abstract class Window extends javax.swing.JFrame {
 	protected static String tel="";
 	protected static String fax="";
 	protected static String email="";
-	protected static String referencequot="";
+	public static String referencequot="";
 	protected static String gsm="";
 	protected static String remarks="";
 	protected static String recipientname="";
