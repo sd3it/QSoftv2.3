@@ -49,7 +49,7 @@ public class ConstructScreen {
 	private static File f = null;
 	private static Boolean save = false;
 
-	private javax.swing.JLabel lb_logo, lb_date;
+	private javax.swing.JLabel lb_logo;
 
 	public ConstructScreen() {
 
@@ -109,6 +109,7 @@ public class ConstructScreen {
 		new NonOverlapMoveAdapter(jc);
 
 		GUIHelper.showOnFrame(jc, "QSoft - Schema");
+		
 	}
 
 	/**

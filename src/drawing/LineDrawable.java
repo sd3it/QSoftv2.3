@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import drawing.listeners.NonOverlapMoveAdapter;
+
 /**
  * @author KoA
  * @version 0.1

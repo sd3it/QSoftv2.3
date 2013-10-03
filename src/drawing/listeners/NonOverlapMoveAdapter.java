@@ -26,7 +26,8 @@ import drawing.MoveDrawableMouseListener;
 public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 
 	private Point initialLocation;
-	Point start, end;
+	private static Point start;
+	private static Point end;
 	private static boolean mouseUp = false;
 
 	/**
@@ -38,8 +39,8 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 
 	public void mouseReleased(MouseEvent e) {
 		if (drawable == null) {
-			end = new Point(e.getX(), e.getY());
-			System.out.println("+ END = " + end);
+			setEnd(new Point(e.getX(), e.getY()));
+			System.out.println("+ END = " + getEnd());
 			setMouseUp(true);
 			/*
 			System.out.println("stateLine = " + GUIHelper.isStateLine());
@@ -67,8 +68,8 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 			initialLocation = drawable.getPosition();
 		} else {
 			setMouseUp(false);
-			start = new Point(e.getX(), e.getY());
-			System.out.println("+ START = " + start);
+			setStart(new Point(e.getX(), e.getY()));
+			System.out.println("+ START = " + getStart());
 		}
 	}
 
@@ -85,5 +86,33 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	 */
 	public static boolean isMouseUp() {
 		return mouseUp;
+	}
+
+	/**
+	 * @param start the start to set
+	 */
+	public static void setStart(Point start) {
+		NonOverlapMoveAdapter.start = start;
+	}
+
+	/**
+	 * @return the start
+	 */
+	public static Point getStart() {
+		return start;
+	}
+
+	/**
+	 * @param end the end to set
+	 */
+	public static void setEnd(Point end) {
+		NonOverlapMoveAdapter.end = end;
+	}
+
+	/**
+	 * @return the end
+	 */
+	public static Point getEnd() {
+		return end;
 	}
 }
