@@ -23,8 +23,15 @@ import drawing.demos.ConstructScreen;
  */
 
 public class GUIHelper {
+	
+	/*
+	 * State of isStateLine :
+	 * 		- 0 : no line
+	 * 		- 1 : pleine
+	 * 		- 2 : pointille
+	 */
 
-	protected static boolean stateLine;
+	protected static int stateLine = 0;
 
 	public static void showOnFrame(JComponent component, String frameName) {
 		final JFrame frame = new JFrame(frameName);
@@ -86,11 +93,17 @@ public class GUIHelper {
 		JMenu Menu1 = new JMenu("Actions");
 
 		JMenuItem menuItem11 = new JMenuItem("Add Text");
-		JMenuItem menuItem12 = new JMenuItem("Add Line");
+		JMenu Menu11 = new JMenu("Add Line");
+		JMenuItem menuItem111 = new JMenuItem("_________");
+		JMenuItem menuItem112 = new JMenuItem("_ _ _ _ _");
+		JMenuItem menuItem113 = new JMenuItem("unknow");
 		JMenuItem menuItem13 = new JMenuItem("Save to PNG file");
 
 		Menu1.add(menuItem11);
-		Menu1.add(menuItem12);
+		Menu1.add(Menu11);
+		Menu11.add(menuItem111);
+		Menu11.add(menuItem112);
+		Menu11.add(menuItem113);
 		Menu1.add(menuItem13);
 
 		JMenu Menu2 = new JMenu("Add");
@@ -141,9 +154,15 @@ public class GUIHelper {
 			}
 		});
 
-		menuItem12.addActionListener(new ActionListener() {
+		menuItem111.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(true);
+				setStateLine(1);
+			}
+		});
+		
+		menuItem112.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setStateLine(2);
 			}
 		});
 
@@ -240,11 +259,11 @@ public class GUIHelper {
 		return menuBar;
 	}
 
-	public static boolean isStateLine() {
+	public static int isStateLine() {
 		return stateLine;
 	}
 
-	public static void setStateLine(boolean stateLine) {
+	public static void setStateLine(int stateLine) {
 		GUIHelper.stateLine = stateLine;
 	}
 }

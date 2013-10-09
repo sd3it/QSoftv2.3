@@ -18,7 +18,7 @@ public interface IDrawable {
 	 * @post: configuration de g inchangee
 	 */
 	public abstract void draw(Graphics g);
-
+	
 	/**
 	 * @pre:
 	 * @return le rectangle qui contient completement this.

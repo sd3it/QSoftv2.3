@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import javax.swing.SwingUtilities;
+
 import drawing.GUIHelper;
 import drawing.JCanvas;
 import drawing.MoveDrawableMouseListener;
@@ -34,13 +36,31 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 
 	public void mouseReleased(MouseEvent e) {
 		System.out.println("+ END = " + getEnd());
+		System.out.println("+----- State Line = " + GUIHelper.isStateLine());
 		if (drawable == null) {
 			setEnd(new Point(e.getX(), e.getY()));
 			setMouseUp(true);
+			
+			/*
+			 * State of isStateLine :
+			 * 		- 0 : no line
+			 * 		- 1 : pleine
+			 * 		- 2 : pointille
+			 */
 
-			if (GUIHelper.isStateLine()) {
+			if (GUIHelper.isStateLine() == 1) {
 				ConstructScreen.addLine(Color.BLUE);
-				GUIHelper.setStateLine(false);
+				GUIHelper.setStateLine(0);
+			}
+			
+			if (GUIHelper.isStateLine() == 2) {
+				ConstructScreen.addLinePointille(Color.GREEN);
+				GUIHelper.setStateLine(0);
+			}
+			
+			if ( SwingUtilities.isRightMouseButton(e) ) {
+				ConstructScreen.addLine(Color.RED);
+				GUIHelper.setStateLine(0);
 			}
 
 			return;

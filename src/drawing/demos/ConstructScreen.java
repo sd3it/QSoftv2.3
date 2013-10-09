@@ -31,6 +31,7 @@ import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.JCanvas;
 import drawing.LineDrawable1;
+import drawing.LineDrawable2;
 import drawing.RectangleDrawable;
 import drawing.TextDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
@@ -115,10 +116,20 @@ public class ConstructScreen {
 	}
 
 	/**
-	 * Methode d'ajout d'une ligne
+	 * Methode d'ajout d'une ligne pleine
 	 */
 	public static void addLine(Color c) {
 		IDrawable r = new LineDrawable1(c, new Point(
+				NonOverlapMoveAdapter.getEnd()), new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(5, 5));
+		jc.addDrawable(r);
+	}
+	
+	/**
+	 * Methode d'ajout d'une ligne pointille
+	 */
+	public static void addLinePointille(Color c) {
+		IDrawable r = new LineDrawable2(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
 				NonOverlapMoveAdapter.getStart()), new Dimension(5, 5));
 		jc.addDrawable(r);
