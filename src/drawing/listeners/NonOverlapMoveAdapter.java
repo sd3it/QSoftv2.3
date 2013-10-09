@@ -36,6 +36,7 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	public NonOverlapMoveAdapter(JCanvas canvas) {
 		super(canvas);
 	}
+	
 
 	public void mouseReleased(MouseEvent e) {
 		if (drawable == null) {
