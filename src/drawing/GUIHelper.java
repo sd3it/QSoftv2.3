@@ -1,5 +1,6 @@
 package drawing;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -145,10 +146,8 @@ public class GUIHelper {
 
 		menuItem12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("++++++");
+				//ConstructScreen.addLine(Color.blue);
 				setStateLine(true);
-				System.out.println("stateLine = " + isStateLine());
-				System.out.println("++++++");
 			}
 		});
 

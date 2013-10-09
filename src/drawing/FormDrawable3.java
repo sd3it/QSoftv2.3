@@ -1,35 +1,55 @@
 package drawing;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 
-public abstract class FormDrawable3 implements IMovableDrawable{
-	
-	protected Point pos1, pos2;
+/**
+ * @author KoA
+ * @version 0.1
+ * 
+ *          FormDrawable : classe abstraite qui permet de dessiner un carre dans
+ *          la classe, on place les infos de chaque type de forme : position,
+ *          dimension, couleur
+ */
+
+public abstract class FormDrawable3 implements IMovableDrawable {
+
+	protected Rectangle rect;
+	protected Point start, end;
 	protected Color color;
 
-	public FormDrawable3(Color color, Point pos1, Point pos2) {
+	/**
+	 * @param color
+	 *            the color of this form
+	 * @param pos
+	 *            the coordinate of the center this form
+	 * @param dim
+	 *            the dimension of this form
+	 */
+	public FormDrawable3(Color color, Point pos, Dimension dim) {
 		this.color = color;
-		this.pos1 = pos1;
-		this.pos2 = pos2;
+		this.rect = new Rectangle(dim);
+		setPosition(pos);
 	}
 	
 	public abstract void draw(Graphics g);
 
-	public Point getPos1() {
-		return pos1;
+	public Rectangle getRectangle() {
+		return (Rectangle) rect.clone();
 	}
 
-	public void setPos1(Point pos1) {
-		this.pos1 = pos1;
+	public Point getPosition() {
+		Point p = rect.getLocation();
+		p.x = (p.x + rect.width / 2);
+		p.y = (p.y + rect.width / 2);
+		return p;
 	}
 
-	public Point getPos2() {
-		return pos2;
-	}
-
-	public void setPos2(Point pos2) {
-		this.pos2 = pos2;
+	public void setPosition(Point p) {
+		rect.x = (p.x - rect.width / 2);
+		rect.y = (p.y - rect.height / 2);
 	}
 }

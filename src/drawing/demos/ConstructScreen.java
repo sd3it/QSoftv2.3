@@ -30,6 +30,8 @@ import drawing.GUIHelper;
 import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.JCanvas;
+import drawing.LineDrawable1;
+import drawing.RectangleDrawable;
 import drawing.TextDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
 
@@ -105,12 +107,22 @@ public class ConstructScreen {
 
 		lb_logo = new JLabel(new ImageIcon("logo.png"));
 		jc.add(lb_logo);
+		
+		IDrawable rec = new RectangleDrawable(Color.red, new Point(50,20), new Dimension(130, 20));
+		jc.addDrawable(rec);
 
 		new NonOverlapMoveAdapter(jc);
 
 		GUIHelper.showOnFrame(jc, "QSoft - Schema");
 		
 	}
+	
+	public static void addLine(Color c){
+		
+		IDrawable r = new LineDrawable1(c, new Point(NonOverlapMoveAdapter.getStart()), new Dimension(45,60));
+		jc.addDrawable(r);
+	}
+	
 
 	/**
 	 * Methode d'ajout de Texte

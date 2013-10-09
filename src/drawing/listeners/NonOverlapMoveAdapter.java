@@ -2,17 +2,15 @@ package drawing.listeners;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-
-import javax.swing.SwingUtilities;
 
 import drawing.GUIHelper;
 import drawing.IDrawable;
 import drawing.JCanvas;
-import drawing.LineDrawable;
+import drawing.LineDrawable1;
 import drawing.MoveDrawableMouseListener;
+import drawing.demos.ConstructScreen;
 
 /**
  * @author KoA
@@ -36,12 +34,12 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	public NonOverlapMoveAdapter(JCanvas canvas) {
 		super(canvas);
 	}
-	
 
 	public void mouseReleased(MouseEvent e) {
+		System.out.println("+ END = " + getEnd());
 		if (drawable == null) {
 			setEnd(new Point(e.getX(), e.getY()));
-			System.out.println("+ END = " + getEnd());
+			//System.out.println("+ END = " + getEnd());
 			setMouseUp(true);
 			/*
 			System.out.println("stateLine = " + GUIHelper.isStateLine());
@@ -51,12 +49,21 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 				GUIHelper.setStateLine(false);
 			}
 			*/
+			System.out.println("stateLine = " + GUIHelper.isStateLine());
+			if (GUIHelper.isStateLine()) {
+				/*IDrawable r = new LineDrawable1(Color.black, new Point(60,85), new Dimension(120,46));
+				canvas.addDrawable(r);*/
+				ConstructScreen.addLine(Color.BLUE);
+				GUIHelper.setStateLine(false);
+			}
+			
 			return;
 		}
-		if (!canvas.isAlone(drawable)) {
+		/*if (!canvas.isAlone(drawable)) {
 			drawable.setPosition(initialLocation);
-		}
-		initialLocation = null;
+			System.out.println("aie");
+		}*/
+		//initialLocation = null;
 		drawable = null;
 
 		canvas.repaint();
@@ -64,14 +71,16 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 
 	public void mousePressed(MouseEvent e) {
 		super.mousePressed(e);
-
+		/*
 		if (drawable != null) {
 			initialLocation = drawable.getPosition();
 		} else {
+		*/
 			setMouseUp(false);
 			setStart(new Point(e.getX(), e.getY()));
 			System.out.println("+ START = " + getStart());
-		}
+
+		//}
 	}
 
 	/**
