@@ -1,14 +1,11 @@
 package drawing.listeners;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import drawing.GUIHelper;
-import drawing.IDrawable;
 import drawing.JCanvas;
-import drawing.LineDrawable1;
 import drawing.MoveDrawableMouseListener;
 import drawing.demos.ConstructScreen;
 
@@ -39,31 +36,19 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		System.out.println("+ END = " + getEnd());
 		if (drawable == null) {
 			setEnd(new Point(e.getX(), e.getY()));
-			//System.out.println("+ END = " + getEnd());
 			setMouseUp(true);
-			/*
-			System.out.println("stateLine = " + GUIHelper.isStateLine());
+
 			if (GUIHelper.isStateLine()) {
-				IDrawable line = new LineDrawable(Color.GREEN, start, end);
-				canvas.addDrawable(line);
-				GUIHelper.setStateLine(false);
-			}
-			*/
-			System.out.println("stateLine = " + GUIHelper.isStateLine());
-			if (GUIHelper.isStateLine()) {
-				/*IDrawable r = new LineDrawable1(Color.black, new Point(60,85), new Dimension(120,46));
-				canvas.addDrawable(r);*/
 				ConstructScreen.addLine(Color.BLUE);
 				GUIHelper.setStateLine(false);
 			}
-			
+
 			return;
 		}
-		/*if (!canvas.isAlone(drawable)) {
-			drawable.setPosition(initialLocation);
-			System.out.println("aie");
-		}*/
-		//initialLocation = null;
+		/*
+		 * if (!canvas.isAlone(drawable)) {
+		 * drawable.setPosition(initialLocation); } initialLocation = null;
+		 */
 		drawable = null;
 
 		canvas.repaint();
@@ -72,15 +57,14 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	public void mousePressed(MouseEvent e) {
 		super.mousePressed(e);
 		/*
-		if (drawable != null) {
-			initialLocation = drawable.getPosition();
-		} else {
-		*/
-			setMouseUp(false);
-			setStart(new Point(e.getX(), e.getY()));
-			System.out.println("+ START = " + getStart());
+		 * if (drawable != null) { initialLocation = drawable.getPosition(); }
+		 * else {
+		 */
+		setMouseUp(false);
+		setStart(new Point(e.getX(), e.getY()));
+		System.out.println("+ START = " + getStart());
 
-		//}
+		// }
 	}
 
 	/**
@@ -99,7 +83,8 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	}
 
 	/**
-	 * @param start the start to set
+	 * @param start
+	 *            the start to set
 	 */
 	public static void setStart(Point start) {
 		NonOverlapMoveAdapter.start = start;
@@ -113,7 +98,8 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	}
 
 	/**
-	 * @param end the end to set
+	 * @param end
+	 *            the end to set
 	 */
 	public static void setEnd(Point end) {
 		NonOverlapMoveAdapter.end = end;
