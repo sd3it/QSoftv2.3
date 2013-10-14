@@ -32,6 +32,7 @@ public class GUIHelper {
 	 */
 
 	protected static int stateLine = 0;
+	protected static boolean stateGomme = false;
 
 	public static void showOnFrame(JComponent component, String frameName) {
 		final JFrame frame = new JFrame(frameName);
@@ -96,14 +97,16 @@ public class GUIHelper {
 		JMenu Menu11 = new JMenu("Add Line");
 		JMenuItem menuItem111 = new JMenuItem("_________");
 		JMenuItem menuItem112 = new JMenuItem("_ _ _ _ _");
-		JMenuItem menuItem113 = new JMenuItem("unknow");
+		//JMenuItem menuItem113 = new JMenuItem("-------->");
+		JMenuItem menuItem12 = new JMenuItem("Add Gomme");
 		JMenuItem menuItem13 = new JMenuItem("Save to PNG file");
 
 		Menu1.add(menuItem11);
+		Menu1.add(menuItem12);
 		Menu1.add(Menu11);
 		Menu11.add(menuItem111);
 		Menu11.add(menuItem112);
-		Menu11.add(menuItem113);
+		//Menu11.add(menuItem113);
 		Menu1.add(menuItem13);
 
 		JMenu Menu2 = new JMenu("Add");
@@ -165,7 +168,20 @@ public class GUIHelper {
 				setStateLine(2);
 			}
 		});
-
+		/*
+		menuItem113.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setStateLine(3);
+			}
+		});
+		*/
+		
+		menuItem12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setStateGomme(true);
+			}
+		});
+		
 		menuItem13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConstructScreen.saveAndPrintPNG();
@@ -265,5 +281,13 @@ public class GUIHelper {
 
 	public static void setStateLine(int stateLine) {
 		GUIHelper.stateLine = stateLine;
+	}
+	
+	public static boolean isStateGomme() {
+		return stateGomme;
+	}
+
+	public static void setStateGomme(boolean stateGomme) {
+		GUIHelper.stateGomme = stateGomme;
 	}
 }
