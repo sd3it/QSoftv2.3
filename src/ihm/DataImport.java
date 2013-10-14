@@ -61,8 +61,7 @@ public class DataImport extends Window{
 					row=0;
 					buyprice=0;
 					
-					//if(sheet1.getRows()-1 != 0){
-					if(sheet1.getRows()-1 != -1){
+					if(sheet1.getRows()-1 != 0){
 						while(row <= sheet1.getRows()-1){
 							for(int column=0; column<=8 ;column++){
 								if(column==0){

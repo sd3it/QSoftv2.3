@@ -684,57 +684,22 @@ public class Screen2 extends Window implements ComponentListener{
 		}
 		//Si une donnée est load -> ajout ligne dans Tableau
 		if(dataload){
-			/*
-			 	for(int i=0;i<=reference.size()-1;i++){
-					((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-							index.get(i),
-							reference.get(i), 
-							description.get(i),
-							quantity.get(i),
-							price.get(i),
-							discountprod.get(i),
-							totalyprice.get(i),
-							achat.get(i),
-							kp.get(i)
-					});   
+			for(int i=0;i<=reference.size()-1;i++){
 				
-					if(!index.get(i).toString().isEmpty())
-						rowcount=Integer.parseInt(index.get(i).toString())+1;
-				}
-			 */
-			if(margin==false){
-				for(int i=0;i<=reference.size()-1;i++){
-					((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-							index.get(i),
-							reference.get(i), 
-							description.get(i),
-							quantity.get(i),
-							price.get(i),
-							discountprod.get(i),
-							totalyprice.get(i)
-					});   
-					
-					if(!index.get(i).toString().isEmpty())
-						rowcount=Integer.parseInt(index.get(i).toString())+1;
-				}
-			}
-			if(margin==true){
-				for(int i=0;i<=reference.size()-1;i++){
-					((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-							index.get(i),
-							reference.get(i), 
-							description.get(i),
-							quantity.get(i),
-							price.get(i),
-							discountprod.get(i),
-							totalyprice.get(i),
-							achat.get(i),
-							kp.get(i)
-					});   
+				((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
+						index.get(i),
+						reference.get(i), 
+						description.get(i),
+						quantity.get(i),
+						price.get(i),
+						discountprod.get(i),
+						totalyprice.get(i),
+						achat.get(i),
+						kp.get(i)
+				});   
 				
-					if(!index.get(i).toString().isEmpty())
-						rowcount=Integer.parseInt(index.get(i).toString())+1;
-				}
+				if(!index.get(i).toString().isEmpty())
+					rowcount=Integer.parseInt(index.get(i).toString())+1;
 			}
 		}
 		
@@ -1393,7 +1358,6 @@ public class Screen2 extends Window implements ComponentListener{
 								if(column==0){
 									try{
 										index.set(row, data.toString());
-										System.out.println("data load modif =====> " + data);
 									}
 									catch (Exception e) {
 										index.set(row, index.get(row));
@@ -1405,12 +1369,10 @@ public class Screen2 extends Window implements ComponentListener{
 									}
 									else {
 										reference.set(row, data.toString());
-										System.out.println("data load modif =====> " + data);
 									}
 								}
 								if(column==2){	
 									description.set(row, data.toString());
-									System.out.println("data load modif =====> " + data);
 								}
 								
 								if(column==3){
@@ -1423,19 +1385,16 @@ public class Screen2 extends Window implements ComponentListener{
 										}
 										
 										quantity.set(row, data.toString());
-										System.out.println("data load modif =====> " + data);
 										
 										if(margin==true){
 											buyprice += Double.parseDouble(marginbase.readMargin(reference.get(row)))*Double.parseDouble(quantity.get(row));
 										}
 										try {
 											quotationprice -= Double.parseDouble(totalyprice.get(row));
-											totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
+											totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""));
 											quotationprice += Double.parseDouble(totalyprice.get(row));
-											System.out.println("totalyprice: " + totalyprice);
 											jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-											
-											jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
+											jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""), row, 5);
 											
 											if(margin==true){
 												if(quotationprice != 0){
@@ -1459,20 +1418,11 @@ public class Screen2 extends Window implements ComponentListener{
 										price.set(row, price.get(row));
 									}
 									else {
-										price.set(row, data.toString());
-										System.out.println("data load modif =====> " + data);
-									}
-									try {
 										quotationprice-=Double.parseDouble(totalyprice.get(row));
-										totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
+										totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""));
 										quotationprice+=Double.parseDouble(totalyprice.get(row));
-										
 										jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-										jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
-									}
-									catch (Exception e) {
-										// TODO: handle exception
-										System.out.println(e);
+										jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""), row, 5);
 									}
 									if(margin==true){
 										if(quotationprice!=0){
@@ -1501,7 +1451,6 @@ public class Screen2 extends Window implements ComponentListener{
 									}
 									else {
 										totalyprice.set(row, data.toString());
-										System.out.println("data load modif =====> " + data);
 									}
 								}
 							}
@@ -1797,14 +1746,12 @@ public class Screen2 extends Window implements ComponentListener{
 		jTextField6.setFocusable(false);
 
 		jTable1.getModel().addTableModelListener(new TableModelListener(){
-
+			
 			@Override
 			public void tableChanged(TableModelEvent arg0) {
-				if(arg0.getColumn()!=-1){
-
+				if(arg0.getColumn()!= -1 ){
 					int row = arg0.getFirstRow();
 					int column = arg0.getColumn();
-					
 					TableModel model = (TableModel)arg0.getSource();
 					Object data = model.getValueAt(row, column);
 					save=false;
@@ -1812,7 +1759,7 @@ public class Screen2 extends Window implements ComponentListener{
 					if(column==0){
 						try{
 							index.set(row, data.toString());
-							System.out.println("modif =====> " + data);
+							System.out.println("modif ======> " + data);
 						}
 						catch (Exception e) {
 							index.set(row, index.get(row));
@@ -1822,90 +1769,58 @@ public class Screen2 extends Window implements ComponentListener{
 						if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
 							reference.set(row, reference.get(row));
 						}
-						else {
+						else { 
 							reference.set(row, data.toString());
-							System.out.println("modif =====> " + data);
+							System.out.println("modif ======> " + data);
 						}
 					}
 					if(column==2){	
 						description.set(row, data.toString());
-						System.out.println("modif =====> " + data);
+						System.out.println("modif ======> " + data);
 					}
 					
 					if(column==3){
 						if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
 							quantity.set(row, quantity.get(row));
 						}
-						else {
-							if(margin==true){
-								buyprice -= Double.parseDouble(marginbase.readMargin(reference.get(row)))*Double.parseDouble(quantity.get(row));	
-							}
-							
+						else{
 							quantity.set(row, data.toString());
-							System.out.println("modif =====> " + data);
-							
-							if(margin==true){
-								buyprice += Double.parseDouble(marginbase.readMargin(reference.get(row)))*Double.parseDouble(quantity.get(row));
-							}
+							System.out.println("modif ======> " + data);
+
 							try {
 								quotationprice -= Double.parseDouble(totalyprice.get(row));
 								totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
 								quotationprice += Double.parseDouble(totalyprice.get(row));
-								
 								jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-								
 								jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
-								
-								if(margin==true){
-									if(quotationprice != 0){
-										jTextField11.setText(df.format((quotationprice-(quotationprice*discount/100))/totalbuyprice).replaceAll(",",""));
-										jTextField18.setText(df.format((((quotationprice-(quotationprice*discount/100))-totalbuyprice)/(quotationprice-(quotationprice*discount/100)))*100).replaceAll(",",""));
-									}
-									else{
-										jTextField11.setText("");
-										jTextField18.setText("");
-									}
-								}
 							}
 							catch (Exception e) {
 								System.out.println(e);
 							}
 						}
 					}
-
+					
 					if(column==4){
 						if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
 							price.set(row, price.get(row));
 						}
-						else {
+						else{
 							price.set(row, data.toString());
-							System.out.println("modif =====> " + data);
+							System.out.println("modif ======> " + data);
 						}
 						try {
-							quotationprice-=Double.parseDouble(totalyprice.get(row));
+							quotationprice -= Double.parseDouble(totalyprice.get(row));
 							totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
-							quotationprice+=Double.parseDouble(totalyprice.get(row));
-							
+							quotationprice += Double.parseDouble(totalyprice.get(row));
 							jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
 							jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
 						}
 						catch (Exception e) {
-							// TODO: handle exception
 							System.out.println(e);
-						}
-						if(margin==true){
-							if(quotationprice!=0){
-								jTextField11.setText(df.format((quotationprice-(quotationprice*discount/100))/totalbuyprice).replaceAll(",",""));
-								jTextField18.setText(df.format((((quotationprice-(quotationprice*discount/100))-totalbuyprice)/(quotationprice-(quotationprice*discount/100)))*100).replaceAll(",",""));
-							}
-							else{
-								jTextField11.setText("");
-								jTextField18.setText("");
-							}
 						}
 					}
 
-					if(column==5){
+					if(column==5){	// colonne Discount
 						if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
 							discountprod.set(row, discountprod.get(row));
 						}
@@ -1918,11 +1833,12 @@ public class Screen2 extends Window implements ComponentListener{
 						if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
 							totalyprice.set(row, totalyprice.get(row));
 						}
-						else {
+						else{
 							totalyprice.set(row, data.toString());
-							System.out.println("modif =====> " + data);
+							System.out.println("modif ======> " + data);
 						}
 					}
+					
 				}
 			}
 		});
@@ -2430,7 +2346,6 @@ public class Screen2 extends Window implements ComponentListener{
 							if(column==0){
 								try{
 									index.set(row, data.toString());
-									System.out.println("data load modif =====> " + data);
 								}
 								catch (Exception e) {
 									index.set(row, index.get(row));
@@ -2442,12 +2357,10 @@ public class Screen2 extends Window implements ComponentListener{
 								}
 								else {
 									reference.set(row, data.toString());
-									System.out.println("data load modif =====> " + data);
 								}
 							}
 							if(column==2){	
 								description.set(row, data.toString());
-								System.out.println("data load modif =====> " + data);
 							}
 							
 							if(column==3){
@@ -2460,19 +2373,16 @@ public class Screen2 extends Window implements ComponentListener{
 									}
 									
 									quantity.set(row, data.toString());
-									System.out.println("data load modif =====> " + data);
 									
 									if(margin==true){
 										buyprice += Double.parseDouble(marginbase.readMargin(reference.get(row)))*Double.parseDouble(quantity.get(row));
 									}
 									try {
 										quotationprice -= Double.parseDouble(totalyprice.get(row));
-										totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
+										totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""));
 										quotationprice += Double.parseDouble(totalyprice.get(row));
-										System.out.println("totalyprice: " + totalyprice);
 										jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-										
-										jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
+										jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""), row, 5);
 										
 										if(margin==true){
 											if(quotationprice != 0){
@@ -2496,20 +2406,11 @@ public class Screen2 extends Window implements ComponentListener{
 									price.set(row, price.get(row));
 								}
 								else {
-									price.set(row, data.toString());
-									System.out.println("data load modif =====> " + data);
-								}
-								try {
 									quotationprice-=Double.parseDouble(totalyprice.get(row));
-									totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
+									totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""));
 									quotationprice+=Double.parseDouble(totalyprice.get(row));
-									
 									jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-									jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
-								}
-								catch (Exception e) {
-									// TODO: handle exception
-									System.out.println(e);
+									jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*Double.parseDouble(price.get(row))).replaceAll(",",""), row, 5);
 								}
 								if(margin==true){
 									if(quotationprice!=0){
@@ -2538,7 +2439,6 @@ public class Screen2 extends Window implements ComponentListener{
 								}
 								else {
 									totalyprice.set(row, data.toString());
-									System.out.println("data load modif =====> " + data);
 								}
 							}
 						}
@@ -3021,138 +2921,6 @@ public class Screen2 extends Window implements ComponentListener{
 													return canEdit [columnIndex];
 												}
 											});
-											/*+++++++++++ RAJOUT +++++++++++*/
-											jTable1.getModel().addTableModelListener(new TableModelListener(){
-
-												@Override
-												public void tableChanged(TableModelEvent arg0) {
-													if(arg0.getColumn()!=-1){
-
-														int row = arg0.getFirstRow();
-														int column = arg0.getColumn();
-														
-														TableModel model = (TableModel)arg0.getSource();
-														Object data = model.getValueAt(row, column);
-														save=false;
-														
-														if(column==0){
-															try{
-																index.set(row, data.toString());
-																System.out.println("modif with purchasing =====> " + data);
-															}
-															catch (Exception e) {
-																index.set(row, index.get(row));
-															}
-														}
-														if(column==1){
-															if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
-																reference.set(row, reference.get(row));
-															}
-															else {
-																reference.set(row, data.toString());
-																System.out.println("modif with purchasing =====> " + data);
-															}
-														}
-														if(column==2){	
-															description.set(row, data.toString());
-															System.out.println("modif with purchasing =====> " + data);
-														}
-														
-														if(column==3){
-															if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
-																quantity.set(row, quantity.get(row));
-															}
-															else {
-																if(margin==true){
-																	buyprice -= Double.parseDouble(marginbase.readMargin(reference.get(row)))*Double.parseDouble(quantity.get(row));	
-																}
-																
-																quantity.set(row, data.toString());
-																System.out.println("modif with purchasing =====> " + data);
-																
-																if(margin==true){
-																	buyprice += Double.parseDouble(marginbase.readMargin(reference.get(row)))*Double.parseDouble(quantity.get(row));
-																}
-																try {
-																	quotationprice -= Double.parseDouble(totalyprice.get(row));
-																	totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
-																	quotationprice += Double.parseDouble(totalyprice.get(row));
-																	System.out.println("totalyprice: " + totalyprice);
-																	jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-																	
-																	jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
-																	
-																	if(margin==true){
-																		if(quotationprice != 0){
-																			jTextField11.setText(df.format((quotationprice-(quotationprice*discount/100))/totalbuyprice).replaceAll(",",""));
-																			jTextField18.setText(df.format((((quotationprice-(quotationprice*discount/100))-totalbuyprice)/(quotationprice-(quotationprice*discount/100)))*100).replaceAll(",",""));
-																		}
-																		else{
-																			jTextField11.setText("");
-																			jTextField18.setText("");
-																		}
-																	}
-																}
-																catch (Exception e) {
-																	System.out.println(e);
-																}
-															}
-														}
-
-														if(column==4){
-															if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
-																price.set(row, price.get(row));
-															}
-															else {
-																price.set(row, data.toString());
-																System.out.println("modif with purchasing =====> " + data);
-															}
-															try {
-																quotationprice-=Double.parseDouble(totalyprice.get(row));
-																totalyprice.set(row, df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""));
-																quotationprice+=Double.parseDouble(totalyprice.get(row));
-																
-																jTextField9.setText(df.format(quotationprice-(quotationprice*discount/100)+transportval+assistance).replaceAll(","," "));
-																jTable1.getModel().setValueAt(df.format(Double.parseDouble(quantity.get(row))*((Double.parseDouble(price.get(row)))-(Double.parseDouble(price.get(row))*Double.parseDouble(discountprod.get(row))/100))).replaceAll(",",""), row, 6);
-															}
-															catch (Exception e) {
-																// TODO: handle exception
-																System.out.println(e);
-															}
-															if(margin==true){
-																if(quotationprice!=0){
-																	jTextField11.setText(df.format((quotationprice-(quotationprice*discount/100))/totalbuyprice).replaceAll(",",""));
-																	jTextField18.setText(df.format((((quotationprice-(quotationprice*discount/100))-totalbuyprice)/(quotationprice-(quotationprice*discount/100)))*100).replaceAll(",",""));
-																}
-																else{
-																	jTextField11.setText("");
-																	jTextField18.setText("");
-																}
-															}
-														}
-
-														if(column==5){
-															if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
-																discountprod.set(row, discountprod.get(row));
-															}
-															else {
-																discountprod.set(row, data.toString());
-															}
-														}
-														
-														if(column==6){
-															if(reference.get(row).isEmpty()||description.get(row).isEmpty()||quantity.get(row).isEmpty()||price.get(row).isEmpty()||discountprod.get(row).isEmpty()||totalyprice.get(row).isEmpty()){
-																totalyprice.set(row, totalyprice.get(row));
-															}
-															else {
-																totalyprice.set(row, data.toString());
-																System.out.println("modif with purchasing =====> " + data);
-															}
-														}
-													}
-												}
-											});
-											/*++++++++++ FIN RAJOUT +++++++++*/
 										}
 									}
 								}
