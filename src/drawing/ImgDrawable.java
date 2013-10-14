@@ -45,9 +45,10 @@ public class ImgDrawable extends FormDrawable2 {
 
 		try {
 			img = ImageIO.read(new File("images_schema/" + name + ".png"));
-			//System.out.println(name + " loaded");
+			System.out.println(name + " loaded");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Img Unknown");
 			try {
 				img = ImageIO.read(new File("images_schema/img_unknown.png"));
 			} catch (IOException e1) {

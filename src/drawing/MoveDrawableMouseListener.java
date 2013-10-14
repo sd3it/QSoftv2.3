@@ -3,8 +3,6 @@ package drawing;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
-
 /**
  * @author KoA
  * @version 0.1
@@ -30,11 +28,8 @@ public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 
 	public void mouseDragged(MouseEvent e) {
 		if (drawable != null) {
-			//Click Left for Dragged
-			if ( SwingUtilities.isLeftMouseButton(e) ) {
 			drawable.setPosition(e.getPoint());
 			canvas.repaint();
-			}
 		}
 	}
 

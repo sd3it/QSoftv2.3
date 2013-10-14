@@ -30,20 +30,20 @@ public class LineDrawable2 extends FormDrawable3 {
 		
 		Color c = g.getColor();
 		g.setColor(color);
-		
-		float[] style = {10,5}; // Pointillé
+		/*
+		float[] style = {10,5}; // les pointillés seront 2 fois plus long que les blancs 
 		((Graphics2D) g).setStroke( 
 			new BasicStroke( 
-				3, // taille de la ligne 
-				BasicStroke.CAP_SQUARE,
+				1, // taille de la ligne 
+				BasicStroke.CAP_BUTT,
 				BasicStroke.JOIN_MITER,
 				10.0f,
 				style,
 				0
 		    )
 		);
-		
-		g.drawLine(rect.x, rect.y+1, rect2.x, rect2.y+1);
+		*/
+		g.drawLine(rect.x, rect.y, rect2.x, rect2.y);
 		g.fillRect(rect.x, rect.y, rect.width, rect.height);
 		g.fillRect(rect2.x, rect2.y, rect2.width, rect2.height);
 		g.setColor(c);
