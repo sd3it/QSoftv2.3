@@ -1,8 +1,10 @@
 package drawing;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
 /**
@@ -27,7 +29,20 @@ public class LineDrawable1 extends FormDrawable3 {
 	public void draw(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(color);
-		g.drawLine(rect.x, rect.y, rect2.x, rect2.y);
+		
+		float[] style = {40,0}; // Pas de pointillés
+		((Graphics2D) g).setStroke( 
+			new BasicStroke( 
+				3, // taille de la ligne 
+				BasicStroke.CAP_SQUARE,
+				BasicStroke.JOIN_MITER,
+				10.0f,
+				style,
+				0
+		    )
+		);
+		
+		g.drawLine(rect.x, rect.y+1, rect2.x, rect2.y+1);
 		g.fillRect(rect.x, rect.y, rect.width, rect.height);
 		g.fillRect(rect2.x, rect2.y, rect2.width, rect2.height);
 		g.setColor(c);

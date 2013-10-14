@@ -27,11 +27,13 @@ import com.itextpdf.text.Font;
 
 import drawing.FenetreAjoutTexte;
 import drawing.GUIHelper;
+import drawing.GommeRectDrawable;
 import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.JCanvas;
 import drawing.LineDrawable1;
 import drawing.LineDrawable2;
+import drawing.LineDrawable3;
 import drawing.RectangleDrawable;
 import drawing.TextDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
@@ -119,22 +121,41 @@ public class ConstructScreen {
 	 * Methode d'ajout d'une ligne pleine
 	 */
 	public static void addLine(Color c) {
-		IDrawable r = new LineDrawable1(c, new Point(
+		IDrawable l1 = new LineDrawable1(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
-				NonOverlapMoveAdapter.getStart()), new Dimension(5, 5));
-		jc.addDrawable(r);
+				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		jc.addDrawable(l1);
 	}
 	
 	/**
 	 * Methode d'ajout d'une ligne pointille
 	 */
 	public static void addLinePointille(Color c) {
-		IDrawable r = new LineDrawable2(c, new Point(
+		IDrawable l2 = new LineDrawable2(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
-				NonOverlapMoveAdapter.getStart()), new Dimension(5, 5));
-		jc.addDrawable(r);
+				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		jc.addDrawable(l2);
 	}
-
+	
+	/**
+	 * Methode d'ajout d'une ligne flèché
+	 */
+	public static void addLineFleche(Color c) {
+		IDrawable l3 = new LineDrawable3(c, new Point(
+				NonOverlapMoveAdapter.getEnd()), new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		jc.addDrawable(l3);
+	}
+	
+	/**
+	 * Methode d'ajout d'une gomme
+	 */
+	public static void addGomme(Color c) {
+		IDrawable gomme = new GommeRectDrawable(c, new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(50, 50));
+		jc.addDrawable(gomme);
+	}
+	
 	/**
 	 * Methode d'ajout de Texte
 	 */
