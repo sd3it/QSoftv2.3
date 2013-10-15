@@ -1,9 +1,12 @@
 package drawing;
 
+import ihm.Window;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -23,12 +26,9 @@ import drawing.demos.ConstructScreen;
  */
 
 public class GUIHelper {
-	
+
 	/*
-	 * State of isStateLine :
-	 * 		- 0 : no line
-	 * 		- 1 : pleine
-	 * 		- 2 : pointille
+	 * State of isStateLine : - 0 : no line - 1 : pleine - 2 : pointille
 	 */
 
 	protected static int stateLine = 0;
@@ -91,44 +91,141 @@ public class GUIHelper {
 	public static JMenuBar createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu Menu1 = new JMenu("Actions");
+		/* Menu 1 */
+		JMenu Menu1 = new JMenu();
+		JMenuItem menuItem11 = new JMenuItem();
+		JMenu Menu11 = new JMenu();
+		JMenuItem menuItem111 = new JMenuItem();
+		JMenuItem menuItem112 = new JMenuItem();
+		// JMenuItem menuItem113 = new JMenuItem("-------->");
+		JMenuItem menuItem12 = new JMenuItem();
+		JMenuItem menuItem13 = new JMenuItem();
 
-		JMenuItem menuItem11 = new JMenuItem("Add Text");
-		JMenu Menu11 = new JMenu("Add Line");
-		JMenuItem menuItem111 = new JMenuItem("_________");
-		JMenuItem menuItem112 = new JMenuItem("_ _ _ _ _");
-		//JMenuItem menuItem113 = new JMenuItem("-------->");
-		JMenuItem menuItem12 = new JMenuItem("Add Gomme");
-		JMenuItem menuItem13 = new JMenuItem("Save to PNG file");
+		/* Menu 2 */
+		JMenu Menu2 = new JMenu();
+		JMenuItem menuItem21 = new JMenuItem();
+		JMenuItem menuItem22 = new JMenuItem();
+		JMenuItem menuItem23 = new JMenuItem();
+		JMenuItem menuItem24 = new JMenuItem();
 
+		/* Menu 3 */
+		JMenu Menu3 = new JMenu();
+		final JMenuItem menuItem31 = new JMenuItem();
+		final JMenuItem menuItem32 = new JMenuItem();
+		final JMenuItem menuItem33 = new JMenuItem();
+		final JMenuItem menuItem34 = new JMenuItem();
+		final JMenuItem menuItem35 = new JMenuItem();
+		final JMenuItem menuItem36 = new JMenuItem();
+		final JMenuItem menuItem37 = new JMenuItem();
+		final JMenuItem menuItem38 = new JMenuItem();
+		final JMenuItem menuItem39 = new JMenuItem();
+		final JMenuItem menuItem310 = new JMenuItem();
+
+		if (Window.locale.toString().equals("en")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			/* Texte Menu 1 */
+			Menu1.setText("Actions");
+			menuItem11.setText("Add Text");
+			Menu11.setText("Add Line");
+			menuItem111.setText("_________");
+			menuItem112.setText("_ _ _ _ _ _");
+			menuItem12.setText("Add Gomme");
+			menuItem13.setText("Save to PNG file");
+
+			/* Texte Menu 2 */
+			Menu2.setText("Add elements");
+			menuItem21.setText("EoL (End of Line)");
+			menuItem22.setText("+");
+			menuItem23.setText("=");
+			menuItem24.setText("RAL");
+
+			/* Texte Menu 3 */
+			Menu3.setText("Add synoptique");
+			menuItem31.setText("Synoptique ALPHA 2");
+			menuItem32.setText("Synoptique ALPHA 4-8-12");
+			menuItem33.setText("Synoptique ALPHA 16-248");
+			menuItem34.setText("Synoptique MEPFLASH");
+			menuItem35.setText("Synoptique HEPHAIS 128");
+			menuItem36.setText("Synoptique HEPHAIS 1600NE");
+			menuItem37.setText("Synoptique HEPHAIS 1600");
+			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
+			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
+			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+
+		} else if (Window.locale.toString().equals("it")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			/* Texte Menu 1 */
+			Menu1.setText("Actions");
+			menuItem11.setText("Add Text");
+			Menu11.setText("Add Line");
+			menuItem111.setText("_________");
+			menuItem112.setText("_ _ _ _ _ _");
+			menuItem12.setText("Add Gomme");
+			menuItem13.setText("Save to PNG file");
+
+			/* Texte Menu 2 */
+			Menu2.setText("Add elements");
+			menuItem21.setText("EoL (End of Line)");
+			menuItem22.setText("+");
+			menuItem23.setText("=");
+			menuItem24.setText("RAL");
+
+			/* Texte Menu 3 */
+			Menu3.setText("Add schema");
+			menuItem31.setText("Synoptique ALPHA 2");
+			menuItem32.setText("Synoptique ALPHA 4-8-12");
+			menuItem33.setText("Synoptique ALPHA 16-248");
+			menuItem34.setText("Synoptique MEPFLASH");
+			menuItem35.setText("Synoptique HEPHAIS 128");
+			menuItem36.setText("Synoptique HEPHAIS 1600NE");
+			menuItem37.setText("Synoptique HEPHAIS 1600");
+			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
+			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
+			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+
+		} else if (Window.locale.toString().equals("fr")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			/* Texte Menu 1 */
+			Menu1.setText("Outils");
+			menuItem11.setText("Outils Texte");
+			Menu11.setText("Outils Ligne");
+			menuItem111.setText("_________");
+			menuItem112.setText("_ _ _ _ _ _");
+			menuItem12.setText("Outils Gomme");
+			menuItem13.setText("Sauvegarder en fichier PNG");
+
+			/* Texte Menu 2 */
+			Menu2.setText("Ajouter des élements");
+			menuItem21.setText("EoL (End of Line)");
+			menuItem22.setText("+");
+			menuItem23.setText("=");
+			menuItem24.setText("RAL");
+
+			/* Texte Menu 3 */
+			Menu3.setText("Ajouter un synoptique");
+			menuItem31.setText("Synoptique ALPHA 2");
+			menuItem32.setText("Synoptique ALPHA 4-8-12");
+			menuItem33.setText("Synoptique ALPHA 16-248");
+			menuItem34.setText("Synoptique MEPFLASH");
+			menuItem35.setText("Synoptique HEPHAIS 128");
+			menuItem36.setText("Synoptique HEPHAIS 1600NE");
+			menuItem37.setText("Synoptique HEPHAIS 1600");
+			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
+			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
+			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+		}
+
+		/* Ajout des Items */
 		Menu1.add(menuItem11);
 		Menu1.add(menuItem12);
 		Menu1.add(Menu11);
 		Menu11.add(menuItem111);
 		Menu11.add(menuItem112);
-		//Menu11.add(menuItem113);
+		// Menu11.add(menuItem113);
 		Menu1.add(menuItem13);
-
-		JMenu Menu2 = new JMenu("Add");
-		JMenuItem menuItem21 = new JMenuItem("EoL (End of Line)");
-		JMenuItem menuItem22 = new JMenuItem("+");
-		JMenuItem menuItem23 = new JMenuItem("=");
-		JMenuItem menuItem24 = new JMenuItem("RAL");
-
-		JMenu Menu3 = new JMenu("Add schema");
-		final JMenuItem menuItem31 = new JMenuItem("Synoptique ALPHA 2");
-		final JMenuItem menuItem32 = new JMenuItem("Synoptique ALPHA 4-8-12");
-		final JMenuItem menuItem33 = new JMenuItem("Synoptique ALPHA 16-248");
-		final JMenuItem menuItem34 = new JMenuItem("Synoptique MEPFLASH");
-		final JMenuItem menuItem35 = new JMenuItem("Synoptique HEPHAIS 128");
-		final JMenuItem menuItem36 = new JMenuItem("Synoptique HEPHAIS 1600NE");
-		final JMenuItem menuItem37 = new JMenuItem("Synoptique HEPHAIS 1600");
-		final JMenuItem menuItem38 = new JMenuItem(
-				"Synoptique HEPHAIS 1600 NETWORK");
-		final JMenuItem menuItem39 = new JMenuItem(
-				"Synoptique HEPHAIS 1600 COMFORT");
-		final JMenuItem menuItem310 = new JMenuItem(
-				"Synoptique WIRELESS SYSTEM");
 
 		Menu3.add(menuItem31);
 		Menu3.add(menuItem32);
@@ -147,6 +244,7 @@ public class GUIHelper {
 		Menu2.add(menuItem23);
 		Menu2.add(menuItem24);
 
+		/* Ajout des Menu au MenuBar */
 		menuBar.add(Menu1);
 		menuBar.add(Menu2);
 
@@ -162,26 +260,23 @@ public class GUIHelper {
 				setStateLine(1);
 			}
 		});
-		
+
 		menuItem112.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setStateLine(2);
 			}
 		});
 		/*
-		menuItem113.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(3);
-			}
-		});
-		*/
-		
+		 * menuItem113.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent arg0) { setStateLine(3); } });
+		 */
+
 		menuItem12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setStateGomme(true);
 			}
 		});
-		
+
 		menuItem13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConstructScreen.saveAndPrintPNG();
@@ -282,7 +377,7 @@ public class GUIHelper {
 	public static void setStateLine(int stateLine) {
 		GUIHelper.stateLine = stateLine;
 	}
-	
+
 	public static boolean isStateGomme() {
 		return stateGomme;
 	}

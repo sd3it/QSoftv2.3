@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -34,7 +35,6 @@ import drawing.JCanvas;
 import drawing.LineDrawable1;
 import drawing.LineDrawable2;
 import drawing.LineDrawable3;
-import drawing.RectangleDrawable;
 import drawing.TextDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
 
@@ -91,9 +91,9 @@ public class ConstructScreen {
 					py = py + 150;
 					px = 80;
 				}
-				System.out.println("px=" + px);
+				//System.out.println("px=" + px);
 			}
-			System.out.println();
+			//System.out.println();
 		}
 
 		IDrawable date = new TextDrawable(Color.BLACK, Font.NORMAL, 15,
@@ -112,8 +112,20 @@ public class ConstructScreen {
 		jc.add(lb_logo);
 
 		new NonOverlapMoveAdapter(jc);
-
-		GUIHelper.showOnFrame(jc, "QSoft - Schema");
+		
+		if(Window.locale.toString().equals("en")){
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
+		}
+		else if(Window.locale.toString().equals("it")){
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
+		}
+		else if(Window.locale.toString().equals("fr")){
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
+		}
+		
 
 	}
 
@@ -126,7 +138,7 @@ public class ConstructScreen {
 				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
 		jc.addDrawable(l1);
 	}
-	
+
 	/**
 	 * Methode d'ajout d'une ligne pointille
 	 */
@@ -136,7 +148,7 @@ public class ConstructScreen {
 				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
 		jc.addDrawable(l2);
 	}
-	
+
 	/**
 	 * Methode d'ajout d'une ligne flèché
 	 */
@@ -146,7 +158,7 @@ public class ConstructScreen {
 				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
 		jc.addDrawable(l3);
 	}
-	
+
 	/**
 	 * Methode d'ajout d'une gomme
 	 */
@@ -155,7 +167,7 @@ public class ConstructScreen {
 				NonOverlapMoveAdapter.getStart()), new Dimension(50, 50));
 		jc.addDrawable(gomme);
 	}
-	
+
 	/**
 	 * Methode d'ajout de Texte
 	 */
