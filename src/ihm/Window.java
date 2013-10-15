@@ -18,7 +18,7 @@ import jxl.Sheet;
 @SuppressWarnings("serial")
 public abstract class Window extends javax.swing.JFrame {
 	
-	protected static String nameTitle="QSoft 2.3";
+	public static String nameTitle="QSoft 2.3.1";
 	
 	//static Workbook workbook=null;
 	protected static Sheet sheet;
@@ -111,8 +111,8 @@ public abstract class Window extends javax.swing.JFrame {
 	protected static Boolean save=false;
 	
 	protected static String s_label5, s_label4, s_button1, s_button2, s_labelPO, s_labelPO2; 
-	protected static Locale locale; 
-	protected static ResourceBundle res;
+	public static Locale locale; 
+	public static ResourceBundle res;
 	
 	protected static double patotal;
 

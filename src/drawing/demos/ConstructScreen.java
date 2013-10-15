@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -27,9 +28,13 @@ import com.itextpdf.text.Font;
 
 import drawing.FenetreAjoutTexte;
 import drawing.GUIHelper;
+import drawing.GommeRectDrawable;
 import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.JCanvas;
+import drawing.LineDrawable1;
+import drawing.LineDrawable2;
+import drawing.LineDrawable3;
 import drawing.TextDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
 
@@ -86,9 +91,9 @@ public class ConstructScreen {
 					py = py + 150;
 					px = 80;
 				}
-				System.out.println("px=" + px);
+				//System.out.println("px=" + px);
 			}
-			System.out.println();
+			//System.out.println();
 		}
 
 		IDrawable date = new TextDrawable(Color.BLACK, Font.NORMAL, 15,
@@ -107,9 +112,60 @@ public class ConstructScreen {
 		jc.add(lb_logo);
 
 		new NonOverlapMoveAdapter(jc);
-
-		GUIHelper.showOnFrame(jc, "QSoft - Schema");
 		
+		if(Window.locale.toString().equals("en")){
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
+		}
+		else if(Window.locale.toString().equals("it")){
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
+		}
+		else if(Window.locale.toString().equals("fr")){
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
+		}
+		
+
+	}
+
+	/**
+	 * Methode d'ajout d'une ligne pleine
+	 */
+	public static void addLine(Color c) {
+		IDrawable l1 = new LineDrawable1(c, new Point(
+				NonOverlapMoveAdapter.getEnd()), new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		jc.addDrawable(l1);
+	}
+
+	/**
+	 * Methode d'ajout d'une ligne pointille
+	 */
+	public static void addLinePointille(Color c) {
+		IDrawable l2 = new LineDrawable2(c, new Point(
+				NonOverlapMoveAdapter.getEnd()), new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		jc.addDrawable(l2);
+	}
+
+	/**
+	 * Methode d'ajout d'une ligne flèché
+	 */
+	public static void addLineFleche(Color c) {
+		IDrawable l3 = new LineDrawable3(c, new Point(
+				NonOverlapMoveAdapter.getEnd()), new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		jc.addDrawable(l3);
+	}
+
+	/**
+	 * Methode d'ajout d'une gomme
+	 */
+	public static void addGomme(Color c) {
+		IDrawable gomme = new GommeRectDrawable(c, new Point(
+				NonOverlapMoveAdapter.getStart()), new Dimension(50, 50));
+		jc.addDrawable(gomme);
 	}
 
 	/**

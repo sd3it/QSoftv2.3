@@ -35,7 +35,6 @@ public abstract class FormDrawable implements IMovableDrawable {
 		setPosition(pos);
 	}
 	
-
 	public abstract void draw(Graphics g);
 
 	public Rectangle getRectangle() {
