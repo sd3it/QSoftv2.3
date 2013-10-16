@@ -38,5 +38,7 @@ Compilation .exe and setup.exe
 
 Install the software "Launch4j" and "InnoSetup"
 Import QSoftv2.3 project in Java IDE (Eclipse)
+Change the build path to "swing-layout.jar"
 Right click on "install/build.xml" -> "Run As" -> "Ant Build"
+
 ========
