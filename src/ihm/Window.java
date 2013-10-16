@@ -18,7 +18,7 @@ import jxl.Sheet;
 @SuppressWarnings("serial")
 public abstract class Window extends javax.swing.JFrame {
 	
-	public static String nameTitle="QSoft 2.3.2";
+	public static String nameTitle="QSoft 2.3.2.";
 	
 	//static Workbook workbook=null;
 	protected static Sheet sheet;
