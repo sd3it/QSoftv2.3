@@ -125,8 +125,6 @@ public class ConstructScreen {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
 			GUIHelper.showOnFrame(jc, (String)Window.res.getObject("title_schema"));
 		}
-		
-
 	}
 
 	/**
