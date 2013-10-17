@@ -45,7 +45,6 @@ public class ImgDrawable extends FormDrawable2 {
 
 		try {
 			img = ImageIO.read(new File("images_schema/" + name + ".png"));
-			//System.out.println(name + " loaded");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -60,12 +59,7 @@ public class ImgDrawable extends FormDrawable2 {
 		 * Resize de l'image chargé avec les dimensions width et height défini
 		 * dans le main
 		 */
-		/*
-		 * BufferedImage resizedImage = new BufferedImage(rect.width,
-		 * rect.height, BufferedImage.TYPE_INT_ARGB); Graphics2D graphics =
-		 * resizedImage.createGraphics(); graphics.drawImage(img, 0, 0,
-		 * rect.width, rect.height, null); graphics.dispose();
-		 */
+
 		int Wimg = img.getWidth();
 		int Himg = img.getHeight();
 
