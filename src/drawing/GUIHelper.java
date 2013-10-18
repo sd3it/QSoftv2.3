@@ -2,10 +2,15 @@ package drawing;
 
 import ihm.Window;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
@@ -121,6 +126,9 @@ public class GUIHelper {
 		final JMenuItem menuItem39 = new JMenuItem();
 		final JMenuItem menuItem310 = new JMenuItem();
 
+		JMenu Menu4 = new JMenu();
+		final JMenuItem menuItem41 = new JMenuItem();
+
 		if (Window.locale.toString().equals("en")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
@@ -152,6 +160,10 @@ public class GUIHelper {
 			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
 			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
 			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+
+			/* Texte Menu 4 */
+			Menu4.setText("Help");
+			menuItem41.setText("How to use Schema");
 
 		} else if (Window.locale.toString().equals("it")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
@@ -185,6 +197,10 @@ public class GUIHelper {
 			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
 			menuItem310.setText("Synoptique WIRELESS SYSTEM");
 
+			/* Texte Menu 4 */
+			Menu4.setText("Help");
+			menuItem41.setText("About Schema");
+
 		} else if (Window.locale.toString().equals("fr")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
@@ -216,6 +232,10 @@ public class GUIHelper {
 			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
 			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
 			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+
+			/* Texte Menu 4 */
+			Menu4.setText("Aide");
+			menuItem41.setText("Comment utiliser Schema");
 		}
 
 		/* Ajout des Items */
@@ -244,9 +264,12 @@ public class GUIHelper {
 		Menu2.add(menuItem23);
 		Menu2.add(menuItem24);
 
+		Menu4.add(menuItem41);
+
 		/* Ajout des Menu au MenuBar */
 		menuBar.add(Menu1);
 		menuBar.add(Menu2);
+		menuBar.add(Menu4);
 
 		menuItem11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -364,6 +387,35 @@ public class GUIHelper {
 		menuItem310.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConstructScreen.addImg(menuItem310.getText());
+			}
+		});
+
+		menuItem41.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Desktop.isDesktopSupported()) {
+					Desktop desktop1 = Desktop.getDesktop();
+					File helpuseSchema = new File("doc/help_use_schema.html");
+
+					if (desktop1.isSupported(Desktop.Action.BROWSE)) {
+						try {
+							try {
+								desktop1.browse(new URI(
+										"doc/help_use_schema.html"));
+							} catch (URISyntaxException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						} catch (IOException ec) {
+							try {
+								desktop1.open(helpuseSchema);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								javax.swing.JOptionPane.showMessageDialog(null,
+										"Unable to open the web page");
+							}
+						}
+					}
+				}
 			}
 		});
 
