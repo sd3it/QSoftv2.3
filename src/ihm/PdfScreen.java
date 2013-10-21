@@ -197,7 +197,6 @@ public class PdfScreen extends JDialog {
 		jLabel28 = new javax.swing.JLabel();
 		
 		jTextArea1 = new JTextArea();
-		//jTextArea1.setBackground(Color.GRAY);
 		jTextArea1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(135,153,255)));
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);

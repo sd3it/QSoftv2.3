@@ -1,5 +1,6 @@
 package drawing.demos;
 
+import ihm.Screen1;
 import ihm.Window;
 
 import java.awt.Color;
@@ -108,7 +109,8 @@ public class ConstructScreen {
 			jc.addDrawable(reference);
 		}
 
-		lb_logo = new JLabel(new ImageIcon("logo.png"));
+		//lb_logo = new JLabel(new ImageIcon("logo.png"));
+		lb_logo = new JLabel(Screen1.getImg());
 		jc.add(lb_logo);
 
 		new NonOverlapMoveAdapter(jc);

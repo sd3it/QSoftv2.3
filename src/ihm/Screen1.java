@@ -120,7 +120,7 @@ public class Screen1 extends Window implements ComponentListener {
 			e2.printStackTrace();
 		}
 
-		jLabel1 = new javax.swing.JLabel(img, JLabel.CENTER);
+		jLabel1 = new javax.swing.JLabel(getImg(), JLabel.CENTER);
 		jLabel1.setBounds(0, 0, 160, 110);
 		jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -700,11 +700,11 @@ public class Screen1 extends Window implements ComponentListener {
 					chooser.setFileFilter(filter);
 					int returnval = chooser.showOpenDialog(null);
 					if (returnval == JFileChooser.APPROVE_OPTION) {
-						img = new ImageIcon(chooser.getSelectedFile()
-								.getAbsolutePath());
+						setImg(new ImageIcon(chooser.getSelectedFile()
+								.getAbsolutePath()));
 						Copy.copyfile(chooser.getSelectedFile(), new File(
 								"logo.png"));
-						jLabel1.setIcon(img);
+						jLabel1.setIcon(getImg());
 						SwingUtilities.updateComponentTreeUI(jLabel1);
 					}
 				} catch (Exception ev) {
@@ -1036,5 +1036,19 @@ public class Screen1 extends Window implements ComponentListener {
 
 	@Override
 	public void componentShown(ComponentEvent arg0) {
+	}
+
+	/**
+	 * @param img the img to set
+	 */
+	public static void setImg(ImageIcon img) {
+		Screen1.img = img;
+	}
+
+	/**
+	 * @return the img
+	 */
+	public static ImageIcon getImg() {
+		return img;
 	}
 }
