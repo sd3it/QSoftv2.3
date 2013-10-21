@@ -103,16 +103,16 @@ public class GUIHelper {
 		JMenu Menu11 = new JMenu();
 
 		JMenu Menu111 = new JMenu();
-		JMenuItem menuItem1111 = new JMenuItem();
-		JMenuItem menuItem1112 = new JMenuItem();
-		JMenuItem menuItem1113 = new JMenuItem();
-		JMenuItem menuItem1114 = new JMenuItem();
+		JMenuItem menuItem1111 = new JMenuItem(new ImageIcon("images/color/red.gif"));
+		JMenuItem menuItem1112 = new JMenuItem(new ImageIcon("images/color/green.gif"));
+		JMenuItem menuItem1113 = new JMenuItem(new ImageIcon("images/color/blue.gif"));
+		JMenuItem menuItem1114 = new JMenuItem(new ImageIcon("images/color/black.gif"));
 
 		JMenu Menu112 = new JMenu();
-		JMenuItem menuItem1121 = new JMenuItem();
-		JMenuItem menuItem1122 = new JMenuItem();
-		JMenuItem menuItem1123 = new JMenuItem();
-		JMenuItem menuItem1124 = new JMenuItem();
+		JMenuItem menuItem1121 = new JMenuItem(new ImageIcon("images/color/red.gif"));
+		JMenuItem menuItem1122 = new JMenuItem(new ImageIcon("images/color/green.gif"));
+		JMenuItem menuItem1123 = new JMenuItem(new ImageIcon("images/color/blue.gif"));
+		JMenuItem menuItem1124 = new JMenuItem(new ImageIcon("images/color/black.gif"));
 
 		// JMenuItem menuItem113 = new JMenuItem("-------->");
 
