@@ -127,6 +127,8 @@ public class FenetreAjoutTexte extends JDialog {
 		jCboxPolice.addItem("20");
 		jCboxPolice.addItem("25");
 		jCboxPolice.addItem("30");
+		jCboxPolice.addItem("40");
+		jCboxPolice.addItem("50");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());

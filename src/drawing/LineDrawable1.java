@@ -33,7 +33,7 @@ public class LineDrawable1 extends FormDrawable3 {
 		float[] style = {40,0}; // Pas de pointillés
 		((Graphics2D) g).setStroke( 
 			new BasicStroke( 
-				3, // taille de la ligne 
+				4, // taille de la ligne 
 				BasicStroke.CAP_SQUARE,
 				BasicStroke.JOIN_MITER,
 				10.0f,
