@@ -30,7 +30,7 @@ public class LineDrawable1 extends FormDrawable3 {
 		Color c = g.getColor();
 		g.setColor(color);
 		
-		float[] style = {40,0}; // Pas de pointillés
+		float[] style = {10,0}; // Pas de pointillés
 		((Graphics2D) g).setStroke( 
 			new BasicStroke( 
 				4, // taille de la ligne 

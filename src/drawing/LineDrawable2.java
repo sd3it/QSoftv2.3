@@ -31,7 +31,7 @@ public class LineDrawable2 extends FormDrawable3 {
 		Color c = g.getColor();
 		g.setColor(color);
 		
-		float[] style = {10,5}; // Pointillé
+		float[] style = {5,7}; // Pointillé
 		((Graphics2D) g).setStroke( 
 			new BasicStroke( 
 				4, // taille de la ligne 

@@ -42,28 +42,82 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 			setMouseUp(true);
 
 			/*
-			 * State of isStateLine : 
-			 * 	- 0 : no line 
-			 * 	- 1 : pleine 
-			 * 	- 2 : pointille
+			 * State of isStateLine : - 0 : no line - 1 : pleine - 2 : pointille
 			 */
 
 			if (GUIHelper.isStateLine() == 1) {
-				// Click Right
-				if (SwingUtilities.isRightMouseButton(e)) {
-					ConstructScreen.addLine(Color.BLACK);
-					GUIHelper.setStateLine(0);
+
+				switch (GUIHelper.isColorLine()) {
+				case 1: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLine(Color.RED);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+				case 2: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLine(Color.GREEN);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+				case 3: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLine(Color.BLUE);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+				case 4: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLine(Color.BLACK);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+
+				default:
+					break;
 				}
 			}
 
 			if (GUIHelper.isStateLine() == 2) {
-				// Click Right
-				if (SwingUtilities.isRightMouseButton(e)) {
-					ConstructScreen.addLinePointille(Color.RED);
-					GUIHelper.setStateLine(0);
+				switch (GUIHelper.isColorLine()) {
+				case 1: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLinePointille(Color.RED);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+				case 2: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLinePointille(Color.GREEN);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+				case 3: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLinePointille(Color.BLUE);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+				case 4: // Click Right
+					if (SwingUtilities.isRightMouseButton(e)) {
+						ConstructScreen.addLinePointille(Color.BLACK);
+						GUIHelper.setStateLine(0);
+					}
+
+					break;
+
+				default:
+					break;
 				}
 			}
-			
+
 			if (GUIHelper.isStateLine() == 3) {
 				// Click Right
 				if (SwingUtilities.isRightMouseButton(e)) {
@@ -79,7 +133,7 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 					GUIHelper.setStateLine(0);
 				}
 			}
-			
+
 			/*
 			 * if ( SwingUtilities.isRightMouseButton(e) ) {
 			 * ConstructScreen.addLine(Color.RED); GUIHelper.setStateLine(0); }
@@ -104,8 +158,6 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		setMouseUp(false);
 		setStart(new Point(e.getX(), e.getY()));
 		System.out.println("+ START = " + getStart());
-		
-		
 
 		// }
 	}
