@@ -125,6 +125,13 @@ public class GUIHelper {
 		final JMenuItem menuItem38 = new JMenuItem();
 		final JMenuItem menuItem39 = new JMenuItem();
 		final JMenuItem menuItem310 = new JMenuItem();
+		final JMenuItem menuItem311 = new JMenuItem();
+		final JMenuItem menuItem312 = new JMenuItem();
+		final JMenuItem menuItem313 = new JMenuItem();
+		final JMenuItem menuItem314 = new JMenuItem();
+		final JMenuItem menuItem315 = new JMenuItem();
+		final JMenuItem menuItem316 = new JMenuItem();
+		final JMenuItem menuItem317 = new JMenuItem();
 
 		JMenu Menu4 = new JMenu();
 		final JMenuItem menuItem41 = new JMenuItem();
@@ -160,6 +167,13 @@ public class GUIHelper {
 			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
 			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
 			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+			menuItem311.setText("Synoptique DFA05");
+			menuItem312.setText("Synoptique DLF");
+			menuItem313.setText("Synoptique EX Adressable Interface");
+			menuItem314.setText("Synoptique EX Gas Detection");
+			menuItem315.setText("Synoptique Heat Cable");
+			menuItem316.setText("Synoptique Monitoring Software");
+			menuItem317.setText("Synoptique Passerelle Radio");
 
 			/* Texte Menu 4 */
 			Menu4.setText("Help");
@@ -196,6 +210,13 @@ public class GUIHelper {
 			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
 			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
 			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+			menuItem311.setText("Synoptique DFA05");
+			menuItem312.setText("Synoptique DLF");
+			menuItem313.setText("Synoptique EX Adressable Interface");
+			menuItem314.setText("Synoptique EX Gas Detection");
+			menuItem315.setText("Synoptique Heat Cable");
+			menuItem316.setText("Synoptique Monitoring Software");
+			menuItem317.setText("Synoptique Passerelle Radio");
 
 			/* Texte Menu 4 */
 			Menu4.setText("Help");
@@ -232,6 +253,13 @@ public class GUIHelper {
 			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
 			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
 			menuItem310.setText("Synoptique WIRELESS SYSTEM");
+			menuItem311.setText("Synoptique DFA05");
+			menuItem312.setText("Synoptique DLF");
+			menuItem313.setText("Synoptique EX Adressable Interface");
+			menuItem314.setText("Synoptique EX Gas Detection");
+			menuItem315.setText("Synoptique Heat Cable");
+			menuItem316.setText("Synoptique Monitoring Software");
+			menuItem317.setText("Synoptique Passerelle Radio");
 
 			/* Texte Menu 4 */
 			Menu4.setText("Aide");
@@ -257,6 +285,13 @@ public class GUIHelper {
 		Menu3.add(menuItem38);
 		Menu3.add(menuItem39);
 		Menu3.add(menuItem310);
+		Menu3.add(menuItem311);
+		Menu3.add(menuItem312);
+		Menu3.add(menuItem313);
+		Menu3.add(menuItem314);
+		Menu3.add(menuItem315);
+		Menu3.add(menuItem316);
+		Menu3.add(menuItem317);
 
 		Menu2.add(Menu3);
 		Menu2.add(menuItem21);
@@ -387,6 +422,48 @@ public class GUIHelper {
 		menuItem310.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConstructScreen.addImg(menuItem310.getText());
+			}
+		});
+		
+		menuItem311.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem311.getText());
+			}
+		});
+		
+		menuItem312.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem312.getText());
+			}
+		});
+		
+		menuItem313.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem313.getText());
+			}
+		});
+		
+		menuItem314.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem314.getText());
+			}
+		});
+		
+		menuItem315.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem315.getText());
+			}
+		});
+		
+		menuItem316.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem316.getText());
+			}
+		});
+		
+		menuItem317.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg(menuItem317.getText());
 			}
 		});
 

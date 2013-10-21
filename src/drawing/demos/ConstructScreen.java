@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -109,7 +108,6 @@ public class ConstructScreen {
 			jc.addDrawable(reference);
 		}
 
-		//lb_logo = new JLabel(new ImageIcon("logo.png"));
 		lb_logo = new JLabel(Screen1.getImg());
 		jc.add(lb_logo);
 
