@@ -17,7 +17,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -26,9 +25,7 @@ import java.util.ResourceBundle;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -36,17 +33,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import com.itextpdf.text.DocumentException;
-
-import database.ReadMargin;
-import drawing.demos.ConstructScreen;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import database.ReadMargin;
+import drawing.demos.ConstructScreen;
 
 
 public class Screen2 extends Window implements ComponentListener{
@@ -3167,6 +3160,7 @@ public class Screen2 extends Window implements ComponentListener{
 							FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichier Excel (.xls)","xls");
 							chooser.setFileFilter(filter);
 							int returnval = chooser.showOpenDialog(null);
+							String msgLoad = null;
 						
 							if(returnval == JFileChooser.APPROVE_OPTION) {
 								WorkbookSettings ws=new WorkbookSettings();
@@ -3179,7 +3173,17 @@ public class Screen2 extends Window implements ComponentListener{
 									margin = true;
 									new Copy();
 									sheet = Workbook.getWorkbook(Copy.copyfile(chooser.getSelectedFile(), new File("lastmarginfile.info")),ws).getSheet(0);
-									javax.swing.JOptionPane.showMessageDialog(null,"The Purchasing price list has been loaded"); 
+									
+									if(Window.locale.toString().equals("en")){
+										msgLoad = "The Purchasing price list has been loaded";
+									}
+									else if(Window.locale.toString().equals("it")){
+										msgLoad = "Prezzo di acquisto elenco è stato addebitato";
+									}
+									else if(Window.locale.toString().equals("fr")){
+										msgLoad = "La liste de prix d'achat a été chargé";
+									}
+									javax.swing.JOptionPane.showMessageDialog(null, msgLoad); 
 								
 									// si purchasing pice list load -> affichage des labels & textfields caché
 									jLabel10.setVisible(true);
@@ -3197,7 +3201,17 @@ public class Screen2 extends Window implements ComponentListener{
 								}
 								else{
 									margin = false;
-									javax.swing.JOptionPane.showMessageDialog(null,"The file \""+chooser.getSelectedFile().getName()+"\" is not in purchasing price list file format"); 
+																		
+									if(Window.locale.toString().equals("en")){
+										msgLoad = "The file \""+chooser.getSelectedFile().getName()+"\" is not in purchasing price list file format";
+									}
+									else if(Window.locale.toString().equals("it")){
+										msgLoad = "Il file \""+chooser.getSelectedFile().getName()+"\" non è un elenco dei prezzi di acquisto";
+									}
+									else if(Window.locale.toString().equals("fr")){
+										msgLoad = "Le fichier \""+chooser.getSelectedFile().getName()+"\" n'est pas une liste de prix d'achat";
+									}
+									javax.swing.JOptionPane.showMessageDialog(null, msgLoad);
 								
 									jLabel10.setVisible(false);
 									jLabel13.setVisible(false);
