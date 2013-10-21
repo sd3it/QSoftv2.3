@@ -227,14 +227,14 @@ public class Screen2 extends Window implements ComponentListener{
 		//jLabel14 = new javax.swing.JLabel();
 
 		/******************************** Icon ToolBar **************************************/
-		jButton5 = new javax.swing.JButton(new ImageIcon("mail.png"));
-		jButton11 = new javax.swing.JButton(new ImageIcon("pdf_icon.png"));
-		jButton12 = new javax.swing.JButton(new ImageIcon("facture-icone.JPG"));
-		jButton10 = new javax.swing.JButton(new ImageIcon("save.jpg"));
-		jButton9 = new javax.swing.JButton(new ImageIcon("folder.png"));
-		jButton14 = new javax.swing.JButton(new ImageIcon("excel.png"));
-		jButtonProfit2 = new javax.swing.JButton(new ImageIcon("profit.png"));
-		jButtonSchema = new javax.swing.JButton(new ImageIcon("schema.png"));
+		jButton5 = new javax.swing.JButton(new ImageIcon("images/icons/mail.png"));
+		jButton11 = new javax.swing.JButton(new ImageIcon("images/icons/pdf.png"));
+		jButton12 = new javax.swing.JButton(new ImageIcon("images/icons/facture.png"));
+		jButton10 = new javax.swing.JButton(new ImageIcon("images/icons/save.png"));
+		jButton9 = new javax.swing.JButton(new ImageIcon("images/icons/folder.png"));
+		jButton14 = new javax.swing.JButton(new ImageIcon("images/icons/excel.png"));
+		jButtonProfit2 = new javax.swing.JButton(new ImageIcon("images/icons/profit.png"));
+		jButtonSchema = new javax.swing.JButton(new ImageIcon("images/icons/schema.png"));
 
 		if(Window.locale.toString().equals("en")){
 			res = ResourceBundle.getBundle("I18nPropertiesRessources", locale);
