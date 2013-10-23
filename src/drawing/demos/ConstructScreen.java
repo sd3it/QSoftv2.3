@@ -73,16 +73,20 @@ public class ConstructScreen {
 		for (int row = 0; row <= Window.reference.size() - 1; row++) {
 			for (int column = 0; column <= 6; column++) {
 				if (column == 1) {
-					if (Window.reference.get(row).contains("/")) {
-						IDrawable img = new ImgDrawable(Color.BLACK, new Point(
-								px, py), dim, Window.reference.get(row)
-								.replace("/", ""), Window.quantity.get(row));
-						jc.addDrawable(img);
-					} else {
-						IDrawable img = new ImgDrawable(Color.BLACK, new Point(
-								px, py), dim, Window.reference.get(row),
-								Window.quantity.get(row));
-						jc.addDrawable(img);
+					if (!Window.reference.get(row).isEmpty()) {				//Si colonne reference n'est pas vide
+						if (Window.reference.get(row).contains("/")) {		//Si colonne reference contient un "/" -> on le remplace par un ""
+							IDrawable img = new ImgDrawable(Color.BLACK,
+									new Point(px, py), dim, Window.reference
+											.get(row).replace("/", ""),
+									Window.quantity.get(row));
+							jc.addDrawable(img);
+						} else {											//Sinon Ok
+							IDrawable img = new ImgDrawable(Color.BLACK,
+									new Point(px, py), dim,
+									Window.reference.get(row),
+									Window.quantity.get(row));
+							jc.addDrawable(img);
+						}
 					}
 
 				}
@@ -129,9 +133,8 @@ public class ConstructScreen {
 			GUIHelper.showOnFrame(jc,
 					(String) Window.res.getObject("title_schema"));
 		}
-
 	}
-
+	
 	/**
 	 * Methode d'ajout d'une ligne pleine
 	 */

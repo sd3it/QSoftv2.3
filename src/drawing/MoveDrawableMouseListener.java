@@ -30,10 +30,10 @@ public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 
 	public void mouseDragged(MouseEvent e) {
 		if (drawable != null) {
-			//Click Left for Dragged
-			if ( SwingUtilities.isLeftMouseButton(e) ) {
-			drawable.setPosition(e.getPoint());
-			canvas.repaint();
+			// Click Left for Dragged
+			if (SwingUtilities.isLeftMouseButton(e)) {
+				drawable.setPosition(e.getPoint());
+				canvas.repaint();
 			}
 		}
 	}
