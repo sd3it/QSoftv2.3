@@ -95,59 +95,66 @@ public class GUIHelper {
 
 	// Creation menu
 	public static JMenuBar createMenuBar() {
-		JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar(); // Barre menu
 
 		/* Menu 1 */
-		JMenu Menu1 = new JMenu();
-		JMenuItem menuItem11 = new JMenuItem();
-		JMenu Menu11 = new JMenu();
+		JMenu Menu1 = new JMenu(); // menu "Actions"
+		JMenuItem menuItem11 = new JMenuItem(); // Add Text
+		JMenuItem menuItem12 = new JMenuItem(); // Add Gomme
+		JMenu Menu11 = new JMenu(); // Add Line
+		JMenuItem menuItem13 = new JMenuItem(); // Save to PNG file
 
-		JMenu Menu111 = new JMenu();
-		JMenuItem menuItem1111 = new JMenuItem(new ImageIcon("images/color/red.gif"));
-		JMenuItem menuItem1112 = new JMenuItem(new ImageIcon("images/color/green.gif"));
-		JMenuItem menuItem1113 = new JMenuItem(new ImageIcon("images/color/blue.gif"));
-		JMenuItem menuItem1114 = new JMenuItem(new ImageIcon("images/color/black.gif"));
+		JMenu Menu111 = new JMenu(); // Ligne Pleine
+		JMenuItem menuItem1111 = new JMenuItem(new ImageIcon(
+				"images/color/red.gif"));
+		JMenuItem menuItem1112 = new JMenuItem(new ImageIcon(
+				"images/color/green.gif"));
+		JMenuItem menuItem1113 = new JMenuItem(new ImageIcon(
+				"images/color/blue.gif"));
+		JMenuItem menuItem1114 = new JMenuItem(new ImageIcon(
+				"images/color/black.gif"));
 
-		JMenu Menu112 = new JMenu();
-		JMenuItem menuItem1121 = new JMenuItem(new ImageIcon("images/color/red.gif"));
-		JMenuItem menuItem1122 = new JMenuItem(new ImageIcon("images/color/green.gif"));
-		JMenuItem menuItem1123 = new JMenuItem(new ImageIcon("images/color/blue.gif"));
-		JMenuItem menuItem1124 = new JMenuItem(new ImageIcon("images/color/black.gif"));
+		JMenu Menu112 = new JMenu(); // Ligne Pointille
+		JMenuItem menuItem1121 = new JMenuItem(new ImageIcon(
+				"images/color/red.gif"));
+		JMenuItem menuItem1122 = new JMenuItem(new ImageIcon(
+				"images/color/green.gif"));
+		JMenuItem menuItem1123 = new JMenuItem(new ImageIcon(
+				"images/color/blue.gif"));
+		JMenuItem menuItem1124 = new JMenuItem(new ImageIcon(
+				"images/color/black.gif"));
 
 		// JMenuItem menuItem113 = new JMenuItem("-------->");
 
-		JMenuItem menuItem12 = new JMenuItem();
-		JMenuItem menuItem13 = new JMenuItem();
-
 		/* Menu 2 */
-		JMenu Menu2 = new JMenu();
-		JMenuItem menuItem21 = new JMenuItem();
-		JMenuItem menuItem22 = new JMenuItem();
-		JMenuItem menuItem23 = new JMenuItem();
-		JMenuItem menuItem24 = new JMenuItem();
+		JMenu Menu2 = new JMenu(); // menu "Add Elements"
+		JMenuItem menuItem21 = new JMenuItem(); // "EoL"
+		JMenuItem menuItem22 = new JMenuItem(); // "+"
+		JMenuItem menuItem23 = new JMenuItem(); // "-"
+		JMenuItem menuItem24 = new JMenuItem(); // "RAL"
 
 		/* Menu 3 */
-		JMenu Menu3 = new JMenu();
-		final JMenuItem menuItem31 = new JMenuItem();
-		final JMenuItem menuItem32 = new JMenuItem();
-		final JMenuItem menuItem33 = new JMenuItem();
-		final JMenuItem menuItem34 = new JMenuItem();
-		final JMenuItem menuItem35 = new JMenuItem();
-		final JMenuItem menuItem36 = new JMenuItem();
-		final JMenuItem menuItem37 = new JMenuItem();
-		final JMenuItem menuItem38 = new JMenuItem();
-		final JMenuItem menuItem39 = new JMenuItem();
-		final JMenuItem menuItem310 = new JMenuItem();
-		final JMenuItem menuItem311 = new JMenuItem();
-		final JMenuItem menuItem312 = new JMenuItem();
-		final JMenuItem menuItem313 = new JMenuItem();
-		final JMenuItem menuItem314 = new JMenuItem();
-		final JMenuItem menuItem315 = new JMenuItem();
-		final JMenuItem menuItem316 = new JMenuItem();
-		final JMenuItem menuItem317 = new JMenuItem();
+		JMenu Menu3 = new JMenu(); // ss-menu "Add Synoptique"
+		final JMenuItem menuItem31 = new JMenuItem(); // "ALPHA 2"
+		final JMenuItem menuItem32 = new JMenuItem(); // "ALPHA 4/8/12"
+		final JMenuItem menuItem33 = new JMenuItem(); // "ALPHA 16/248"
+		final JMenuItem menuItem34 = new JMenuItem(); // "MEPFLASH"
+		final JMenuItem menuItem35 = new JMenuItem(); // "HEPHAIS 128"
+		final JMenuItem menuItem36 = new JMenuItem(); // "HEPHAIS 1600NE"
+		final JMenuItem menuItem37 = new JMenuItem(); // "HEPHAIS 1600"
+		final JMenuItem menuItem38 = new JMenuItem(); // "HEPHAIS 1600 NETWORK"
+		final JMenuItem menuItem39 = new JMenuItem(); // "HEPHAIS 1600 COMFORT"
+		final JMenuItem menuItem310 = new JMenuItem(); // "WIRELESS SYSTEM"
+		final JMenuItem menuItem311 = new JMenuItem(); // "DFA05"
+		final JMenuItem menuItem312 = new JMenuItem(); // "DLF"
+		final JMenuItem menuItem313 = new JMenuItem(); // "EX Adressable Interface"
+		final JMenuItem menuItem314 = new JMenuItem(); // "EX Gas Detection"
+		final JMenuItem menuItem315 = new JMenuItem(); // "Heat Cable"
+		final JMenuItem menuItem316 = new JMenuItem(); // "Monitoring Software"
+		final JMenuItem menuItem317 = new JMenuItem(); // "Passerelle Radio"
 
-		JMenu Menu4 = new JMenu();
-		final JMenuItem menuItem41 = new JMenuItem();
+		JMenu Menu4 = new JMenu(); // menu "Help"
+		final JMenuItem menuItem41 = new JMenuItem(); // "How to use schema"
 
 		if (Window.locale.toString().equals("en")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
@@ -155,6 +162,7 @@ public class GUIHelper {
 			/* Texte Menu 1 */
 			Menu1.setText("Actions");
 			menuItem11.setText("Add Text");
+			menuItem12.setText("Add Gomme");
 			Menu11.setText("Add Line");
 			Menu111.setText("_________");
 			menuItem1111.setText("Red");
@@ -167,7 +175,6 @@ public class GUIHelper {
 			menuItem1123.setText("Blue");
 			menuItem1124.setText("Black");
 
-			menuItem12.setText("Add Gomme");
 			menuItem13.setText("Save to PNG file");
 
 			/* Texte Menu 2 */
@@ -259,24 +266,24 @@ public class GUIHelper {
 			/* Texte Menu 1 */
 			Menu1.setText("Outils");
 			menuItem11.setText("Outils Texte");
-			Menu11.setText("Add Line");
+			Menu11.setText("Outils Ligne");
 			Menu111.setText("_________");
-			menuItem1111.setText("Red");
-			menuItem1112.setText("Green");
-			menuItem1113.setText("Blue");
-			menuItem1114.setText("Black");
+			menuItem1111.setText("Rouge");
+			menuItem1112.setText("Verte");
+			menuItem1113.setText("Bleue");
+			menuItem1114.setText("Noire");
 			Menu112.setText("_ _ _ _ _ _");
-			menuItem1121.setText("Red");
-			menuItem1122.setText("Green");
-			menuItem1123.setText("Blue");
-			menuItem1124.setText("Black");
+			menuItem1121.setText("Rouge");
+			menuItem1122.setText("Verte");
+			menuItem1123.setText("Bleue");
+			menuItem1124.setText("Noire");
 
 			menuItem12.setText("Outils Gomme");
 			menuItem13.setText("Sauvegarder en fichier PNG");
 
 			/* Texte Menu 2 */
 			Menu2.setText("Ajouter des élements");
-			menuItem21.setText("EoL (End of Line)");
+			menuItem21.setText("EoL (Fin de Ligne)");
 			menuItem22.setText("+");
 			menuItem23.setText("=");
 			menuItem24.setText("RAL");
