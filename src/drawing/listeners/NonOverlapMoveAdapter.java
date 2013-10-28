@@ -42,8 +42,11 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		setMouseUp(true);
 
 		if (GUIHelper.isStateLine() == 0) {
-			if (SwingUtilities.isRightMouseButton(e)) {
-				canvas.removeDrawable(drawable); // Del drawable clicked
+			if (GUIHelper.isStateDelete()) {
+				if (SwingUtilities.isRightMouseButton(e)) {
+					canvas.removeDrawable(drawable); // Del drawable clicked
+				}
+				GUIHelper.setStateDelete(false);
 			}
 		}
 
@@ -121,6 +124,42 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 			// }
 
 			return;
+		}
+
+		if (GUIHelper.isStateLine() == 3) {
+			switch (GUIHelper.isColorLine()) {
+			case 1: // Click Right = Red color
+				if (SwingUtilities.isRightMouseButton(e)) {
+					ConstructScreen.addLineFleche(Color.RED);
+					GUIHelper.setStateLine(0);
+				}
+
+				break;
+			case 2: // Click Right = Green color
+				if (SwingUtilities.isRightMouseButton(e)) {
+					ConstructScreen.addLineFleche(Color.GREEN);
+					GUIHelper.setStateLine(0);
+				}
+
+				break;
+			case 3: // Click Right = Blue color
+				if (SwingUtilities.isRightMouseButton(e)) {
+					ConstructScreen.addLineFleche(Color.BLUE);
+					GUIHelper.setStateLine(0);
+				}
+
+				break;
+			case 4: // Click Right = Black color
+				if (SwingUtilities.isRightMouseButton(e)) {
+					ConstructScreen.addLineFleche(Color.BLACK);
+					GUIHelper.setStateLine(0);
+				}
+
+				break;
+
+			default:
+				break;
+			}
 		}
 		/*
 		 * if (!canvas.isAlone(drawable)) {

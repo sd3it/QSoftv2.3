@@ -141,7 +141,7 @@ public class ConstructScreen {
 	public static void addLine(Color c) {
 		IDrawable l1 = new LineDrawable1(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
-				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+				NonOverlapMoveAdapter.getStart()), new Dimension(8, 8));
 		jc.addDrawable(l1);
 	}
 
@@ -149,9 +149,10 @@ public class ConstructScreen {
 	 * Methode d'ajout d'une ligne pointille
 	 */
 	public static void addLinePointille(Color c) {
+		//IDrawable l2 = new LineDrawable2(c, new Point(NonOverlapMoveAdapter.getEnd()), new Point(NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
 		IDrawable l2 = new LineDrawable2(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
-				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+				NonOverlapMoveAdapter.getStart()), new Dimension(8, 8));
 		jc.addDrawable(l2);
 	}
 
@@ -161,7 +162,7 @@ public class ConstructScreen {
 	public static void addLineFleche(Color c) {
 		IDrawable l3 = new LineDrawable3(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
-				NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+				NonOverlapMoveAdapter.getStart()), new Dimension(8, 8));
 		jc.addDrawable(l3);
 	}
 
