@@ -3,7 +3,6 @@ package drawing;
 import ihm.Window;
 
 import java.awt.Desktop;
-import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -102,9 +101,8 @@ public class GUIHelper {
 		/* Menu 1 */
 		JMenu Menu1 = new JMenu(); // menu "Actions"
 		JMenuItem menuItem11 = new JMenuItem(); // Add Text
-		//JMenuItem menuItem12 = new JMenuItem(); // Add Gomme
 		JMenu Menu11 = new JMenu(); // Add Line
-		JMenuItem menuItemDel = new JMenuItem(); //Delete drawable
+		JMenuItem menuItemDel = new JMenuItem(); // Delete drawable
 		JMenuItem menuItem13 = new JMenuItem(); // Save to PNG file
 
 		JMenu Menu111 = new JMenu(); // Ligne Pleine
@@ -127,7 +125,7 @@ public class GUIHelper {
 		JMenuItem menuItem1124 = new JMenuItem(new ImageIcon(
 				"images/color/black.gif"));
 
-		//JMenu Menu113 = new JMenu(); // Ligne Fléché
+		JMenu Menu113 = new JMenu(); // Ligne Fléché
 		JMenuItem menuItem1131 = new JMenuItem(new ImageIcon(
 				"images/color/red.gif"));
 		JMenuItem menuItem1132 = new JMenuItem(new ImageIcon(
@@ -136,7 +134,6 @@ public class GUIHelper {
 				"images/color/blue.gif"));
 		JMenuItem menuItem1134 = new JMenuItem(new ImageIcon(
 				"images/color/black.gif"));
-		
 
 		/* Menu 2 */
 		JMenu Menu2 = new JMenu(); // menu "Add Elements"
@@ -174,7 +171,6 @@ public class GUIHelper {
 			/* Texte Menu 1 */
 			Menu1.setText("Actions");
 			menuItem11.setText("Add Text");
-			//menuItem12.setText("Add Gomme");
 			Menu11.setText("Add Line");
 			Menu111.setText("_________");
 			menuItem1111.setText("Red");
@@ -186,12 +182,12 @@ public class GUIHelper {
 			menuItem1122.setText("Green");
 			menuItem1123.setText("Blue");
 			menuItem1124.setText("Black");
-			//Menu113.setText("---------->");
+			Menu113.setText("---------->");
 			menuItem1131.setText("Red");
 			menuItem1132.setText("Green");
 			menuItem1133.setText("Blue");
 			menuItem1134.setText("Black");
-			
+
 			menuItemDel.setText("Delete Element");
 
 			menuItem13.setText("Save to PNG file");
@@ -244,13 +240,12 @@ public class GUIHelper {
 			menuItem1122.setText("Green");
 			menuItem1123.setText("Blue");
 			menuItem1124.setText("Black");
-			//Menu113.setText("---------->");
+			Menu113.setText("---------->");
 			menuItem1131.setText("Red");
 			menuItem1132.setText("Green");
 			menuItem1133.setText("Blue");
 			menuItem1134.setText("Black");
 
-			//menuItem12.setText("Add Gomme");
 			menuItemDel.setText("Delete Element");
 			menuItem13.setText("Save to PNG file");
 
@@ -302,13 +297,11 @@ public class GUIHelper {
 			menuItem1122.setText("Verte");
 			menuItem1123.setText("Bleue");
 			menuItem1124.setText("Noire");
-			//Menu113.setText("---------->");
+			Menu113.setText("---------->");
 			menuItem1131.setText("Red");
 			menuItem1132.setText("Green");
 			menuItem1133.setText("Blue");
 			menuItem1134.setText("Black");
-
-			//menuItem12.setText("Outils Gomme");
 			menuItemDel.setText("Supprimer Element");
 			menuItem13.setText("Sauvegarder en fichier PNG");
 
@@ -346,7 +339,6 @@ public class GUIHelper {
 
 		/* Ajout des Items */
 		Menu1.add(menuItem11);
-		//Menu1.add(menuItem12);
 		Menu1.add(Menu11);
 
 		Menu11.add(Menu111);
@@ -360,13 +352,13 @@ public class GUIHelper {
 		Menu112.add(menuItem1122);
 		Menu112.add(menuItem1123);
 		Menu112.add(menuItem1124);
-/*
+
 		Menu11.add(Menu113);
 		Menu113.add(menuItem1131);
 		Menu113.add(menuItem1132);
 		Menu113.add(menuItem1133);
 		Menu113.add(menuItem1134);
-		*/
+
 		Menu1.add(menuItemDel);
 
 		Menu1.add(menuItem13);
@@ -491,13 +483,7 @@ public class GUIHelper {
 				setColorLine(4);
 			}
 		});
-/*
-		menuItem12.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setStateGomme(true);
-			}
-		});
-*/		
+
 		menuItemDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setStateDelete(true);
@@ -686,19 +672,11 @@ public class GUIHelper {
 		GUIHelper.colorLine = colorLine;
 	}
 
-	public static boolean isStateGomme() {
-		return stateGomme;
-	}
-
-	public static void setStateGomme(boolean stateGomme) {
-		GUIHelper.stateGomme = stateGomme;
-	}
-	
-	public static boolean isStateDelete(){
+	public static boolean isStateDelete() {
 		return stateDelete;
 	}
-	
-	public static void setStateDelete(boolean stateDelete){
+
+	public static void setStateDelete(boolean stateDelete) {
 		GUIHelper.stateDelete = stateDelete;
 	}
 }

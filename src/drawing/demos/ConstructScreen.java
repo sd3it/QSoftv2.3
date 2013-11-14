@@ -28,7 +28,6 @@ import com.itextpdf.text.Font;
 
 import drawing.FenetreAjoutTexte;
 import drawing.GUIHelper;
-import drawing.GommeRectDrawable;
 import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.JCanvas;
@@ -164,15 +163,6 @@ public class ConstructScreen {
 				NonOverlapMoveAdapter.getEnd()), new Point(
 				NonOverlapMoveAdapter.getStart()), new Dimension(8, 8));
 		jc.addDrawable(l3);
-	}
-
-	/**
-	 * Methode d'ajout d'une gomme
-	 */
-	public static void addGomme(Color c) {
-		IDrawable gomme = new GommeRectDrawable(c, new Point(
-				NonOverlapMoveAdapter.getStart()), new Dimension(50, 50));
-		jc.addDrawable(gomme);
 	}
 
 	/**
