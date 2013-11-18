@@ -1,8 +1,8 @@
 <launch4jConfig>
   	<dontWrapJar>false</dontWrapJar>
   	<headerType>gui</headerType>
-  	<jar>C:\Documents and Settings\stage\workspace\QSoftv2.3\install\Qsoftexe.jar</jar>
-  	<outfile>C:\Documents and Settings\stage\workspace\QSoftv2.3\install\QSoftv2.3.exe</outfile>
+  	<jar>C:\Users\IT SD3\workspace\QSoftv2.3\install\Qsoftexe.jar</jar>
+  	<outfile>C:\Users\IT SD3\workspace\QSoftv2.3\install\QSoftv2.3.exe</outfile>
   	<errTitle></errTitle>
   	<cmdLine></cmdLine>
   	<chdir></chdir>
@@ -11,7 +11,7 @@
   	<supportUrl></supportUrl>
   	<customProcName>true</customProcName>
   	<stayAlive>false</stayAlive>
-  	<icon>C:\Documents and Settings\stage\workspace\QSoftv2.3\picture\SD31632.ico</icon>
+  	<icon>C:\Users\IT SD3\workspace\QSoftv2.3\picture\SD31632.ico</icon>
   	<classPath>
     	<mainClass>main.Program</mainClass>
     	<cp>.</cp>

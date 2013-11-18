@@ -46,17 +46,17 @@
       </fileset>
     </copy>
 	<target name="create_run_jar">
-		<jar destfile="C:\Documents and Settings\stage\workspace\QSoftv2.3\install\Qsoftexe.jar" filesetmanifest="mergewithoutmain">
+		<jar destfile="C:\Users\IT SD3\workspace\QSoftv2.3\install\Qsoftexe.jar" filesetmanifest="mergewithoutmain">
 	    	<manifest>
 	        	<attribute name="Main-Class" value="main.Program"/>
 	            <attribute name="Class-Path" value="."/>
 	     	</manifest>
-	        <fileset dir="C:\Documents and Settings\stage\workspace\QSoftv2.3\bin"/>
-	        <zipfileset excludes="META-INF/*.SF" src="C:\Documents and Settings\stage\workspace\QSoftv2.3\itextpdf-5.1.0.jar"/>
-	        <zipfileset excludes="META-INF/*.SF" src="C:\Documents and Settings\stage\workspace\QSoftv2.3\jdic.jar"/>
-	        <zipfileset excludes="META-INF/*.SF" src="C:\Documents and Settings\stage\workspace\QSoftv2.3\jxl.jar"/>
+	        <fileset dir="C:\Users\IT SD3\workspace\QSoftv2.3\bin"/>
+	        <zipfileset excludes="META-INF/*.SF" src="C:\Users\IT SD3\workspace\QSoftv2.3\itextpdf-5.1.0.jar"/>
+	        <zipfileset excludes="META-INF/*.SF" src="C:\Users\IT SD3\workspace\QSoftv2.3\jdic.jar"/>
+	        <zipfileset excludes="META-INF/*.SF" src="C:\Users\IT SD3\workspace\QSoftv2.3\jxl.jar"/>
 	        <!--<zipfileset excludes="META-INF/*.SF" src="C://Documents and Settings/stage/Mes documents/Downloads/quaqua-8.0/Quaqua/lib/swing-layout.jar"/>-->
-			<zipfileset excludes="META-INF/*.SF" src="C:\Documents and Settings\stage\workspace\QSoftv2.3\swing-layout.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="C:\Users\IT SD3\workspace\QSoftv2.3\swing-layout.jar"/>
 		</jar>
 	</target>
 	
