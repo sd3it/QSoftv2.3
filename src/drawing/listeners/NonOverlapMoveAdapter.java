@@ -41,10 +41,26 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		setEnd(new Point(e.getX(), e.getY()));
 		setMouseUp(true);
 
+		/************************************************************************
+		 * if (drawable != null) { if(SwingUtilities.isLeftMouseButton(e)) {
+		 * System.out.println("Image : " + drawable.getPosition());
+		 * System.out.println("Image : " + drawable.getRectangle()); } }
+		 * GUIHelper.setStateChangeSize(false);
+		 *************************************************************************/
+		if (GUIHelper.isStateLine() == 0) {
+			if (GUIHelper.isStateChangeSize()) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					ConstructScreen.changeSizeImage("gav-min");
+				}
+				GUIHelper.setStateChangeSize(false);
+			}
+		}
+
 		if (GUIHelper.isStateLine() == 0) {
 			if (GUIHelper.isStateDelete()) {
 				if (SwingUtilities.isRightMouseButton(e)) {
 					canvas.removeDrawable(drawable); // Del drawable clicked
+					System.out.println(drawable);
 				}
 				GUIHelper.setStateDelete(false);
 			}
@@ -165,6 +181,7 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		 * if (!canvas.isAlone(drawable)) {
 		 * drawable.setPosition(initialLocation); } initialLocation = null;
 		 */
+
 		drawable = null;
 
 		canvas.repaint();

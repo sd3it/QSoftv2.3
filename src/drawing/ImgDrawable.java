@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,7 +26,7 @@ public class ImgDrawable extends FormDrawable2 {
 	/** Acces au toolkit : */
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-	private BufferedImage img;
+	private static BufferedImage img;
 
 	/**
 	 * @param color
@@ -79,5 +81,14 @@ public class ImgDrawable extends FormDrawable2 {
 				(rect.x + resizedImage.getHeight(null) / 4), (rect.y
 						+ resizedImage.getHeight(null) + 15));
 		g.setColor(c);
+	}
+
+	/** NEW FOR RESIZE IMG **/
+	public static BufferedImage getImg() {
+		return img;
+	}
+
+	public void setImg(BufferedImage img) {
+		this.img = img;
 	}
 }

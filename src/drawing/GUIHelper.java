@@ -39,7 +39,7 @@ public class GUIHelper {
 	protected static int stateLine = 0;
 	protected static int colorLine = 0;
 	protected static boolean stateDelete = false;
-	protected static boolean stateGomme = false;
+	protected static boolean stateChangeSize = false;
 
 	public static void showOnFrame(JComponent component, String frameName) {
 		final JFrame frame = new JFrame(frameName);
@@ -103,6 +103,7 @@ public class GUIHelper {
 		JMenuItem menuItem11 = new JMenuItem(); // Add Text
 		JMenu Menu11 = new JMenu(); // Add Line
 		JMenuItem menuItemDel = new JMenuItem(); // Delete drawable
+		JMenuItem menuItemChangeSize = new JMenuItem(); // Change size
 		JMenuItem menuItem13 = new JMenuItem(); // Save to PNG file
 
 		JMenu Menu111 = new JMenu(); // Ligne Pleine
@@ -189,6 +190,7 @@ public class GUIHelper {
 			menuItem1134.setText("Black");
 
 			menuItemDel.setText("Delete Element");
+			menuItemChangeSize.setText("Change Size Image");
 
 			menuItem13.setText("Save to PNG file");
 
@@ -247,6 +249,7 @@ public class GUIHelper {
 			menuItem1134.setText("Black");
 
 			menuItemDel.setText("Delete Element");
+			menuItemChangeSize.setText("Change Size Image");
 			menuItem13.setText("Save to PNG file");
 
 			/* Texte Menu 2 */
@@ -303,6 +306,7 @@ public class GUIHelper {
 			menuItem1133.setText("Blue");
 			menuItem1134.setText("Black");
 			menuItemDel.setText("Supprimer Element");
+			menuItemChangeSize.setText("Changer Taille de l'Image");
 			menuItem13.setText("Sauvegarder en fichier PNG");
 
 			/* Texte Menu 2 */
@@ -360,6 +364,7 @@ public class GUIHelper {
 		Menu113.add(menuItem1134);
 
 		Menu1.add(menuItemDel);
+		Menu1.add(menuItemChangeSize);
 
 		Menu1.add(menuItem13);
 
@@ -487,6 +492,13 @@ public class GUIHelper {
 		menuItemDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setStateDelete(true);
+			}
+		});
+		
+		menuItemChangeSize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setStateChangeSize(true);
+				
 			}
 		});
 
@@ -672,11 +684,21 @@ public class GUIHelper {
 		GUIHelper.colorLine = colorLine;
 	}
 
+	/* Suppression d'un Drawable */
 	public static boolean isStateDelete() {
 		return stateDelete;
 	}
 
 	public static void setStateDelete(boolean stateDelete) {
 		GUIHelper.stateDelete = stateDelete;
+	}
+	
+	/* Changement de taille d'une image */
+	public static boolean isStateChangeSize(){
+		return stateChangeSize;
+	}
+	
+	public static void setStateChangeSize(boolean stateChangeSize){
+		GUIHelper.stateChangeSize = stateChangeSize;
 	}
 }

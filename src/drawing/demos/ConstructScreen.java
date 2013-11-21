@@ -10,6 +10,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +99,6 @@ public class ConstructScreen {
 				}
 				// System.out.println("px=" + px);
 			}
-			// System.out.println();
 		}
 
 		IDrawable date = new TextDrawable(Color.BLACK, Font.NORMAL, 15,
@@ -183,6 +185,20 @@ public class ConstructScreen {
 		IDrawable img3 = new ImgDrawable(Color.BLACK, new Point(200, 250),
 				new Dimension(200, 200), name, "1");
 		jc.addDrawable(img3);
+	}
+	
+	/**
+	 * Méthode pour changer la taille de l'image
+	 */
+	public static void changeSizeImage(String n){
+		/*IDrawable img = new ImgDrawable(Color.BLACK,
+				new Point(90, 180), new Dimension(30, 30),
+				n,
+				"5");
+		jc.addDrawable(img);*/
+		System.out.println(ImgDrawable.getImg().getHeight()*0.5);
+		
+		
 	}
 
 	/**
