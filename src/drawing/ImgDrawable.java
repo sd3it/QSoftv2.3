@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -27,6 +28,7 @@ public class ImgDrawable extends FormDrawable2 {
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 	private static BufferedImage img;
+	private static String nomImg;
 
 	/**
 	 * @param color
@@ -47,6 +49,7 @@ public class ImgDrawable extends FormDrawable2 {
 
 		try {
 			img = ImageIO.read(new File("images_schema/" + name + ".png"));
+			//System.out.println("Name : " + name);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -64,6 +67,7 @@ public class ImgDrawable extends FormDrawable2 {
 
 		int Wimg = img.getWidth();
 		int Himg = img.getHeight();
+		nomImg = name;
 
 		BufferedImage resizedImage = new BufferedImage(Wimg, Himg,
 				BufferedImage.TYPE_INT_ARGB);
@@ -76,11 +80,22 @@ public class ImgDrawable extends FormDrawable2 {
 		/**
 		 * Dessin de l'image + label
 		 */
+		rect.width = Wimg;
+		rect.height = Himg;
 		g.drawImage(resizedImage, rect.x, rect.y, null);
+		g.drawRect(rect.x, rect.y, rect.width, rect.height);	// Cadre de l'image (a retirer apres les tests)
 		g.drawString("x" + quantit + " " + name,
 				(rect.x + resizedImage.getHeight(null) / 4), (rect.y
 						+ resizedImage.getHeight(null) + 15));
 		g.setColor(c);
+	}
+
+	public static String getNomImg() {
+		return nomImg;
+	}
+
+	public static void setNomImg(String nomImg) {
+		ImgDrawable.nomImg = nomImg;
 	}
 
 	/** NEW FOR RESIZE IMG **/

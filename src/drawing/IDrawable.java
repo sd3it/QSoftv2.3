@@ -23,6 +23,6 @@ public interface IDrawable {
 	 * @pre:
 	 * @return le rectangle qui contient completement this.
 	 */
-	public abstract Rectangle getRectangle();	
+	public abstract Rectangle getRectangle();
 	
 }

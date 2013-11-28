@@ -41,6 +41,7 @@ public abstract class FormDrawable implements IMovableDrawable {
 		return (Rectangle) rect.clone();
 	}
 
+
 	public Point getPosition() {
 		Point p = rect.getLocation();
 		p.x = (p.x + rect.width / 2);

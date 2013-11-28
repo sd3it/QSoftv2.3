@@ -1,12 +1,15 @@
 package drawing.listeners;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
 import drawing.GUIHelper;
+import drawing.ImgDrawable;
+import drawing.ImgDrawable2;
 import drawing.JCanvas;
 import drawing.MoveDrawableMouseListener;
 import drawing.demos.ConstructScreen;
@@ -49,8 +52,15 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		 *************************************************************************/
 		if (GUIHelper.isStateLine() == 0) {
 			if (GUIHelper.isStateChangeSize()) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
-					ConstructScreen.changeSizeImage("gav-min");
+				if (drawable != null){
+					if (SwingUtilities.isLeftMouseButton(e)) {
+							
+						ConstructScreen.changeSizeImage(drawable);
+						canvas.addDrawable(drawable);
+						canvas.removeDrawable(drawable);						
+						
+						System.out.println("H = " + drawable.getRectangle().height + " + W = " + drawable.getRectangle().width);
+					}
 				}
 				GUIHelper.setStateChangeSize(false);
 			}
@@ -60,7 +70,6 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 			if (GUIHelper.isStateDelete()) {
 				if (SwingUtilities.isRightMouseButton(e)) {
 					canvas.removeDrawable(drawable); // Del drawable clicked
-					System.out.println(drawable);
 				}
 				GUIHelper.setStateDelete(false);
 			}
@@ -193,6 +202,10 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 		 * if (drawable != null) { initialLocation = drawable.getPosition(); }
 		 * else {
 		 */
+		if(drawable != null){
+			System.out.println("----> NOM : " + this.drawable);
+			
+		}
 		setMouseUp(false);
 		setStart(new Point(e.getX(), e.getY()));
 		System.out.println("+ START = " + getStart());

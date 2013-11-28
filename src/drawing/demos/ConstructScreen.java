@@ -32,7 +32,9 @@ import com.itextpdf.text.Font;
 import drawing.FenetreAjoutTexte;
 import drawing.GUIHelper;
 import drawing.IDrawable;
+import drawing.IMovableDrawable;
 import drawing.ImgDrawable;
+import drawing.ImgDrawable2;
 import drawing.JCanvas;
 import drawing.LineDrawable1;
 import drawing.LineDrawable2;
@@ -190,15 +192,9 @@ public class ConstructScreen {
 	/**
 	 * Méthode pour changer la taille de l'image
 	 */
-	public static void changeSizeImage(String n){
-		/*IDrawable img = new ImgDrawable(Color.BLACK,
-				new Point(90, 180), new Dimension(30, 30),
-				n,
-				"5");
-		jc.addDrawable(img);*/
-		System.out.println(ImgDrawable.getImg().getHeight()*0.5);
-		
-		
+	public static void changeSizeImage(IMovableDrawable dr){		
+		IDrawable imgRS = new ImgDrawable2(Color.BLACK, new Point(150, 150), new Dimension(30,30), dr.toString(), "5");
+		jc.addDrawable(imgRS);
 	}
 
 	/**

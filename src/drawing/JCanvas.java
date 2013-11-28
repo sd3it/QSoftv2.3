@@ -3,20 +3,12 @@ package drawing;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.Action;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.TransferHandler;
 
 /**
  * @author KoA
@@ -38,12 +30,20 @@ public class JCanvas extends JPanel {
 		drawables.add(d);
 		repaint();
 	}
-
+	
+	public void resizeDrawable(IDrawable d) {
+		drawables.add(d);
+		
+		System.out.println("Size IDrawable : " + d.getRectangle().height / 2);
+		repaint();
+	}
+	
 	/**
 	 * @pre: d!= null
 	 * @post: d est retire de this
 	 */
 	public void removeDrawable(IDrawable d) {
+		
 		drawables.remove(d);
 		repaint();
 	}
