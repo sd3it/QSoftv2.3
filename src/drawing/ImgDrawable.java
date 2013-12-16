@@ -83,7 +83,7 @@ public class ImgDrawable extends FormDrawable2 {
 		rect.width = Wimg;
 		rect.height = Himg;
 		g.drawImage(resizedImage, rect.x, rect.y, null);
-		g.drawRect(rect.x, rect.y, rect.width, rect.height);	// Cadre de l'image (a retirer apres les tests)
+		//g.drawRect(rect.x, rect.y, rect.width, rect.height);	// Cadre de l'image (a retirer apres les tests)
 		g.drawString("x" + quantit + " " + name,
 				(rect.x + resizedImage.getHeight(null) / 4), (rect.y
 						+ resizedImage.getHeight(null) + 15));

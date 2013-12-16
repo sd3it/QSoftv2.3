@@ -2,12 +2,13 @@ package ihm;
 
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class MenuBar {
 
 	private JFrame frame;
-	
+
 	public MenuBar(JFrame frame) {
 		super();
 		this.frame = frame;
@@ -53,7 +54,7 @@ public class MenuBar {
 	private javax.swing.JPopupMenu.Separator jSeparator4;
 	private javax.swing.JPopupMenu.Separator jSeparator5;
 
-	public void add(){
+	public void add() {
 
 		jMenuBar1 = new javax.swing.JMenuBar();
 		jMenu1 = new javax.swing.JMenu();
@@ -66,134 +67,160 @@ public class MenuBar {
 		jMenuItem5 = new javax.swing.JMenuItem();
 		jMenuItem6 = new javax.swing.JMenuItem();
 		jMenuItem7 = new javax.swing.JMenuItem();
-		jMenuItem4 = new javax.swing.JMenuItem();
+		jMenuItem4 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_send.png"));
 		jMenuItem3 = new javax.swing.JMenuItem();
-		jMenuItem9 = new javax.swing.JMenuItem();
-		jMenuItem12 = new javax.swing.JMenuItem();
-		jMenuItem13 = new javax.swing.JMenuItem();
+		jMenuItem9 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_exit.png"));
+		jMenuItem12 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/flags/flag_en.png"));
+		jMenuItem13 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/flags/flag_it.png"));
 		jMenuItem14 = new javax.swing.JMenuItem();
-		jMenuItem15 = new javax.swing.JMenuItem();
+		jMenuItem15 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/flags/flag_fr.png"));
 		jMenuItem16 = new javax.swing.JMenuItem();
 		jMenuItem19 = new javax.swing.JMenuItem();
-		jMenuItem10 = new javax.swing.JMenuItem();
-		jMenuItem11 = new javax.swing.JMenuItem();
+		jMenuItem10 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_user.png"));
+		jMenuItem11 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_logo.png"));
 		jMenuItem17 = new javax.swing.JMenuItem();
-		jMenuItem18 = new javax.swing.JMenuItem();
-		jMenuItem20 = new javax.swing.JMenuItem();
-		jMenuItem22 = new javax.swing.JMenuItem();
+		jMenuItem18 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_about.png"));
+		jMenuItem20 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_restart.png"));
+		jMenuItem22 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_mail.png"));
 		jMenuItem25 = new javax.swing.JMenuItem();
 		jMenuItem23 = new javax.swing.JMenuItem();
-		jMenuItem24 = new javax.swing.JMenuItem();
-		jMenuItemHelpInstall = new javax.swing.JMenuItem();
-		jMenuItemHelpUse = new javax.swing.JMenuItem();
+		jMenuItem24 = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_company.png"));
+		jMenuItemHelpInstall = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_help.png"));
+		jMenuItemHelpUse = new javax.swing.JMenuItem(new ImageIcon(
+				"images/icons/ic_help.png"));
 		jSeparator1 = new javax.swing.JPopupMenu.Separator();
 		jSeparator2 = new javax.swing.JPopupMenu.Separator();
 		jSeparator3 = new javax.swing.JPopupMenu.Separator();
 		jSeparator5 = new javax.swing.JPopupMenu.Separator();
 		jSeparator4 = new javax.swing.JPopupMenu.Separator();
-		
-		if(Window.locale.toString().equals("en")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+
+		if (Window.locale.toString().equals("en")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
 			/********** Menu 1 *********/
-			jMenu1.setText((String)Window.res.getObject("menu_file"));
-			jMenuItem1.setText((String)Window.res.getObject("lb_menuitem1"));
-			jMenuItem2.setText((String)Window.res.getObject("lb_menuitem2"));
-			jMenuItem8.setText((String)Window.res.getObject("lb_menuitem8"));
-			jMenuItem5.setText((String)Window.res.getObject("lb_menuitem5"));
-			jMenuItem6.setText((String)Window.res.getObject("lb_menuitem6"));
-			jMenuItem23.setText((String)Window.res.getObject("lb_menuitem23"));
-			jMenuItem7.setText((String)Window.res.getObject("lb_menuitem7"));
-			jMenuItem4.setText((String)Window.res.getObject("lb_menuitem4"));
-	        jMenuItem20.setText((String)Window.res.getObject("lb_menuitem20"));
-			jMenuItem9.setText((String)Window.res.getObject("lb_menuitem9"));
+			jMenu1.setText((String) Window.res.getObject("menu_file"));
+			jMenuItem1.setText((String) Window.res.getObject("lb_menuitem1"));
+			jMenuItem2.setText((String) Window.res.getObject("lb_menuitem2"));
+			jMenuItem8.setText((String) Window.res.getObject("lb_menuitem8"));
+			jMenuItem5.setText((String) Window.res.getObject("lb_menuitem5"));
+			jMenuItem6.setText((String) Window.res.getObject("lb_menuitem6"));
+			jMenuItem23.setText((String) Window.res.getObject("lb_menuitem23"));
+			jMenuItem7.setText((String) Window.res.getObject("lb_menuitem7"));
+			jMenuItem4.setText((String) Window.res.getObject("lb_menuitem4"));
+			jMenuItem20.setText((String) Window.res.getObject("lb_menuitem20"));
+			jMenuItem9.setText((String) Window.res.getObject("lb_menuitem9"));
 			/******** Menu 2 & 3 *******/
-			jMenu2.setText((String)Window.res.getObject("menu_preference"));
-			jMenu3.setText((String)Window.res.getObject("menu_language"));
-			jMenuItem12.setText((String)Window.res.getObject("lb_menuitem12"));
-			jMenuItem13.setText((String)Window.res.getObject("lb_menuitem13"));
-			jMenuItem15.setText((String)Window.res.getObject("lb_menuitem15"));
-			jMenuItem10.setText((String)Window.res.getObject("lb_menuitem10"));
-			jMenuItem24.setText((String)Window.res.getObject("lb_menuitem24"));
-			jMenuItem22.setText((String)Window.res.getObject("lb_menuitem22"));
-			jMenuItem11.setText((String)Window.res.getObject("lb_menuitem11"));
+			jMenu2.setText((String) Window.res.getObject("menu_preference"));
+			jMenu3.setText((String) Window.res.getObject("menu_language"));
+			jMenuItem12.setText((String) Window.res.getObject("lb_menuitem12"));
+			jMenuItem13.setText((String) Window.res.getObject("lb_menuitem13"));
+			jMenuItem15.setText((String) Window.res.getObject("lb_menuitem15"));
+			jMenuItem10.setText((String) Window.res.getObject("lb_menuitem10"));
+			jMenuItem24.setText((String) Window.res.getObject("lb_menuitem24"));
+			jMenuItem22.setText((String) Window.res.getObject("lb_menuitem22"));
+			jMenuItem11.setText((String) Window.res.getObject("lb_menuitem11"));
 			/********** Menu 4 *********/
-			jMenu4.setText((String)Window.res.getObject("menu_help"));
-			jMenuItem18.setText((String)Window.res.getObject("lb_menuitem18"));
-			jMenuItemHelpInstall.setText((String)Window.res.getObject("lb_menuitemHelpInstall") + Window.nameTitle);
-			jMenuItemHelpUse.setText((String)Window.res.getObject("lb_menuitemHelpUse") + Window.nameTitle);
-		}
-		else if(Window.locale.toString().equals("it")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			jMenu4.setText((String) Window.res.getObject("menu_help"));
+			jMenuItem18.setText((String) Window.res.getObject("lb_menuitem18"));
+			jMenuItemHelpInstall.setText((String) Window.res
+					.getObject("lb_menuitemHelpInstall") + Window.nameTitle);
+			jMenuItemHelpUse.setText((String) Window.res
+					.getObject("lb_menuitemHelpUse") + Window.nameTitle);
+		} else if (Window.locale.toString().equals("it")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
 			/********** Menu 1 *********/
-			jMenu1.setText((String)Window.res.getObject("menu_file"));
-			jMenuItem1.setText((String)Window.res.getObject("lb_menuitem1"));
-			jMenuItem2.setText((String)Window.res.getObject("lb_menuitem2"));
-			jMenuItem8.setText((String)Window.res.getObject("lb_menuitem8"));
-			jMenuItem5.setText((String)Window.res.getObject("lb_menuitem5"));
-			jMenuItem6.setText((String)Window.res.getObject("lb_menuitem6"));
-			jMenuItem23.setText((String)Window.res.getObject("lb_menuitem23"));
-			jMenuItem7.setText((String)Window.res.getObject("lb_menuitem7"));
-			jMenuItem4.setText((String)Window.res.getObject("lb_menuitem4"));
-	        jMenuItem20.setText((String)Window.res.getObject("lb_menuitem20"));
-			jMenuItem9.setText((String)Window.res.getObject("lb_menuitem9"));
+			jMenu1.setText((String) Window.res.getObject("menu_file"));
+			jMenuItem1.setText((String) Window.res.getObject("lb_menuitem1"));
+			jMenuItem2.setText((String) Window.res.getObject("lb_menuitem2"));
+			jMenuItem8.setText((String) Window.res.getObject("lb_menuitem8"));
+			jMenuItem5.setText((String) Window.res.getObject("lb_menuitem5"));
+			jMenuItem6.setText((String) Window.res.getObject("lb_menuitem6"));
+			jMenuItem23.setText((String) Window.res.getObject("lb_menuitem23"));
+			jMenuItem7.setText((String) Window.res.getObject("lb_menuitem7"));
+			jMenuItem4.setText((String) Window.res.getObject("lb_menuitem4"));
+			jMenuItem20.setText((String) Window.res.getObject("lb_menuitem20"));
+			jMenuItem9.setText((String) Window.res.getObject("lb_menuitem9"));
 			/******** Menu 2 & 3 *******/
-			jMenu2.setText((String)Window.res.getObject("menu_preference"));
-			jMenu3.setText((String)Window.res.getObject("menu_language"));
-			jMenuItem12.setText((String)Window.res.getObject("lb_menuitem12"));
-			jMenuItem13.setText((String)Window.res.getObject("lb_menuitem13"));
-			jMenuItem15.setText((String)Window.res.getObject("lb_menuitem15"));
-			jMenuItem10.setText((String)Window.res.getObject("lb_menuitem10"));
-			jMenuItem24.setText((String)Window.res.getObject("lb_menuitem24"));
-			jMenuItem22.setText((String)Window.res.getObject("lb_menuitem22"));
-			jMenuItem11.setText((String)Window.res.getObject("lb_menuitem11"));
+			jMenu2.setText((String) Window.res.getObject("menu_preference"));
+			jMenu3.setText((String) Window.res.getObject("menu_language"));
+			jMenuItem12.setText((String) Window.res.getObject("lb_menuitem12"));
+			jMenuItem13.setText((String) Window.res.getObject("lb_menuitem13"));
+			jMenuItem15.setText((String) Window.res.getObject("lb_menuitem15"));
+			jMenuItem10.setText((String) Window.res.getObject("lb_menuitem10"));
+			jMenuItem24.setText((String) Window.res.getObject("lb_menuitem24"));
+			jMenuItem22.setText((String) Window.res.getObject("lb_menuitem22"));
+			jMenuItem11.setText((String) Window.res.getObject("lb_menuitem11"));
 			/********** Menu 4 *********/
-			jMenu4.setText((String)Window.res.getObject("menu_help"));
-			jMenuItem18.setText((String)Window.res.getObject("lb_menuitem18"));
-			jMenuItemHelpInstall.setText((String)Window.res.getObject("lb_menuitemHelpInstall") + Window.nameTitle);
-			jMenuItemHelpUse.setText((String)Window.res.getObject("lb_menuitemHelpUse") + Window.nameTitle);
-		}
-		else if(Window.locale.toString().equals("fr")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
+			jMenu4.setText((String) Window.res.getObject("menu_help"));
+			jMenuItem18.setText((String) Window.res.getObject("lb_menuitem18"));
+			jMenuItemHelpInstall.setText((String) Window.res
+					.getObject("lb_menuitemHelpInstall") + Window.nameTitle);
+			jMenuItemHelpUse.setText((String) Window.res
+					.getObject("lb_menuitemHelpUse") + Window.nameTitle);
+		} else if (Window.locale.toString().equals("fr")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
 			/********** Menu 1 *********/
-			jMenu1.setText((String)Window.res.getObject("menu_file"));
-			jMenuItem1.setText((String)Window.res.getObject("lb_menuitem1"));
-			jMenuItem2.setText((String)Window.res.getObject("lb_menuitem2"));
-			jMenuItem8.setText((String)Window.res.getObject("lb_menuitem8"));
-			jMenuItem5.setText((String)Window.res.getObject("lb_menuitem5"));
-			jMenuItem6.setText((String)Window.res.getObject("lb_menuitem6"));
-			jMenuItem23.setText((String)Window.res.getObject("lb_menuitem23"));
-			jMenuItem7.setText((String)Window.res.getObject("lb_menuitem7"));
-			jMenuItem4.setText((String)Window.res.getObject("lb_menuitem4"));
-	        jMenuItem20.setText((String)Window.res.getObject("lb_menuitem20"));
-			jMenuItem9.setText((String)Window.res.getObject("lb_menuitem9"));
+			jMenu1.setText((String) Window.res.getObject("menu_file"));
+			jMenuItem1.setText((String) Window.res.getObject("lb_menuitem1"));
+			jMenuItem2.setText((String) Window.res.getObject("lb_menuitem2"));
+			jMenuItem8.setText((String) Window.res.getObject("lb_menuitem8"));
+			jMenuItem5.setText((String) Window.res.getObject("lb_menuitem5"));
+			jMenuItem6.setText((String) Window.res.getObject("lb_menuitem6"));
+			jMenuItem23.setText((String) Window.res.getObject("lb_menuitem23"));
+			jMenuItem7.setText((String) Window.res.getObject("lb_menuitem7"));
+			jMenuItem4.setText((String) Window.res.getObject("lb_menuitem4"));
+			jMenuItem20.setText((String) Window.res.getObject("lb_menuitem20"));
+			jMenuItem9.setText((String) Window.res.getObject("lb_menuitem9"));
 			/******** Menu 2 & 3 *******/
-			jMenu2.setText((String)Window.res.getObject("menu_preference"));
-			jMenu3.setText((String)Window.res.getObject("menu_language"));
-			jMenuItem12.setText((String)Window.res.getObject("lb_menuitem12"));
-			jMenuItem13.setText((String)Window.res.getObject("lb_menuitem13"));
-			jMenuItem15.setText((String)Window.res.getObject("lb_menuitem15"));
-			jMenuItem10.setText((String)Window.res.getObject("lb_menuitem10"));
-			jMenuItem24.setText((String)Window.res.getObject("lb_menuitem24"));
-			jMenuItem22.setText((String)Window.res.getObject("lb_menuitem22"));
-			jMenuItem11.setText((String)Window.res.getObject("lb_menuitem11"));
+			jMenu2.setText((String) Window.res.getObject("menu_preference"));
+			jMenu3.setText((String) Window.res.getObject("menu_language"));
+			jMenuItem12.setText((String) Window.res.getObject("lb_menuitem12"));
+			jMenuItem13.setText((String) Window.res.getObject("lb_menuitem13"));
+			jMenuItem15.setText((String) Window.res.getObject("lb_menuitem15"));
+			jMenuItem10.setText((String) Window.res.getObject("lb_menuitem10"));
+			jMenuItem24.setText((String) Window.res.getObject("lb_menuitem24"));
+			jMenuItem22.setText((String) Window.res.getObject("lb_menuitem22"));
+			jMenuItem11.setText((String) Window.res.getObject("lb_menuitem11"));
 			/********** Menu 4 *********/
-			jMenu4.setText((String)Window.res.getObject("menu_help"));
-			jMenuItem18.setText((String)Window.res.getObject("lb_menuitem18"));
-			jMenuItemHelpInstall.setText((String)Window.res.getObject("lb_menuitemHelpInstall") + Window.nameTitle);
-			jMenuItemHelpUse.setText((String)Window.res.getObject("lb_menuitemHelpUse") + Window.nameTitle);
+			jMenu4.setText((String) Window.res.getObject("menu_help"));
+			jMenuItem18.setText((String) Window.res.getObject("lb_menuitem18"));
+			jMenuItemHelpInstall.setText((String) Window.res
+					.getObject("lb_menuitemHelpInstall") + Window.nameTitle);
+			jMenuItemHelpUse.setText((String) Window.res
+					.getObject("lb_menuitemHelpUse") + Window.nameTitle);
 		}
 
 		/*************************** MENU 1 *************************/
 		// Load Selling price list
-		jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+		jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_F,
+				java.awt.event.InputEvent.CTRL_MASK));
 		jMenu1.add(jMenuItem1);
 		// Load Purchasing price list
-		jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+		jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_M,
+				java.awt.event.InputEvent.CTRL_MASK));
 		jMenu1.add(jMenuItem2);
 		// Load data file
-		jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+		jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_D,
+				java.awt.event.InputEvent.CTRL_MASK));
 		jMenu1.add(jMenuItem8);
-		
+
 		jMenu1.add(jSeparator1);
 
 		// Save proforma file (PDF)
@@ -204,25 +231,29 @@ public class MenuBar {
 		jMenu1.add(jMenuItem23);
 		// Save data file (DATA)
 		jMenu1.add(jMenuItem7);
-		
+
 		jMenu1.add(jSeparator2);
 
 		// Send by mail
 		jMenu1.add(jMenuItem4);
 
-		jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+		jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_P,
+				java.awt.event.InputEvent.CTRL_MASK));
 		jMenuItem3.setText("Print");
 
 		jMenu1.add(jSeparator3);
-        
+
 		// Restart QSoft
-        jMenu1.add(jMenuItem20);
-        // Exit
-		jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+		jMenu1.add(jMenuItem20);
+		// Exit
+		jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_F4,
+				java.awt.event.InputEvent.ALT_MASK));
 		jMenu1.add(jMenuItem9);
 
 		jMenuBar1.add(jMenu1);
-		
+
 		/*************************** MENU 2 & 3 *************************/
 		// English
 		jMenu3.add(jMenuItem12);
@@ -243,21 +274,22 @@ public class MenuBar {
 		jMenu2.add(jMenuItem22);
 		// Change logo
 		jMenu2.add(jMenuItem11);
-		
-		//retiré le 27/02/13 suite à la réunion 
-		//jMenu2.add(jSeparator6);
 
-		//jMenuItem17.setText("Load last pricelist");
-		//jMenu2.add(jMenuItem17);
-		
-		//jMenuItem25.setText("Load last marginlist");
-		//jMenu2.add(jMenuItem25);
+		// retiré le 27/02/13 suite à la réunion
+		// jMenu2.add(jSeparator6);
+
+		// jMenuItem17.setText("Load last pricelist");
+		// jMenu2.add(jMenuItem17);
+
+		// jMenuItem25.setText("Load last marginlist");
+		// jMenu2.add(jMenuItem25);
 
 		jMenuBar1.add(jMenu2);
 
 		/*************************** MENU 4 *************************/
 		// About QSoft
-		jMenuItem18.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+		jMenuItem18.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_F1, 0));
 		jMenu4.add(jMenuItem18);
 		// How to install
 		jMenu4.add(jMenuItemHelpInstall);
@@ -267,7 +299,7 @@ public class MenuBar {
 
 		this.frame.setJMenuBar(jMenuBar1);
 	}
-	
+
 	public javax.swing.JMenuItem getjMenuItem23() {
 		return jMenuItem23;
 	}
@@ -283,7 +315,7 @@ public class MenuBar {
 	public void setjMenuItem25(javax.swing.JMenuItem jMenuItem25) {
 		this.jMenuItem25 = jMenuItem25;
 	}
-	
+
 	public javax.swing.JMenuItem getjMenuItem24() {
 		return jMenuItem24;
 	}
@@ -435,7 +467,7 @@ public class MenuBar {
 	public void setjMenuItem20(javax.swing.JMenuItem jMenuItem20) {
 		this.jMenuItem20 = jMenuItem20;
 	}
-	
+
 	public javax.swing.JMenuItem getjMenuItem2() {
 		return jMenuItem2;
 	}
@@ -531,10 +563,11 @@ public class MenuBar {
 	public void setjSeparator4(javax.swing.JPopupMenu.Separator jSeparator4) {
 		this.jSeparator4 = jSeparator4;
 	}
-	
+
 	public javax.swing.JMenuItem getjMenuItemHelpInstall() {
 		return jMenuItemHelpInstall;
 	}
+
 	public javax.swing.JMenuItem getjMenuItemHelpUse() {
 		return jMenuItemHelpUse;
 	}

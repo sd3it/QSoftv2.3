@@ -100,11 +100,15 @@ public class GUIHelper {
 
 		/* Menu 1 */
 		JMenu Menu1 = new JMenu(); // menu "Actions"
-		JMenuItem menuItem11 = new JMenuItem(); // Add Text
+		JMenuItem menuItem11 = new JMenuItem(new ImageIcon(
+				"images/icons/ic_text.png")); // Add Text
 		JMenu Menu11 = new JMenu(); // Add Line
-		JMenuItem menuItemDel = new JMenuItem(); // Delete drawable
-		JMenuItem menuItemChangeSize = new JMenuItem(); // Change size
-		JMenuItem menuItem13 = new JMenuItem(); // Save to PNG file
+		JMenuItem menuItemDel = new JMenuItem(new ImageIcon(
+				"images/icons/ic_delete.png")); // Delete drawable
+		JMenuItem menuItemChangeSize = new JMenuItem(new ImageIcon(
+				"images/icons/ic_resize.png")); // Change size
+		JMenuItem menuItem13 = new JMenuItem(new ImageIcon(
+				"images/icons/ic_save.png")); // Save to PNG file
 
 		JMenu Menu111 = new JMenu(); // Ligne Pleine
 		JMenuItem menuItem1111 = new JMenuItem(new ImageIcon(
@@ -126,16 +130,15 @@ public class GUIHelper {
 		JMenuItem menuItem1124 = new JMenuItem(new ImageIcon(
 				"images/color/black.gif"));
 
-		JMenu Menu113 = new JMenu(); // Ligne Fléché
-		JMenuItem menuItem1131 = new JMenuItem(new ImageIcon(
-				"images/color/red.gif"));
-		JMenuItem menuItem1132 = new JMenuItem(new ImageIcon(
-				"images/color/green.gif"));
-		JMenuItem menuItem1133 = new JMenuItem(new ImageIcon(
-				"images/color/blue.gif"));
-		JMenuItem menuItem1134 = new JMenuItem(new ImageIcon(
-				"images/color/black.gif"));
-
+		/*
+		 * JMenu Menu113 = new JMenu(); // Ligne Fléché JMenuItem menuItem1131 =
+		 * new JMenuItem(new ImageIcon( "images/color/red.gif")); JMenuItem
+		 * menuItem1132 = new JMenuItem(new ImageIcon(
+		 * "images/color/green.gif")); JMenuItem menuItem1133 = new
+		 * JMenuItem(new ImageIcon( "images/color/blue.gif")); JMenuItem
+		 * menuItem1134 = new JMenuItem(new ImageIcon(
+		 * "images/color/black.gif"));
+		 */
 		/* Menu 2 */
 		JMenu Menu2 = new JMenu(); // menu "Add Elements"
 		JMenuItem menuItem21 = new JMenuItem(); // "EoL"
@@ -164,7 +167,8 @@ public class GUIHelper {
 		final JMenuItem menuItem317 = new JMenuItem(); // "Passerelle Radio"
 
 		JMenu Menu4 = new JMenu(); // menu "Help"
-		final JMenuItem menuItem41 = new JMenuItem(); // "How to use schema"
+		final JMenuItem menuItem41 = new JMenuItem(new ImageIcon(
+				"images/icons/ic_help.png")); // "How to use schema"
 
 		if (Window.locale.toString().equals("en")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
@@ -183,14 +187,14 @@ public class GUIHelper {
 			menuItem1122.setText("Green");
 			menuItem1123.setText("Blue");
 			menuItem1124.setText("Black");
-			Menu113.setText("---------->");
-			menuItem1131.setText("Red");
-			menuItem1132.setText("Green");
-			menuItem1133.setText("Blue");
-			menuItem1134.setText("Black");
+			/*
+			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
+			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
+			 * menuItem1134.setText("Black");
+			 */
 
 			menuItemDel.setText("Delete Element");
-			menuItemChangeSize.setText("Change Size Image");
+			menuItemChangeSize.setText("Change Image Size");
 
 			menuItem13.setText("Save to PNG file");
 
@@ -242,11 +246,11 @@ public class GUIHelper {
 			menuItem1122.setText("Green");
 			menuItem1123.setText("Blue");
 			menuItem1124.setText("Black");
-			Menu113.setText("---------->");
-			menuItem1131.setText("Red");
-			menuItem1132.setText("Green");
-			menuItem1133.setText("Blue");
-			menuItem1134.setText("Black");
+			/*
+			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
+			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
+			 * menuItem1134.setText("Black");
+			 */
 
 			menuItemDel.setText("Delete Element");
 			menuItemChangeSize.setText("Change Size Image");
@@ -300,11 +304,11 @@ public class GUIHelper {
 			menuItem1122.setText("Verte");
 			menuItem1123.setText("Bleue");
 			menuItem1124.setText("Noire");
-			Menu113.setText("---------->");
-			menuItem1131.setText("Red");
-			menuItem1132.setText("Green");
-			menuItem1133.setText("Blue");
-			menuItem1134.setText("Black");
+			/*
+			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
+			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
+			 * menuItem1134.setText("Black");
+			 */
 			menuItemDel.setText("Supprimer Element");
 			menuItemChangeSize.setText("Changer Taille de l'Image");
 			menuItem13.setText("Sauvegarder en fichier PNG");
@@ -357,11 +361,11 @@ public class GUIHelper {
 		Menu112.add(menuItem1123);
 		Menu112.add(menuItem1124);
 
-		Menu11.add(Menu113);
-		Menu113.add(menuItem1131);
-		Menu113.add(menuItem1132);
-		Menu113.add(menuItem1133);
-		Menu113.add(menuItem1134);
+		/*
+		 * Menu11.add(Menu113); Menu113.add(menuItem1131);
+		 * Menu113.add(menuItem1132); Menu113.add(menuItem1133);
+		 * Menu113.add(menuItem1134);
+		 */
 
 		Menu1.add(menuItemDel);
 		Menu1.add(menuItemChangeSize);
@@ -464,41 +468,34 @@ public class GUIHelper {
 		});
 
 		/*********** Couleur pour ligne fléché ****************/
-		menuItem1131.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(3);
-				setColorLine(1);
-			}
-		});
-		menuItem1132.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(3);
-				setColorLine(2);
-			}
-		});
-		menuItem1133.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(3);
-				setColorLine(3);
-			}
-		});
-		menuItem1134.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(3);
-				setColorLine(4);
-			}
-		});
-
+		/*
+		 * menuItem1131.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent arg0) { setStateLine(3); setColorLine(1);
+		 * } }); menuItem1132.addActionListener(new ActionListener() { public
+		 * void actionPerformed(ActionEvent arg0) { setStateLine(3);
+		 * setColorLine(2); } }); menuItem1133.addActionListener(new
+		 * ActionListener() { public void actionPerformed(ActionEvent arg0) {
+		 * setStateLine(3); setColorLine(3); } });
+		 * menuItem1134.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent arg0) { setStateLine(3); setColorLine(4);
+		 * } });
+		 */
 		menuItemDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setStateDelete(true);
 			}
 		});
-		
+
 		menuItemChangeSize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateChangeSize(true);
-				
+				/*
+				 * Solution mise de coté le 02/12 :
+				 * 
+				 * setStateChangeSize(true);
+				 */
+				FenetreAjoutComposant fac = new FenetreAjoutComposant();
+				fac.setVisible(true);
+
 			}
 		});
 
@@ -516,13 +513,13 @@ public class GUIHelper {
 
 		menuItem22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ConstructScreen.addText("+");
+				ConstructScreen.addTextGrd("+");
 			}
 		});
 
 		menuItem23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ConstructScreen.addText("=");
+				ConstructScreen.addTextGrd("=");
 			}
 		});
 
@@ -692,13 +689,13 @@ public class GUIHelper {
 	public static void setStateDelete(boolean stateDelete) {
 		GUIHelper.stateDelete = stateDelete;
 	}
-	
+
 	/* Changement de taille d'une image */
-	public static boolean isStateChangeSize(){
+	public static boolean isStateChangeSize() {
 		return stateChangeSize;
 	}
-	
-	public static void setStateChangeSize(boolean stateChangeSize){
+
+	public static void setStateChangeSize(boolean stateChangeSize) {
 		GUIHelper.stateChangeSize = stateChangeSize;
 	}
 }

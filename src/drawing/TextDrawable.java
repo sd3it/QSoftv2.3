@@ -33,8 +33,8 @@ public class TextDrawable extends FormDrawable2 {
 		Color c = g.getColor();
 		g.setColor(color);
 
-		Font fonte = new Font("TimesRoman", style, taillePolice);
-		g.setFont(fonte);
+		Font font = new Font("TimesRoman", style, taillePolice);
+		g.setFont(font);
 
 		g.drawString(name, rect.x, rect.y + 10);
 		// g.fillRect(rect.x, rect.y, rect.width, rect.height);

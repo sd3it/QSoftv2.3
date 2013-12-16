@@ -45,8 +45,8 @@ public class LineDrawable2 extends FormDrawable3 {
 		
 		//g.drawLine(rect.x, rect.y+1, rect2.x, rect2.y+1);
 		g.drawLine(rect.x, rect.y+3, rect2.x, rect2.y+3);
-		g.fillRect(rect.x, rect.y, rect.width, rect.height);
-		g.fillRect(rect2.x, rect2.y, rect2.width, rect2.height);
+		//g.fillRect(rect.x, rect.y, rect.width, rect.height);
+		//g.fillRect(rect2.x, rect2.y, rect2.width, rect2.height);
 		g.setColor(c);
 	}
 }

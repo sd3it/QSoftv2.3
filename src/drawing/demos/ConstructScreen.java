@@ -10,9 +10,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,12 +26,12 @@ import javax.swing.filechooser.FileSystemView;
 
 import com.itextpdf.text.Font;
 
+import drawing.FenetreAjoutComposant;
 import drawing.FenetreAjoutTexte;
 import drawing.GUIHelper;
 import drawing.IDrawable;
-import drawing.IMovableDrawable;
 import drawing.ImgDrawable;
-import drawing.ImgDrawable2;
+import drawing.ImgDrawable3;
 import drawing.JCanvas;
 import drawing.LineDrawable1;
 import drawing.LineDrawable2;
@@ -77,19 +74,23 @@ public class ConstructScreen {
 		for (int row = 0; row <= Window.reference.size() - 1; row++) {
 			for (int column = 0; column <= 6; column++) {
 				if (column == 1) {
-					if (!Window.reference.get(row).isEmpty()) {				//Si colonne reference n'est pas vide
-						if (Window.reference.get(row).contains("/")) {		//Si colonne reference contient un "/" -> on le remplace par un ""
+					// Si colonne reference n'est pas vide
+					if (!Window.reference.get(row).isEmpty()) {
+						// Si colonne reference contient un "/" -> on le
+						// remplace par un ""
+						if (Window.reference.get(row).contains("/")) {
 							IDrawable img = new ImgDrawable(Color.BLACK,
 									new Point(px, py), dim, Window.reference
 											.get(row).replace("/", ""),
 									Window.quantity.get(row));
 							jc.addDrawable(img);
-						} else {											//Sinon Ok
+						} else { // Sinon Ok
 							IDrawable img = new ImgDrawable(Color.BLACK,
 									new Point(px, py), dim,
 									Window.reference.get(row),
 									Window.quantity.get(row));
 							jc.addDrawable(img);
+							System.out.println("Load img " + row);
 						}
 					}
 
@@ -137,7 +138,7 @@ public class ConstructScreen {
 					(String) Window.res.getObject("title_schema"));
 		}
 	}
-	
+
 	/**
 	 * Methode d'ajout d'une ligne pleine
 	 */
@@ -152,7 +153,9 @@ public class ConstructScreen {
 	 * Methode d'ajout d'une ligne pointille
 	 */
 	public static void addLinePointille(Color c) {
-		//IDrawable l2 = new LineDrawable2(c, new Point(NonOverlapMoveAdapter.getEnd()), new Point(NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
+		// IDrawable l2 = new LineDrawable2(c, new
+		// Point(NonOverlapMoveAdapter.getEnd()), new
+		// Point(NonOverlapMoveAdapter.getStart()), new Dimension(2, 3));
 		IDrawable l2 = new LineDrawable2(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
 				NonOverlapMoveAdapter.getStart()), new Dimension(8, 8));
@@ -179,6 +182,17 @@ public class ConstructScreen {
 				new Dimension(10, 30), lab);
 		jc.addDrawable(txt3);
 	}
+	
+	/**
+	 * Methode d'ajout de Texte plus grand
+	 */
+	public static void addTextGrd(String lab) {
+		IDrawable txt3 = new TextDrawable(Color.BLACK,
+				Font.BOLD,
+				26, new Point(500, 100),
+				new Dimension(10, 30), lab);
+		jc.addDrawable(txt3);
+	}
 
 	/**
 	 * Méthode d'ajout d'une image
@@ -190,11 +204,18 @@ public class ConstructScreen {
 	}
 	
 	/**
-	 * Méthode pour changer la taille de l'image
+	 * Méthode d'ajout d'un composant avec choix de la taille de l'image
 	 */
-	public static void changeSizeImage(IMovableDrawable dr){		
-		IDrawable imgRS = new ImgDrawable2(Color.BLACK, new Point(150, 150), new Dimension(30,30), dr.toString(), "5");
-		jc.addDrawable(imgRS);
+	public static void addImgComponant(String name, String quantity) {
+		if (FenetreAjoutComposant.getStyle() == 30) {
+			IDrawable img3 = new ImgDrawable3(Color.BLACK, new Point(670, 170),
+					new Dimension(30, 30), name, quantity);
+			jc.addDrawable(img3);
+		} else if (FenetreAjoutComposant.getStyle() == 100) {
+			IDrawable img3 = new ImgDrawable(Color.BLACK, new Point(670, 170),
+					new Dimension(100, 100), name, quantity);
+			jc.addDrawable(img3);
+		}
 	}
 
 	/**
