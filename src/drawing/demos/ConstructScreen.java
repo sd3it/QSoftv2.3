@@ -76,8 +76,10 @@ public class ConstructScreen {
 				if (column == 1) {
 					// Si colonne reference n'est pas vide
 					if (!Window.reference.get(row).isEmpty()) {
-						// Si colonne reference contient un "/" -> on le
-						// remplace par un ""
+						/*
+						 * Si colonne reference contient un "/" -> on le
+						 * remplace par un ""
+						 */
 						if (Window.reference.get(row).contains("/")) {
 							IDrawable img = new ImgDrawable(Color.BLACK,
 									new Point(px, py), dim, Window.reference
@@ -90,7 +92,6 @@ public class ConstructScreen {
 									Window.reference.get(row),
 									Window.quantity.get(row));
 							jc.addDrawable(img);
-							System.out.println("Load img " + row);
 						}
 					}
 
@@ -182,15 +183,13 @@ public class ConstructScreen {
 				new Dimension(10, 30), lab);
 		jc.addDrawable(txt3);
 	}
-	
+
 	/**
 	 * Methode d'ajout de Texte plus grand
 	 */
 	public static void addTextGrd(String lab) {
-		IDrawable txt3 = new TextDrawable(Color.BLACK,
-				Font.BOLD,
-				26, new Point(500, 100),
-				new Dimension(10, 30), lab);
+		IDrawable txt3 = new TextDrawable(Color.BLACK, Font.BOLD, 26,
+				new Point(500, 100), new Dimension(10, 30), lab);
 		jc.addDrawable(txt3);
 	}
 
@@ -202,7 +201,7 @@ public class ConstructScreen {
 				new Dimension(200, 200), name, "1");
 		jc.addDrawable(img3);
 	}
-	
+
 	/**
 	 * Méthode d'ajout d'un composant avec choix de la taille de l'image
 	 */

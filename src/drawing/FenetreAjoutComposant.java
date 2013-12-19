@@ -1,10 +1,16 @@
 package drawing;
 
+import ihm.Window;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.border.BevelBorder;
@@ -106,6 +112,7 @@ public class FenetreAjoutComposant extends JDialog {
 		jButton1.setText("Add");
 		jButton1.setBounds(320, 170, 80, 20);
 		jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jButton1.setEnabled(false);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -123,20 +130,128 @@ public class FenetreAjoutComposant extends JDialog {
 
 		this.getContentPane().setBackground(Color.white);
 
+		/************* Liste de produits ************/
+		/* Action clavier sur la zone de texte */
+		jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				jTextField1ActionPerformed(evt);
+			}
+
+			@SuppressWarnings("deprecation")
+			private void jTextField1ActionPerformed(KeyEvent evt) {
+				if (Window.file != null) {
+					if (jTextField1.getText().equals("")) {
+						if (Character.isJavaLetter(evt.getKeyChar())
+								|| evt.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD
+								|| evt.getKeyCode() == Event.ENTER) {
+							jTextField2.setText("1");
+							jButton1.setEnabled(false);
+							list.setModel(Window.database
+									.readSearch(jTextField1.getText()));
+							list.setEnabled(true);
+						}
+					} else {
+						if (Character.isJavaLetter(evt.getKeyChar())
+								|| evt.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD
+								|| evt.getKeyCode() == Event.ENTER
+								|| evt.getKeyCode() == 8) {
+							jTextField2.setText("1");
+							jButton1.setEnabled(false);
+							list.setModel(Window.database
+									.readSearch(jTextField1.getText()));
+							list.setEnabled(true);
+						}
+					}
+				}
+			}
+		});
+		list.setFocusable(true);
+		/* Action clavier sur la zone de texte Search Product */
+		jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyPressed(java.awt.event.KeyEvent evt) {
+				jTextField1KeyPressed(evt);
+			}
+
+			private void jTextField1KeyPressed(KeyEvent evt) {
+				// KeyCode 40 = Flèche bas
+				if (evt.getKeyCode() == 40) {
+					// Si la liste != -1 (donc rempli)
+					if (list.getFirstVisibleIndex() != -1) {
+						list.setSelectedIndex(0);
+						list.requestFocus();
+					}
+				}
+			}
+		});
+
+		/***************************/
+		/* Action clavier sur sur la liste de produits */
+		list.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyPressed(java.awt.event.KeyEvent evt) {
+				jList1KeyPressed(evt);
+			}
+
+			@SuppressWarnings("static-access")
+			private void jList1KeyPressed(KeyEvent evt) {
+				// if(isList){
+				if (evt.getKeyCode() == Event.ENTER) {
+					jTextField2.setText("1");
+					jButton1.setEnabled(true);
+					DefaultListModel test = new DefaultListModel();
+					test.addElement(list.getSelectedValue().toString());
+					list.setModel(test);
+					list.setSelectedIndex(0);
+				}
+				// }
+			}
+		});
+
+		/* Action souris sur la liste de produits */
+		list.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				listMouseClicked(evt);
+			}
+
+			private void listMouseClicked(MouseEvent evt) {
+				// TODO Auto-generated method stub
+				jTextField2.setText("1");
+				jButton1.setEnabled(true);
+				DefaultListModel test = new DefaultListModel();
+				test.addElement(list.getSelectedValue().toString());
+				list.setModel(test);
+				list.setSelectedIndex(0);
+				jTextField1.setText(list.getSelectedValue().toString());
+			}
+
+		});
+
+		/* Action clique sur le bouton d'ajout du composant */
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				ConstructScreen.addImgComponant(jTextField1.getText(),
-						jTextField2.getText());
+				String nameProduct = jTextField1.getText();
+				/*
+				 * Si colonne reference contient un "/" -> on le
+				 * remplace par un ""
+				 */
+				if (nameProduct.contains("/")) {
+					ConstructScreen.addImgComponant(
+							nameProduct.replace("/", ""), jTextField2.getText());
+				} else {
+					ConstructScreen.addImgComponant(nameProduct,
+							jTextField2.getText());
+				}
 				dispose();
 			}
 		});
 
+		/* Action de clique sur le btn radio 100x100 px */
 		jRb100.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				setStyle(100);
 			}
 		});
 
+		/* Action de clique sur le btn radio 30x30 px */
 		jRb30.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				setStyle(30);

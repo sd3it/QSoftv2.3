@@ -23,8 +23,10 @@ public abstract class Window extends javax.swing.JFrame {
 	//static Workbook workbook=null;
 	protected static Sheet sheet;
 	protected static Sheet marginsheet;
-	protected static File file, file2;
-	protected static ReadSheet database;
+	public static File file;
+
+	protected static File file2;
+	public static ReadSheet database;
 	protected static ReadMargin marginbase;
 	protected static double discount=0;
 	protected static double quotationprice=0;
