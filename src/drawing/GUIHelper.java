@@ -50,28 +50,28 @@ public class GUIHelper {
 				if (!ConstructScreen.getSave()) {
 					int reponse = 0;
 					if (Window.locale.toString().equals("en")) {
-					reponse = javax.swing.JOptionPane
-							.showConfirmDialog(
-									new javax.swing.JFrame(),
-									"You forgot to save your schema. Would you like to save it now?",
-									"Confirmation", JOptionPane.YES_NO_OPTION,
-									JOptionPane.QUESTION_MESSAGE);
-					}
-					else if (Window.locale.toString().equals("it")) {
 						reponse = javax.swing.JOptionPane
-						.showConfirmDialog(
-								new javax.swing.JFrame(),
-								"Hai dimenticato di salvare il diagramma. Vuoi salvare ora?",
-        						"Conferma", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE);
-					}
-					else if (Window.locale.toString().equals("fr")) {
+								.showConfirmDialog(
+										new javax.swing.JFrame(),
+										"You forgot to save your schema. Would you like to save it now?",
+										"Confirmation",
+										JOptionPane.YES_NO_OPTION,
+										JOptionPane.QUESTION_MESSAGE);
+					} else if (Window.locale.toString().equals("it")) {
 						reponse = javax.swing.JOptionPane
-						.showConfirmDialog(
-								new javax.swing.JFrame(),
-								"Vous avez oublié d'enregistrer le schéma. Voulez-vous sauver maintenant?",
-        						"Confirmation", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE);
+								.showConfirmDialog(
+										new javax.swing.JFrame(),
+										"Hai dimenticato di salvare il diagramma. Vuoi salvare ora?",
+										"Conferma", JOptionPane.YES_NO_OPTION,
+										JOptionPane.QUESTION_MESSAGE);
+					} else if (Window.locale.toString().equals("fr")) {
+						reponse = javax.swing.JOptionPane
+								.showConfirmDialog(
+										new javax.swing.JFrame(),
+										"Vous avez oublié d'enregistrer le schéma. Voulez-vous sauver maintenant?",
+										"Confirmation",
+										JOptionPane.YES_NO_OPTION,
+										JOptionPane.QUESTION_MESSAGE);
 					}
 
 					// si rep = yes
