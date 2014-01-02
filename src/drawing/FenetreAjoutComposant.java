@@ -8,6 +8,7 @@ import java.awt.Event;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -47,7 +48,19 @@ public class FenetreAjoutComposant extends JDialog {
 
 	public FenetreAjoutComposant() {
 
-		this.setTitle("Add Component");
+		if (Window.locale.toString().equals("en")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_addElem"));
+		} else if (Window.locale.toString().equals("it")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_addElem"));
+		} else if (Window.locale.toString().equals("fr")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_addElem"));
+		}
 		Toolkit.getDefaultToolkit().getScreenSize();
 
 		this.setIconImage(new ImageIcon("logoframe.png").getImage());
@@ -73,7 +86,44 @@ public class FenetreAjoutComposant extends JDialog {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-		jLabel1.setText("Product : ");
+		if (Window.locale.toString().equals("en")) {
+			jLabel1.setText((String) Window.res.getObject("lb_product"));
+			jLabel2.setText((String) Window.res.getObject("lb_quantity"));
+			jLabel3.setText((String) Window.res.getObject("lb_size"));
+			jLabel3.setBounds(280, 95, 50, 20);
+			jRb100.setText((String) Window.res.getObject("lb_100px"));
+			jRb100.setBounds(310, 95, 85, 20);
+			jRb30.setText((String) Window.res.getObject("lb_30px"));
+			jRb30.setBounds(310, 120, 85, 20);
+			jButton1.setText((String) Window.res.getObject("lb_addElem"));
+			jButton1.setBounds(320, 170, 80, 20);
+
+		} else if (Window.locale.toString().equals("it")) {
+			jLabel1.setText((String) Window.res.getObject("lb_product"));
+			jLabel2.setText((String) Window.res.getObject("lb_quantity"));
+			jLabel3.setText((String) Window.res.getObject("lb_size"));
+			jLabel3.setBounds(280, 95, 70, 20);
+			jRb100.setText((String) Window.res.getObject("lb_100px"));
+			jRb100.setBounds(350, 95, 85, 20);
+			jRb30.setText((String) Window.res.getObject("lb_30px"));
+			jRb30.setBounds(350, 120, 85, 20);
+			jButton1.setText((String) Window.res.getObject("lb_addElem"));
+			jButton1.setBounds(320, 170, 90, 20);
+
+		} else if (Window.locale.toString().equals("fr")) {
+			jLabel1.setText((String) Window.res.getObject("lb_product"));
+			jLabel2.setText((String) Window.res.getObject("lb_quantity"));
+			jLabel3.setText((String) Window.res.getObject("lb_size"));
+			jLabel3.setBounds(280, 95, 50, 20);
+			jRb100.setText((String) Window.res.getObject("lb_100px"));
+			jRb100.setBounds(320, 95, 85, 20);
+			jRb30.setText((String) Window.res.getObject("lb_30px"));
+			jRb30.setBounds(320, 120, 85, 20);
+			jButton1.setText((String) Window.res.getObject("lb_addElem"));
+			jButton1.setBounds(320, 170, 80, 20);
+		}
+
+		// Product
 		jLabel1.setBounds(40, 10, 90, 30);
 		jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -86,31 +136,27 @@ public class FenetreAjoutComposant extends JDialog {
 		list.setFocusable(false);
 		jLayeredPane1.add(list, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jLabel2.setText("Quantity : ");
+		// Quantity
 		jLabel2.setBounds(280, 50, 70, 20);
 		jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jTextField2.setBounds(335, 50, 50, 20);
 		jLayeredPane1.add(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jLabel3.setText("Size : ");
-		jLabel3.setBounds(280, 95, 50, 20);
+		// Size
 		jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jRb100.setBounds(310, 95, 85, 20);
-		jRb100.setText("100 x 100");
+		// 100x100
 		jRb100.setSelected(true);
 		jLayeredPane1.add(jRb100, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jRb30.setBounds(310, 120, 85, 20);
-		jRb30.setText("30 x 30");
+		// 30x30
 		jLayeredPane1.add(jRb30, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		sizeGroup.add(jRb100);
 		sizeGroup.add(jRb30);
 
-		jButton1.setText("Add");
-		jButton1.setBounds(320, 170, 80, 20);
+		// Add
 		jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jButton1.setEnabled(false);
 
@@ -230,8 +276,8 @@ public class FenetreAjoutComposant extends JDialog {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				String nameProduct = jTextField1.getText();
 				/*
-				 * Si colonne reference contient un "/" -> on le
-				 * remplace par un ""
+				 * Si colonne reference contient un "/" -> on le remplace par un
+				 * ""
 				 */
 				if (nameProduct.contains("/")) {
 					ConstructScreen.addImgComponant(

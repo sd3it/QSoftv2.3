@@ -101,7 +101,6 @@ public class ConstructScreen {
 					py = py + 150;
 					px = 80;
 				}
-				// System.out.println("px=" + px);
 			}
 		}
 
@@ -236,10 +235,25 @@ public class ConstructScreen {
 				if (f.exists()) {
 					parents = f.getParent();
 
-					int answer = JOptionPane.showConfirmDialog(this, f
-							+ " exists. Overwrite?", "Overwrite?",
-							JOptionPane.OK_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE);
+					int answer = 0;
+					if (Window.locale.toString().equals("en")) {
+						answer = JOptionPane.showConfirmDialog(this, f
+								+ " exists. Overwrite?", "Overwrite?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
+					if (Window.locale.toString().equals("it")) {
+						answer = JOptionPane.showConfirmDialog(this, f
+								+ " esiste. Sovrascrivere?", "Sovrascrivere?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
+					if (Window.locale.toString().equals("fr")) {
+						answer = JOptionPane.showConfirmDialog(this, f
+								+ " existe. Remplacer?", "Remplacer?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
 
 					if (answer != JOptionPane.OK_OPTION) {
 						return;
@@ -252,7 +266,7 @@ public class ConstructScreen {
 		chooser.setAcceptAllFileFilterUsed(false);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				"Fichier PNG (.png)", "png");
+				"PNG File (.png)", "png");
 		chooser.setFileFilter(filter);
 		chooser.setSelectedFile(new File("Schema_"
 				+ new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
@@ -294,10 +308,25 @@ public class ConstructScreen {
 				if (f.exists()) {
 					parents = f.getParent();
 
-					int answer = JOptionPane.showConfirmDialog(this, f
-							+ " exists. Overwrite?", "Overwrite?",
-							JOptionPane.OK_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE);
+					int answer = 0;
+					if (Window.locale.toString().equals("en")) {
+						answer = JOptionPane.showConfirmDialog(this, f
+								+ " exists. Overwrite?", "Overwrite?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
+					if (Window.locale.toString().equals("it")) {
+						answer = JOptionPane.showConfirmDialog(this, f
+								+ " esiste. Sovrascrivere?", "Sovrascrivere?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
+					if (Window.locale.toString().equals("fr")) {
+						answer = JOptionPane.showConfirmDialog(this, f
+								+ " existe. Remplacer?", "Remplacer?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
 
 					if (answer != JOptionPane.OK_OPTION) {
 						return;
@@ -310,7 +339,7 @@ public class ConstructScreen {
 		chooser.setAcceptAllFileFilterUsed(false);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				"Fichier PNG (.png)", "png");
+				"PNG File(.png)", "png");
 		chooser.setFileFilter(filter);
 		chooser.setSelectedFile(new File("Schema_"
 				+ new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
@@ -364,7 +393,7 @@ public class ConstructScreen {
 	public static void clear() {
 		jc.clear();
 		jc.removeAll();
-		System.out.println("clean frame");
+		System.out.println("Clean frame");
 	}
 
 	/**

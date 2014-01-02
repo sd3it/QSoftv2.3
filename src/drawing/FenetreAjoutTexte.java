@@ -1,9 +1,12 @@
 package drawing;
 
+import ihm.Window;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.ResourceBundle;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -46,7 +49,19 @@ public class FenetreAjoutTexte extends JDialog {
 
 	public FenetreAjoutTexte() {
 
-		this.setTitle("Add Text");
+		if (Window.locale.toString().equals("en")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_addText"));
+		} else if (Window.locale.toString().equals("it")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_addText"));
+		} else if (Window.locale.toString().equals("fr")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_addText"));
+		}
 		Toolkit.getDefaultToolkit().getScreenSize();
 
 		this.setIconImage(new ImageIcon("logoframe.png").getImage());
@@ -74,15 +89,29 @@ public class FenetreAjoutTexte extends JDialog {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-		jLabel1.setText("Saisir texte : ");
+		if (Window.locale.toString().equals("en")) {
+			jLabel1.setText((String) Window.res.getObject("lb_setText"));
+			jButton1.setText((String) Window.res.getObject("lb_addElem"));
+			jButton1.setBounds(340, 35, 80, 20);
+
+		} else if (Window.locale.toString().equals("it")) {
+			jLabel1.setText((String) Window.res.getObject("lb_setText"));
+			jButton1.setText((String) Window.res.getObject("lb_addElem"));
+			jButton1.setBounds(340, 35, 90, 20);
+
+		} else if (Window.locale.toString().equals("fr")) {
+			jLabel1.setText((String) Window.res.getObject("lb_setText"));
+			jButton1.setText((String) Window.res.getObject("lb_addElem"));
+			jButton1.setBounds(340, 35, 80, 20);
+		}
+
 		jLabel1.setBounds(20, 0, 150, 30);
 		jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jTextField1.setBounds(20, 35, 300, 20);
 		jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jButton1.setText("Ajouter");
-		jButton1.setBounds(340, 35, 80, 20);
+		
 		jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jRbRed.setBounds(20, 70, 40, 20);
@@ -107,11 +136,11 @@ public class FenetreAjoutTexte extends JDialog {
 		colorGroup.add(jRbBlue);
 		colorGroup.add(jRbBlack);
 
-		jRbBold.setText("G");
+		jRbBold.setText("<html><b>B");
 		jRbBold.setBounds(250, 70, 40, 20);
 		jLayeredPane1.add(jRbBold, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jRbItalic.setText("I");
+		jRbItalic.setText("<html><i>I");
 		jRbItalic.setBounds(300, 70, 40, 20);
 		jLayeredPane1.add(jRbItalic, javax.swing.JLayeredPane.DEFAULT_LAYER);
 

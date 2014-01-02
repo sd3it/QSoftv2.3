@@ -34,7 +34,7 @@ public class JCanvas extends JPanel {
 	public void resizeDrawable(IDrawable d) {
 		drawables.add(d);
 		
-		System.out.println("Size IDrawable : " + d.getRectangle().height / 2);
+		//System.out.println("Size IDrawable : " + d.getRectangle().height / 2);
 		repaint();
 	}
 	
@@ -74,7 +74,7 @@ public class JCanvas extends JPanel {
 	public boolean isFree(Rectangle rect) {
 		for (Iterator iter = drawables.iterator(); iter.hasNext();) {
 			IDrawable element = (IDrawable) iter.next();
-			System.out.println(element.getRectangle());
+			//System.out.println(element.getRectangle());
 			if (element.getRectangle().intersects(rect)) {
 				System.out.println("non-libre");
 				return false;
@@ -85,10 +85,10 @@ public class JCanvas extends JPanel {
 
 	public boolean isAlone(IDrawable drawable) {
 		Rectangle rect = drawable.getRectangle();
-		System.out.println("----------------------------------------------------------");
+		//System.out.println("----------------------------------------------------------");
 		for (Iterator iter = drawables.iterator(); iter.hasNext();) {
 			IDrawable element = (IDrawable) iter.next();
-			System.out.println("+ " + element.getRectangle());
+			//System.out.println("+ " + element.getRectangle());
 			if (!element.equals(drawable)
 					&& element.getRectangle().intersects(rect)) {
 				System.out.println("non-libre");

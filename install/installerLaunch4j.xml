@@ -22,11 +22,11 @@
     	<maxVersion></maxVersion>
   	</jre>
   	<versionInfo>
-    	<fileVersion>2.3.0.0</fileVersion>
+    	<fileVersion>2.3.2.0</fileVersion>
     	<txtFileVersion>2.3</txtFileVersion>
     	<fileDescription>Quotation software</fileDescription>
    	 	<copyright>Copyright (c) 2011 SD3</copyright>
-    	<productVersion>2.3.0.0</productVersion>
+    	<productVersion>2.3.2.0</productVersion>
     	<txtProductVersion>2.3</txtProductVersion>
     	<productName>QSoft</productName>
     	<companyName>SD3</companyName>

@@ -38,8 +38,8 @@ public class NonOverlapMoveAdapter extends MoveDrawableMouseListener {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("+ END = " + getEnd());
-		System.out.println("+----- State Line = " + GUIHelper.isStateLine());
+		//System.out.println("+ END = " + getEnd());
+		//System.out.println("+----- State Line = " + GUIHelper.isStateLine());
 		// if (drawable == null) {
 		setEnd(new Point(e.getX(), e.getY()));
 		setMouseUp(true);

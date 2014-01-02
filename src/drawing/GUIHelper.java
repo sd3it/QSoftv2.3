@@ -49,13 +49,30 @@ public class GUIHelper {
 				// Si non sauvegardé
 				if (!ConstructScreen.getSave()) {
 					int reponse = 0;
-
+					if (Window.locale.toString().equals("en")) {
 					reponse = javax.swing.JOptionPane
 							.showConfirmDialog(
 									new javax.swing.JFrame(),
 									"You forgot to save your schema. Would you like to save it now?",
 									"Confirmation", JOptionPane.YES_NO_OPTION,
 									JOptionPane.QUESTION_MESSAGE);
+					}
+					else if (Window.locale.toString().equals("it")) {
+						reponse = javax.swing.JOptionPane
+						.showConfirmDialog(
+								new javax.swing.JFrame(),
+								"Hai dimenticato di salvare il diagramma. Vuoi salvare ora?",
+        						"Conferma", JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
+					else if (Window.locale.toString().equals("fr")) {
+						reponse = javax.swing.JOptionPane
+						.showConfirmDialog(
+								new javax.swing.JFrame(),
+								"Vous avez oublié d'enregistrer le schéma. Voulez-vous sauver maintenant?",
+        						"Confirmation", JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+					}
 
 					// si rep = yes
 					if (reponse == JOptionPane.YES_OPTION) {
@@ -107,6 +124,8 @@ public class GUIHelper {
 				"images/icons/ic_delete.png")); // Delete drawable
 		JMenuItem menuItemChangeSize = new JMenuItem(new ImageIcon(
 				"images/icons/ic_resize.png")); // Change size
+		JMenuItem menuItemPrint = new JMenuItem(new ImageIcon(
+				"images/icons/ic_print.png"));
 		JMenuItem menuItem13 = new JMenuItem(new ImageIcon(
 				"images/icons/ic_save.png")); // Save to PNG file
 
@@ -174,175 +193,259 @@ public class GUIHelper {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
 			/* Texte Menu 1 */
-			Menu1.setText("Actions");
-			menuItem11.setText("Add Text");
-			Menu11.setText("Add Line");
-			Menu111.setText("_________");
-			menuItem1111.setText("Red");
-			menuItem1112.setText("Green");
-			menuItem1113.setText("Blue");
-			menuItem1114.setText("Black");
-			Menu112.setText("_ _ _ _ _ _");
-			menuItem1121.setText("Red");
-			menuItem1122.setText("Green");
-			menuItem1123.setText("Blue");
-			menuItem1124.setText("Black");
+			Menu1.setText((String) Window.res.getObject("menu_actions"));
+			menuItem11.setText((String) Window.res
+					.getObject("menuitem_addtext"));
+			Menu11.setText((String) Window.res.getObject("menu_addline"));
+			Menu111.setText((String) Window.res.getObject("menu_linepleine"));
+			menuItem1111.setText((String) Window.res.getObject("menuitem_red"));
+			menuItem1112.setText((String) Window.res
+					.getObject("menuitem_green"));
+			menuItem1113
+					.setText((String) Window.res.getObject("menuitem_blue"));
+			menuItem1114.setText((String) Window.res
+					.getObject("menuitem_black"));
+			Menu112.setText((String) Window.res.getObject("menu_linepointille"));
+			menuItem1121.setText((String) Window.res.getObject("menuitem_red"));
+			menuItem1122.setText((String) Window.res
+					.getObject("menuitem_green"));
+			menuItem1123
+					.setText((String) Window.res.getObject("menuitem_blue"));
+			menuItem1124.setText((String) Window.res
+					.getObject("menuitem_black"));
 			/*
 			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
 			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
 			 * menuItem1134.setText("Black");
 			 */
 
-			menuItemDel.setText("Delete Element");
-			menuItemChangeSize.setText("Change Image Size");
-
-			menuItem13.setText("Save to PNG file");
+			menuItemDel.setText((String) Window.res
+					.getObject("menuitem_delete"));
+			menuItemChangeSize.setText((String) Window.res
+					.getObject("menuitem_changesize"));
+			menuItemPrint.setText((String) Window.res
+					.getObject("menuitem_print"));
+			menuItem13.setText((String) Window.res.getObject("menuitem_save"));
 
 			/* Texte Menu 2 */
-			Menu2.setText("Add elements");
-			menuItem21.setText("EoL (End of Line)");
-			menuItem22.setText("+");
-			menuItem23.setText("=");
-			menuItem24.setText("RAL");
+			Menu2.setText((String) Window.res.getObject("menu_addElem"));
+			menuItem21.setText((String) Window.res.getObject("menuitem_eol"));
+			menuItem22.setText((String) Window.res.getObject("menuitem_plus"));
+			menuItem23.setText((String) Window.res.getObject("menuitem_egal"));
+			menuItem24.setText((String) Window.res.getObject("menuitem_ral"));
 
 			/* Texte Menu 3 */
-			Menu3.setText("Add synoptique");
-			menuItem31.setText("Synoptique ALPHA 2");
-			menuItem32.setText("Synoptique ALPHA 4-8-12");
-			menuItem33.setText("Synoptique ALPHA 16-248");
-			menuItem34.setText("Synoptique MEPFLASH");
-			menuItem35.setText("Synoptique HEPHAIS 128");
-			menuItem36.setText("Synoptique HEPHAIS 1600NE");
-			menuItem37.setText("Synoptique HEPHAIS 1600");
-			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
-			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
-			menuItem310.setText("Synoptique WIRELESS SYSTEM");
-			menuItem311.setText("Synoptique DFA05");
-			menuItem312.setText("Synoptique DLF");
-			menuItem313.setText("Synoptique EX Adressable Interface");
-			menuItem314.setText("Synoptique EX Gas Detection");
-			menuItem315.setText("Synoptique Heat Cable");
-			menuItem316.setText("Synoptique Monitoring Software");
-			menuItem317.setText("Synoptique Passerelle Radio");
+			Menu3.setText((String) Window.res.getObject("menu_addSynop"));
+			menuItem31
+					.setText((String) Window.res.getObject("menuitem_alpha2"));
+			menuItem32.setText((String) Window.res
+					.getObject("menuitem_alpha4812"));
+			menuItem33.setText((String) Window.res
+					.getObject("menuitem_alpha16248"));
+			menuItem34.setText((String) Window.res
+					.getObject("menuitem_mepflash"));
+			menuItem35.setText((String) Window.res
+					.getObject("menuitem_hephais128"));
+			menuItem36.setText((String) Window.res
+					.getObject("menuitem_hephais1600ne"));
+			menuItem37.setText((String) Window.res
+					.getObject("menuitem_hephais1600"));
+			menuItem38.setText((String) Window.res
+					.getObject("menuitem_hephais1600net"));
+			menuItem39.setText((String) Window.res
+					.getObject("menuitem_hephais1600comfort"));
+			menuItem310.setText((String) Window.res
+					.getObject("menuitem_wireless"));
+			menuItem311
+					.setText((String) Window.res.getObject("menuitem_dfa05"));
+			menuItem312.setText((String) Window.res.getObject("menuitem_dlf"));
+			menuItem313.setText((String) Window.res
+					.getObject("menuitem_exAdressableInterface"));
+			menuItem314.setText((String) Window.res
+					.getObject("menuitem_exGasDetection"));
+			menuItem315.setText((String) Window.res
+					.getObject("menuitem_heatCable"));
+			menuItem316.setText((String) Window.res
+					.getObject("menuitem_moniSoftware"));
+			menuItem317.setText((String) Window.res
+					.getObject("menuitem_passRadio"));
 
 			/* Texte Menu 4 */
-			Menu4.setText("Help");
-			menuItem41.setText("How to use Schema");
+			Menu4.setText((String) Window.res.getObject("menu_help"));
+			menuItem41.setText((String) Window.res
+					.getObject("menuitem_helpSchema"));
 
 		} else if (Window.locale.toString().equals("it")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
 			/* Texte Menu 1 */
-			Menu1.setText("Actions");
-			menuItem11.setText("Add Text");
-			Menu11.setText("Add Line");
-			Menu111.setText("_________");
-			menuItem1111.setText("Red");
-			menuItem1112.setText("Green");
-			menuItem1113.setText("Blue");
-			menuItem1114.setText("Black");
-			Menu112.setText("_ _ _ _ _ _");
-			menuItem1121.setText("Red");
-			menuItem1122.setText("Green");
-			menuItem1123.setText("Blue");
-			menuItem1124.setText("Black");
+			Menu1.setText((String) Window.res.getObject("menu_actions"));
+			menuItem11.setText((String) Window.res
+					.getObject("menuitem_addtext"));
+			Menu11.setText((String) Window.res.getObject("menu_addline"));
+			Menu111.setText((String) Window.res.getObject("menu_linepleine"));
+			menuItem1111.setText((String) Window.res.getObject("menuitem_red"));
+			menuItem1112.setText((String) Window.res
+					.getObject("menuitem_green"));
+			menuItem1113
+					.setText((String) Window.res.getObject("menuitem_blue"));
+			menuItem1114.setText((String) Window.res
+					.getObject("menuitem_black"));
+			Menu112.setText((String) Window.res.getObject("menu_linepointille"));
+			menuItem1121.setText((String) Window.res.getObject("menuitem_red"));
+			menuItem1122.setText((String) Window.res
+					.getObject("menuitem_green"));
+			menuItem1123
+					.setText((String) Window.res.getObject("menuitem_blue"));
+			menuItem1124.setText((String) Window.res
+					.getObject("menuitem_black"));
 			/*
 			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
 			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
 			 * menuItem1134.setText("Black");
 			 */
 
-			menuItemDel.setText("Delete Element");
-			menuItemChangeSize.setText("Change Size Image");
-			menuItem13.setText("Save to PNG file");
+			menuItemDel.setText((String) Window.res
+					.getObject("menuitem_delete"));
+			menuItemChangeSize.setText((String) Window.res
+					.getObject("menuitem_changesize"));
+			menuItemPrint.setText((String) Window.res
+					.getObject("menuitem_print"));
+			menuItem13.setText((String) Window.res.getObject("menuitem_save"));
 
 			/* Texte Menu 2 */
-			Menu2.setText("Add elements");
-			menuItem21.setText("EoL (End of Line)");
-			menuItem22.setText("+");
-			menuItem23.setText("=");
-			menuItem24.setText("RAL");
+			Menu2.setText((String) Window.res.getObject("menu_addElem"));
+			menuItem21.setText((String) Window.res.getObject("menuitem_eol"));
+			menuItem22.setText((String) Window.res.getObject("menuitem_plus"));
+			menuItem23.setText((String) Window.res.getObject("menuitem_egal"));
+			menuItem24.setText((String) Window.res.getObject("menuitem_ral"));
 
 			/* Texte Menu 3 */
-			Menu3.setText("Add schema");
-			menuItem31.setText("Synoptique ALPHA 2");
-			menuItem32.setText("Synoptique ALPHA 4-8-12");
-			menuItem33.setText("Synoptique ALPHA 16-248");
-			menuItem34.setText("Synoptique MEPFLASH");
-			menuItem35.setText("Synoptique HEPHAIS 128");
-			menuItem36.setText("Synoptique HEPHAIS 1600NE");
-			menuItem37.setText("Synoptique HEPHAIS 1600");
-			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
-			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
-			menuItem310.setText("Synoptique WIRELESS SYSTEM");
-			menuItem311.setText("Synoptique DFA05");
-			menuItem312.setText("Synoptique DLF");
-			menuItem313.setText("Synoptique EX Adressable Interface");
-			menuItem314.setText("Synoptique EX Gas Detection");
-			menuItem315.setText("Synoptique Heat Cable");
-			menuItem316.setText("Synoptique Monitoring Software");
-			menuItem317.setText("Synoptique Passerelle Radio");
+			Menu3.setText((String) Window.res.getObject("menu_addSynop"));
+			menuItem31
+					.setText((String) Window.res.getObject("menuitem_alpha2"));
+			menuItem32.setText((String) Window.res
+					.getObject("menuitem_alpha4812"));
+			menuItem33.setText((String) Window.res
+					.getObject("menuitem_alpha16248"));
+			menuItem34.setText((String) Window.res
+					.getObject("menuitem_mepflash"));
+			menuItem35.setText((String) Window.res
+					.getObject("menuitem_hephais128"));
+			menuItem36.setText((String) Window.res
+					.getObject("menuitem_hephais1600ne"));
+			menuItem37.setText((String) Window.res
+					.getObject("menuitem_hephais1600"));
+			menuItem38.setText((String) Window.res
+					.getObject("menuitem_hephais1600net"));
+			menuItem39.setText((String) Window.res
+					.getObject("menuitem_hephais1600comfort"));
+			menuItem310.setText((String) Window.res
+					.getObject("menuitem_wireless"));
+			menuItem311
+					.setText((String) Window.res.getObject("menuitem_dfa05"));
+			menuItem312.setText((String) Window.res.getObject("menuitem_dlf"));
+			menuItem313.setText((String) Window.res
+					.getObject("menuitem_exAdressableInterface"));
+			menuItem314.setText((String) Window.res
+					.getObject("menuitem_exGasDetection"));
+			menuItem315.setText((String) Window.res
+					.getObject("menuitem_heatCable"));
+			menuItem316.setText((String) Window.res
+					.getObject("menuitem_moniSoftware"));
+			menuItem317.setText((String) Window.res
+					.getObject("menuitem_passRadio"));
 
 			/* Texte Menu 4 */
-			Menu4.setText("Help");
-			menuItem41.setText("About Schema");
+			Menu4.setText((String) Window.res.getObject("menu_help"));
+			menuItem41.setText((String) Window.res
+					.getObject("menuitem_helpSchema"));
 
 		} else if (Window.locale.toString().equals("fr")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
 			/* Texte Menu 1 */
-			Menu1.setText("Outils");
-			menuItem11.setText("Outils Texte");
-			Menu11.setText("Outils Ligne");
-			Menu111.setText("_________");
-			menuItem1111.setText("Rouge");
-			menuItem1112.setText("Verte");
-			menuItem1113.setText("Bleue");
-			menuItem1114.setText("Noire");
-			Menu112.setText("_ _ _ _ _ _");
-			menuItem1121.setText("Rouge");
-			menuItem1122.setText("Verte");
-			menuItem1123.setText("Bleue");
-			menuItem1124.setText("Noire");
+			Menu1.setText((String) Window.res.getObject("menu_actions"));
+			menuItem11.setText((String) Window.res
+					.getObject("menuitem_addtext"));
+			Menu11.setText((String) Window.res.getObject("menu_addline"));
+			Menu111.setText((String) Window.res.getObject("menu_linepleine"));
+			menuItem1111.setText((String) Window.res.getObject("menuitem_red"));
+			menuItem1112.setText((String) Window.res
+					.getObject("menuitem_green"));
+			menuItem1113
+					.setText((String) Window.res.getObject("menuitem_blue"));
+			menuItem1114.setText((String) Window.res
+					.getObject("menuitem_black"));
+			Menu112.setText((String) Window.res.getObject("menu_linepointille"));
+			menuItem1121.setText((String) Window.res.getObject("menuitem_red"));
+			menuItem1122.setText((String) Window.res
+					.getObject("menuitem_green"));
+			menuItem1123
+					.setText((String) Window.res.getObject("menuitem_blue"));
+			menuItem1124.setText((String) Window.res
+					.getObject("menuitem_black"));
 			/*
 			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
 			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
 			 * menuItem1134.setText("Black");
 			 */
-			menuItemDel.setText("Supprimer Element");
-			menuItemChangeSize.setText("Changer Taille de l'Image");
-			menuItem13.setText("Sauvegarder en fichier PNG");
+
+			menuItemDel.setText((String) Window.res
+					.getObject("menuitem_delete"));
+			menuItemChangeSize.setText((String) Window.res
+					.getObject("menuitem_changesize"));
+			menuItemPrint.setText((String) Window.res
+					.getObject("menuitem_print"));
+			menuItem13.setText((String) Window.res.getObject("menuitem_save"));
 
 			/* Texte Menu 2 */
-			Menu2.setText("Ajouter des élements");
-			menuItem21.setText("EoL (Fin de Ligne)");
-			menuItem22.setText("+");
-			menuItem23.setText("=");
-			menuItem24.setText("RAL");
+			Menu2.setText((String) Window.res.getObject("menu_addElem"));
+			menuItem21.setText((String) Window.res.getObject("menuitem_eol"));
+			menuItem22.setText((String) Window.res.getObject("menuitem_plus"));
+			menuItem23.setText((String) Window.res.getObject("menuitem_egal"));
+			menuItem24.setText((String) Window.res.getObject("menuitem_ral"));
 
 			/* Texte Menu 3 */
-			Menu3.setText("Ajouter un synoptique");
-			menuItem31.setText("Synoptique ALPHA 2");
-			menuItem32.setText("Synoptique ALPHA 4-8-12");
-			menuItem33.setText("Synoptique ALPHA 16-248");
-			menuItem34.setText("Synoptique MEPFLASH");
-			menuItem35.setText("Synoptique HEPHAIS 128");
-			menuItem36.setText("Synoptique HEPHAIS 1600NE");
-			menuItem37.setText("Synoptique HEPHAIS 1600");
-			menuItem38.setText("Synoptique HEPHAIS 1600 NETWORK");
-			menuItem39.setText("Synoptique HEPHAIS 1600 COMFORT");
-			menuItem310.setText("Synoptique WIRELESS SYSTEM");
-			menuItem311.setText("Synoptique DFA05");
-			menuItem312.setText("Synoptique DLF");
-			menuItem313.setText("Synoptique EX Adressable Interface");
-			menuItem314.setText("Synoptique EX Gas Detection");
-			menuItem315.setText("Synoptique Heat Cable");
-			menuItem316.setText("Synoptique Monitoring Software");
-			menuItem317.setText("Synoptique Passerelle Radio");
+			Menu3.setText((String) Window.res.getObject("menu_addSynop"));
+			menuItem31
+					.setText((String) Window.res.getObject("menuitem_alpha2"));
+			menuItem32.setText((String) Window.res
+					.getObject("menuitem_alpha4812"));
+			menuItem33.setText((String) Window.res
+					.getObject("menuitem_alpha16248"));
+			menuItem34.setText((String) Window.res
+					.getObject("menuitem_mepflash"));
+			menuItem35.setText((String) Window.res
+					.getObject("menuitem_hephais128"));
+			menuItem36.setText((String) Window.res
+					.getObject("menuitem_hephais1600ne"));
+			menuItem37.setText((String) Window.res
+					.getObject("menuitem_hephais1600"));
+			menuItem38.setText((String) Window.res
+					.getObject("menuitem_hephais1600net"));
+			menuItem39.setText((String) Window.res
+					.getObject("menuitem_hephais1600comfort"));
+			menuItem310.setText((String) Window.res
+					.getObject("menuitem_wireless"));
+			menuItem311
+					.setText((String) Window.res.getObject("menuitem_dfa05"));
+			menuItem312.setText((String) Window.res.getObject("menuitem_dlf"));
+			menuItem313.setText((String) Window.res
+					.getObject("menuitem_exAdressableInterface"));
+			menuItem314.setText((String) Window.res
+					.getObject("menuitem_exGasDetection"));
+			menuItem315.setText((String) Window.res
+					.getObject("menuitem_heatCable"));
+			menuItem316.setText((String) Window.res
+					.getObject("menuitem_moniSoftware"));
+			menuItem317.setText((String) Window.res
+					.getObject("menuitem_passRadio"));
 
 			/* Texte Menu 4 */
-			Menu4.setText("Aide");
-			menuItem41.setText("Comment utiliser Schema");
+			Menu4.setText((String) Window.res.getObject("menu_help"));
+			menuItem41.setText((String) Window.res
+					.getObject("menuitem_helpSchema"));
 		}
 
 		/* Ajout des Items */
@@ -369,7 +472,7 @@ public class GUIHelper {
 
 		Menu1.add(menuItemDel);
 		Menu1.add(menuItemChangeSize);
-
+		Menu1.add(menuItemPrint);
 		Menu1.add(menuItem13);
 
 		Menu3.add(menuItem31);
@@ -496,6 +599,12 @@ public class GUIHelper {
 				FenetreAjoutComposant fac = new FenetreAjoutComposant();
 				fac.setVisible(true);
 
+			}
+		});
+
+		menuItemPrint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "En construction...");
 			}
 		});
 
@@ -651,8 +760,21 @@ public class GUIHelper {
 								desktop1.open(helpuseSchema);
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
-								javax.swing.JOptionPane.showMessageDialog(null,
-										"Unable to open the web page");
+								if (Window.locale.toString().equals("en")) {
+									javax.swing.JOptionPane
+											.showMessageDialog(null,
+													"Unable to open the web page");
+								} else if (Window.locale.toString()
+										.equals("it")) {
+									javax.swing.JOptionPane.showMessageDialog(
+											null,
+											"Impossibile aprire la pagina web");
+								} else if (Window.locale.toString()
+										.equals("fr")) {
+									javax.swing.JOptionPane.showMessageDialog(
+											null,
+											"Impossible d'ouvrir la page web");
+								}
 							}
 						}
 					}
