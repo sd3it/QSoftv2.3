@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JLayeredPane;
 import javax.swing.border.BevelBorder;
 
 import drawing.demos.ConstructScreen;
@@ -38,6 +39,7 @@ public class FenetreAjoutComposant extends JDialog {
 	private javax.swing.JLayeredPane jLayeredPane1;
 	private javax.swing.JRadioButton jRb100, jRb30;
 	private javax.swing.ButtonGroup sizeGroup;
+	private javax.swing.JScrollPane scroll;
 
 	Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit()
 			.getScreenSize();
@@ -83,6 +85,7 @@ public class FenetreAjoutComposant extends JDialog {
 		jRb100 = new javax.swing.JRadioButton();
 		jRb30 = new javax.swing.JRadioButton();
 		sizeGroup = new javax.swing.ButtonGroup();
+		scroll = new javax.swing.JScrollPane(list);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -130,11 +133,15 @@ public class FenetreAjoutComposant extends JDialog {
 		jTextField1.setBounds(95, 15, 300, 20);
 		jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+		/*
 		list.setBounds(95, 45, 160, 120);
 		list.setBorder(BorderFactory.createEtchedBorder(BevelBorder.RAISED,
 				new Color(255, 255, 255), null));
 		list.setFocusable(false);
 		jLayeredPane1.add(list, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		*/
+		scroll.setBounds(95, 45, 160, 120);
+		jLayeredPane1.add(scroll, JLayeredPane.DEFAULT_LAYER);
 
 		// Quantity
 		jLabel2.setBounds(280, 50, 70, 20);

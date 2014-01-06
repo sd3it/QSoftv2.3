@@ -1,5 +1,6 @@
 package ihm;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 
@@ -19,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
@@ -118,7 +120,8 @@ public class PdfScreen extends JDialog {
 	private javax.swing.JTextField jTextField9;
 	private static javax.swing.JTextArea jTextArea1 ;
 	private javax.swing.JLabel jLabel28;
-
+	private javax.swing.JScrollPane scroll;
+	
 	public PdfScreen() {
 		if(Window.locale.toString().equals("en")){
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
@@ -197,7 +200,9 @@ public class PdfScreen extends JDialog {
 		jLabel28 = new javax.swing.JLabel();
 		
 		jTextArea1 = new JTextArea();
-		jTextArea1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(135,153,255)));
+		//jTextArea1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(135,153,255)));
+		
+		scroll = new JScrollPane(jTextArea1);
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		
@@ -268,7 +273,8 @@ public class PdfScreen extends JDialog {
 			
 			jLabel28.setText((String)Window.res.getObject("lb_comment"));
 			jLabel28.setBounds(10, 570, 50, 20);
-			jTextArea1.setBounds(70, 570, 280, 100);
+			//jTextArea1.setBounds(70, 570, 280, 100);
+			scroll.setBounds(70, 570, 280, 100);
 			
 			jCheckBox3.setText((String)Window.res.getObject("cb_userData"));
 			jCheckBox3.setBounds(310, 470, 100, 23);
@@ -343,7 +349,8 @@ public class PdfScreen extends JDialog {
 			
 			jLabel28.setText((String)Window.res.getObject("lb_comment"));
 			jLabel28.setBounds(10, 570, 70, 20);
-			jTextArea1.setBounds(70, 570, 280, 100);
+			//jTextArea1.setBounds(70, 570, 280, 100);
+			scroll.setBounds(70, 570, 280, 100);
 			
 			jCheckBox3.setText((String)Window.res.getObject("cb_userData"));
 			jCheckBox3.setBounds(310, 470, 100, 23);
@@ -418,7 +425,8 @@ public class PdfScreen extends JDialog {
 			
 			jLabel28.setText((String)Window.res.getObject("lb_comment"));
 			jLabel28.setBounds(10, 570, 70, 20);
-			jTextArea1.setBounds(85, 570, 280, 100);
+			//jTextArea1.setBounds(85, 570, 280, 100);
+			scroll.setBounds(70, 570, 280, 100);
 			
 			jCheckBox3.setText((String)Window.res.getObject("cb_userData"));
 			jCheckBox3.setBounds(310, 470, 150, 23);
@@ -670,9 +678,13 @@ public class PdfScreen extends JDialog {
 		jLayeredPane1.add(jTextField16, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		jLayeredPane1.add(jLabel28, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		/*
 		jTextArea1.setLineWrap(true);
 		jLayeredPane1.add(jTextArea1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
+		*/
+		jTextArea1.setLineWrap(true);
+		jLayeredPane1.add(scroll, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
 		//user data
 		jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
 		jLayeredPane1.add(jCheckBox3, javax.swing.JLayeredPane.DEFAULT_LAYER);
