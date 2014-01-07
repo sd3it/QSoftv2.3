@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
@@ -56,6 +57,7 @@ public class ConstructScreen {
 	private static Boolean save = false;
 
 	private javax.swing.JLabel lb_logo;
+	private JScrollPane scroll = new JScrollPane(jc);
 
 	public ConstructScreen() {
 
