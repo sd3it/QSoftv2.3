@@ -2,6 +2,7 @@ package drawing;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -83,6 +84,9 @@ public class ImgDrawable extends FormDrawable2 {
 		rect.height = Himg;
 		g.drawImage(resizedImage, rect.x, rect.y, null);
 		//g.drawRect(rect.x, rect.y, rect.width, rect.height);	// Cadre de l'image (a retirer apres les tests)
+		
+		Font font = new Font("TimesRoman", 0, 12);
+		g.setFont(font);
 		g.drawString("x" + quantit + " " + name,
 				(rect.x + resizedImage.getHeight(null) / 4), (rect.y
 						+ resizedImage.getHeight(null) + 15));
