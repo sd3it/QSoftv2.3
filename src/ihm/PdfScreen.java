@@ -1,33 +1,33 @@
 package ihm;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
-
+import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-
-import other.TextFieldLimit;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -51,12 +51,12 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfCopy;
@@ -64,13 +64,21 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
+
 import database.Footer;
+import database.ReadNamelist;
 
 public class PdfScreen extends JDialog {
-	boolean exist=false;
-	
+	boolean exist = false;
+
+	String parents = FileSystemView.getFileSystemView().getHomeDirectory()
+			.getAbsolutePath();
+	ReadNamelist databaseName;
+	File file = null;
+	private static boolean isList = false;
+	String pathnameDatabase = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3.xls";
+
 	private javax.swing.JButton jButton1;
 	private javax.swing.JCheckBox jCheckBox1;
 	private javax.swing.JCheckBox jCheckBox2;
@@ -118,24 +126,32 @@ public class PdfScreen extends JDialog {
 	private javax.swing.JTextField jTextField3;
 	private javax.swing.JTextField jTextField8;
 	private javax.swing.JTextField jTextField9;
-	private static javax.swing.JTextArea jTextArea1 ;
+	private static javax.swing.JTextArea jTextArea1;
 	private javax.swing.JLabel jLabel28;
 	private javax.swing.JScrollPane scroll;
-	
+
+	// -------
+	private javax.swing.JLabel jLbSearch;
+	private javax.swing.JTextField jTfSearch;
+	private javax.swing.JList listName;
+	private javax.swing.JScrollPane scrollList;
+	private javax.swing.JButton btnLoad;
+
 	public PdfScreen() {
-		if(Window.locale.toString().equals("en")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
-			this.setTitle((String)Window.res.getObject("title_pdfExport"));
+		if (Window.locale.toString().equals("en")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_pdfExport"));
+		} else if (Window.locale.toString().equals("it")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_pdfExport"));
+		} else if (Window.locale.toString().equals("fr")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+			this.setTitle((String) Window.res.getObject("title_pdfExport"));
 		}
-		else if(Window.locale.toString().equals("it")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
-			this.setTitle((String)Window.res.getObject("title_pdfExport"));
-		}
-		else if(Window.locale.toString().equals("fr")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
-			this.setTitle((String)Window.res.getObject("title_pdfExport"));
-		}
-		
+
 		this.setIconImage(new ImageIcon("logoframe.png").getImage());
 		this.setModal(true);
 		initComponents();
@@ -175,307 +191,341 @@ public class PdfScreen extends JDialog {
 		jTextField15 = new javax.swing.JTextField();
 		jLabel18 = new javax.swing.JLabel();
 		jTextField16 = new javax.swing.JTextField();
-		
+
 		jCheckBox3 = new javax.swing.JCheckBox();
 		jCheckBox6 = new javax.swing.JCheckBox();
 		jCheckBox7 = new javax.swing.JCheckBox();
-		
+
 		jButton1 = new javax.swing.JButton();
-		
+
 		jLabel22 = new javax.swing.JLabel();
 		jLabel23 = new javax.swing.JLabel();
 		jLabel24 = new javax.swing.JLabel();
 		jLabel25 = new javax.swing.JLabel();
 		jLabel26 = new javax.swing.JLabel();
 		jLabel27 = new javax.swing.JLabel();
-		
-		//jTextField18 = new TextFieldLimit(19);
+
+		// jTextField18 = new TextFieldLimit(19);
 		jTextField18 = new javax.swing.JTextField();
 		jTextField19 = new javax.swing.JTextField();
 		jTextField20 = new javax.swing.JTextField();
-		//jTextField21 = new TextFieldLimit(19);
+		// jTextField21 = new TextFieldLimit(19);
 		jTextField21 = new javax.swing.JTextField();
 		jTextField22 = new javax.swing.JTextField();
 		jTextField23 = new javax.swing.JTextField();
 		jLabel28 = new javax.swing.JLabel();
-		
+
+		// ------
+		jLbSearch = new javax.swing.JLabel();
+		jTfSearch = new javax.swing.JTextField();
+		listName = new javax.swing.JList();
+		scrollList = new JScrollPane(listName);
+		btnLoad = new JButton(new ImageIcon("images/icons/database.png"));
+
 		jTextArea1 = new JTextArea();
-		//jTextArea1.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(135,153,255)));
-		
 		scroll = new JScrollPane(jTextArea1);
-		
+
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		
+
 		/************************************ ANGLAIS ******************************/
-		if(Window.locale.toString().equals("en")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
-			jLabel21.setText((String)Window.res.getObject("lb_ref"));
-			jLabel21.setBounds(210, 65, 60, 20);
-			
-			jLabel3.setText((String)Window.res.getObject("lb_date"));
+		if (Window.locale.toString().equals("en")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+
+			jLabel3.setText((String) Window.res.getObject("lb_date"));
 			jLabel3.setBounds(40, 20, 27, 20);
-			
-			jLabel4.setText((String)Window.res.getObject("lb_from"));
-			jLabel4.setBounds(40, 50, 28, 20);
 
-			jLabel7.setText((String)Window.res.getObject("lb_to"));
-			jLabel7.setBounds(50, 80, 16, 20);
-			
-			jLabel10.setText((String)Window.res.getObject("lb_object"));
-			jLabel10.setBounds(25, 110, 40, 20);
+			jLabel4.setText((String) Window.res.getObject("lb_from"));
+			jLabel4.setBounds(310, 75, 28, 20);
 
-			jLabel20.setText((String)Window.res.getObject("lb_recName"));
-			jLabel20.setBounds(10, 140, 80, 20);
-			
-			jLabel13.setText((String)Window.res.getObject("lb_payment"));
-			jLabel13.setBounds(10, 170, 46, 20);
-			jTextField10.setBounds(70, 170, 320, 20);
-			
-			jLabel12.setText((String)Window.res.getObject("lb_incoterm"));
-			jLabel12.setBounds(10, 200, 47, 20);
-			
-			jLabel22.setText((String)Window.res.getObject("lb_delivAddress"));
-			jLabel22.setBounds(10, 230, 120, 20);
+			jLabel7.setText((String) Window.res.getObject("lb_to"));
+			jLabel7.setBounds(310, 105, 16, 20);
 
-			jLabel23.setText((String)Window.res.getObject("lb_delivPostcode"));
-			jLabel23.setBounds(10, 260, 120, 20);
-			
-			jLabel24.setText((String)Window.res.getObject("lb_delivTown"));
-			jLabel24.setBounds(10, 290, 120, 20);
-			
-			jLabel25.setText((String)Window.res.getObject("lb_invoiceAddress"));
-			jLabel25.setBounds(10, 320, 120, 20);
-			jTextField21.setBounds(120, 320, 320, 20);
+			jLabel21.setText((String) Window.res.getObject("lb_ref"));
+			jLabel21.setBounds(310, 135, 60, 20);
 
-			jLabel26.setText((String)Window.res.getObject("lb_invoicePostcode"));
-			jLabel26.setBounds(10, 350, 120, 20);
-			
-			jCheckBox7.setText((String)Window.res.getObject("cb_sameAddress"));
-			jCheckBox7.setBounds(460, 350, 110, 20);
-			
-			jLabel27.setText((String)Window.res.getObject("lb_invoiceTown"));
-			jLabel27.setBounds(10, 380, 120, 20);
+			jLabel10.setText((String) Window.res.getObject("lb_object"));
+			jLabel10.setBounds(10, 200, 50, 20);
 
-			jLabel14.setText((String)Window.res.getObject("lb_firstName"));
-			jLabel14.setBounds(10, 420, 60, 20);
-			
-			jLabel15.setText((String)Window.res.getObject("lb_tel"));
-			jLabel15.setBounds(40, 480, 18, 20);
-			
-			jLabel16.setText((String)Window.res.getObject("lb_lastName"));
-			jLabel16.setBounds(10, 450, 60, 20);
+			jLabel20.setText((String) Window.res.getObject("lb_recName"));
+			jLabel20.setBounds(10, 230, 80, 20);
 
-			jLabel17.setText((String)Window.res.getObject("lb_fax"));
-			jLabel17.setBounds(40, 510, 22, 20);
-			
-			jLabel18.setText((String)Window.res.getObject("lb_mail"));
-			jLabel18.setBounds(40, 540, 28, 20);
-			
-			jLabel28.setText((String)Window.res.getObject("lb_comment"));
-			jLabel28.setBounds(10, 570, 50, 20);
-			//jTextArea1.setBounds(70, 570, 280, 100);
-			scroll.setBounds(70, 570, 280, 100);
-			
-			jCheckBox3.setText((String)Window.res.getObject("cb_userData"));
-			jCheckBox3.setBounds(310, 470, 100, 23);
-			
-			jButton1.setText((String)Window.res.getObject("bt_print"));
-			jButton1.setBounds(360, 530, 73, 23);
+			jLabel13.setText((String) Window.res.getObject("lb_payment"));
+			jLabel13.setBounds(10, 260, 70, 20);
+			jTextField10.setBounds(70, 260, 320, 20);
+
+			jLabel12.setText((String) Window.res.getObject("lb_incoterm"));
+			jLabel12.setBounds(10, 290, 47, 20);
+
+			jLabel22.setText((String) Window.res.getObject("lb_delivAddress"));
+			jLabel22.setBounds(10, 320, 120, 20);
+
+			jLabel23.setText((String) Window.res.getObject("lb_delivPostcode"));
+			jLabel23.setBounds(10, 350, 120, 20);
+
+			jLabel24.setText((String) Window.res.getObject("lb_delivTown"));
+			jLabel24.setBounds(10, 380, 120, 20);
+
+			jLabel25.setText((String) Window.res.getObject("lb_invoiceAddress"));
+			jLabel25.setBounds(10, 410, 160, 20);
+			jTextField21.setBounds(120, 410, 320, 20);
+
+			jLabel26.setText((String) Window.res
+					.getObject("lb_invoicePostcode"));
+			jLabel26.setBounds(10, 440, 120, 20);
+
+			jCheckBox7.setText((String) Window.res.getObject("cb_sameAddress"));
+			jCheckBox7.setBounds(460, 440, 110, 20);
+
+			jLabel27.setText((String) Window.res.getObject("lb_invoiceTown"));
+			jLabel27.setBounds(10, 470, 120, 20);
+
+			jLabel14.setText((String) Window.res.getObject("lb_firstName"));
+			jLabel14.setBounds(10, 510, 60, 20);
+
+			jLabel15.setText((String) Window.res.getObject("lb_tel"));
+			jLabel15.setBounds(40, 570, 18, 20);
+
+			jLabel16.setText((String) Window.res.getObject("lb_lastName"));
+			jLabel16.setBounds(10, 540, 60, 20);
+
+			jLabel17.setText((String) Window.res.getObject("lb_fax"));
+			jLabel17.setBounds(40, 600, 22, 20);
+
+			jLabel18.setText((String) Window.res.getObject("lb_mail"));
+			jLabel18.setBounds(40, 630, 28, 20);
+
+			jLabel28.setText((String) Window.res.getObject("lb_comment"));
+			jLabel28.setBounds(10, 660, 70, 20);
+			scroll.setBounds(70, 660, 280, 40);
+
+			jCheckBox3.setText((String) Window.res.getObject("cb_userData"));
+			jCheckBox3.setBounds(310, 510, 100, 23);
+
+			jButton1.setText((String) Window.res.getObject("bt_print"));
+			jButton1.setBounds(360, 580, 73, 23);
+
+			jLbSearch.setText((String) Window.res.getObject("lb_searchName"));
+			jLbSearch.setBounds(40, 50, 50, 20);
+
+			btnLoad.setToolTipText((String) Window.res.getObject("bt_loadDB"));
+			btnLoad.setBounds(25, 110, 39, 39);
+			btnLoad.setBackground(new java.awt.Color(255, 255, 255));
 		}
 		/*********************************** ITALIEN **********************************/
-		else if(Window.locale.toString().equals("it")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
-			jLabel21.setText((String)Window.res.getObject("lb_ref"));
-			jLabel21.setBounds(210, 65, 60, 20);
-			
-			jLabel3.setText((String)Window.res.getObject("lb_date"));
+		else if (Window.locale.toString().equals("it")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+
+			jLabel3.setText((String) Window.res.getObject("lb_date"));
 			jLabel3.setBounds(40, 20, 27, 20);
-			
-			jLabel4.setText((String)Window.res.getObject("lb_from"));
-			jLabel4.setBounds(45, 50, 28, 20);
 
-			jLabel7.setText((String)Window.res.getObject("lb_to"));
-			jLabel7.setBounds(50, 80, 16, 20);
-			
-			jLabel10.setText((String)Window.res.getObject("lb_object"));
-			jLabel10.setBounds(10, 110, 50, 20);
-			
-			jLabel20.setText((String)Window.res.getObject("lb_recName"));
-			jLabel20.setBounds(10, 140, 77, 20);
-			
-			jLabel13.setText((String)Window.res.getObject("lb_payment"));
-			jLabel13.setBounds(10, 170, 70, 20);
-			jTextField10.setBounds(90, 170, 320, 20);
-			
-			jLabel12.setText((String)Window.res.getObject("lb_incoterm"));
-			jLabel12.setBounds(10, 200, 47, 20);
-			
-			jLabel22.setText((String)Window.res.getObject("lb_delivAddress"));
-			jLabel22.setBounds(10, 230, 120, 20);
-			
-			jLabel23.setText((String)Window.res.getObject("lb_delivPostcode"));
-			jLabel23.setBounds(10, 260, 120, 20);
-			
-			jLabel24.setText((String)Window.res.getObject("lb_delivTown"));
-			jLabel24.setBounds(10, 290, 120, 20);
-			
-			jLabel25.setText((String)Window.res.getObject("lb_invoiceAddress"));
-			jLabel25.setBounds(10, 320, 130, 20);
-			jTextField21.setBounds(140, 320, 320, 20);
-			
-			jLabel26.setText((String)Window.res.getObject("lb_invoicePostcode"));
-			jLabel26.setBounds(10, 350, 120, 20);
-			
-			jCheckBox7.setText((String)Window.res.getObject("cb_sameAddress"));
-			jCheckBox7.setBounds(460, 350, 110, 20);
-			
-			jLabel27.setText((String)Window.res.getObject("lb_invoiceTown"));
-			jLabel27.setBounds(10, 380, 120, 20);
+			jLabel4.setText((String) Window.res.getObject("lb_from"));
+			jLabel4.setBounds(310, 75, 28, 20);
 
-			jLabel14.setText((String)Window.res.getObject("lb_firstName"));
-			jLabel14.setBounds(28, 420, 60, 20);
-			
-			jLabel15.setText((String)Window.res.getObject("lb_tel"));
-			jLabel15.setBounds(40, 480, 18, 20);
-			
-			jLabel16.setText((String)Window.res.getObject("lb_lastName"));
-			jLabel16.setBounds(12, 450, 60, 20);
-			
-			jLabel17.setText((String)Window.res.getObject("lb_fax"));
-			jLabel17.setBounds(40, 510, 22, 20);
-			
-			jLabel18.setText((String)Window.res.getObject("lb_mail"));
-			jLabel18.setBounds(40, 540, 28, 20);
-			
-			jLabel28.setText((String)Window.res.getObject("lb_comment"));
-			jLabel28.setBounds(10, 570, 70, 20);
-			//jTextArea1.setBounds(70, 570, 280, 100);
-			scroll.setBounds(70, 570, 280, 100);
-			
-			jCheckBox3.setText((String)Window.res.getObject("cb_userData"));
-			jCheckBox3.setBounds(310, 470, 100, 23);
-			
-			jButton1.setText((String)Window.res.getObject("bt_print"));
-			jButton1.setBounds(360, 530, 85, 23);
+			jLabel7.setText((String) Window.res.getObject("lb_to"));
+			jLabel7.setBounds(310, 105, 16, 20);
+
+			jLabel21.setText((String) Window.res.getObject("lb_ref"));
+			jLabel21.setBounds(310, 135, 60, 20);
+
+			jLabel10.setText((String) Window.res.getObject("lb_object"));
+			jLabel10.setBounds(10, 200, 50, 20);
+
+			jLabel20.setText((String) Window.res.getObject("lb_recName"));
+			jLabel20.setBounds(10, 230, 80, 20);
+
+			jLabel13.setText((String) Window.res.getObject("lb_payment"));
+			jLabel13.setBounds(10, 260, 70, 20);
+			jTextField10.setBounds(70, 260, 320, 20);
+
+			jLabel12.setText((String) Window.res.getObject("lb_incoterm"));
+			jLabel12.setBounds(10, 290, 47, 20);
+
+			jLabel22.setText((String) Window.res.getObject("lb_delivAddress"));
+			jLabel22.setBounds(10, 320, 120, 20);
+
+			jLabel23.setText((String) Window.res.getObject("lb_delivPostcode"));
+			jLabel23.setBounds(10, 350, 120, 20);
+
+			jLabel24.setText((String) Window.res.getObject("lb_delivTown"));
+			jLabel24.setBounds(10, 380, 120, 20);
+
+			jLabel25.setText((String) Window.res.getObject("lb_invoiceAddress"));
+			jLabel25.setBounds(10, 410, 160, 20);
+			jTextField21.setBounds(130, 410, 320, 20);
+
+			jLabel26.setText((String) Window.res
+					.getObject("lb_invoicePostcode"));
+			jLabel26.setBounds(10, 440, 120, 20);
+
+			jCheckBox7.setText((String) Window.res.getObject("cb_sameAddress"));
+			jCheckBox7.setBounds(460, 440, 110, 20);
+
+			jLabel27.setText((String) Window.res.getObject("lb_invoiceTown"));
+			jLabel27.setBounds(10, 470, 120, 20);
+
+			jLabel14.setText((String) Window.res.getObject("lb_firstName"));
+			jLabel14.setBounds(10, 510, 60, 20);
+
+			jLabel15.setText((String) Window.res.getObject("lb_tel"));
+			jLabel15.setBounds(40, 570, 18, 20);
+
+			jLabel16.setText((String) Window.res.getObject("lb_lastName"));
+			jLabel16.setBounds(10, 540, 60, 20);
+
+			jLabel17.setText((String) Window.res.getObject("lb_fax"));
+			jLabel17.setBounds(40, 600, 22, 20);
+
+			jLabel18.setText((String) Window.res.getObject("lb_mail"));
+			jLabel18.setBounds(40, 630, 28, 20);
+
+			jLabel28.setText((String) Window.res.getObject("lb_comment"));
+			jLabel28.setBounds(10, 660, 70, 20);
+			scroll.setBounds(70, 660, 280, 40);
+
+			jCheckBox3.setText((String) Window.res.getObject("cb_userData"));
+			jCheckBox3.setBounds(310, 510, 100, 23);
+
+			jButton1.setText((String) Window.res.getObject("bt_print"));
+			jButton1.setBounds(360, 580, 85, 23);
+
+			jLbSearch.setText((String) Window.res.getObject("lb_searchName"));
+			jLbSearch.setBounds(40, 50, 50, 20);
+
+			btnLoad.setToolTipText((String) Window.res.getObject("bt_loadDB"));
+			btnLoad.setBounds(25, 110, 39, 39);
+			btnLoad.setBackground(new java.awt.Color(255, 255, 255));
 		}
 		/******************************** FRANCAIS *********************************/
-		else if(Window.locale.toString().equals("fr")){
-			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources", Window.locale);
-			jLabel21.setText((String)Window.res.getObject("lb_ref"));
-			jLabel21.setBounds(210, 65, 60, 20);
-			
-			jLabel3.setText((String)Window.res.getObject("lb_date"));
+		else if (Window.locale.toString().equals("fr")) {
+			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
+					Window.locale);
+
+			jLabel3.setText((String) Window.res.getObject("lb_date"));
 			jLabel3.setBounds(40, 20, 27, 20);
-			
-			jLabel4.setText((String)Window.res.getObject("lb_from"));
-			jLabel4.setBounds(45, 50, 28, 20);
 
-			jLabel7.setText((String)Window.res.getObject("lb_to"));
-			jLabel7.setBounds(50, 80, 16, 20);
-			
-			jLabel10.setText((String)Window.res.getObject("lb_object"));
-			jLabel10.setBounds(30, 110, 36, 20);
-			
-			jLabel20.setText((String)Window.res.getObject("lb_recName"));
-			jLabel20.setBounds(10, 140, 77, 20);
-			
-			jLabel13.setText((String)Window.res.getObject("lb_payment"));
-			jLabel13.setBounds(10, 170, 50, 20);
-			jTextField10.setBounds(70, 170, 320, 20);
-			
-			jLabel12.setText((String)Window.res.getObject("lb_incoterm"));
-			jLabel12.setBounds(10, 200, 47, 20);
-			
-			jLabel22.setText((String)Window.res.getObject("lb_delivAddress"));
-			jLabel22.setBounds(10, 230, 120, 20);
-			
-			jLabel23.setText((String)Window.res.getObject("lb_delivPostcode"));
-			jLabel23.setBounds(10, 260, 120, 20);
-			
-			jLabel24.setText((String)Window.res.getObject("lb_delivTown"));
-			jLabel24.setBounds(10, 290, 120, 20);
-			
-			jLabel25.setText((String)Window.res.getObject("lb_invoiceAddress"));
-			jLabel25.setBounds(10, 320, 120, 20);
-			jTextField21.setBounds(120, 320, 320, 20);
-			
-			jLabel26.setText((String)Window.res.getObject("lb_invoicePostcode"));
-			jLabel26.setBounds(10, 350, 120, 20);
-			
-			jCheckBox7.setText((String)Window.res.getObject("cb_sameAddress"));
-			jCheckBox7.setBounds(460, 350, 110, 20);
-			
-			jLabel27.setText((String)Window.res.getObject("lb_invoiceTown"));
-			jLabel27.setBounds(10, 380, 120, 20);
+			jLabel4.setText((String) Window.res.getObject("lb_from"));
+			jLabel4.setBounds(310, 75, 28, 20);
 
-			jLabel14.setText((String)Window.res.getObject("lb_firstName"));
-			jLabel14.setBounds(20, 420, 60, 20);
-			
-			jLabel15.setText((String)Window.res.getObject("lb_tel"));
-			jLabel15.setBounds(40, 480, 18, 20);
-			
-			jLabel16.setText((String)Window.res.getObject("lb_lastName"));
-			jLabel16.setBounds(35, 450, 60, 20);
-			
-			jLabel17.setText((String)Window.res.getObject("lb_fax"));
-			jLabel17.setBounds(40, 510, 22, 20);
-			
-			jLabel18.setText((String)Window.res.getObject("lb_mail"));
-			jLabel18.setBounds(40, 540, 28, 20);
-			
-			jLabel28.setText((String)Window.res.getObject("lb_comment"));
-			jLabel28.setBounds(10, 570, 70, 20);
-			//jTextArea1.setBounds(85, 570, 280, 100);
-			scroll.setBounds(70, 570, 280, 100);
-			
-			jCheckBox3.setText((String)Window.res.getObject("cb_userData"));
-			jCheckBox3.setBounds(310, 470, 150, 23);
-			
-			jButton1.setText((String)Window.res.getObject("bt_print"));
-			jButton1.setBounds(360, 530, 85, 23);
+			jLabel7.setText((String) Window.res.getObject("lb_to"));
+			jLabel7.setBounds(310, 105, 16, 20);
+
+			jLabel21.setText((String) Window.res.getObject("lb_ref"));
+			jLabel21.setBounds(310, 135, 60, 20);
+
+			jLabel10.setText((String) Window.res.getObject("lb_object"));
+			jLabel10.setBounds(10, 200, 50, 20);
+
+			jLabel20.setText((String) Window.res.getObject("lb_recName"));
+			jLabel20.setBounds(10, 230, 80, 20);
+
+			jLabel13.setText((String) Window.res.getObject("lb_payment"));
+			jLabel13.setBounds(10, 260, 70, 20);
+			jTextField10.setBounds(70, 260, 320, 20);
+
+			jLabel12.setText((String) Window.res.getObject("lb_incoterm"));
+			jLabel12.setBounds(10, 290, 47, 20);
+
+			jLabel22.setText((String) Window.res.getObject("lb_delivAddress"));
+			jLabel22.setBounds(10, 320, 120, 20);
+
+			jLabel23.setText((String) Window.res.getObject("lb_delivPostcode"));
+			jLabel23.setBounds(10, 350, 120, 20);
+
+			jLabel24.setText((String) Window.res.getObject("lb_delivTown"));
+			jLabel24.setBounds(10, 380, 120, 20);
+
+			jLabel25.setText((String) Window.res.getObject("lb_invoiceAddress"));
+			jLabel25.setBounds(10, 410, 160, 20);
+			jTextField21.setBounds(120, 410, 320, 20);
+
+			jLabel26.setText((String) Window.res
+					.getObject("lb_invoicePostcode"));
+			jLabel26.setBounds(10, 440, 120, 20);
+
+			jCheckBox7.setText((String) Window.res.getObject("cb_sameAddress"));
+			jCheckBox7.setBounds(460, 440, 110, 20);
+
+			jLabel27.setText((String) Window.res.getObject("lb_invoiceTown"));
+			jLabel27.setBounds(10, 470, 120, 20);
+
+			jLabel14.setText((String) Window.res.getObject("lb_firstName"));
+			jLabel14.setBounds(20, 510, 60, 20);
+
+			jLabel15.setText((String) Window.res.getObject("lb_tel"));
+			jLabel15.setBounds(40, 570, 18, 20);
+
+			jLabel16.setText((String) Window.res.getObject("lb_lastName"));
+			jLabel16.setBounds(35, 540, 60, 20);
+
+			jLabel17.setText((String) Window.res.getObject("lb_fax"));
+			jLabel17.setBounds(40, 600, 22, 20);
+
+			jLabel18.setText((String) Window.res.getObject("lb_mail"));
+			jLabel18.setBounds(40, 630, 28, 20);
+
+			jLabel28.setText((String) Window.res.getObject("lb_comment"));
+			jLabel28.setBounds(10, 660, 70, 20);
+			scroll.setBounds(85, 660, 280, 40);
+
+			jCheckBox3.setText((String) Window.res.getObject("cb_userData"));
+			jCheckBox3.setBounds(310, 510, 150, 23);
+
+			jButton1.setText((String) Window.res.getObject("bt_print"));
+			jButton1.setBounds(360, 580, 85, 23);
+
+			jLbSearch.setText((String) Window.res.getObject("lb_searchName"));
+			jLbSearch.setBounds(20, 50, 90, 20);
+
+			btnLoad.setToolTipText((String) Window.res.getObject("bt_loadDB"));
+			btnLoad.setBounds(25, 110, 39, 39);
+			btnLoad.setBackground(new java.awt.Color(255, 255, 255));
+
 		}
-		
-		//Reference
-		jLayeredPane1.add(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField17.setBounds(270, 65, 100, 20);
-		jTextField17.setText(Window.referencequot);
-		jLayeredPane1.add(jTextField17, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Date
+		// Date
 		jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTextField1.setBounds(70, 20, 70, 20);
-		jTextField1.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-		Window.date=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+		jTextField1.setText(new SimpleDateFormat("dd/MM/yyyy")
+				.format(new Date()));
+		Window.date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//From
+		// From
 		jLayeredPane1.add(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField2.setBounds(70, 50, 120, 20);
+		jTextField2.setBounds(350, 75, 180, 20);
 		jTextField2.setText(Window.from);
 		jLayeredPane1.add(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//To
+		// To
 		jLayeredPane1.add(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField3.setBounds(70, 80, 120, 20);
+		jTextField3.setBounds(350, 105, 180, 20);
 		jTextField3.setText(Window.to);
 		jLayeredPane1.add(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Object
+		// Reference
+		jLayeredPane1.add(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTextField17.setBounds(380, 135, 150, 20);
+		jTextField17.setText(Window.referencequot);
+		jLayeredPane1.add(jTextField17, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// Subject
 		jLayeredPane1.add(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField8.setBounds(70, 110, 330, 20);
+		jTextField8.setBounds(60, 200, 380, 20);
 		jTextField8.setText(Window.object);
 		jLayeredPane1.add(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Recipient Name
+		// Recipient Name
 		jLayeredPane1.add(jLabel20, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField9.setBounds(90, 140, 190, 20);
+		jTextField9.setBounds(100, 230, 190, 20);
 		jTextField9.setText(Window.recipientname);
 		jLayeredPane1.add(jTextField9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
 		jCheckBox2.setText("Mr");
 		jCheckBox2.setSelected(true);
-		jCheckBox2.setBounds(300, 140, 37, 23);
+		jCheckBox2.setBounds(300, 230, 37, 23);
 		jLayeredPane1.add(jCheckBox2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -484,7 +534,7 @@ public class PdfScreen extends JDialog {
 			}
 
 			private void jCheckBox2ActionPerformed(ActionEvent evt) {
-				if(jCheckBox2.isSelected()){
+				if (jCheckBox2.isSelected()) {
 					jCheckBox1.setSelected(false);
 					jCheckBox6.setSelected(false);
 				}
@@ -493,7 +543,7 @@ public class PdfScreen extends JDialog {
 
 		jCheckBox1.setText("Mrs");
 		jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox1.setBounds(350, 140, 43, 23);
+		jCheckBox1.setBounds(350, 230, 43, 23);
 		jLayeredPane1.add(jCheckBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -502,7 +552,7 @@ public class PdfScreen extends JDialog {
 			}
 
 			private void jCheckBox1ActionPerformed(ActionEvent evt) {
-				if(jCheckBox1.isSelected()){
+				if (jCheckBox1.isSelected()) {
 					jCheckBox6.setSelected(false);
 					jCheckBox2.setSelected(false);
 				}
@@ -511,7 +561,7 @@ public class PdfScreen extends JDialog {
 
 		jCheckBox6.setText("no");
 		jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox6.setBounds(400, 140, 43, 23);
+		jCheckBox6.setBounds(400, 230, 43, 23);
 		jLayeredPane1.add(jCheckBox6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
@@ -520,13 +570,13 @@ public class PdfScreen extends JDialog {
 			}
 
 			private void jCheckBox1ActionPerformed(ActionEvent evt) {
-				if(jCheckBox6.isSelected()){
+				if (jCheckBox6.isSelected()) {
 					jCheckBox1.setSelected(false);
 					jCheckBox2.setSelected(false);
 				}
 			}
 		});
-		
+
 		jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
 		jCheckBox4.setText("dd/mm/yyyy");
 		jCheckBox4.setSelected(true);
@@ -539,14 +589,15 @@ public class PdfScreen extends JDialog {
 			}
 
 			private void jCheckBox4ActionPerformed(ActionEvent evt) {
-				if(jCheckBox4.isSelected()){
+				if (jCheckBox4.isSelected()) {
 					jCheckBox5.setSelected(false);
-				}
-				else{
+				} else {
 					jCheckBox4.setSelected(true);
 				}
-				jTextField1.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-				Window.date=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+				jTextField1.setText(new SimpleDateFormat("dd/MM/yyyy")
+						.format(new Date()));
+				Window.date = new SimpleDateFormat("dd/MM/yyyy")
+						.format(new Date());
 			}
 		});
 
@@ -561,58 +612,59 @@ public class PdfScreen extends JDialog {
 			}
 
 			private void jCheckBox5ActionPerformed(ActionEvent evt) {
-				if(jCheckBox5.isSelected()){
+				if (jCheckBox5.isSelected()) {
 					jCheckBox4.setSelected(false);
-				}
-				else{
+				} else {
 					jCheckBox5.setSelected(true);
 				}
-				jTextField1.setText(new SimpleDateFormat("MM/dd/yyyy").format(new Date()));
-				Window.date=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+				jTextField1.setText(new SimpleDateFormat("MM/dd/yyyy")
+						.format(new Date()));
+				Window.date = new SimpleDateFormat("MM/dd/yyyy")
+						.format(new Date());
 			}
 		});
-		
-		//Payment
+
+		// Payment
 		jLayeredPane1.add(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTextField10.setText(Window.payment);
 		jLayeredPane1.add(jTextField10, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Incoterm
+		// Incoterm
 		jLayeredPane1.add(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField11.setBounds(70, 200, 320, 20);
+		jTextField11.setBounds(70, 290, 320, 20);
 		jTextField11.setText(Window.incoterm);
 		jLayeredPane1.add(jTextField11, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Delivery Address
+		// Delivery Address
 		jLayeredPane1.add(jLabel22, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField18.setBounds(120, 230, 320, 20);
+		jTextField18.setBounds(120, 320, 320, 20);
 		jTextField18.setText(Window.deliveryaddress);
 		jLayeredPane1.add(jTextField18, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//postcode
+
+		// Postcode
 		jLayeredPane1.add(jLabel23, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField19.setBounds(120, 260, 320, 20);
+		jTextField19.setBounds(120, 350, 320, 20);
 		jTextField19.setText(Window.deliverypostcode);
 		jLayeredPane1.add(jTextField19, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//Town or/and Country
+
+		// Town or/and Country
 		jLayeredPane1.add(jLabel24, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField20.setBounds(120, 290, 320, 20);
+		jTextField20.setBounds(120, 380, 320, 20);
 		jTextField20.setText(Window.deliverylocation);
 		jLayeredPane1.add(jTextField20, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//Invoicing address
+
+		// Invoicing address
 		jLayeredPane1.add(jLabel25, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTextField21.setText(Window.address);
 		jLayeredPane1.add(jTextField21, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//postcode
+
+		// postcode
 		jLayeredPane1.add(jLabel26, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField22.setBounds(120, 350, 320, 20);
+		jTextField22.setBounds(120, 440, 320, 20);
 		jTextField22.setText(Window.postcode);
 		jLayeredPane1.add(jTextField22, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//Same Address
+
+		// Same Address
 		jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
 		jLayeredPane1.add(jCheckBox7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -622,102 +674,111 @@ public class PdfScreen extends JDialog {
 			}
 
 			private void jCheckBox1ActionPerformed(ActionEvent evt) {
-				if(jCheckBox7.isSelected()){
-					Window.address=jTextField18.getText();
-					Window.postcode=jTextField19.getText();
-					Window.location=jTextField20.getText();
+				if (jCheckBox7.isSelected()) {
+					Window.address = jTextField18.getText();
+					Window.postcode = jTextField19.getText();
+					Window.location = jTextField20.getText();
 					jTextField21.setText(Window.address);
 					jTextField22.setText(Window.postcode);
 					jTextField23.setText(Window.location);
-				}
-				else{
-					Window.address="";
-					Window.postcode="";
-					Window.location="";
+				} else {
+					Window.address = "";
+					Window.postcode = "";
+					Window.location = "";
 					jTextField21.setText("");
 					jTextField22.setText("");
 					jTextField23.setText("");
 				}
 			}
 		});
-		
-		//Town or/and Country
+
+		// Town or/and Country
 		jLayeredPane1.add(jLabel27, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField23.setBounds(120, 380, 320, 20);
+		jTextField23.setBounds(120, 470, 320, 20);
 		jTextField23.setText(Window.location);
 		jLayeredPane1.add(jTextField23, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//First Name
+
+		// First Name
 		jLayeredPane1.add(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField12.setBounds(70, 420, 210, 20);
+		jTextField12.setBounds(70, 510, 210, 20);
 		jTextField12.setText(Window.salesman);
 		jLayeredPane1.add(jTextField12, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Tel
+		// Tel
 		jLayeredPane1.add(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTextField13.setText(Window.gsm);
-		jTextField13.setBounds(70, 450, 210, 20);
+		jTextField13.setBounds(70, 540, 210, 20);
 		jLayeredPane1.add(jTextField13, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Last name
+		// Last name
 		jLayeredPane1.add(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTextField14.setText(Window.tel);
-		jTextField14.setBounds(70, 480, 210, 20);
+		jTextField14.setBounds(70, 570, 210, 20);
 		jLayeredPane1.add(jTextField14, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Fax
+		// Fax
 		jLayeredPane1.add(jLabel17, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField15.setBounds(70, 510, 210, 20);
+		jTextField15.setBounds(70, 600, 210, 20);
 		jTextField15.setText(Window.fax);
 		jLayeredPane1.add(jTextField15, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//mail
+		// Mail
 		jLayeredPane1.add(jLabel18, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField16.setBounds(70, 540, 210, 20);
+		jTextField16.setBounds(70, 630, 210, 20);
 		jTextField16.setText(Window.email);
 		jLayeredPane1.add(jTextField16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
+
 		jLayeredPane1.add(jLabel28, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		/*
-		jTextArea1.setLineWrap(true);
-		jLayeredPane1.add(jTextArea1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		*/
 		jTextArea1.setLineWrap(true);
 		jLayeredPane1.add(scroll, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//user data
+
+		// user data
 		jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
 		jLayeredPane1.add(jCheckBox3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+		// Search 
+		jLayeredPane1.add(jLbSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTfSearch.setBounds(90, 50, 180, 20);
+		jTfSearch.setEnabled(false);
+		jLayeredPane1.add(jTfSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// List 
+		listName.setFocusable(false);
+		scrollList.setBounds(90, 75, 180, 110);
+		jLayeredPane1.add(scrollList, JLayeredPane.DEFAULT_LAYER);
+
+		jLayeredPane1.add(btnLoad, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// Action sur CheckBox 'User Data'
 		jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					jCheckBox3ActionPerformed(evt);
-				} 
-				catch (IndexOutOfBoundsException e) {
+				} catch (IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
-				catch (BiffException e) {
+				} catch (BiffException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
-				catch (IOException e) {
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 
-			private void jCheckBox3ActionPerformed(ActionEvent evt) throws IndexOutOfBoundsException, BiffException, IOException {
-				if(jCheckBox3.isSelected()){
-					WorkbookSettings ws=new WorkbookSettings();
+			private void jCheckBox3ActionPerformed(ActionEvent evt)
+					throws IndexOutOfBoundsException, BiffException,
+					IOException {
+				if (jCheckBox3.isSelected()) {
+					WorkbookSettings ws = new WorkbookSettings();
 					ws.setSuppressWarnings(true);
-					Sheet sheet=Workbook.getWorkbook(new File("comercialdata.info"),ws).getSheet(0);
-					Window.salesman=sheet.getCell(1,0).getContents();
-					Window.gsm=sheet.getCell(1,1).getContents();
-					Window.tel=sheet.getCell(1,2).getContents();
-					Window.fax=sheet.getCell(1,3).getContents();
-					Window.email=sheet.getCell(1,4).getContents();
+					Sheet sheet = Workbook.getWorkbook(
+							new File("comercialdata.info"), ws).getSheet(0);
+					Window.salesman = sheet.getCell(1, 0).getContents();
+					Window.gsm = sheet.getCell(1, 1).getContents();
+					Window.tel = sheet.getCell(1, 2).getContents();
+					Window.fax = sheet.getCell(1, 3).getContents();
+					Window.email = sheet.getCell(1, 4).getContents();
 					jTextField12.setEditable(false);
 					jTextField12.setText(Window.salesman);
 					jTextField13.setEditable(false);
@@ -728,13 +789,12 @@ public class PdfScreen extends JDialog {
 					jTextField15.setText(Window.fax);
 					jTextField16.setEditable(false);
 					jTextField16.setText(Window.email);
-				}
-				else{
-					Window.salesman="";
-					Window.gsm="";
-					Window.tel="";
-					Window.fax="";
-					Window.email="";
+				} else {
+					Window.salesman = "";
+					Window.gsm = "";
+					Window.tel = "";
+					Window.fax = "";
+					Window.email = "";
 					jTextField12.setEditable(true);
 					jTextField12.setText(Window.salesman);
 					jTextField13.setEditable(true);
@@ -749,10 +809,9 @@ public class PdfScreen extends JDialog {
 			}
 		});
 
-		//Button Print
+		// Button Print
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-
 				try {
 					jButton1ActionPerformed(evt);
 				} catch (DocumentException e) {
@@ -765,22 +824,23 @@ public class PdfScreen extends JDialog {
 
 			}
 		});
-		
+
 		jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
+				getContentPane());
 		getContentPane().setLayout(layout);
-		
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-		);
-		
-		layout.setVerticalGroup(
-			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-		);
-		
+
+		layout.setHorizontalGroup(layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625,
+				Short.MAX_VALUE));
+
+		layout.setVerticalGroup(layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710,
+				Short.MAX_VALUE));
+
 		this.getContentPane().setBackground(new Color(255, 255, 255));
 
 		FocusListener focuslistener = new FocusListener() {
@@ -793,85 +853,66 @@ public class PdfScreen extends JDialog {
 			@Override
 			public void focusLost(FocusEvent e) {
 
-				if(e.getSource().equals(jTextField1))
-				{
-					Window.date=jTextField1.getText();
+				if (e.getSource().equals(jTextField1)) {
+					Window.date = jTextField1.getText();
 				}
-				if(e.getSource().equals(jTextField2))
-				{
-					Window.from=jTextField2.getText();
+				if (e.getSource().equals(jTextField2)) {
+					Window.from = jTextField2.getText();
 				}
-				if(e.getSource().equals(jTextField3))
-				{
-					Window.to=jTextField3.getText();
+				if (e.getSource().equals(jTextField3)) {
+					Window.to = jTextField3.getText();
 				}
-				if(e.getSource().equals(jTextField8))
-				{
-					Window.object=jTextField8.getText();
+				if (e.getSource().equals(jTextField8)) {
+					Window.object = jTextField8.getText();
 				}
-				if(e.getSource().equals(jTextField9))
-				{
-					Window.recipientname=jTextField9.getText();
+				if (e.getSource().equals(jTextField9)) {
+					Window.recipientname = jTextField9.getText();
 				}
-				if(e.getSource().equals(jTextField10))
-				{
-					Window.payment=jTextField10.getText();
+				if (e.getSource().equals(jTextField10)) {
+					Window.payment = jTextField10.getText();
 				}
-				if(e.getSource().equals(jTextField11))
-				{
-					Window.incoterm=jTextField11.getText();
+				if (e.getSource().equals(jTextField11)) {
+					Window.incoterm = jTextField11.getText();
 				}
-				if(e.getSource().equals(jTextField12))
-				{
-					Window.salesman=jTextField12.getText();
+				if (e.getSource().equals(jTextField12)) {
+					Window.salesman = jTextField12.getText();
 				}
-				if(e.getSource().equals(jTextField13))
-				{
-					Window.gsm=jTextField13.getText();
+				if (e.getSource().equals(jTextField13)) {
+					Window.gsm = jTextField13.getText();
 				}
-				if(e.getSource().equals(jTextField14))
-				{
-					Window.tel=jTextField14.getText();
+				if (e.getSource().equals(jTextField14)) {
+					Window.tel = jTextField14.getText();
 				}
-				if(e.getSource().equals(jTextField15))
-				{
-					Window.fax=jTextField15.getText();
+				if (e.getSource().equals(jTextField15)) {
+					Window.fax = jTextField15.getText();
 				}
-				if(e.getSource().equals(jTextField16))
-				{
-					Window.email=jTextField16.getText();
+				if (e.getSource().equals(jTextField16)) {
+					Window.email = jTextField16.getText();
 				}
-				if(e.getSource().equals(jTextField17))
-				{
-					Window.referencequot=jTextField17.getText();
+				if (e.getSource().equals(jTextField17)) {
+					Window.referencequot = jTextField17.getText();
 				}
-				if(e.getSource().equals(jTextField18))
-				{
-					Window.deliveryaddress=jTextField18.getText();
+				if (e.getSource().equals(jTextField18)) {
+					Window.deliveryaddress = jTextField18.getText();
 				}
-				if(e.getSource().equals(jTextField19))
-				{
-					Window.deliverypostcode=jTextField19.getText();
+				if (e.getSource().equals(jTextField19)) {
+					Window.deliverypostcode = jTextField19.getText();
 				}
-				if(e.getSource().equals(jTextField20))
-				{
-					Window.deliverylocation=jTextField20.getText();
+				if (e.getSource().equals(jTextField20)) {
+					Window.deliverylocation = jTextField20.getText();
 				}
-				if(e.getSource().equals(jTextField21))
-				{
-					Window.address=jTextField21.getText();
+				if (e.getSource().equals(jTextField21)) {
+					Window.address = jTextField21.getText();
 				}
-				if(e.getSource().equals(jTextField22))
-				{
-					Window.postcode=jTextField22.getText();
+				if (e.getSource().equals(jTextField22)) {
+					Window.postcode = jTextField22.getText();
 				}
-				if(e.getSource().equals(jTextField23))
-				{
-					Window.location=jTextField23.getText();
+				if (e.getSource().equals(jTextField23)) {
+					Window.location = jTextField23.getText();
 				}
 			}
 		};
-		
+
 		jTextField1.addFocusListener(focuslistener);
 		jTextField2.addFocusListener(focuslistener);
 		jTextField3.addFocusListener(focuslistener);
@@ -892,6 +933,268 @@ public class PdfScreen extends JDialog {
 		jTextField22.addFocusListener(focuslistener);
 		jTextField23.addFocusListener(focuslistener);
 
+		/* Ouverture de fichier de bdd client */
+		try {
+			WorkbookSettings ws = new WorkbookSettings();
+			ws.setSuppressWarnings(true);
+			Sheet sheet = Workbook.getWorkbook(new File(pathnameDatabase), ws)
+					.getSheet(0);
+
+			databaseName = new ReadNamelist(sheet);
+
+			if (databaseName.isNameList(sheet)) {
+				file = new File(pathnameDatabase);
+				ArrayList<String> productslist = databaseName
+						.readDatabase(sheet);
+
+				String name = file.getName();
+				WritableWorkbook workbook1 = Workbook.createWorkbook(new File(
+						"filename.info"));
+				WritableSheet sheet1 = workbook1.createSheet(
+						"Premier classeur", 0);
+				workbook1.setProtected(true);
+				sheet1.setProtected(true);
+				Label label = new Label(0, 0, file.getName());
+				sheet1.addCell(label);
+				workbook1.write();
+				workbook1.close();
+				// jLb_notif.setText("<html><font color=blue>File: " + name);
+
+				jTfSearch.setText("");
+				jTfSearch.setEnabled(true);
+
+			} else {
+				// jLb_notif.setText("No loaded file");
+
+				javax.swing.JOptionPane.showMessageDialog(null,
+						"The file is not in expected format");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("ERROR : " + e);
+			javax.swing.JOptionPane.showMessageDialog(null, "ERROR: File "
+					+ pathnameDatabase + " was not found");
+		}
+
+		btnLoad.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				try {
+					JFileChooser chooser;
+					chooser = new JFileChooser(parents) {
+
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void approveSelection() {
+							File f = new File(getSelectedFile()
+									.getAbsolutePath());
+							if (f.exists()) {
+								parents = f.getParent();
+								super.approveSelection();
+							}
+						}
+					};
+
+					chooser.setAcceptAllFileFilterUsed(false);
+
+					FileNameExtensionFilter filter = new FileNameExtensionFilter(
+							"Fichier Excel (.xls)", "xls");
+					chooser.setFileFilter(filter);
+
+					int returnval = chooser.showOpenDialog(null);
+
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						WorkbookSettings ws = new WorkbookSettings();
+						ws.setSuppressWarnings(true);
+						Sheet sheet = Workbook.getWorkbook(
+								chooser.getSelectedFile(), ws).getSheet(0);
+
+						databaseName = new ReadNamelist(sheet);
+
+						if (databaseName.isNameList(sheet)) {
+							file = chooser.getSelectedFile();
+							ArrayList<String> productslist = databaseName
+									.readDatabase(sheet);
+
+							String name = file.getName();
+							WritableWorkbook workbook1 = Workbook
+									.createWorkbook(new File("filename.info"));
+							WritableSheet sheet1 = workbook1.createSheet(
+									"Premier classeur", 0);
+							workbook1.setProtected(true);
+							sheet1.setProtected(true);
+							Label label = new Label(0, 0, file.getName());
+							sheet1.addCell(label);
+							workbook1.write();
+							workbook1.close();
+
+							jTfSearch.setEnabled(true);
+							jTfSearch.setText("");
+
+							javax.swing.JOptionPane
+									.showMessageDialog(null, "The file \""
+											+ chooser.getSelectedFile()
+													.getName() + "\" is loaded");
+
+						} else {
+							javax.swing.JOptionPane.showMessageDialog(null,
+									"The file \""
+											+ chooser.getSelectedFile()
+													.getName()
+											+ "\" is not in expected format");
+						}
+					}
+				} catch (Exception ev) {
+					javax.swing.JOptionPane.showMessageDialog(null, ev);
+				}
+			}
+		});
+
+		/* Action sur la zone de texte Search Product */
+		jTfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				jTextField1ActionPerformed(evt);
+			}
+
+			@SuppressWarnings("deprecation")
+			private void jTextField1ActionPerformed(KeyEvent evt) {
+				if (file == null) {
+					System.out.println("WARNING ! No loaded file");
+				} else if (file != null) {
+					if (jTfSearch.getText().equals("")) {
+						if (Character.isJavaLetter(evt.getKeyChar())
+								|| evt.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD
+								|| evt.getKeyCode() == Event.ENTER) {
+							listName.setModel(databaseName.readSearch(jTfSearch
+									.getText()));
+							listName.setEnabled(true);
+						}
+					} else {
+						if (Character.isJavaLetter(evt.getKeyChar())
+								|| evt.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD
+								|| evt.getKeyCode() == Event.ENTER
+								|| evt.getKeyCode() == 8) {
+							listName.setModel(databaseName.readSearch(jTfSearch
+									.getText()));
+							listName.setEnabled(true);
+						}
+					}
+				}
+			}
+		});
+		listName.setFocusable(true);
+
+		/* Action clavier sur la zone de texte Search Product */
+		jTfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyPressed(java.awt.event.KeyEvent evt) {
+				jTextField1KeyPressed(evt);
+			}
+
+			private void jTextField1KeyPressed(KeyEvent evt) {
+				// KeyCode 40 = Flèche bas
+				if (evt.getKeyCode() == 40) {
+					// Si la liste != -1 (donc rempli)
+					if (listName.getFirstVisibleIndex() != -1) {
+						listName.setSelectedIndex(0);
+						listName.requestFocus();
+					}
+				}
+			}
+		});
+
+		/***************************/
+		/* Action clavier sur List1 */
+		listName.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyPressed(java.awt.event.KeyEvent evt) {
+				jList1KeyPressed(evt);
+			}
+
+			@SuppressWarnings("static-access")
+			private void jList1KeyPressed(KeyEvent evt) {
+				if (isList) {
+					if (evt.getKeyCode() == Event.ENTER) {
+
+						DefaultListModel test = new DefaultListModel();
+						test.addElement(listName.getSelectedValue().toString());
+						listName.setModel(test);
+						listName.setSelectedIndex(0);
+					}
+				}
+			}
+		});
+
+		/* Action souris sur List1 */
+		listName.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				listMouseClicked(evt);
+			}
+
+			private void listMouseClicked(MouseEvent evt) {
+				// TODO Auto-generated method stub
+				DefaultListModel test = new DefaultListModel();
+				test.addElement(listName.getSelectedValue().toString());
+				listName.setModel(test);
+				listName.setSelectedIndex(0);
+				jTfSearch.setText(listName.getSelectedValue().toString());
+
+				/* To */
+				Window.to = databaseName.readCompany(listName
+						.getSelectedValue().toString());
+				jTextField3.setText(Window.to);
+
+				/* Payment */
+				// TO DO
+
+				/* Incoterm */
+				Window.incoterm = databaseName.readIncoterm(listName
+						.getSelectedValue().toString());
+				jTextField11.setText(Window.incoterm);
+
+				/* Delivery Address */
+				Window.deliveryaddress = databaseName.readDelAddress(listName
+						.getSelectedValue().toString())
+						+ "  "
+						+ databaseName.readDelAddress2(listName
+								.getSelectedValue().toString());
+				jTextField18.setText(Window.deliveryaddress);
+
+				/* Delivery Postcode */
+				Window.deliverypostcode = databaseName.readDelPostcode(listName
+						.getSelectedValue().toString());
+				jTextField19.setText(Window.deliverypostcode);
+
+				/* Delivery Town/Country */
+				Window.deliverylocation = databaseName.readDelTown(listName
+						.getSelectedValue().toString())
+						+ " - "
+						+ databaseName.readDelCountry(listName
+								.getSelectedValue().toString());
+				jTextField20.setText(Window.deliverylocation);
+
+				/* Invoicing Address */
+				Window.address = databaseName.readInvAddress(listName
+						.getSelectedValue().toString())
+						+ "  "
+						+ databaseName.readInvAddress2(listName
+								.getSelectedValue().toString());
+				jTextField21.setText(Window.address);
+
+				/* Invoicing Postcode */
+				Window.postcode = databaseName.readInvPostcode(listName
+						.getSelectedValue().toString());
+				jTextField22.setText(Window.postcode);
+
+				/* Invoicing Town/Country */
+				Window.location = databaseName.readInvTown(listName
+						.getSelectedValue().toString())
+						+ " - "
+						+ databaseName.readInvCountry(listName
+								.getSelectedValue().toString());
+				jTextField23.setText(Window.location);
+			}
+
+		});
+
 		jTextField1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField1ActionPerformed(evt);
@@ -899,10 +1202,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField1ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.date=jTextField1.getText();
+				Window.date = jTextField1.getText();
 			}
 		});
-		
+
 		jTextField2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField2ActionPerformed(evt);
@@ -910,10 +1213,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField2ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.from=jTextField2.getText();
+				Window.from = jTextField2.getText();
 			}
 		});
-		
+
 		jTextField3.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField3ActionPerformed(evt);
@@ -921,10 +1224,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField3ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.to=jTextField3.getText();
+				Window.to = jTextField3.getText();
 			}
 		});
-		
+
 		jTextField8.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField8ActionPerformed(evt);
@@ -932,7 +1235,7 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField8ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.object=jTextField8.getText();
+				Window.object = jTextField8.getText();
 			}
 		});
 
@@ -943,10 +1246,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField10ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.payment=jTextField10.getText();
+				Window.payment = jTextField10.getText();
 			}
 		});
-		
+
 		jTextField11.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField11ActionPerformed(evt);
@@ -954,7 +1257,7 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField11ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.incoterm=jTextField11.getText();
+				Window.incoterm = jTextField11.getText();
 			}
 		});
 
@@ -965,10 +1268,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField12ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.salesman=jTextField12.getText();
+				Window.salesman = jTextField12.getText();
 			}
 		});
-		
+
 		jTextField13.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField13ActionPerformed(evt);
@@ -976,10 +1279,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField13ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.gsm=jTextField13.getText();
+				Window.gsm = jTextField13.getText();
 			}
 		});
-		
+
 		jTextField14.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField14ActionPerformed(evt);
@@ -987,10 +1290,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField14ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.tel=jTextField14.getText();
+				Window.tel = jTextField14.getText();
 			}
 		});
-		
+
 		jTextField15.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField15ActionPerformed(evt);
@@ -998,10 +1301,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField15ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.fax=jTextField15.getText();
+				Window.fax = jTextField15.getText();
 			}
 		});
-		
+
 		jTextField16.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField16ActionPerformed(evt);
@@ -1009,10 +1312,10 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField16ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.email=jTextField16.getText();
+				Window.email = jTextField16.getText();
 			}
 		});
-		
+
 		jTextField17.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField17ActionPerformed(evt);
@@ -1020,37 +1323,38 @@ public class PdfScreen extends JDialog {
 
 			private void jTextField17ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.referencequot=jTextField17.getText();
+				Window.referencequot = jTextField17.getText();
 			}
 		});
-	}	
+	}
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws DocumentException, IOException {
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+			throws DocumentException, IOException {
 
-		try{
+		try {
+			System.out.println(jTextField9.getText());
+			JFileChooser chooser = new JFileChooser(Window.parents) {
 
-			JFileChooser chooser = new JFileChooser(Window.parents){
-				
 				private static final long serialVersionUID = 1L;
 
 				@Override
-				public void approveSelection(){
+				public void approveSelection() {
 					File f = null;
-					
-					if(getSelectedFile().getAbsolutePath().endsWith(".pdf"))
-						f = new File(getSelectedFile().getAbsolutePath());
-					else 
-						f = new File(getSelectedFile().getAbsolutePath()+".pdf");
 
-					if(f.exists()){
-						Window.parents=f.getParent();
-						int answer = JOptionPane.showConfirmDialog(
-								this, f + " exists. Overwrite?", "Overwrite?",
-								JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE
-						);
-						
-						if (answer != JOptionPane.OK_OPTION)
-						{
+					if (getSelectedFile().getAbsolutePath().endsWith(".pdf"))
+						f = new File(getSelectedFile().getAbsolutePath());
+					else
+						f = new File(getSelectedFile().getAbsolutePath()
+								+ ".pdf");
+
+					if (f.exists()) {
+						Window.parents = f.getParent();
+						int answer = JOptionPane.showConfirmDialog(this, f
+								+ " exists. Overwrite?", "Overwrite?",
+								JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+
+						if (answer != JOptionPane.OK_OPTION) {
 							return;
 						}
 					}
@@ -1058,18 +1362,22 @@ public class PdfScreen extends JDialog {
 				}
 			};
 			chooser.setAcceptAllFileFilterUsed(false);
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichier PDF (.pdf)","pdf");
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					"Fichier PDF (.pdf)", "pdf");
 			chooser.setFileFilter(filter);
-			chooser.setSelectedFile(new File("quotation "+new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
-			
-			int returnVal=chooser.showSaveDialog(null);
-			
-			if(returnVal==JFileChooser.APPROVE_OPTION)
-			{
+			chooser.setSelectedFile(new File("quotation "
+					+ new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
+
+			int returnVal = chooser.showSaveDialog(null);
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				this.dispose();
-							
-				Document document = new Document(PageSize.A4);//PageSize.A4, 36, 36, 54, 54);
-				PdfWriter writer=PdfWriter.getInstance(document, new FileOutputStream("quotation.pdf"));
+
+				Document document = new Document(PageSize.A4);// PageSize.A4,
+																// 36, 36, 54,
+																// 54);
+				PdfWriter writer = PdfWriter.getInstance(document,
+						new FileOutputStream("quotation.pdf"));
 
 				document.open();
 
@@ -1080,13 +1388,20 @@ public class PdfScreen extends JDialog {
 
 				table2.addCell(c);
 
-				c = new PdfPCell(new Phrase(Window.companyname+" : "+Window.companyaddress+" – "+Window.companypostcode+" "+Window.companytown+" – "+Window.companycountry, new Font(FontFamily.HELVETICA, 6, Font.NORMAL)));
+				c = new PdfPCell(new Phrase(Window.companyname + " : "
+						+ Window.companyaddress + " – "
+						+ Window.companypostcode + " " + Window.companytown
+						+ " – " + Window.companycountry, new Font(
+						FontFamily.HELVETICA, 6, Font.NORMAL)));
 				c.setHorizontalAlignment(Element.ALIGN_CENTER);
 				c.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				c.setBorder(Rectangle.NO_BORDER);
 				table2.addCell(c);
 
-				c = new PdfPCell(new Phrase("Tel : "+Window.conpanytel+" – Fax : "+Window.conpanyfax+" – Email: "+Window.conpanyemail, new Font(FontFamily.HELVETICA, 6, Font.NORMAL)));
+				c = new PdfPCell(new Phrase("Tel : " + Window.conpanytel
+						+ " – Fax : " + Window.conpanyfax + " – Email: "
+						+ Window.conpanyemail, new Font(FontFamily.HELVETICA,
+						6, Font.NORMAL)));
 				c.setHorizontalAlignment(Element.ALIGN_CENTER);
 				c.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				c.setBorder(Rectangle.NO_BORDER);
@@ -1094,7 +1409,7 @@ public class PdfScreen extends JDialog {
 
 				c = new PdfPCell(new Phrase(""));
 				c.setBorder(Rectangle.NO_BORDER);
-				c.setFixedHeight(c.getFixedHeight()+30);
+				c.setFixedHeight(c.getFixedHeight() + 30);
 				table2.addCell(c);
 
 				document.add(table2);
@@ -1105,182 +1420,163 @@ public class PdfScreen extends JDialog {
 				PdfReader reader = new PdfReader("quotation.pdf");
 
 				Document document2 = new Document();
-				PdfWriter writer2=PdfWriter.getInstance(document2, new FileOutputStream("text.pdf"));
+				PdfWriter writer2 = PdfWriter.getInstance(document2,
+						new FileOutputStream("text.pdf"));
 				document2.open();
 				PdfContentByte canvas = writer2.getDirectContent();
 				writer2.setCompressionLevel(0);
 
-				canvas.saveState();                               // q
-				canvas.beginText();                               // BT
-				canvas.moveText(280, 39);                         // 36 788 Td
+				canvas.saveState(); // q
+				canvas.beginText(); // BT
+				canvas.moveText(280, 39); // 36 788 Td
 				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
-				canvas.showText("Page 1 of "+(reader.getNumberOfPages()+1));                   // (Hello World)Tj
-				canvas.endText();                                 // ET
-				canvas.restoreState();  
-				
-				canvas.saveState();                               // q
-				Image img2=Image.getInstance("logo.png");
+				canvas.showText("Page 1 of " + (reader.getNumberOfPages() + 1)); 
+				canvas.endText(); // ET
+				canvas.restoreState();
+
+				canvas.saveState(); // q
+				Image img2 = Image.getInstance("logo.png");
 				img2.setAbsolutePosition(59, 680);
 				img2.scalePercent(80);
-				canvas.addImage(img2);                         // 36 788 Td                         // ET
-				canvas.restoreState(); 
-				
-				
-				canvas.saveState();                               // q
-				canvas.beginText();                               // BT
-				canvas.moveText(59, 662);                         // 36 788 Td
-				canvas.setFontAndSize(FontFactory.getFont(BaseFont.HELVETICA, 10, 1).getCalculatedBaseFont(false), 8); // /F1 12 Tf
-				canvas.showText(Window.companyname);                   // (Hello World)Tj
-				canvas.endText();                                 // ET
-				canvas.restoreState();  
-				
-				canvas.saveState();                               // q
-				canvas.beginText();                               // BT
-				canvas.moveText(59, 650);                         // 36 788 Td
-				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
-				canvas.showText(Window.companyaddress);                   // (Hello World)Tj
-				canvas.endText();                                 // ET
-				canvas.restoreState();  
-				
-				canvas.saveState();                               // q
-				canvas.beginText();                               // BT
-				canvas.moveText(59, 638);                         // 36 788 Td
-				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
-				canvas.showText(Window.companypostcode+" "+Window.companytown+" - "+Window.companycountry);                   // (Hello World)Tj
-				canvas.endText();                                 // ET
-				canvas.restoreState(); 
-
-				canvas.saveState();                               // q
-				canvas.beginText();                               // BT
-				canvas.moveText(167, 68);                         // 36 788 Td
-				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
-				canvas.showText("Tel: "+Window.conpanytel+" - Fax: "+Window.conpanyfax+" - Email: "+Window.conpanyemail);                   // (Hello World)Tj
-				canvas.endText();                                 // ET
-				canvas.restoreState(); 
-				
-				canvas.saveState();                               // q
-				canvas.beginText();                               // BT
-				canvas.moveText(80, 58); 							// 36 788 Td
-				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
-				canvas.showText(Window.conpanycomment);           // (Hello World)Tj
-				canvas.endText();                                 // ET
+				canvas.addImage(img2); // 36 788 Td // ET
 				canvas.restoreState();
-				
-				BaseFont font = FontFactory.getFont(BaseFont.HELVETICA, 10, 1).getCalculatedBaseFont(false);// 36 788 Td
+
+				canvas.saveState(); // q
+				canvas.beginText(); // BT
+				canvas.moveText(59, 662); // 36 788 Td
+				canvas.setFontAndSize(
+						FontFactory.getFont(BaseFont.HELVETICA, 10, 1)
+								.getCalculatedBaseFont(false), 8);
+				canvas.showText(Window.companyname);
+				canvas.endText(); // ET
+				canvas.restoreState();
+
+				canvas.saveState(); // q
+				canvas.beginText(); // BT
+				canvas.moveText(59, 650); // 36 788 Td
+				canvas.setFontAndSize(BaseFont.createFont(), 8);
+				canvas.showText(Window.companyaddress);
+				canvas.endText(); // ET
+				canvas.restoreState();
+
+				canvas.saveState(); // q
+				canvas.beginText(); // BT
+				canvas.moveText(59, 638); // 36 788 Td
+				canvas.setFontAndSize(BaseFont.createFont(), 8);
+				canvas.showText(Window.companypostcode + " "
+						+ Window.companytown + " - " + Window.companycountry); 
+				canvas.endText(); // ET
+				canvas.restoreState();
+
+				canvas.saveState(); // q
+				canvas.beginText(); // BT
+				canvas.moveText(167, 68); // 36 788 Td
+				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
+				canvas.showText("Tel: " + Window.conpanytel + " - Fax: "
+						+ Window.conpanyfax + " - Email: "
+						+ Window.conpanyemail); // (Hello World)Tj
+				canvas.endText(); // ET
+				canvas.restoreState();
+
+				canvas.saveState(); // q
+				canvas.beginText(); // BT
+				canvas.moveText(80, 58); // 36 788 Td
+				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
+				canvas.showText(Window.conpanycomment); // (Hello World)Tj
+				canvas.endText(); // ET
+				canvas.restoreState();
+
+				BaseFont font = FontFactory.getFont(BaseFont.HELVETICA, 10, 1)
+						.getCalculatedBaseFont(false);// 36 788 Td
 
 				/************************************ ANGLAIS ******************************/
-				if(Window.locale.toString().equals("en")){
+				if (Window.locale.toString().equals("en")) {
 					// REFERENCE
-					if(!Window.referencequot.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(375, 695);                         // 36 788 Td
+					if (!Window.referencequot.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(375, 695); // 36 788 Td
 						canvas.setFontAndSize(font, 10); // /F1 12 Tf
-						canvas.showText("Reference :");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+						canvas.showText("Reference :"); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(436, 695);                         // 36 788 Td
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText(Window.referencequot);                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState();  
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(436, 695); // 36 788 Td
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText(Window.referencequot); // (Hello
+																// World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 					}
 					// DELIVERY ADDRESS
-					if(!Window.deliveryaddress.isEmpty() && !Window.deliverypostcode.isEmpty() && !Window.deliverylocation.isEmpty()){
-						canvas.saveState(); 
+					if (!Window.deliveryaddress.isEmpty()
+							&& !Window.deliverypostcode.isEmpty()
+							&& !Window.deliverylocation.isEmpty()) {
+						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 637);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Delivery address:");
 						canvas.endText();
-						canvas.restoreState(); 
-						/*
-						canvas.saveState();
-						canvas.beginText();
-						canvas.moveText(460, 637);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText(Window.deliveryaddress);
-						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 624);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText(Window.deliverypostcode + " " + Window.deliverylocation);
-						canvas.endText();
-						canvas.restoreState(); 
-						*/						
-						canvas.saveState();
-						canvas.beginText();
-						canvas.moveText(375, 624);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.deliveryaddress);
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 611);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText(Window.deliverypostcode + " " + Window.deliverylocation);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText(Window.deliverypostcode + " "
+								+ Window.deliverylocation);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 					// INVOICING ADDRESS
-					if(!Window.address.isEmpty() && !Window.postcode.isEmpty() && !Window.location.isEmpty()){
+					if (!Window.address.isEmpty() && !Window.postcode.isEmpty()
+							&& !Window.location.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 598);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Invoicing address:");
 						canvas.endText();
-						canvas.restoreState(); 
-						/*
-						canvas.saveState();
-						canvas.beginText();
-						canvas.moveText(465, 598);
-						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.address);
-						canvas.endText();
-						canvas.restoreState(); 
-						
-						canvas.saveState();
-						canvas.beginText();
-						canvas.moveText(375, 585);
-						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.postcode+" "+Window.location);
-						canvas.endText();
-						canvas.restoreState(); 
-						*/
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 585);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.address);
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 572);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.postcode+" "+Window.location);
+						canvas.showText(Window.postcode + " " + Window.location);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// DE / FROM 
-					if(!Window.from.isEmpty()){
+					// DE / FROM
+					if (!Window.from.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(375, 663);  
+						canvas.moveText(375, 663);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("From:");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
@@ -1288,110 +1584,122 @@ public class PdfScreen extends JDialog {
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.from);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// A / TO 
-					if(!Window.to.isEmpty()){
+					// A / TO
+					if (!Window.to.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 650);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("To:");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(395, 650); 
+						canvas.moveText(395, 650);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.to);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// Subject 
-					if(!Window.object.isEmpty()){
+					// Subject
+					if (!Window.object.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(59, 588); 
+						canvas.moveText(59, 588);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Subject: ");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(100, 588); 
+						canvas.moveText(100, 588);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.object);                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+						canvas.showText(Window.object); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 					}
 
 					// PAYMENT
-					if(!Window.payment.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(59, 341);                         // 36 788 Td
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText("Payment:");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+					if (!Window.payment.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(59, 341); // 36 788 Td
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText("Payment:"); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(103, 341);                         // 36 788 Td
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText(Window.payment);                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(103, 341); // 36 788 Td
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText(Window.payment); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 					}
 
-					canvas.saveState();                               // q
-					canvas.beginText();                               // BT
-					canvas.moveText(59, 304);                         // 36 788 Td
-					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-					canvas.showText("- Delivery terms: 3/4 weeks from the date we receive the order");                   // (Hello World)Tj
-					canvas.endText();                                 // ET
-					canvas.restoreState(); 
+					canvas.saveState(); // q
+					canvas.beginText(); // BT
+					canvas.moveText(59, 304); // 36 788 Td
+					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12
+																		// Tf
+					canvas.showText("- Delivery terms: 3/4 weeks from the date we receive the order"); // (Hello
+																										// World)Tj
+					canvas.endText(); // ET
+					canvas.restoreState();
 
-					canvas.saveState();                               // q
-					canvas.beginText();                               // BT
-					canvas.moveText(59, 291);                         // 36 788 Td
-					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-					canvas.showText("- Validity offer: 2 months");                   // (Hello World)Tj
-					canvas.endText();                                 // ET
-					canvas.restoreState(); 
+					canvas.saveState(); // q
+					canvas.beginText(); // BT
+					canvas.moveText(59, 291); // 36 788 Td
+					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12
+																		// Tf
+					canvas.showText("- Validity offer: 2 months"); // (Hello
+																	// World)Tj
+					canvas.endText(); // ET
+					canvas.restoreState();
 
 					/* INCOTERM */
-					if(!Window.incoterm.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(59, 328);                         // 36 788 Td
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText("Incoterm:");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+					if (!Window.incoterm.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(59, 328); // 36 788 Td
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText("Incoterm:"); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(103, 328);                         // 36 788 Td
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText(Window.incoterm);                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(103, 328); // 36 788 Td
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText(Window.incoterm); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 					}
 				}
 				/*********************************** ITALIEN **********************************/
-				else if(Window.locale.toString().equals("it")){
+				else if (Window.locale.toString().equals("it")) {
 					// Riferimento
-					if(!Window.referencequot.isEmpty()){
+					if (!Window.referencequot.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 695);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Riferimento :");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
@@ -1399,69 +1707,73 @@ public class PdfScreen extends JDialog {
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.referencequot);
 						canvas.endText();
-						canvas.restoreState();  
-					} 
+						canvas.restoreState();
+					}
 					// Indirizzo di consegna
-					if(!Window.deliveryaddress.isEmpty() && !Window.deliverypostcode.isEmpty() && !Window.deliverylocation.isEmpty()){
-						canvas.saveState(); 
+					if (!Window.deliveryaddress.isEmpty()
+							&& !Window.deliverypostcode.isEmpty()
+							&& !Window.deliverylocation.isEmpty()) {
+						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 637);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Indirizzo di consegna:");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 624);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.deliveryaddress);
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 611);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText(Window.deliverypostcode + " " + Window.deliverylocation);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText(Window.deliverypostcode + " "
+								+ Window.deliverylocation);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 					// Indirizzo di fatturazione
-					if(!Window.address.isEmpty() && !Window.postcode.isEmpty() && !Window.location.isEmpty()){
+					if (!Window.address.isEmpty() && !Window.postcode.isEmpty()
+							&& !Window.location.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 598);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Indirizzo di fatturazione:");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 585);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.address);
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 572);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.postcode+" "+Window.location);
+						canvas.showText(Window.postcode + " " + Window.location);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// DA  
-					if(!Window.from.isEmpty()){
+					// DA
+					if (!Window.from.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(375, 663);  
+						canvas.moveText(375, 663);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Da :");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
@@ -1469,53 +1781,53 @@ public class PdfScreen extends JDialog {
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.from);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// A 
-					if(!Window.to.isEmpty()){
+					// A
+					if (!Window.to.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 650);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("A :");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(393, 650); 
+						canvas.moveText(393, 650);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.to);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 					// Soggetto
-					if(!Window.object.isEmpty()){
+					if (!Window.object.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(59, 588); 
+						canvas.moveText(59, 588);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Soggetto : ");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(113, 588); 
+						canvas.moveText(113, 588);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.object);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 					// PAYMENT
-					if(!Window.payment.isEmpty()){
+					if (!Window.payment.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(59, 341);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Pagamento: " + Window.payment);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 
 					canvas.saveState();
@@ -1524,7 +1836,7 @@ public class PdfScreen extends JDialog {
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText("- Termini di consegna: 3/4 settimane dalla data  ricezione ordine");
 					canvas.endText();
-					canvas.restoreState(); 
+					canvas.restoreState();
 
 					canvas.saveState();
 					canvas.beginText();
@@ -1532,30 +1844,30 @@ public class PdfScreen extends JDialog {
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText("- Validità dell'offerta: 2 mesi");
 					canvas.endText();
-					canvas.restoreState(); 
+					canvas.restoreState();
 
 					/* INCOTERM */
-					if(!Window.incoterm.isEmpty()){
+					if (!Window.incoterm.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(59, 328);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Incoterm: " + Window.incoterm);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 				}
 				/******************************** FRANCAIS *********************************/
-				else if(Window.locale.toString().equals("fr")){
+				else if (Window.locale.toString().equals("fr")) {
 					// REFERENCE
-					if(!Window.referencequot.isEmpty()){
+					if (!Window.referencequot.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 695);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Référence :");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
@@ -1563,69 +1875,73 @@ public class PdfScreen extends JDialog {
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.referencequot);
 						canvas.endText();
-						canvas.restoreState();  
+						canvas.restoreState();
 					}
 					// Adresse de livraison
-					if(!Window.deliveryaddress.isEmpty() && !Window.deliverypostcode.isEmpty() && !Window.deliverylocation.isEmpty()){
-						canvas.saveState(); 
+					if (!Window.deliveryaddress.isEmpty()
+							&& !Window.deliverypostcode.isEmpty()
+							&& !Window.deliverylocation.isEmpty()) {
+						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 637);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Adresse de livraison:");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 624);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.deliveryaddress);
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 611);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText(Window.deliverypostcode + " " + Window.deliverylocation);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText(Window.deliverypostcode + " "
+								+ Window.deliverylocation);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 					// Adresse de facturation
-					if(!Window.address.isEmpty() && !Window.postcode.isEmpty() && !Window.location.isEmpty()){
+					if (!Window.address.isEmpty() && !Window.postcode.isEmpty()
+							&& !Window.location.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 598);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Adresse de facturation:");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 585);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.address);
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 572);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.postcode+" "+Window.location);
+						canvas.showText(Window.postcode + " " + Window.location);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// DE 
-					if(!Window.from.isEmpty()){
+					// DE
+					if (!Window.from.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(375, 663);  
+						canvas.moveText(375, 663);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("De :");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
@@ -1633,54 +1949,54 @@ public class PdfScreen extends JDialog {
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.from);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					// A 
-					if(!Window.to.isEmpty()){
+					// A
+					if (!Window.to.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(375, 650);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("A :");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(393, 650); 
+						canvas.moveText(393, 650);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.to);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 					// Odre d'achat
-					if(!Window.object.isEmpty()){
+					if (!Window.object.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(59, 588); 
+						canvas.moveText(59, 588);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Objet : ");
 						canvas.endText();
-						canvas.restoreState(); 
-						
+						canvas.restoreState();
+
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(95, 588); 
+						canvas.moveText(95, 588);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.object);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					
+
 					// PAYMENT
-					if(!Window.payment.isEmpty()){
+					if (!Window.payment.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(59, 341);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Paiement : " + Window.payment);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 
 					canvas.saveState();
@@ -1689,7 +2005,7 @@ public class PdfScreen extends JDialog {
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText("- Conditions de livraison : 3/4 semaines à partir de la date de réception de l'ordre");
 					canvas.endText();
-					canvas.restoreState(); 
+					canvas.restoreState();
 
 					canvas.saveState();
 					canvas.beginText();
@@ -1697,287 +2013,323 @@ public class PdfScreen extends JDialog {
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText("- Validité de l'offre : 2 mois");
 					canvas.endText();
-					canvas.restoreState(); 
+					canvas.restoreState();
 
 					/* INCOTERM */
-					if(!Window.incoterm.isEmpty()){
+					if (!Window.incoterm.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(59, 328);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Incoterm : " + Window.incoterm);
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
 				}
 
 				/* DATE */
-				if(!Window.date.isEmpty()){
+				if (!Window.date.isEmpty()) {
 					canvas.saveState();
 					canvas.beginText();
 					canvas.moveText(437, 748);
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText(Window.date);
 					canvas.endText();
-					canvas.restoreState();  
+					canvas.restoreState();
 				}
 
-				if(Window.locale.toString().equals("en")){
+				if (Window.locale.toString().equals("en")) {
 					/* MR OU MS + RECIPIENT NAME */
-					if(jCheckBox2.isSelected()&& Window.recipientname.isEmpty()){
+					if (jCheckBox2.isSelected()
+							&& Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(84, 539);  
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
+						canvas.moveText(84, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Mr,");
 						canvas.endText();
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox2.isSelected()&& !Window.recipientname.isEmpty()){
+						canvas.restoreState();
+					}
+					if (jCheckBox2.isSelected()
+							&& !Window.recipientname.isEmpty()) {
 						canvas.saveState();
-						canvas.beginText(); 
+						canvas.beginText();
 						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText("Mr "+Window.recipientname+","); 
-						canvas.endText(); 
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox1.isSelected()&& Window.recipientname.isEmpty()){
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText("Mr " + Window.recipientname + ",");
+						canvas.endText();
+						canvas.restoreState();
+					}
+					if (jCheckBox1.isSelected()
+							&& Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Ms,");
 						canvas.endText();
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox1.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState();
-						canvas.beginText();
-						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText("Ms "+Window.recipientname+","); 
-						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-					if(jCheckBox6.isSelected()&& Window.recipientname.isEmpty()){
+					if (jCheckBox1.isSelected()
+							&& !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(","); 
+						canvas.showText("Ms " + Window.recipientname + ",");
 						canvas.endText();
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox6.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState(); 
+						canvas.restoreState();
+					}
+					if (jCheckBox6.isSelected()
+							&& Window.recipientname.isEmpty()) {
+						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText(Window.recipientname+",");
+						canvas.showText(",");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-				}
-				else if(Window.locale.toString().equals("it")){
+					if (jCheckBox6.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState();
+						canvas.beginText();
+						canvas.moveText(84, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText(Window.recipientname + ",");
+						canvas.endText();
+						canvas.restoreState();
+					}
+				} else if (Window.locale.toString().equals("it")) {
 					/* MR OU MS + RECIPIENT NAME */
-					if(jCheckBox2.isSelected()&& Window.recipientname.isEmpty()){
-						canvas.saveState();
-						canvas.beginText();
-						canvas.moveText(130, 539);  
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText("Mr,"); 
-						canvas.endText(); 
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox2.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState(); 
-						canvas.beginText();
-						canvas.moveText(130, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText("Mr "+Window.recipientname+",");
-						canvas.endText();
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox1.isSelected()&& Window.recipientname.isEmpty()){
-						canvas.saveState(); 
-						canvas.beginText();
-						canvas.moveText(130, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText("Ms,"); 
-						canvas.endText();
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox1.isSelected()&& !Window.recipientname.isEmpty()){
+					if (jCheckBox2.isSelected()
+							&& Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(130, 539);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
-						canvas.showText("Ms "+Window.recipientname+",");
-						canvas.endText(); 
-						canvas.restoreState(); 
+						canvas.showText("Mr,");
+						canvas.endText();
+						canvas.restoreState();
 					}
-					if(jCheckBox6.isSelected()&& Window.recipientname.isEmpty()){
+					if (jCheckBox2.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState();
+						canvas.beginText();
+						canvas.moveText(130, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText("Mr " + Window.recipientname + ",");
+						canvas.endText();
+						canvas.restoreState();
+					}
+					if (jCheckBox1.isSelected()
+							&& Window.recipientname.isEmpty()) {
+						canvas.saveState();
+						canvas.beginText();
+						canvas.moveText(130, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText("Ms,");
+						canvas.endText();
+						canvas.restoreState();
+					}
+					if (jCheckBox1.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState();
+						canvas.beginText();
+						canvas.moveText(130, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText("Ms " + Window.recipientname + ",");
+						canvas.endText();
+						canvas.restoreState();
+					}
+					if (jCheckBox6.isSelected()
+							&& Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(130, 539);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(",");
 						canvas.endText();
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox6.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState(); 
+						canvas.restoreState();
+					}
+					if (jCheckBox6.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(130, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); 
-						canvas.showText(Window.recipientname+","); 
+						canvas.setFontAndSize(BaseFont.createFont(), 10);
+						canvas.showText(Window.recipientname + ",");
 						canvas.endText();
-						canvas.restoreState(); 
+						canvas.restoreState();
 					}
-				}
-				else if(Window.locale.toString().equals("fr")){
+				} else if (Window.locale.toString().equals("fr")) {
 					/* MR OU MS + RECIPIENT NAME */
-					if(jCheckBox2.isSelected()&& Window.recipientname.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(84, 539);  
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText("Mr,");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox2.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
+					if (jCheckBox2.isSelected()
+							&& Window.recipientname.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText("Mr "+Window.recipientname+",");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox1.isSelected()&& Window.recipientname.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText("Ms,");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox1.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
-						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText("Ms "+Window.recipientname+",");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText("Mr,"); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 					}
-					if(jCheckBox6.isSelected()&& Window.recipientname.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
+					if (jCheckBox2.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText(",");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
-					}	
-					if(jCheckBox6.isSelected()&& !Window.recipientname.isEmpty()){
-						canvas.saveState();                               // q
-						canvas.beginText();                               // BT
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText("Mr " + Window.recipientname + ","); // (Hello
+																				// World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
+					}
+					if (jCheckBox1.isSelected()
+							&& Window.recipientname.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
-						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-						canvas.showText(Window.recipientname+",");                   // (Hello World)Tj
-						canvas.endText();                                 // ET
-						canvas.restoreState(); 
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText("Ms,"); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
+					}
+					if (jCheckBox1.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(84, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText("Ms " + Window.recipientname + ","); // (Hello
+																				// World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
+					}
+					if (jCheckBox6.isSelected()
+							&& Window.recipientname.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(84, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText(","); // (Hello World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
+					}
+					if (jCheckBox6.isSelected()
+							&& !Window.recipientname.isEmpty()) {
+						canvas.saveState(); // q
+						canvas.beginText(); // BT
+						canvas.moveText(84, 539);
+						canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1
+																			// 12
+																			// Tf
+						canvas.showText(Window.recipientname + ","); // (Hello
+																		// World)Tj
+						canvas.endText(); // ET
+						canvas.restoreState();
 					}
 				}
-				
+
 				/* NOM + PRENOM USER */
-				if(!Window.salesman.isEmpty()){
-					canvas.saveState();                               // q
-					canvas.beginText();                               // BT
-					canvas.moveText(59, 168);                         // 36 788 Td
-					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-					canvas.showText(Window.salesman+" "+Window.gsm);                   // (Hello World)Tj
-					canvas.endText();                                 // ET
-					canvas.restoreState(); 
+				if (!Window.salesman.isEmpty()) {
+					canvas.saveState(); // q
+					canvas.beginText(); // BT
+					canvas.moveText(59, 168); // 36 788 Td
+					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12
+																		// Tf
+					canvas.showText(Window.salesman + " " + Window.gsm); // (Hello
+																			// World)Tj
+					canvas.endText(); // ET
+					canvas.restoreState();
 				}
 				/* TEL USER */
-				if(!Window.tel.isEmpty()){
-					canvas.saveState();                             
-					canvas.beginText();                             
-					canvas.moveText(59, 156);                         
-					canvas.setFontAndSize(BaseFont.createFont(), 10); 
-					canvas.showText("Tel: "+Window.tel);                   
-					canvas.endText();                                 
-					canvas.restoreState(); 
+				if (!Window.tel.isEmpty()) {
+					canvas.saveState();
+					canvas.beginText();
+					canvas.moveText(59, 156);
+					canvas.setFontAndSize(BaseFont.createFont(), 10);
+					canvas.showText("Tel: " + Window.tel);
+					canvas.endText();
+					canvas.restoreState();
 				}
 				/* FAX */
-				if(!Window.fax.isEmpty()){
-					canvas.saveState();                               // q
-					canvas.beginText();                               // BT
-					canvas.moveText(59, 144);                         // 36 788 Td
-					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12 Tf
-					canvas.showText("Fax: "+Window.fax);                   // (Hello World)Tj
-					canvas.endText();                                 // ET
-					canvas.restoreState(); 
+				if (!Window.fax.isEmpty()) {
+					canvas.saveState(); // q
+					canvas.beginText(); // BT
+					canvas.moveText(59, 144); // 36 788 Td
+					canvas.setFontAndSize(BaseFont.createFont(), 10); // /F1 12
+																		// Tf
+					canvas.showText("Fax: " + Window.fax); // (Hello World)Tj
+					canvas.endText(); // ET
+					canvas.restoreState();
 				}
 				/* MAIL */
-				if(!Window.email.isEmpty()){
-					BaseFont font1 = FontFactory.getFont(BaseFont.HELVETICA, 10, BaseColor.BLUE).getCalculatedBaseFont(true);
-					canvas.saveState();                               // q
-					canvas.beginText();                               // BT
-					canvas.moveText(59, 131);                         // 36 788 Td
+				if (!Window.email.isEmpty()) {
+					BaseFont font1 = FontFactory.getFont(BaseFont.HELVETICA,
+							10, BaseColor.BLUE).getCalculatedBaseFont(true);
+					canvas.saveState(); // q
+					canvas.beginText(); // BT
+					canvas.moveText(59, 131); // 36 788 Td
 					canvas.setFontAndSize(font1, 10); // /F1 12 Tf
-					canvas.showText("Email: "+Window.email);                   // (Hello World)Tj
-					canvas.endText();                                 // ET
-					canvas.restoreState(); 
+					canvas.showText("Email: " + Window.email); // (Hello
+																// World)Tj
+					canvas.endText(); // ET
+					canvas.restoreState();
 				}
 				document2.close();
 
-				//PdfReader reader1 = new PdfReader("quotationform.pdf");
+				// PdfReader reader1 = new PdfReader("quotationform.pdf");
 				PdfReader reader1 = null;
-				
-				if(Window.locale.toString().equals("en")){
+
+				if (Window.locale.toString().equals("en")) {
 					System.out.println("en");
 					reader1 = new PdfReader("quotationform.pdf");
-				}
-				else if(Window.locale.toString().equals("it")){
+				} else if (Window.locale.toString().equals("it")) {
 					System.out.println("it");
 					reader1 = new PdfReader("quotationformIT.pdf");
-				}
-				else if(Window.locale.toString().equals("fr")){
+				} else if (Window.locale.toString().equals("fr")) {
 					System.out.println("fr");
 					reader1 = new PdfReader("quotationformFR.pdf");
 				}
 
 				Document document4 = new Document();
-				PdfCopy copy = new PdfCopy(document4, new FileOutputStream("quotationfinal.pdf"));
+				PdfCopy copy = new PdfCopy(document4, new FileOutputStream(
+						"quotationfinal.pdf"));
 
 				document4.open();
-				PdfImportedPage page1=copy.getImportedPage(reader1, 1);
+				PdfImportedPage page1 = copy.getImportedPage(reader1, 1);
 				copy.addPage(page1);
-				
+
 				PdfReader reader2 = new PdfReader("text.pdf");
-				PdfImportedPage page2=copy.getImportedPage(reader2, 1);
+				PdfImportedPage page2 = copy.getImportedPage(reader2, 1);
 				copy.addPage(page2);
 
-				copy.close();   
+				copy.close();
 				document4.close();
 
 				PdfReader reader5 = new PdfReader("quotationfinal.pdf");
 
 				Document document6 = new Document(PageSize.A4, 36, 36, 54, 54);
-				PdfWriter writer6=PdfWriter.getInstance(document6, new FileOutputStream("quotation2.pdf"));
-				Footer event1=new Footer();
+				PdfWriter writer6 = PdfWriter.getInstance(document6,
+						new FileOutputStream("quotation2.pdf"));
+				Footer event1 = new Footer();
 				writer6.setBoxSize("art", new Rectangle(36, 54, 559, 788));
 				writer6.setPageEvent(event1);
-				event1.settotal(reader.getNumberOfPages()+1);
+				event1.settotal(reader.getNumberOfPages() + 1);
 				document6.open();
-				
-				for(int i=1;i<=reader.getNumberOfPages();i++){
+
+				for (int i = 1; i <= reader.getNumberOfPages(); i++) {
 					document6.newPage();
 					writer6.setPageEmpty(false);
 				}
@@ -1986,16 +2338,17 @@ public class PdfScreen extends JDialog {
 				PdfReader reader6 = new PdfReader("quotation2.pdf");
 
 				Document document7 = new Document();
-				PdfWriter writer7=PdfWriter.getInstance(document7, new FileOutputStream("quotation3.pdf"));
+				PdfWriter writer7 = PdfWriter.getInstance(document7,
+						new FileOutputStream("quotation3.pdf"));
 
 				document7.open();
 
 				PdfContentByte canvas3 = writer7.getDirectContent();
 
-				for(int j=1;j<=reader.getNumberOfPages();j++){
-					page1=writer7.getImportedPage(reader, j);
+				for (int j = 1; j <= reader.getNumberOfPages(); j++) {
+					page1 = writer7.getImportedPage(reader, j);
 					canvas3.addTemplate(page1, 1f, 0, 0, 1, 0, 0);
-					page2=writer7.getImportedPage(reader6, j);
+					page2 = writer7.getImportedPage(reader6, j);
 					canvas3.addTemplate(page2, 1f, 0, 0, 1, 0, 0);
 					document7.newPage();
 				}
@@ -2005,7 +2358,8 @@ public class PdfScreen extends JDialog {
 				reader = new PdfReader("quotation3.pdf");
 
 				Document document3 = new Document(PageSize.A4, 36, 36, 54, 54);
-				PdfWriter writer3=PdfWriter.getInstance(document3, new FileOutputStream("quotationfinal1.pdf"));
+				PdfWriter writer3 = PdfWriter.getInstance(document3,
+						new FileOutputStream("quotationfinal1.pdf"));
 
 				document3.open();
 
@@ -2022,20 +2376,22 @@ public class PdfScreen extends JDialog {
 				PdfReader reader3 = new PdfReader("quotationfinal1.pdf");
 
 				Document document1 = new Document();
-				if(chooser.getSelectedFile().getAbsolutePath().endsWith(".pdf")){
-					copy = new PdfCopy(document1, new FileOutputStream(chooser.getSelectedFile().getAbsolutePath()));
+				if (chooser.getSelectedFile().getAbsolutePath()
+						.endsWith(".pdf")) {
+					copy = new PdfCopy(document1, new FileOutputStream(chooser
+							.getSelectedFile().getAbsolutePath()));
+				} else {
+					copy = new PdfCopy(document1, new FileOutputStream(chooser
+							.getSelectedFile().getAbsolutePath() + ".pdf"));
 				}
-				else {
-					copy = new PdfCopy(document1, new FileOutputStream(chooser.getSelectedFile().getAbsolutePath()+".pdf"));
-				}
-				
+
 				document1.open();
 
-				page1=copy.getImportedPage(reader3, 1);
+				page1 = copy.getImportedPage(reader3, 1);
 				copy.addPage(page1);
 
-				for(int i=1;i<=reader.getNumberOfPages();i++){
-					page2=copy.getImportedPage(reader, i);
+				for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+					page2 = copy.getImportedPage(reader, i);
 					copy.addPage(page2);
 				}
 
@@ -2043,179 +2399,221 @@ public class PdfScreen extends JDialog {
 
 				document1.close();
 
-				File file = new File("quotationfinal1.pdf"); 
+				File file = new File("quotationfinal1.pdf");
 				file.delete();
-				file = new File("quotation.pdf"); 
+				file = new File("quotation.pdf");
 				file.delete();
-				file = new File("quotationfinal.pdf"); 
+				file = new File("quotationfinal.pdf");
 				file.delete();
-				file = new File("text.pdf"); 
+				file = new File("text.pdf");
 				file.delete();
-				file = new File("quotation2.pdf"); 
+				file = new File("quotation2.pdf");
 				file.delete();
-				file = new File("quotation3.pdf"); 
+				file = new File("quotation3.pdf");
 				file.delete();
-				file = new File("quotationform2.pdf"); 			
+				file = new File("quotationform2.pdf");
 				file.delete();
 				WritableSheet sheet;
-		        Workbook workbook;
-		        WritableWorkbook wwork;
-		        WritableCell cell;
-		        
-		        try {
-		        	if(!new File("./Summary offers.xls").exists()){
-		            		
-		        		WritableWorkbook wworkbook;
-		    				
-		        		wworkbook = Workbook.createWorkbook(new File("./Summary offers.xls"));
-		    					
-		        		WritableSheet wsheet = wworkbook.createSheet("Savedata", 0);
-		        		WritableFont titrefont = new WritableFont(WritableFont.ARIAL, 10,WritableFont.BOLD); 
-		        		
-		        		wsheet.setColumnView(0, 20);
-		    		
-		    			wsheet.setColumnView(1, 40);
-		    			wsheet.setColumnView(2, 30);
-		    			wsheet.setColumnView(3, 40);
-		    			wsheet.setColumnView(4, 30);
-		    			wsheet.setColumnView(5, 50);
-		    			wsheet.setColumnView(6, 25);
-		    			wsheet.setColumnView(7, 25);
-		    				
-		    			WritableCellFormat format = new WritableCellFormat (titrefont);
-		    			format.setBackground(Colour.WHITE);
-		    			format.setAlignment(Alignment.CENTRE);
-		    			format.setVerticalAlignment(VerticalAlignment.CENTRE);
-		    			format.setOrientation(Orientation.HORIZONTAL);
-		    			format.setBorder(Border.ALL, BorderLineStyle.THIN,Colour.BLACK);
-		    			format.setShrinkToFit(true);
-		    			format.setWrap(true);
-		    				
-		    			Label label = new Label(0,0, "DATE", format); 
-		    			wsheet.addCell(label);
-						label = new Label(1,0, "REFERENCE", format); 
+				Workbook workbook;
+				WritableWorkbook wwork;
+				WritableCell cell;
+
+				try {
+					if (!new File("./Summary offers.xls").exists()) {
+
+						WritableWorkbook wworkbook;
+
+						wworkbook = Workbook.createWorkbook(new File(
+								"./Summary offers.xls"));
+
+						WritableSheet wsheet = wworkbook.createSheet(
+								"Savedata", 0);
+						WritableFont titrefont = new WritableFont(
+								WritableFont.ARIAL, 10, WritableFont.BOLD);
+
+						wsheet.setColumnView(0, 20);
+
+						wsheet.setColumnView(1, 40);
+						wsheet.setColumnView(2, 30);
+						wsheet.setColumnView(3, 40);
+						wsheet.setColumnView(4, 30);
+						wsheet.setColumnView(5, 50);
+						wsheet.setColumnView(6, 25);
+						wsheet.setColumnView(7, 25);
+
+						WritableCellFormat format = new WritableCellFormat(
+								titrefont);
+						format.setBackground(Colour.WHITE);
+						format.setAlignment(Alignment.CENTRE);
+						format.setVerticalAlignment(VerticalAlignment.CENTRE);
+						format.setOrientation(Orientation.HORIZONTAL);
+						format.setBorder(Border.ALL, BorderLineStyle.THIN,
+								Colour.BLACK);
+						format.setShrinkToFit(true);
+						format.setWrap(true);
+
+						Label label = new Label(0, 0, "DATE", format);
 						wsheet.addCell(label);
-						label = new Label(2,0, "FROM", format); 
+						label = new Label(1, 0, "REFERENCE", format);
 						wsheet.addCell(label);
-						label = new Label(3,0, "CUSTOMER", format); 
+						label = new Label(2, 0, "FROM", format);
 						wsheet.addCell(label);
-						label = new Label(4,0, "NAME", format); 
+						label = new Label(3, 0, "CUSTOMER", format);
 						wsheet.addCell(label);
-						label = new Label(5,0, "BUISNESS NAME", format); 
+						label = new Label(4, 0, "NAME", format);
 						wsheet.addCell(label);
-						label = new Label(6,0, "PURCHASE PRICE", format); 
+						label = new Label(5, 0, "BUISNESS NAME", format);
 						wsheet.addCell(label);
-						label = new Label(7,0, "QUOTATION PRICE", format); 
+						label = new Label(6, 0, "PURCHASE PRICE", format);
 						wsheet.addCell(label);
-						
-						wworkbook.write(); 
-						wworkbook.close(); 	
-							
+						label = new Label(7, 0, "QUOTATION PRICE", format);
+						wsheet.addCell(label);
+
+						wworkbook.write();
+						wworkbook.close();
+
 						System.out.println("Creation de ./Summary offers.xls");
-		            }
-		            	
-		        	workbook = Workbook.getWorkbook(new File("./Summary offers.xls"));
-		        	wwork = Workbook.createWorkbook(new File("./Summary offers.xls"), workbook);
-		        	
-		        	sheet = wwork.getSheet(0);
-		        	
-		            Window.df.setMaximumFractionDigits(2);
-		            Window.df.setMinimumFractionDigits(2);
-		            exist=false;
-		            
-		            for(int k=0;k<=sheet.getRows()-1;k++){
-		            	if(sheet.getCell(0, k).getContents().equals(Window.date) && sheet.getCell(1, k).getContents().equals(Window.referencequot) && sheet.getCell(2, k).getContents().equals(Window.from) && sheet.getCell(3, k).getContents().equals(Window.to) && sheet.getCell(4, k).getContents().equals(Window.salesman+" "+Window.gsm)&&sheet.getCell(5, k).getContents().equals(Window.object) &&sheet.getCell(6, k).getContents().equals(Window.df.format(Window.buyprice))&&sheet.getCell(7, k).getContents().equals(Window.df.format(Window.quotationprice)))
-		            		exist=true;
-		            }
-		            
-		            if(!exist){
-		            	Label label = null;
-		            	int row=sheet.getRows();
-		                
-		                for(int i=0;i<=7;i++){
-		                	cell = sheet.getWritableCell(i, sheet.getRows());
-		                
-		                	if(i==0)
-		                		label = new Label(i, row, Window.date);
-		                	
-		                	if(i==1)
-				                label = new Label(i, row, Window.referencequot);
-		                	
-		                	if(i==2)
-				                label = new Label(i, row, Window.from);
-		                	
-		                	if(i==3)
-				                label = new Label(i, row, Window.to);
-		                	
-		                	if(i==4)
-				                label = new Label(i, row, Window.salesman+" "+Window.gsm);
-		                	
-		                	if(i==5)
-				                label = new Label(i, row, Window.object);
-		                	
-		                	if(i==6)
-				                label = new Label(i, row, Window.df.format(Window.buyprice));
-		                	
-		                	if(i==7)
-				                label = new Label(i, row, Window.df.format(Window.quotationprice));
-			                
-		                	sheet.addCell(label); 
-		                }
-		            }
-		            wwork.write(); 
-		            wwork.close(); 
-		            System.out.println("Sauvegarde quotation dans ./Summary offers.xls");
-		        }
-		        catch (Exception e) {
-		        	System.out.println(e);
-		        }
+					}
 
-				if(chooser.getSelectedFile().getAbsolutePath().endsWith(".pdf"))
-					Window.printermailer=chooser.getSelectedFile().getAbsolutePath();
-				else 
-					Window.printermailer=chooser.getSelectedFile().getAbsolutePath()+".pdf";
+					workbook = Workbook.getWorkbook(new File(
+							"./Summary offers.xls"));
+					wwork = Workbook.createWorkbook(new File(
+							"./Summary offers.xls"), workbook);
 
-				// On vérifie que la classe Desktop soit bien supportée :				
-    	    	if ( Desktop.isDesktopSupported() ) {
-    	    		// On récupère l'instance du desktop :
-    	    		Desktop desktop = Desktop.getDesktop();
+					sheet = wwork.getSheet(0);
 
-    	    		// On vérifie que la fonction open est bien supportée :
-    	    		if (desktop.isSupported(Desktop.Action.OPEN)) {
-    	    			System.out.println(Window.printermailer);
-    	    			// Et on lance l'application associé au fichier pour l'ouvrir :
-    	    			desktop.open(new File(Window.printermailer).getAbsoluteFile());
-    	    		}    	    			
-    	    	}
+					Window.df.setMaximumFractionDigits(2);
+					Window.df.setMinimumFractionDigits(2);
+					exist = false;
+
+					for (int k = 0; k <= sheet.getRows() - 1; k++) {
+						if (sheet.getCell(0, k).getContents()
+								.equals(Window.date)
+								&& sheet.getCell(1, k).getContents()
+										.equals(Window.referencequot)
+								&& sheet.getCell(2, k).getContents()
+										.equals(Window.from)
+								&& sheet.getCell(3, k).getContents()
+										.equals(Window.to)
+								&& sheet.getCell(4, k)
+										.getContents()
+										.equals(Window.salesman + " "
+												+ Window.gsm)
+								&& sheet.getCell(5, k).getContents()
+										.equals(Window.object)
+								&& sheet.getCell(6, k)
+										.getContents()
+										.equals(Window.df
+												.format(Window.buyprice))
+								&& sheet.getCell(7, k)
+										.getContents()
+										.equals(Window.df
+												.format(Window.quotationprice)))
+							exist = true;
+					}
+
+					if (!exist) {
+						Label label = null;
+						int row = sheet.getRows();
+
+						for (int i = 0; i <= 7; i++) {
+							cell = sheet.getWritableCell(i, sheet.getRows());
+
+							if (i == 0)
+								label = new Label(i, row, Window.date);
+
+							if (i == 1)
+								label = new Label(i, row, Window.referencequot);
+
+							if (i == 2)
+								label = new Label(i, row, Window.from);
+
+							if (i == 3)
+								label = new Label(i, row, Window.to);
+
+							if (i == 4)
+								label = new Label(i, row, Window.salesman + " "
+										+ Window.gsm);
+
+							if (i == 5)
+								label = new Label(i, row, Window.object);
+
+							if (i == 6)
+								label = new Label(i, row,
+										Window.df.format(Window.buyprice));
+
+							if (i == 7)
+								label = new Label(i, row,
+										Window.df.format(Window.quotationprice));
+
+							sheet.addCell(label);
+						}
+					}
+					wwork.write();
+					wwork.close();
+					System.out
+							.println("Sauvegarde quotation dans ./Summary offers.xls");
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+
+				if (chooser.getSelectedFile().getAbsolutePath()
+						.endsWith(".pdf"))
+					Window.printermailer = chooser.getSelectedFile()
+							.getAbsolutePath();
+				else
+					Window.printermailer = chooser.getSelectedFile()
+							.getAbsolutePath() + ".pdf";
+
+				// On vérifie que la classe Desktop soit bien supportée :
+				if (Desktop.isDesktopSupported()) {
+					// On récupère l'instance du desktop :
+					Desktop desktop = Desktop.getDesktop();
+
+					// On vérifie que la fonction open est bien supportée :
+					if (desktop.isSupported(Desktop.Action.OPEN)) {
+						System.out.println(Window.printermailer);
+						// Et on lance l'application associé au fichier pour
+						// l'ouvrir :
+						desktop.open(new File(Window.printermailer)
+								.getAbsoluteFile());
+					}
+				}
 			}
-		}
-		catch (Exception e) {
-			javax.swing.JOptionPane.showMessageDialog(null,"The file has been saved in "+Window.printermailer);
+		} catch (Exception e) {
+			javax.swing.JOptionPane.showMessageDialog(null,
+					"The file has been saved in " + Window.printermailer);
 		}
 	}
-	
-	public static PdfPTable createTable(Document document) throws DocumentException, MalformedURLException, IOException {
-		
+
+	public static PdfPTable createTable(Document document)
+			throws DocumentException, MalformedURLException, IOException {
+
 		PdfPTable table = null;
 		PdfPTable table2 = null;
 
-		table= new PdfPTable(6);
-		table.setWidths(new float[]{(float)1,(float)1.6,(float) 6,(float)0.7,(float) 1.6,(float) 1.4});
+		table = new PdfPTable(6);
+		table.setWidths(new float[] { (float) 1, (float) 1.6, (float) 6,
+				(float) 0.7, (float) 1.6, (float) 1.4 });
 		table.setWidthPercentage(100f);
 
 		table2 = new PdfPTable(6);
-		table2.setWidths(new float[]{(float)1,(float)1.6,(float) 6,(float)0.7,(float) 1.4,(float) 1.4});
+		table2.setWidths(new float[] { (float) 1, (float) 1.6, (float) 6,
+				(float) 0.7, (float) 1.4, (float) 1.4 });
 		table2.setWidthPercentage(101f);
-		
+
 		PdfPCell cell = new PdfPCell();
 		addHeader(table, cell);
 
-		for(int i=0;i<=Window.reference.size()-1;i++){
-			
+		for (int i = 0; i <= Window.reference.size() - 1; i++) {
+
 			// Si Reference + index VIDES et description non VIDE
-			if(Window.reference.get(i).isEmpty()&&Window.index.get(i).toString().isEmpty()&&!Window.description.get(i).toString().isEmpty()){
-					
-				cell = new PdfPCell(new Phrase(Window.description.get(i), new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+			if (Window.reference.get(i).isEmpty()
+					&& Window.index.get(i).toString().isEmpty()
+					&& !Window.description.get(i).toString().isEmpty()) {
+
+				cell = new PdfPCell(new Phrase(Window.description.get(i),
+						new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setBackgroundColor(BaseColor.CYAN);
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2223,268 +2621,329 @@ public class PdfScreen extends JDialog {
 
 				table.addCell(cell);
 			}
-			
+
 			// Si Reference VIDE et Index non VIDE
-			else if(Window.reference.get(i).isEmpty()&& !Window.index.get(i).toString().isEmpty()){
-				cell = new PdfPCell(new Phrase(Window.index.get(i).toString(), new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
+			else if (Window.reference.get(i).isEmpty()
+					&& !Window.index.get(i).toString().isEmpty()) {
+				cell = new PdfPCell(new Phrase(Window.index.get(i).toString(),
+						new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 				table.addCell(cell);
-				cell = new PdfPCell(new Phrase(Window.description.get(i), new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
-				
+				cell = new PdfPCell(new Phrase(Window.description.get(i),
+						new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
+
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setColspan(6);
 
 				table.addCell(cell);
 			}
-			
+
 			// Si Reference + Index + Description VIDES
-			else if(Window.reference.get(i).isEmpty()&&Window.index.get(i).toString().isEmpty()&&Window.description.get(i).toString().isEmpty()){
+			else if (Window.reference.get(i).isEmpty()
+					&& Window.index.get(i).toString().isEmpty()
+					&& Window.description.get(i).toString().isEmpty()) {
 				document.add(table);
-				
+
 				table = new PdfPTable(6);
-				table.setWidths(new float[]{(float)1,(float)1.6,(float) 6,(float)0.7,(float) 1.4,(float) 1.4});
+				table.setWidths(new float[] { (float) 1, (float) 1.6,
+						(float) 6, (float) 0.7, (float) 1.4, (float) 1.4 });
 				table.setWidthPercentage(100f);
 				addHeader(table, cell);
 				System.out.println("Reference + Index + Description vides");
-			}
-			else{				
-				cell = new PdfPCell(new Phrase(Window.index.get(i).toString(), new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
+			} else {
+				cell = new PdfPCell(new Phrase(Window.index.get(i).toString(),
+						new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.reference.get(i), new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
+
+				cell = new PdfPCell(new Phrase(Window.reference.get(i),
+						new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.description.get(i), new Font(FontFamily.HELVETICA, 7, Font.NORMAL)));
+
+				cell = new PdfPCell(new Phrase(Window.description.get(i),
+						new Font(FontFamily.HELVETICA, 7, Font.NORMAL)));
 				table.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.quantity.get(i), new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
+
+				cell = new PdfPCell(new Phrase(Window.quantity.get(i),
+						new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(cell);
-				
+
 				// Affichage normal
-				if(!Window.printDiscount){
-					Phrase phrase = new Phrase(
-						Window.price.get(i)+" €", new Font(FontFamily.HELVETICA, 8, Font.NORMAL)
-					);
+				if (!Window.printDiscount) {
+					Phrase phrase = new Phrase(Window.price.get(i) + " €",
+							new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 					cell = new PdfPCell(phrase);
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					table.addCell(cell);
 				}
 				// Affichage avec le discount
-				else if(Window.printDiscount){
-					Phrase phrase = new Phrase(
-						Window.price.get(i) + " €" + "\n" + "  (" + Window.discountprod.get(i) + "%)" , 
-						new Font(FontFamily.HELVETICA, 8, Font.NORMAL)
-					);
-					cell = 	new PdfPCell(phrase);
+				else if (Window.printDiscount) {
+					Phrase phrase = new Phrase(Window.price.get(i) + " €"
+							+ "\n" + "  (" + Window.discountprod.get(i) + "%)",
+							new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+					cell = new PdfPCell(phrase);
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					table.addCell(cell);
 				}
-				
-				cell = new PdfPCell(new Phrase(Window.totalyprice.get(i)+" €", new Font(FontFamily.HELVETICA, 8, Font.NORMAL)));
+
+				cell = new PdfPCell(new Phrase(
+						Window.totalyprice.get(i) + " €", new Font(
+								FontFamily.HELVETICA, 8, Font.NORMAL)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(cell);
 			}
 		}
-	
-		if(!Window.refund){
-			if(!Window.transport){
-				cell = new PdfPCell(new Phrase("TOTAL in EUROS", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+		if (!Window.refund) {
+			if (!Window.transport) {
+				cell = new PdfPCell(new Phrase("TOTAL in EUROS", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setColspan(5);
 				cell.setBackgroundColor(BaseColor.YELLOW);
 				table2.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+			} else {
+				cell = new PdfPCell(new Phrase("TOTAL in EUROS", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setColspan(5);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase("TRANSPORT COST", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setColspan(5);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.transportval).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase("TOTAL in EUROS with transport",
+						new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				cell.setColspan(5);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice + Window.transportval)
+						.replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 				table2.addCell(cell);
 			}
-			else{
-				cell = new PdfPCell(new Phrase("TOTAL in EUROS", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+		} else {
+			if (!Window.transport) {
+				cell = new PdfPCell(new Phrase("TOTAL in EUROS", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setColspan(5);
 				cell.setBackgroundColor(BaseColor.YELLOW);
 				table2.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 				table2.addCell(cell);
 
-				cell = new PdfPCell(new Phrase("TRANSPORT COST", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell = new PdfPCell(new Phrase("SPECIAL DISCOUNT ("
+						+ Window.discount + "%)", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setColspan(5);
 				cell.setBackgroundColor(BaseColor.YELLOW);
 				table2.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.transportval).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice * Window.discount / 100)
+						.replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 				table2.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase("TOTAL in EUROS with transport", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+				cell = new PdfPCell(new Phrase("TOTAL with SPECIAL DISCOUNT",
+						new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setColspan(5);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice - Window.quotationprice
+								* Window.discount / 100).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+			} else {
+
+				cell = new PdfPCell(new Phrase(
+						"TOTAL in EUROS without transport", new Font(
+								FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setColspan(5);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase("SPECIAL DISCOUNT ("
+						+ Window.discount + "%)", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setColspan(5);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice * Window.discount / 100)
+						.replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase("TOTAL with SPECIAL DISCOUNT",
+						new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setColspan(5);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.quotationprice - Window.quotationprice
+								* Window.discount / 100).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase("TRANSPORT COST", new Font(
+						FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setBackgroundColor(BaseColor.YELLOW);
 				cell.setColspan(5);
 				table2.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice+Window.transportval).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						Window.transportval).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase("TOTAL in EUROS with transport",
+						new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setBackgroundColor(BaseColor.YELLOW);
+				cell.setColspan(5);
+				table2.addCell(cell);
+
+				cell = new PdfPCell(new Phrase(Window.df.format(
+						(Window.quotationprice - Window.quotationprice
+								* Window.discount / 100)
+								+ Window.transportval).replaceAll(",", " ")
+						+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 				table2.addCell(cell);
 			}
 		}
-		else{
-			if(!Window.transport){
-				cell = new PdfPCell(new Phrase("TOTAL in EUROS", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setColspan(5);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase("SPECIAL DISCOUNT ("+Window.discount+"%)", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setColspan(5);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice*Window.discount/100).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase("TOTAL with SPECIAL DISCOUNT", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setColspan(5);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice-Window.quotationprice*Window.discount/100).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-			}
-			else{
-
-				cell = new PdfPCell(new Phrase("TOTAL in EUROS without transport", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setColspan(5);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase("SPECIAL DISCOUNT ("+Window.discount+"%)", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setColspan(5);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice*Window.discount/100).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase("TOTAL with SPECIAL DISCOUNT", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setColspan(5);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.quotationprice-Window.quotationprice*Window.discount/100).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-
-				cell = new PdfPCell(new Phrase("TRANSPORT COST", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				cell.setColspan(5);
-				table2.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.df.format(Window.transportval).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase("TOTAL in EUROS with transport", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.YELLOW);
-				cell.setColspan(5);
-				table2.addCell(cell);
-				
-				cell = new PdfPCell(new Phrase(Window.df.format((Window.quotationprice-Window.quotationprice*Window.discount/100)+Window.transportval).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-				table2.addCell(cell);
-			}
-		}
-		if(Window.assistance!=0){
-			cell = new PdfPCell(new Phrase("START-UP COST", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+		if (Window.assistance != 0) {
+			cell = new PdfPCell(new Phrase("START-UP COST", new Font(
+					FontFamily.HELVETICA, 8, Font.BOLD)));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 			cell.setBackgroundColor(BaseColor.YELLOW);
 			cell.setColspan(5);
 			table2.addCell(cell);
-			
-			cell = new PdfPCell(new Phrase(Window.df.format(Window.assistance).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+			cell = new PdfPCell(new Phrase(Window.df.format(Window.assistance)
+					.replaceAll(",", " ") + " €", new Font(
+					FontFamily.HELVETICA, 8, Font.BOLD)));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table2.addCell(cell);
-			
-			cell = new PdfPCell(new Phrase("TOTAL in EUROS with start-up", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+			cell = new PdfPCell(new Phrase("TOTAL in EUROS with start-up",
+					new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 			cell.setBackgroundColor(BaseColor.YELLOW);
 			cell.setColspan(5);
 			table2.addCell(cell);
-			
-			cell = new PdfPCell(new Phrase(Window.df.format((Window.quotationprice-Window.quotationprice*Window.discount/100)+Window.transportval+Window.assistance).replaceAll(","," ")+" €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+			cell = new PdfPCell(new Phrase(Window.df.format(
+					(Window.quotationprice - Window.quotationprice
+							* Window.discount / 100)
+							+ Window.transportval + Window.assistance)
+					.replaceAll(",", " ")
+					+ " €", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -2496,15 +2955,17 @@ public class PdfScreen extends JDialog {
 		cell.setFixedHeight(30f);
 		cell.setBorder(Rectangle.NO_BORDER);
 		table2.addCell(cell);
-		
-		cell = new PdfPCell(new Phrase("Order confirmation : ", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+
+		cell = new PdfPCell(new Phrase("Order confirmation : ", new Font(
+				FontFamily.HELVETICA, 8, Font.BOLD)));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBorder(Rectangle.NO_BORDER);
 		cell.setColspan(3);
 		table2.addCell(cell);
 
-		cell = new PdfPCell(new Phrase("Date : ", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+		cell = new PdfPCell(new Phrase("Date : ", new Font(
+				FontFamily.HELVETICA, 8, Font.BOLD)));
 		cell.setColspan(3);
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2522,7 +2983,8 @@ public class PdfScreen extends JDialog {
 		cell.setFixedHeight(5f);
 		table2.addCell(cell);
 
-		cell = new PdfPCell(new Phrase("Name : ", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+		cell = new PdfPCell(new Phrase("Name : ", new Font(
+				FontFamily.HELVETICA, 8, Font.BOLD)));
 		cell.setColspan(3);
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2540,7 +3002,8 @@ public class PdfScreen extends JDialog {
 		cell.setFixedHeight(5f);
 		table2.addCell(cell);
 
-		cell = new PdfPCell(new Phrase("Signature : ", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
+		cell = new PdfPCell(new Phrase("Signature : ", new Font(
+				FontFamily.HELVETICA, 8, Font.BOLD)));
 		cell.setColspan(3);
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2557,24 +3020,27 @@ public class PdfScreen extends JDialog {
 		cell.setBorder(Rectangle.NO_BORDER);
 		cell.setFixedHeight(5f);
 		table2.addCell(cell);
-		
-		cell = new PdfPCell(new Phrase("Please send it back by mail ("+Window.conpanyemail+") or by fax ("+Window.conpanyfax+")", new Font(FontFamily.HELVETICA, 6, Font.BOLD)));
+
+		cell = new PdfPCell(new Phrase("Please send it back by mail ("
+				+ Window.conpanyemail + ") or by fax (" + Window.conpanyfax
+				+ ")", new Font(FontFamily.HELVETICA, 6, Font.BOLD)));
 		cell.setColspan(6);
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBorder(Rectangle.NO_BORDER);
 		table2.addCell(cell);
-		
-		cell=new PdfPCell();
+
+		cell = new PdfPCell();
 		cell.setColspan(6);
 		cell.setBorder(Rectangle.NO_BORDER);
-		table2.setTotalWidth(table.getTotalWidth()+cell.getBorderWidth());
+		table2.setTotalWidth(table.getTotalWidth() + cell.getBorderWidth());
 		table.setExtendLastRow(true);
 		cell.addElement(table2);
 		table.addCell(cell);
-		
-		if(!jTextArea1.getText().contentEquals("")){
-			cell = new PdfPCell(new Phrase("*NB:\n\n" + jTextArea1.getText(), new Font(FontFamily.HELVETICA, 10, Font.NORMAL)));
+
+		if (!jTextArea1.getText().contentEquals("")) {
+			cell = new PdfPCell(new Phrase("*NB:\n\n" + jTextArea1.getText(),
+					new Font(FontFamily.HELVETICA, 10, Font.NORMAL)));
 			cell.setColspan(6);
 			cell.setFixedHeight(80f);
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -2585,37 +3051,51 @@ public class PdfScreen extends JDialog {
 		return table;
 	}
 
-	private static void addHeader(PdfPTable table,PdfPCell cell) {
-		cell = new PdfPCell(new Phrase("Index",new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
+	private static void addHeader(PdfPTable table, PdfPCell cell) {
+		cell = new PdfPCell(new Phrase("Index", new Font(FontFamily.HELVETICA,
+				10, Font.BOLD)));
 		cell.setFixedHeight(36f);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
-		
-		cell = new PdfPCell(new Phrase("CODE",new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
+
+		cell = new PdfPCell(new Phrase("CODE", new Font(FontFamily.HELVETICA,
+				10, Font.BOLD)));
 		cell.setFixedHeight(36f);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
-		
-		cell = new PdfPCell(new Phrase("DESCRIPTION", new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
+
+		cell = new PdfPCell(new Phrase("DESCRIPTION", new Font(
+				FontFamily.HELVETICA, 10, Font.BOLD)));
 		cell.setFixedHeight(36f);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
-		
-		cell = new PdfPCell(new Phrase("Qty", new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
+
+		cell = new PdfPCell(new Phrase("Qty", new Font(FontFamily.HELVETICA,
+				10, Font.BOLD)));
 		cell.setFixedHeight(36f);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
-		
-		if(!Window.printDiscount){
-			cell = new PdfPCell(new Phrase("Unit net price in €", new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
+
+		if (!Window.printDiscount) {
+			cell = new PdfPCell(new Phrase("Unit net price in €", new Font(
+					FontFamily.HELVETICA, 10, Font.BOLD)));
+			cell.setFixedHeight(36f);
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			cell.setNoWrap(false);
+			table.addCell(cell);
+		} else if (Window.printDiscount) {
+			cell = new PdfPCell(new Phrase("Unit price\n in € \n(discount %)",
+					new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
 			cell.setFixedHeight(36f);
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2623,32 +3103,23 @@ public class PdfScreen extends JDialog {
 			cell.setNoWrap(false);
 			table.addCell(cell);
 		}
-		else if(Window.printDiscount){
-			cell = new PdfPCell(new Phrase("Unit price\n in € \n(discount %)", new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
-			cell.setFixedHeight(36f);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-			cell.setNoWrap(false);
-			table.addCell(cell);
-		}
-		cell = new PdfPCell(new Phrase("Total net price in €", new Font(FontFamily.HELVETICA, 10, Font.BOLD)));
+		cell = new PdfPCell(new Phrase("Total net price in €", new Font(
+				FontFamily.HELVETICA, 10, Font.BOLD)));
 		cell.setFixedHeight(36f);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		cell.setNoWrap(false);
 		table.addCell(cell);
-		
+
 		table.setHeaderRows(1);
 	}
 
-	private static void padding(PdfPCell cell,int n){
-		try{
+	private static void padding(PdfPCell cell, int n) {
+		try {
 			cell.setPadding(n);
-		}
-		catch (Exception e) {
-			padding(cell,n-1);
+		} catch (Exception e) {
+			padding(cell, n - 1);
 		}
 	}
 }

@@ -2,7 +2,7 @@
   	<dontWrapJar>false</dontWrapJar>
   	<headerType>gui</headerType>
   	<jar>C:\Users\IT SD3\workspace\QSoftv2.3\install\Qsoftexe.jar</jar>
-  	<outfile>C:\Users\IT SD3\workspace\QSoftv2.3\install\QSoftv2.3.exe</outfile>
+  	<outfile>C:\Users\IT SD3\workspace\QSoftv2.3\install\QSoftv2.4.exe</outfile>
   	<errTitle></errTitle>
   	<cmdLine></cmdLine>
   	<chdir></chdir>
@@ -22,15 +22,15 @@
     	<maxVersion></maxVersion>
   	</jre>
   	<versionInfo>
-    	<fileVersion>2.3.2.0</fileVersion>
-    	<txtFileVersion>2.3</txtFileVersion>
+    	<fileVersion>2.4.1.0</fileVersion>
+    	<txtFileVersion>2.4</txtFileVersion>
     	<fileDescription>Quotation software</fileDescription>
    	 	<copyright>Copyright (c) 2011 SD3</copyright>
-    	<productVersion>2.3.2.0</productVersion>
-    	<txtProductVersion>2.3</txtProductVersion>
+    	<productVersion>2.4.1.0</productVersion>
+    	<txtProductVersion>2.4</txtProductVersion>
     	<productName>QSoft</productName>
     	<companyName>SD3</companyName>
     	<internalName>QSoft</internalName>
-    	<originalFilename>QSoftv2.3.exe</originalFilename>
+    	<originalFilename>QSoftv2.4.exe</originalFilename>
   	</versionInfo>
 </launch4jConfig>
