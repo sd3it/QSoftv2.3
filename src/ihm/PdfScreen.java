@@ -30,6 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import jxl.Sheet;
+import jxl.SheetSettings;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.format.Alignment;
@@ -77,65 +78,75 @@ public class PdfScreen extends JDialog {
 	ReadNamelist databaseName;
 	File file = null;
 	private static boolean isList = false;
-	String pathnameDatabase = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3.xls";
+	String pathnameDatabase = "\\\\SERVEUR\\Alexandre\\DATABASE Clients QSOFT\\BDD-Clients SD3-TEST-PROTECTED.xls";
+	String pathnameDBtestcreate = "\\\\SERVEUR\\Alexandre\\DATABASE Clients QSOFT\\BDD-Clients SD3-TEST-PROTECTED.xls";
+	boolean isExist = false;
 
-	private javax.swing.JButton jButton1;
-	private javax.swing.JCheckBox jCheckBox1;
-	private javax.swing.JCheckBox jCheckBox2;
-	private javax.swing.JCheckBox jCheckBox3;
-	private javax.swing.JCheckBox jCheckBox4;
-	private javax.swing.JCheckBox jCheckBox5;
-	private javax.swing.JCheckBox jCheckBox6;
-	private javax.swing.JCheckBox jCheckBox7;
-	private javax.swing.JLabel jLabel10;
-	private javax.swing.JLabel jLabel12;
-	private javax.swing.JLabel jLabel13;
-	private javax.swing.JLabel jLabel14;
-	private javax.swing.JLabel jLabel15;
-	private javax.swing.JLabel jLabel16;
-	private javax.swing.JLabel jLabel17;
-	private javax.swing.JLabel jLabel18;
-	private javax.swing.JLabel jLabel20;
-	private javax.swing.JLabel jLabel21;
-	private javax.swing.JLabel jLabel22;
-	private javax.swing.JLabel jLabel23;
-	private javax.swing.JLabel jLabel24;
-	private javax.swing.JLabel jLabel25;
-	private javax.swing.JLabel jLabel26;
-	private javax.swing.JLabel jLabel27;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel7;
+	private javax.swing.JButton jBt_print;
+	private javax.swing.JButton jBt_load;
+	private javax.swing.JButton jBt_addCustomer;
+	private javax.swing.JButton jBt_reset;
+
+	private javax.swing.JCheckBox jCb_Mrs;
+	private javax.swing.JCheckBox jCb_Mr;
+	private javax.swing.JCheckBox jCb_userData;
+	private javax.swing.JCheckBox jCb_formDate1;
+	private javax.swing.JCheckBox jCb_formDate2;
+	private javax.swing.JCheckBox jCb_no;
+	private javax.swing.JCheckBox jCb_sameAddr;
+
+	private javax.swing.JLabel jLb_object;
+	private javax.swing.JLabel jLb_incoterm;
+	private javax.swing.JLabel jLb_payment;
+	private javax.swing.JLabel jLb_indicationPayment;
+	private javax.swing.JLabel jLb_firstName;
+	private javax.swing.JLabel jLb_tel;
+	private javax.swing.JLabel jLb_lastName;
+	private javax.swing.JLabel jLb_fax;
+	private javax.swing.JLabel jLb_mail;
+	private javax.swing.JLabel jLb_recName;
+	private javax.swing.JLabel jLb_ref;
+	private javax.swing.JLabel jLb_delAddress;
+	private javax.swing.JLabel jLb_delPostcode;
+	private javax.swing.JLabel jLb_delTown;
+	private javax.swing.JLabel jLb_invAddress;
+	private javax.swing.JLabel jLb_invPostcode;
+	private javax.swing.JLabel jLb_invTown;
+	private javax.swing.JLabel jLb_date;
+	private javax.swing.JLabel jLb_from;
+	private javax.swing.JLabel jLb_to;
+	private javax.swing.JLabel jLb_comment;
+	private javax.swing.JLabel jLb_search;
+
 	private javax.swing.JLayeredPane jLayeredPane1;
-	private javax.swing.JTextField jTextField1;
-	private javax.swing.JTextField jTextField10;
-	private javax.swing.JTextField jTextField11;
-	private javax.swing.JTextField jTextField12;
-	private javax.swing.JTextField jTextField13;
-	private javax.swing.JTextField jTextField14;
-	private javax.swing.JTextField jTextField15;
-	private javax.swing.JTextField jTextField16;
-	private javax.swing.JTextField jTextField17;
-	private javax.swing.JTextField jTextField18;
-	private javax.swing.JTextField jTextField19;
-	private javax.swing.JTextField jTextField20;
-	private javax.swing.JTextField jTextField21;
-	private javax.swing.JTextField jTextField22;
-	private javax.swing.JTextField jTextField23;
-	private javax.swing.JTextField jTextField2;
-	private javax.swing.JTextField jTextField3;
-	private javax.swing.JTextField jTextField8;
-	private javax.swing.JTextField jTextField9;
-	private static javax.swing.JTextArea jTextArea1;
-	private javax.swing.JLabel jLabel28;
-	private javax.swing.JScrollPane scroll;
 
-	// -------
-	private javax.swing.JLabel jLbSearch;
-	private javax.swing.JTextField jTfSearch;
-	private javax.swing.JList listName;
+	private javax.swing.JTextField jTf_date;
+	private javax.swing.JTextField jTf_payment;
+	private javax.swing.JTextField jTf_incoterm;
+	private javax.swing.JTextField jTf_firstName;
+	private javax.swing.JTextField jTf_tel;
+	private javax.swing.JTextField jTf_lastName;
+	private javax.swing.JTextField jTf_fax;
+	private javax.swing.JTextField jTf_mail;
+	private javax.swing.JTextField jTf_ref;
+	private javax.swing.JTextField jTf_delAddress;
+	private javax.swing.JTextField jTf_delPostcode;
+	private javax.swing.JTextField jTf_devTown;
+	private javax.swing.JTextField jTf_invAddress;
+	private javax.swing.JTextField jTf_invPostcode;
+	private javax.swing.JTextField jTf_invTown;
+	private javax.swing.JTextField jTf_from;
+	private javax.swing.JTextField jTf_to;
+	private javax.swing.JTextField jTf_object;
+	private javax.swing.JTextField jTf_recName;
+	private javax.swing.JTextField jTf_search;
+
+	private static javax.swing.JTextArea jTa_comment;
+
+	private javax.swing.JScrollPane scroll;
 	private javax.swing.JScrollPane scrollList;
-	private javax.swing.JButton btnLoad;
+
+	private javax.swing.JList listName;
 
 	public PdfScreen() {
 		if (Window.locale.toString().equals("en")) {
@@ -161,69 +172,96 @@ public class PdfScreen extends JDialog {
 	private void initComponents() {
 
 		jLayeredPane1 = new javax.swing.JLayeredPane();
-		jLabel3 = new javax.swing.JLabel();
-		jTextField1 = new javax.swing.JTextField();
-		jLabel4 = new javax.swing.JLabel();
-		jTextField2 = new javax.swing.JTextField();
-		jLabel7 = new javax.swing.JLabel();
-		jTextField3 = new javax.swing.JTextField();
-		jLabel10 = new javax.swing.JLabel();
-		jTextField8 = new javax.swing.JTextField();
-		jLabel20 = new javax.swing.JLabel();
-		jTextField9 = new javax.swing.JTextField();
-		jLabel21 = new javax.swing.JLabel();
-		jTextField17 = new javax.swing.JTextField();
-		jCheckBox2 = new javax.swing.JCheckBox();
-		jCheckBox1 = new javax.swing.JCheckBox();
-		jCheckBox4 = new javax.swing.JCheckBox();
-		jCheckBox5 = new javax.swing.JCheckBox();
-		jLabel13 = new javax.swing.JLabel();
-		jTextField10 = new javax.swing.JTextField();
-		jLabel12 = new javax.swing.JLabel();
-		jTextField11 = new javax.swing.JTextField();
-		jLabel14 = new javax.swing.JLabel();
-		jTextField12 = new javax.swing.JTextField();
-		jLabel15 = new javax.swing.JLabel();
-		jTextField13 = new javax.swing.JTextField();
-		jLabel16 = new javax.swing.JLabel();
-		jTextField14 = new javax.swing.JTextField();
-		jLabel17 = new javax.swing.JLabel();
-		jTextField15 = new javax.swing.JTextField();
-		jLabel18 = new javax.swing.JLabel();
-		jTextField16 = new javax.swing.JTextField();
 
-		jCheckBox3 = new javax.swing.JCheckBox();
-		jCheckBox6 = new javax.swing.JCheckBox();
-		jCheckBox7 = new javax.swing.JCheckBox();
+		jLb_date = new javax.swing.JLabel();
+		jTf_date = new javax.swing.JTextField();
 
-		jButton1 = new javax.swing.JButton();
+		jLb_from = new javax.swing.JLabel();
+		jTf_from = new javax.swing.JTextField();
 
-		jLabel22 = new javax.swing.JLabel();
-		jLabel23 = new javax.swing.JLabel();
-		jLabel24 = new javax.swing.JLabel();
-		jLabel25 = new javax.swing.JLabel();
-		jLabel26 = new javax.swing.JLabel();
-		jLabel27 = new javax.swing.JLabel();
+		jLb_to = new javax.swing.JLabel();
+		jTf_to = new javax.swing.JTextField();
 
+		jLb_object = new javax.swing.JLabel();
+		jTf_object = new javax.swing.JTextField();
+
+		jLb_recName = new javax.swing.JLabel();
+		jTf_recName = new javax.swing.JTextField();
+
+		jLb_ref = new javax.swing.JLabel();
+		jTf_ref = new javax.swing.JTextField();
+
+		jCb_Mr = new javax.swing.JCheckBox();
+		jCb_Mrs = new javax.swing.JCheckBox();
+		jCb_no = new javax.swing.JCheckBox();
+
+		jCb_formDate1 = new javax.swing.JCheckBox();
+		jCb_formDate2 = new javax.swing.JCheckBox();
+
+		jLb_payment = new javax.swing.JLabel();
+		jTf_payment = new javax.swing.JTextField();
+		jLb_indicationPayment = new javax.swing.JLabel();
+
+		jLb_incoterm = new javax.swing.JLabel();
+		jTf_incoterm = new javax.swing.JTextField();
+
+		jLb_firstName = new javax.swing.JLabel();
+		jTf_firstName = new javax.swing.JTextField();
+
+		jLb_tel = new javax.swing.JLabel();
+		jTf_tel = new javax.swing.JTextField();
+
+		jLb_lastName = new javax.swing.JLabel();
+		jTf_lastName = new javax.swing.JTextField();
+
+		jLb_fax = new javax.swing.JLabel();
+		jTf_fax = new javax.swing.JTextField();
+
+		jLb_mail = new javax.swing.JLabel();
+		jTf_mail = new javax.swing.JTextField();
+
+		jCb_userData = new javax.swing.JCheckBox();
+		jCb_sameAddr = new javax.swing.JCheckBox();
+
+		jBt_print = new javax.swing.JButton();
+
+		jLb_delAddress = new javax.swing.JLabel();
 		// jTextField18 = new TextFieldLimit(19);
-		jTextField18 = new javax.swing.JTextField();
-		jTextField19 = new javax.swing.JTextField();
-		jTextField20 = new javax.swing.JTextField();
-		// jTextField21 = new TextFieldLimit(19);
-		jTextField21 = new javax.swing.JTextField();
-		jTextField22 = new javax.swing.JTextField();
-		jTextField23 = new javax.swing.JTextField();
-		jLabel28 = new javax.swing.JLabel();
+		jTf_delAddress = new javax.swing.JTextField();
 
-		// ------
-		jLbSearch = new javax.swing.JLabel();
-		jTfSearch = new javax.swing.JTextField();
+		jLb_delPostcode = new javax.swing.JLabel();
+		jTf_delPostcode = new javax.swing.JTextField();
+
+		jLb_delTown = new javax.swing.JLabel();
+		jTf_devTown = new javax.swing.JTextField();
+
+		jLb_invAddress = new javax.swing.JLabel();
+		// jTextField21 = new TextFieldLimit(19);
+		jTf_invAddress = new javax.swing.JTextField();
+
+		jLb_invPostcode = new javax.swing.JLabel();
+		jTf_invPostcode = new javax.swing.JTextField();
+
+		jLb_invTown = new javax.swing.JLabel();
+		jTf_invTown = new javax.swing.JTextField();
+
+		jLb_comment = new javax.swing.JLabel();
+		jTa_comment = new JTextArea();
+		scroll = new JScrollPane(jTa_comment);
+
+		jLb_search = new javax.swing.JLabel();
+		jTf_search = new javax.swing.JTextField();
+
 		listName = new javax.swing.JList();
 		scrollList = new JScrollPane(listName);
-		btnLoad = new JButton(new ImageIcon("images/icons/database.png"));
 
-		jTextArea1 = new JTextArea();
-		scroll = new JScrollPane(jTextArea1);
+		jBt_load = new JButton(new ImageIcon("images/icons/database.png"));
+		jBt_addCustomer = new JButton(new ImageIcon(
+				"images/icons/addCustomer.png"));
+
+		jBt_reset = new JButton();
+
+		System.out.println("->" + Window.salesman);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -232,392 +270,473 @@ public class PdfScreen extends JDialog {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
 
-			jLabel3.setText((String) Window.res.getObject("lb_date"));
-			jLabel3.setBounds(40, 20, 27, 20);
+			jLb_date.setText((String) Window.res.getObject("lb_date"));
+			jLb_date.setBounds(40, 20, 27, 20);
 
-			jLabel4.setText((String) Window.res.getObject("lb_from"));
-			jLabel4.setBounds(310, 75, 28, 20);
+			jLb_from.setText((String) Window.res.getObject("lb_from"));
+			jLb_from.setBounds(310, 75, 28, 20);
 
-			jLabel7.setText((String) Window.res.getObject("lb_to"));
-			jLabel7.setBounds(310, 105, 16, 20);
+			jLb_to.setText((String) Window.res.getObject("lb_to"));
+			jLb_to.setBounds(310, 105, 16, 20);
 
-			jLabel21.setText((String) Window.res.getObject("lb_ref"));
-			jLabel21.setBounds(310, 135, 60, 20);
+			jLb_ref.setText((String) Window.res.getObject("lb_ref"));
+			jLb_ref.setBounds(310, 135, 60, 20);
 
-			jLabel10.setText((String) Window.res.getObject("lb_object"));
-			jLabel10.setBounds(10, 200, 50, 20);
+			jLb_object.setText((String) Window.res.getObject("lb_object"));
+			jLb_object.setBounds(10, 200, 50, 20);
 
-			jLabel20.setText((String) Window.res.getObject("lb_recName"));
-			jLabel20.setBounds(10, 230, 80, 20);
+			jLb_recName.setText((String) Window.res.getObject("lb_recName"));
+			jLb_recName.setBounds(10, 230, 80, 20);
 
-			jLabel13.setText((String) Window.res.getObject("lb_payment"));
-			jLabel13.setBounds(10, 260, 70, 20);
-			jTextField10.setBounds(70, 260, 320, 20);
+			jLb_payment.setText((String) Window.res.getObject("lb_payment"));
+			jLb_payment.setBounds(10, 260, 70, 20);
+			jTf_payment.setBounds(70, 260, 320, 20);
+			jLb_indicationPayment.setText("[Mode of Payment] + [Nb days]");
+			jLb_indicationPayment.setBounds(400, 260, 180, 20);
 
-			jLabel12.setText((String) Window.res.getObject("lb_incoterm"));
-			jLabel12.setBounds(10, 290, 47, 20);
+			jLb_incoterm.setText((String) Window.res.getObject("lb_incoterm"));
+			jLb_incoterm.setBounds(10, 290, 47, 20);
 
-			jLabel22.setText((String) Window.res.getObject("lb_delivAddress"));
-			jLabel22.setBounds(10, 320, 120, 20);
+			jLb_delAddress.setText((String) Window.res
+					.getObject("lb_delivAddress"));
+			jLb_delAddress.setBounds(10, 320, 120, 20);
 
-			jLabel23.setText((String) Window.res.getObject("lb_delivPostcode"));
-			jLabel23.setBounds(10, 350, 120, 20);
+			jLb_delPostcode.setText((String) Window.res
+					.getObject("lb_delivPostcode"));
+			jLb_delPostcode.setBounds(10, 350, 120, 20);
 
-			jLabel24.setText((String) Window.res.getObject("lb_delivTown"));
-			jLabel24.setBounds(10, 380, 120, 20);
+			jLb_delTown.setText((String) Window.res.getObject("lb_delivTown"));
+			jLb_delTown.setBounds(10, 380, 120, 20);
 
-			jLabel25.setText((String) Window.res.getObject("lb_invoiceAddress"));
-			jLabel25.setBounds(10, 410, 160, 20);
-			jTextField21.setBounds(120, 410, 320, 20);
+			jLb_invAddress.setText((String) Window.res
+					.getObject("lb_invoiceAddress"));
+			jLb_invAddress.setBounds(10, 410, 160, 20);
+			jTf_invAddress.setBounds(120, 410, 320, 20);
 
-			jLabel26.setText((String) Window.res
+			jLb_invPostcode.setText((String) Window.res
 					.getObject("lb_invoicePostcode"));
-			jLabel26.setBounds(10, 440, 120, 20);
+			jLb_invPostcode.setBounds(10, 440, 120, 20);
 
-			jCheckBox7.setText((String) Window.res.getObject("cb_sameAddress"));
-			jCheckBox7.setBounds(460, 440, 110, 20);
+			jCb_sameAddr.setText((String) Window.res
+					.getObject("cb_sameAddress"));
+			jCb_sameAddr.setBounds(460, 440, 110, 20);
 
-			jLabel27.setText((String) Window.res.getObject("lb_invoiceTown"));
-			jLabel27.setBounds(10, 470, 120, 20);
+			jLb_invTown
+					.setText((String) Window.res.getObject("lb_invoiceTown"));
+			jLb_invTown.setBounds(10, 470, 120, 20);
 
-			jLabel14.setText((String) Window.res.getObject("lb_firstName"));
-			jLabel14.setBounds(10, 510, 60, 20);
+			jLb_firstName
+					.setText((String) Window.res.getObject("lb_firstName"));
+			jLb_firstName.setBounds(10, 510, 60, 20);
 
-			jLabel15.setText((String) Window.res.getObject("lb_tel"));
-			jLabel15.setBounds(40, 570, 18, 20);
+			jLb_tel.setText((String) Window.res.getObject("lb_tel"));
+			jLb_tel.setBounds(40, 570, 18, 20);
 
-			jLabel16.setText((String) Window.res.getObject("lb_lastName"));
-			jLabel16.setBounds(10, 540, 60, 20);
+			jLb_lastName.setText((String) Window.res.getObject("lb_lastName"));
+			jLb_lastName.setBounds(10, 540, 60, 20);
 
-			jLabel17.setText((String) Window.res.getObject("lb_fax"));
-			jLabel17.setBounds(40, 600, 22, 20);
+			jLb_fax.setText((String) Window.res.getObject("lb_fax"));
+			jLb_fax.setBounds(40, 600, 22, 20);
 
-			jLabel18.setText((String) Window.res.getObject("lb_mail"));
-			jLabel18.setBounds(40, 630, 28, 20);
+			jLb_mail.setText((String) Window.res.getObject("lb_mail"));
+			jLb_mail.setBounds(40, 630, 28, 20);
 
-			jLabel28.setText((String) Window.res.getObject("lb_comment"));
-			jLabel28.setBounds(10, 660, 70, 20);
+			jLb_comment.setText((String) Window.res.getObject("lb_comment"));
+			jLb_comment.setBounds(10, 660, 70, 20);
 			scroll.setBounds(70, 660, 280, 40);
 
-			jCheckBox3.setText((String) Window.res.getObject("cb_userData"));
-			jCheckBox3.setBounds(310, 510, 100, 23);
+			jCb_userData.setText((String) Window.res.getObject("cb_userData"));
+			jCb_userData.setBounds(310, 510, 100, 23);
 
-			jButton1.setText((String) Window.res.getObject("bt_print"));
-			jButton1.setBounds(360, 580, 73, 23);
+			jBt_print.setText((String) Window.res.getObject("bt_print"));
+			jBt_print.setBounds(360, 580, 73, 23);
 
-			jLbSearch.setText((String) Window.res.getObject("lb_searchName"));
-			jLbSearch.setBounds(40, 50, 50, 20);
+			jLb_search.setText((String) Window.res.getObject("lb_searchName"));
+			jLb_search.setBounds(40, 50, 50, 20);
 
-			btnLoad.setToolTipText((String) Window.res.getObject("bt_loadDB"));
-			btnLoad.setBounds(25, 110, 39, 39);
-			btnLoad.setBackground(new java.awt.Color(255, 255, 255));
+			jBt_load.setToolTipText((String) Window.res.getObject("bt_loadDB"));
+			jBt_load.setBounds(25, 110, 39, 39);
+			jBt_load.setBackground(new java.awt.Color(255, 255, 255));
+
+			jBt_addCustomer.setToolTipText((String) Window.res
+					.getObject("bt_addCustomer"));
+			jBt_addCustomer.setBounds(480, 510, 39, 39);
+			jBt_addCustomer.setBackground(new java.awt.Color(255, 255, 255));
+
+			jBt_reset.setText("Reset");
+			jBt_reset.setBounds(465, 580, 73, 23);
 		}
 		/*********************************** ITALIEN **********************************/
 		else if (Window.locale.toString().equals("it")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
 
-			jLabel3.setText((String) Window.res.getObject("lb_date"));
-			jLabel3.setBounds(40, 20, 27, 20);
+			jLb_date.setText((String) Window.res.getObject("lb_date"));
+			jLb_date.setBounds(40, 20, 27, 20);
 
-			jLabel4.setText((String) Window.res.getObject("lb_from"));
-			jLabel4.setBounds(310, 75, 28, 20);
+			jLb_from.setText((String) Window.res.getObject("lb_from"));
+			jLb_from.setBounds(310, 75, 28, 20);
 
-			jLabel7.setText((String) Window.res.getObject("lb_to"));
-			jLabel7.setBounds(310, 105, 16, 20);
+			jLb_to.setText((String) Window.res.getObject("lb_to"));
+			jLb_to.setBounds(310, 105, 16, 20);
 
-			jLabel21.setText((String) Window.res.getObject("lb_ref"));
-			jLabel21.setBounds(310, 135, 60, 20);
+			jLb_ref.setText((String) Window.res.getObject("lb_ref"));
+			jLb_ref.setBounds(310, 135, 60, 20);
 
-			jLabel10.setText((String) Window.res.getObject("lb_object"));
-			jLabel10.setBounds(10, 200, 50, 20);
+			jLb_object.setText((String) Window.res.getObject("lb_object"));
+			jLb_object.setBounds(10, 200, 50, 20);
 
-			jLabel20.setText((String) Window.res.getObject("lb_recName"));
-			jLabel20.setBounds(10, 230, 80, 20);
+			jLb_recName.setText((String) Window.res.getObject("lb_recName"));
+			jLb_recName.setBounds(10, 230, 80, 20);
 
-			jLabel13.setText((String) Window.res.getObject("lb_payment"));
-			jLabel13.setBounds(10, 260, 70, 20);
-			jTextField10.setBounds(70, 260, 320, 20);
+			jLb_payment.setText((String) Window.res.getObject("lb_payment"));
+			jLb_payment.setBounds(10, 260, 70, 20);
+			jTf_payment.setBounds(70, 260, 320, 20);
+			jLb_indicationPayment.setText("[Mode of Payment] + [Nb days]");
+			jLb_indicationPayment.setBounds(400, 260, 120, 20);
 
-			jLabel12.setText((String) Window.res.getObject("lb_incoterm"));
-			jLabel12.setBounds(10, 290, 47, 20);
+			jLb_incoterm.setText((String) Window.res.getObject("lb_incoterm"));
+			jLb_incoterm.setBounds(10, 290, 47, 20);
 
-			jLabel22.setText((String) Window.res.getObject("lb_delivAddress"));
-			jLabel22.setBounds(10, 320, 120, 20);
+			jLb_delAddress.setText((String) Window.res
+					.getObject("lb_delivAddress"));
+			jLb_delAddress.setBounds(10, 320, 120, 20);
 
-			jLabel23.setText((String) Window.res.getObject("lb_delivPostcode"));
-			jLabel23.setBounds(10, 350, 120, 20);
+			jLb_delPostcode.setText((String) Window.res
+					.getObject("lb_delivPostcode"));
+			jLb_delPostcode.setBounds(10, 350, 120, 20);
 
-			jLabel24.setText((String) Window.res.getObject("lb_delivTown"));
-			jLabel24.setBounds(10, 380, 120, 20);
+			jLb_delTown.setText((String) Window.res.getObject("lb_delivTown"));
+			jLb_delTown.setBounds(10, 380, 120, 20);
 
-			jLabel25.setText((String) Window.res.getObject("lb_invoiceAddress"));
-			jLabel25.setBounds(10, 410, 160, 20);
-			jTextField21.setBounds(130, 410, 320, 20);
+			jLb_invAddress.setText((String) Window.res
+					.getObject("lb_invoiceAddress"));
+			jLb_invAddress.setBounds(10, 410, 160, 20);
+			jTf_invAddress.setBounds(130, 410, 320, 20);
 
-			jLabel26.setText((String) Window.res
+			jLb_invPostcode.setText((String) Window.res
 					.getObject("lb_invoicePostcode"));
-			jLabel26.setBounds(10, 440, 120, 20);
+			jLb_invPostcode.setBounds(10, 440, 120, 20);
 
-			jCheckBox7.setText((String) Window.res.getObject("cb_sameAddress"));
-			jCheckBox7.setBounds(460, 440, 110, 20);
+			jCb_sameAddr.setText((String) Window.res
+					.getObject("cb_sameAddress"));
+			jCb_sameAddr.setBounds(460, 440, 110, 20);
 
-			jLabel27.setText((String) Window.res.getObject("lb_invoiceTown"));
-			jLabel27.setBounds(10, 470, 120, 20);
+			jLb_invTown
+					.setText((String) Window.res.getObject("lb_invoiceTown"));
+			jLb_invTown.setBounds(10, 470, 120, 20);
 
-			jLabel14.setText((String) Window.res.getObject("lb_firstName"));
-			jLabel14.setBounds(10, 510, 60, 20);
+			jLb_firstName
+					.setText((String) Window.res.getObject("lb_firstName"));
+			jLb_firstName.setBounds(10, 510, 60, 20);
 
-			jLabel15.setText((String) Window.res.getObject("lb_tel"));
-			jLabel15.setBounds(40, 570, 18, 20);
+			jLb_tel.setText((String) Window.res.getObject("lb_tel"));
+			jLb_tel.setBounds(40, 570, 18, 20);
 
-			jLabel16.setText((String) Window.res.getObject("lb_lastName"));
-			jLabel16.setBounds(10, 540, 60, 20);
+			jLb_lastName.setText((String) Window.res.getObject("lb_lastName"));
+			jLb_lastName.setBounds(10, 540, 60, 20);
 
-			jLabel17.setText((String) Window.res.getObject("lb_fax"));
-			jLabel17.setBounds(40, 600, 22, 20);
+			jLb_fax.setText((String) Window.res.getObject("lb_fax"));
+			jLb_fax.setBounds(40, 600, 22, 20);
 
-			jLabel18.setText((String) Window.res.getObject("lb_mail"));
-			jLabel18.setBounds(40, 630, 28, 20);
+			jLb_mail.setText((String) Window.res.getObject("lb_mail"));
+			jLb_mail.setBounds(40, 630, 28, 20);
 
-			jLabel28.setText((String) Window.res.getObject("lb_comment"));
-			jLabel28.setBounds(10, 660, 70, 20);
+			jLb_comment.setText((String) Window.res.getObject("lb_comment"));
+			jLb_comment.setBounds(10, 660, 70, 20);
 			scroll.setBounds(70, 660, 280, 40);
 
-			jCheckBox3.setText((String) Window.res.getObject("cb_userData"));
-			jCheckBox3.setBounds(310, 510, 100, 23);
+			jCb_userData.setText((String) Window.res.getObject("cb_userData"));
+			jCb_userData.setBounds(310, 510, 100, 23);
 
-			jButton1.setText((String) Window.res.getObject("bt_print"));
-			jButton1.setBounds(360, 580, 85, 23);
+			jBt_print.setText((String) Window.res.getObject("bt_print"));
+			jBt_print.setBounds(360, 580, 85, 23);
 
-			jLbSearch.setText((String) Window.res.getObject("lb_searchName"));
-			jLbSearch.setBounds(40, 50, 50, 20);
+			jLb_search.setText((String) Window.res.getObject("lb_searchName"));
+			jLb_search.setBounds(40, 50, 50, 20);
 
-			btnLoad.setToolTipText((String) Window.res.getObject("bt_loadDB"));
-			btnLoad.setBounds(25, 110, 39, 39);
-			btnLoad.setBackground(new java.awt.Color(255, 255, 255));
+			jBt_load.setToolTipText((String) Window.res.getObject("bt_loadDB"));
+			jBt_load.setBounds(25, 110, 39, 39);
+			jBt_load.setBackground(new java.awt.Color(255, 255, 255));
+
+			jBt_addCustomer.setToolTipText((String) Window.res
+					.getObject("bt_addCustomer"));
+			jBt_addCustomer.setBounds(480, 510, 39, 39);
+			jBt_addCustomer.setBackground(new java.awt.Color(255, 255, 255));
+
+			jBt_reset.setText("Reset");
+			jBt_reset.setBounds(465, 580, 73, 23);
 		}
 		/******************************** FRANCAIS *********************************/
 		else if (Window.locale.toString().equals("fr")) {
 			Window.res = ResourceBundle.getBundle("I18nPropertiesRessources",
 					Window.locale);
 
-			jLabel3.setText((String) Window.res.getObject("lb_date"));
-			jLabel3.setBounds(40, 20, 27, 20);
+			jLb_date.setText((String) Window.res.getObject("lb_date"));
+			jLb_date.setBounds(40, 20, 27, 20);
 
-			jLabel4.setText((String) Window.res.getObject("lb_from"));
-			jLabel4.setBounds(310, 75, 28, 20);
+			jLb_from.setText((String) Window.res.getObject("lb_from"));
+			jLb_from.setBounds(310, 75, 28, 20);
 
-			jLabel7.setText((String) Window.res.getObject("lb_to"));
-			jLabel7.setBounds(310, 105, 16, 20);
+			jLb_to.setText((String) Window.res.getObject("lb_to"));
+			jLb_to.setBounds(310, 105, 16, 20);
 
-			jLabel21.setText((String) Window.res.getObject("lb_ref"));
-			jLabel21.setBounds(310, 135, 60, 20);
+			jLb_ref.setText((String) Window.res.getObject("lb_ref"));
+			jLb_ref.setBounds(310, 135, 60, 20);
 
-			jLabel10.setText((String) Window.res.getObject("lb_object"));
-			jLabel10.setBounds(10, 200, 50, 20);
+			jLb_object.setText((String) Window.res.getObject("lb_object"));
+			jLb_object.setBounds(10, 200, 50, 20);
 
-			jLabel20.setText((String) Window.res.getObject("lb_recName"));
-			jLabel20.setBounds(10, 230, 80, 20);
+			jLb_recName.setText((String) Window.res.getObject("lb_recName"));
+			jLb_recName.setBounds(10, 230, 80, 20);
 
-			jLabel13.setText((String) Window.res.getObject("lb_payment"));
-			jLabel13.setBounds(10, 260, 70, 20);
-			jTextField10.setBounds(70, 260, 320, 20);
+			jLb_payment.setText((String) Window.res.getObject("lb_payment"));
+			jLb_payment.setBounds(10, 260, 70, 20);
+			jTf_payment.setBounds(70, 260, 320, 20);
+			jLb_indicationPayment.setText("[Mode of Payment] + [Nb days]");
+			jLb_indicationPayment.setBounds(400, 260, 120, 20);
 
-			jLabel12.setText((String) Window.res.getObject("lb_incoterm"));
-			jLabel12.setBounds(10, 290, 47, 20);
+			jLb_incoterm.setText((String) Window.res.getObject("lb_incoterm"));
+			jLb_incoterm.setBounds(10, 290, 47, 20);
 
-			jLabel22.setText((String) Window.res.getObject("lb_delivAddress"));
-			jLabel22.setBounds(10, 320, 120, 20);
+			jLb_delAddress.setText((String) Window.res
+					.getObject("lb_delivAddress"));
+			jLb_delAddress.setBounds(10, 320, 120, 20);
 
-			jLabel23.setText((String) Window.res.getObject("lb_delivPostcode"));
-			jLabel23.setBounds(10, 350, 120, 20);
+			jLb_delPostcode.setText((String) Window.res
+					.getObject("lb_delivPostcode"));
+			jLb_delPostcode.setBounds(10, 350, 120, 20);
 
-			jLabel24.setText((String) Window.res.getObject("lb_delivTown"));
-			jLabel24.setBounds(10, 380, 120, 20);
+			jLb_delTown.setText((String) Window.res.getObject("lb_delivTown"));
+			jLb_delTown.setBounds(10, 380, 120, 20);
 
-			jLabel25.setText((String) Window.res.getObject("lb_invoiceAddress"));
-			jLabel25.setBounds(10, 410, 160, 20);
-			jTextField21.setBounds(120, 410, 320, 20);
+			jLb_invAddress.setText((String) Window.res
+					.getObject("lb_invoiceAddress"));
+			jLb_invAddress.setBounds(10, 410, 160, 20);
+			jTf_invAddress.setBounds(120, 410, 320, 20);
 
-			jLabel26.setText((String) Window.res
+			jLb_invPostcode.setText((String) Window.res
 					.getObject("lb_invoicePostcode"));
-			jLabel26.setBounds(10, 440, 120, 20);
+			jLb_invPostcode.setBounds(10, 440, 120, 20);
 
-			jCheckBox7.setText((String) Window.res.getObject("cb_sameAddress"));
-			jCheckBox7.setBounds(460, 440, 110, 20);
+			jCb_sameAddr.setText((String) Window.res
+					.getObject("cb_sameAddress"));
+			jCb_sameAddr.setBounds(460, 440, 110, 20);
 
-			jLabel27.setText((String) Window.res.getObject("lb_invoiceTown"));
-			jLabel27.setBounds(10, 470, 120, 20);
+			jLb_invTown
+					.setText((String) Window.res.getObject("lb_invoiceTown"));
+			jLb_invTown.setBounds(10, 470, 120, 20);
 
-			jLabel14.setText((String) Window.res.getObject("lb_firstName"));
-			jLabel14.setBounds(20, 510, 60, 20);
+			jLb_firstName
+					.setText((String) Window.res.getObject("lb_firstName"));
+			jLb_firstName.setBounds(20, 510, 60, 20);
 
-			jLabel15.setText((String) Window.res.getObject("lb_tel"));
-			jLabel15.setBounds(40, 570, 18, 20);
+			jLb_tel.setText((String) Window.res.getObject("lb_tel"));
+			jLb_tel.setBounds(40, 570, 18, 20);
 
-			jLabel16.setText((String) Window.res.getObject("lb_lastName"));
-			jLabel16.setBounds(35, 540, 60, 20);
+			jLb_lastName.setText((String) Window.res.getObject("lb_lastName"));
+			jLb_lastName.setBounds(35, 540, 60, 20);
 
-			jLabel17.setText((String) Window.res.getObject("lb_fax"));
-			jLabel17.setBounds(40, 600, 22, 20);
+			jLb_fax.setText((String) Window.res.getObject("lb_fax"));
+			jLb_fax.setBounds(40, 600, 22, 20);
 
-			jLabel18.setText((String) Window.res.getObject("lb_mail"));
-			jLabel18.setBounds(40, 630, 28, 20);
+			jLb_mail.setText((String) Window.res.getObject("lb_mail"));
+			jLb_mail.setBounds(40, 630, 28, 20);
 
-			jLabel28.setText((String) Window.res.getObject("lb_comment"));
-			jLabel28.setBounds(10, 660, 70, 20);
+			jLb_comment.setText((String) Window.res.getObject("lb_comment"));
+			jLb_comment.setBounds(10, 660, 70, 20);
 			scroll.setBounds(85, 660, 280, 40);
 
-			jCheckBox3.setText((String) Window.res.getObject("cb_userData"));
-			jCheckBox3.setBounds(310, 510, 150, 23);
+			jCb_userData.setText((String) Window.res.getObject("cb_userData"));
+			jCb_userData.setBounds(310, 510, 150, 23);
 
-			jButton1.setText((String) Window.res.getObject("bt_print"));
-			jButton1.setBounds(360, 580, 85, 23);
+			jBt_print.setText((String) Window.res.getObject("bt_print"));
+			jBt_print.setBounds(360, 580, 85, 23);
 
-			jLbSearch.setText((String) Window.res.getObject("lb_searchName"));
-			jLbSearch.setBounds(20, 50, 90, 20);
+			jLb_search.setText((String) Window.res.getObject("lb_searchName"));
+			jLb_search.setBounds(20, 50, 90, 20);
 
-			btnLoad.setToolTipText((String) Window.res.getObject("bt_loadDB"));
-			btnLoad.setBounds(25, 110, 39, 39);
-			btnLoad.setBackground(new java.awt.Color(255, 255, 255));
+			jBt_load.setToolTipText((String) Window.res.getObject("bt_loadDB"));
+			jBt_load.setBounds(25, 110, 39, 39);
+			jBt_load.setBackground(new java.awt.Color(255, 255, 255));
 
+			jBt_addCustomer.setToolTipText((String) Window.res
+					.getObject("bt_addCustomer"));
+			jBt_addCustomer.setBounds(480, 510, 39, 39);
+			jBt_addCustomer.setBackground(new java.awt.Color(255, 255, 255));
+
+			jBt_reset.setText("RàZ");
+			jBt_reset.setBounds(465, 580, 73, 23);
 		}
 
 		// Date
-		jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField1.setBounds(70, 20, 70, 20);
-		jTextField1.setText(new SimpleDateFormat("dd/MM/yyyy")
-				.format(new Date()));
+		jLayeredPane1.add(jLb_date, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_date.setBounds(70, 20, 70, 20);
+		jTf_date.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		Window.date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-		jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jTf_date, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// From
-		jLayeredPane1.add(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField2.setBounds(350, 75, 180, 20);
-		jTextField2.setText(Window.from);
-		jLayeredPane1.add(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_from, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_from.setBounds(350, 75, 180, 20);
+		if (Window.from.isEmpty()){
+			Window.from=Window.companyname;
+			jTf_from.setText(Window.from);
+		}
+		else {
+			jTf_from.setText(Window.from);
+		}
+		jLayeredPane1.add(jTf_from, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// To
-		jLayeredPane1.add(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField3.setBounds(350, 105, 180, 20);
-		jTextField3.setText(Window.to);
-		jLayeredPane1.add(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_to, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_to.setBounds(350, 105, 180, 20);
+		jTf_to.setText(Window.to);
+		jLayeredPane1.add(jTf_to, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Reference
-		jLayeredPane1.add(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField17.setBounds(380, 135, 150, 20);
-		jTextField17.setText(Window.referencequot);
-		jLayeredPane1.add(jTextField17, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_ref, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_ref.setBounds(380, 135, 150, 20);
+		if (Window.referencequot.isEmpty()) {
+			WorkbookSettings ws = new WorkbookSettings();
+			ws.setSuppressWarnings(true);
+			Sheet sheetuser;
+			char username;
+			char userlastname;
+			try {
+				sheetuser = Workbook.getWorkbook(
+						new File("comercialdata.info"), ws).getSheet(0);
+				username = sheetuser.getCell(1, 0).getContents().charAt(0);
+				userlastname = sheetuser.getCell(1, 1).getContents().charAt(0);
+				
+				Window.referencequot=username + "" + userlastname + Window.date.replace("/", "");
+				jTf_ref.setText(Window.referencequot);
+
+			} catch (IndexOutOfBoundsException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (BiffException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else {
+			jTf_ref.setText(Window.referencequot);
+		}
+		jLayeredPane1.add(jTf_ref, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Subject
-		jLayeredPane1.add(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField8.setBounds(60, 200, 380, 20);
-		jTextField8.setText(Window.object);
-		jLayeredPane1.add(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_object, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_object.setBounds(60, 200, 380, 20);
+		jTf_object.setText(Window.object);
+		jLayeredPane1.add(jTf_object, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Recipient Name
-		jLayeredPane1.add(jLabel20, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField9.setBounds(100, 230, 190, 20);
-		jTextField9.setText(Window.recipientname);
-		jLayeredPane1.add(jTextField9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_recName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_recName.setBounds(100, 230, 190, 20);
+		jTf_recName.setText(Window.recipientname);
+		jLayeredPane1.add(jTf_recName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox2.setText("Mr");
-		jCheckBox2.setSelected(true);
-		jCheckBox2.setBounds(300, 230, 37, 23);
-		jLayeredPane1.add(jCheckBox2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_Mr.setBackground(new java.awt.Color(255, 255, 255));
+		jCb_Mr.setText("Mr");
+		jCb_Mr.setSelected(true);
+		jCb_Mr.setBounds(300, 230, 37, 23);
+		jLayeredPane1.add(jCb_Mr, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+		jCb_Mr.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jCheckBox2ActionPerformed(evt);
 			}
 
 			private void jCheckBox2ActionPerformed(ActionEvent evt) {
-				if (jCheckBox2.isSelected()) {
-					jCheckBox1.setSelected(false);
-					jCheckBox6.setSelected(false);
+				if (jCb_Mr.isSelected()) {
+					jCb_Mrs.setSelected(false);
+					jCb_no.setSelected(false);
 				}
 			}
 		});
 
-		jCheckBox1.setText("Mrs");
-		jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox1.setBounds(350, 230, 43, 23);
-		jLayeredPane1.add(jCheckBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_Mrs.setText("Mrs");
+		jCb_Mrs.setBackground(new java.awt.Color(255, 255, 255));
+		jCb_Mrs.setBounds(350, 230, 43, 23);
+		jLayeredPane1.add(jCb_Mrs, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+		jCb_Mrs.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jCheckBox1ActionPerformed(evt);
 			}
 
 			private void jCheckBox1ActionPerformed(ActionEvent evt) {
-				if (jCheckBox1.isSelected()) {
-					jCheckBox6.setSelected(false);
-					jCheckBox2.setSelected(false);
+				if (jCb_Mrs.isSelected()) {
+					jCb_no.setSelected(false);
+					jCb_Mr.setSelected(false);
 				}
 			}
 		});
 
-		jCheckBox6.setText("no");
-		jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox6.setBounds(400, 230, 43, 23);
-		jLayeredPane1.add(jCheckBox6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_no.setText("no");
+		jCb_no.setBackground(new java.awt.Color(255, 255, 255));
+		jCb_no.setBounds(400, 230, 43, 23);
+		jLayeredPane1.add(jCb_no, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+		jCb_no.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jCheckBox1ActionPerformed(evt);
 			}
 
 			private void jCheckBox1ActionPerformed(ActionEvent evt) {
-				if (jCheckBox6.isSelected()) {
-					jCheckBox1.setSelected(false);
-					jCheckBox2.setSelected(false);
+				if (jCb_no.isSelected()) {
+					jCb_Mrs.setSelected(false);
+					jCb_Mr.setSelected(false);
 				}
 			}
 		});
 
-		jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox4.setText("dd/mm/yyyy");
-		jCheckBox4.setSelected(true);
-		jCheckBox4.setBounds(160, 20, 90, 20);
-		jLayeredPane1.add(jCheckBox4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_formDate1.setBackground(new java.awt.Color(255, 255, 255));
+		jCb_formDate1.setText("dd/mm/yyyy");
+		jCb_formDate1.setSelected(true);
+		jCb_formDate1.setBounds(160, 20, 90, 20);
+		jLayeredPane1
+				.add(jCb_formDate1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+		jCb_formDate1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jCheckBox4ActionPerformed(evt);
 			}
 
 			private void jCheckBox4ActionPerformed(ActionEvent evt) {
-				if (jCheckBox4.isSelected()) {
-					jCheckBox5.setSelected(false);
+				if (jCb_formDate1.isSelected()) {
+					jCb_formDate2.setSelected(false);
 				} else {
-					jCheckBox4.setSelected(true);
+					jCb_formDate1.setSelected(true);
 				}
-				jTextField1.setText(new SimpleDateFormat("dd/MM/yyyy")
+				jTf_date.setText(new SimpleDateFormat("dd/MM/yyyy")
 						.format(new Date()));
 				Window.date = new SimpleDateFormat("dd/MM/yyyy")
 						.format(new Date());
 			}
 		});
 
-		jCheckBox5.setText("mm/dd/yyyy");
-		jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
-		jCheckBox5.setBounds(260, 20, 100, 20);
-		jLayeredPane1.add(jCheckBox5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_formDate2.setText("mm/dd/yyyy");
+		jCb_formDate2.setBackground(new java.awt.Color(255, 255, 255));
+		jCb_formDate2.setBounds(260, 20, 100, 20);
+		jLayeredPane1
+				.add(jCb_formDate2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+		jCb_formDate2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jCheckBox5ActionPerformed(evt);
 			}
 
 			private void jCheckBox5ActionPerformed(ActionEvent evt) {
-				if (jCheckBox5.isSelected()) {
-					jCheckBox4.setSelected(false);
+				if (jCb_formDate2.isSelected()) {
+					jCb_formDate1.setSelected(false);
 				} else {
-					jCheckBox5.setSelected(true);
+					jCb_formDate2.setSelected(true);
 				}
-				jTextField1.setText(new SimpleDateFormat("MM/dd/yyyy")
+				jTf_date.setText(new SimpleDateFormat("MM/dd/yyyy")
 						.format(new Date()));
 				Window.date = new SimpleDateFormat("MM/dd/yyyy")
 						.format(new Date());
@@ -625,132 +744,163 @@ public class PdfScreen extends JDialog {
 		});
 
 		// Payment
-		jLayeredPane1.add(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField10.setText(Window.payment);
-		jLayeredPane1.add(jTextField10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_payment, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_payment.setText(Window.payment);
+		jLayeredPane1.add(jTf_payment, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_indicationPayment, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Incoterm
-		jLayeredPane1.add(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField11.setBounds(70, 290, 320, 20);
-		jTextField11.setText(Window.incoterm);
-		jLayeredPane1.add(jTextField11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_incoterm, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_incoterm.setBounds(70, 290, 320, 20);
+		jTf_incoterm.setText(Window.incoterm);
+		jLayeredPane1.add(jTf_incoterm, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Delivery Address
-		jLayeredPane1.add(jLabel22, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField18.setBounds(120, 320, 320, 20);
-		jTextField18.setText(Window.deliveryaddress);
-		jLayeredPane1.add(jTextField18, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_delAddress,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_delAddress.setBounds(120, 320, 320, 20);
+		jTf_delAddress.setText(Window.deliveryaddress);
+		jLayeredPane1.add(jTf_delAddress,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Postcode
-		jLayeredPane1.add(jLabel23, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField19.setBounds(120, 350, 320, 20);
-		jTextField19.setText(Window.deliverypostcode);
-		jLayeredPane1.add(jTextField19, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		// Delivery Postcode
+		jLayeredPane1.add(jLb_delPostcode,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_delPostcode.setBounds(120, 350, 320, 20);
+		jTf_delPostcode.setText(Window.deliverypostcode);
+		jLayeredPane1.add(jTf_delPostcode,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Town or/and Country
-		jLayeredPane1.add(jLabel24, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField20.setBounds(120, 380, 320, 20);
-		jTextField20.setText(Window.deliverylocation);
-		jLayeredPane1.add(jTextField20, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		// Delivery Town or/and Country
+		jLayeredPane1.add(jLb_delTown, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_devTown.setBounds(120, 380, 320, 20);
+		jTf_devTown.setText(Window.deliverylocation);
+		jLayeredPane1.add(jTf_devTown, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Invoicing address
-		jLayeredPane1.add(jLabel25, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField21.setText(Window.address);
-		jLayeredPane1.add(jTextField21, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_invAddress,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_invAddress.setText(Window.address);
+		jLayeredPane1.add(jTf_invAddress,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// postcode
-		jLayeredPane1.add(jLabel26, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField22.setBounds(120, 440, 320, 20);
-		jTextField22.setText(Window.postcode);
-		jLayeredPane1.add(jTextField22, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		// Invoicing postcode
+		jLayeredPane1.add(jLb_invPostcode,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_invPostcode.setBounds(120, 440, 320, 20);
+		jTf_invPostcode.setText(Window.postcode);
+		jLayeredPane1.add(jTf_invPostcode,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Same Address
-		jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
-		jLayeredPane1.add(jCheckBox7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_sameAddr.setBackground(new java.awt.Color(255, 255, 255));
+		jLayeredPane1.add(jCb_sameAddr, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+		jCb_sameAddr.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jCheckBox1ActionPerformed(evt);
 			}
 
 			private void jCheckBox1ActionPerformed(ActionEvent evt) {
-				if (jCheckBox7.isSelected()) {
-					Window.address = jTextField18.getText();
-					Window.postcode = jTextField19.getText();
-					Window.location = jTextField20.getText();
-					jTextField21.setText(Window.address);
-					jTextField22.setText(Window.postcode);
-					jTextField23.setText(Window.location);
+				if (jCb_sameAddr.isSelected()) {
+					Window.address = jTf_delAddress.getText();
+					Window.postcode = jTf_delPostcode.getText();
+					Window.location = jTf_devTown.getText();
+					jTf_invAddress.setText(Window.address);
+					jTf_invPostcode.setText(Window.postcode);
+					jTf_invTown.setText(Window.location);
 				} else {
 					Window.address = "";
 					Window.postcode = "";
 					Window.location = "";
-					jTextField21.setText("");
-					jTextField22.setText("");
-					jTextField23.setText("");
+					jTf_invAddress.setText("");
+					jTf_invPostcode.setText("");
+					jTf_invTown.setText("");
 				}
 			}
 		});
 
-		// Town or/and Country
-		jLayeredPane1.add(jLabel27, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField23.setBounds(120, 470, 320, 20);
-		jTextField23.setText(Window.location);
-		jLayeredPane1.add(jTextField23, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		// Invoicing Town or/and Country
+		jLayeredPane1.add(jLb_invTown, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_invTown.setBounds(120, 470, 320, 20);
+		jTf_invTown.setText(Window.location);
+		jLayeredPane1.add(jTf_invTown, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// First Name
-		jLayeredPane1.add(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField12.setBounds(70, 510, 210, 20);
-		jTextField12.setText(Window.salesman);
-		jLayeredPane1.add(jTextField12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1
+				.add(jLb_firstName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_firstName.setBounds(70, 510, 210, 20);
+		jTf_firstName.setText(Window.salesman);
+		jLayeredPane1
+				.add(jTf_firstName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Tel
-		jLayeredPane1.add(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField13.setText(Window.gsm);
-		jTextField13.setBounds(70, 540, 210, 20);
-		jLayeredPane1.add(jTextField13, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_tel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_tel.setText(Window.gsm);
+		jTf_tel.setBounds(70, 540, 210, 20);
+		jLayeredPane1.add(jTf_tel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Last name
-		jLayeredPane1.add(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField14.setText(Window.tel);
-		jTextField14.setBounds(70, 570, 210, 20);
-		jLayeredPane1.add(jTextField14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_lastName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_lastName.setText(Window.tel);
+		jTf_lastName.setBounds(70, 570, 210, 20);
+		jLayeredPane1.add(jTf_lastName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Fax
-		jLayeredPane1.add(jLabel17, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField15.setBounds(70, 600, 210, 20);
-		jTextField15.setText(Window.fax);
-		jLayeredPane1.add(jTextField15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_fax, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_fax.setBounds(70, 600, 210, 20);
+		jTf_fax.setText(Window.fax);
+		jLayeredPane1.add(jTf_fax, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Mail
-		jLayeredPane1.add(jLabel18, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextField16.setBounds(70, 630, 210, 20);
-		jTextField16.setText(Window.email);
-		jLayeredPane1.add(jTextField16, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_mail, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_mail.setBounds(70, 630, 210, 20);
+		jTf_mail.setText(Window.email);
+		jLayeredPane1.add(jTf_mail, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		jLayeredPane1.add(jLabel28, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTextArea1.setLineWrap(true);
+		jLayeredPane1.add(jLb_comment, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTa_comment.setLineWrap(true);
 		jLayeredPane1.add(scroll, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// user data
-		jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
-		jLayeredPane1.add(jCheckBox3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jCb_userData.setBackground(new java.awt.Color(255, 255, 255));
+		jLayeredPane1.add(jCb_userData, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Search 
-		jLayeredPane1.add(jLbSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jTfSearch.setBounds(90, 50, 180, 20);
-		jTfSearch.setEnabled(false);
-		jLayeredPane1.add(jTfSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		// Search
+		jLayeredPane1.add(jLb_search, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jTf_search.setBounds(90, 50, 180, 20);
+		jTf_search.setEnabled(false);
+		jLayeredPane1.add(jTf_search, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// List 
+		// List
 		listName.setFocusable(false);
 		scrollList.setBounds(90, 75, 180, 110);
 		jLayeredPane1.add(scrollList, JLayeredPane.DEFAULT_LAYER);
 
-		jLayeredPane1.add(btnLoad, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jBt_load, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		jLayeredPane1.add(jBt_addCustomer,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		/* Action pour reset le formulaire de devis */
+		jBt_reset.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jTf_to.setText("");
+				jTf_delAddress.setText("");
+				jTf_delPostcode.setText("");
+				jTf_devTown.setText("");
+				jTf_invAddress.setText("");
+				jTf_invPostcode.setText("");
+				jTf_invTown.setText("");
+				jTf_payment.setText("");
+				jTf_incoterm.setText("");
+				jTf_search.setText("");
+			}
+		});
+		jLayeredPane1.add(jBt_reset, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Action sur CheckBox 'User Data'
-		jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+		jCb_userData.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					jCheckBox3ActionPerformed(evt);
@@ -769,7 +919,7 @@ public class PdfScreen extends JDialog {
 			private void jCheckBox3ActionPerformed(ActionEvent evt)
 					throws IndexOutOfBoundsException, BiffException,
 					IOException {
-				if (jCheckBox3.isSelected()) {
+				if (jCb_userData.isSelected()) {
 					WorkbookSettings ws = new WorkbookSettings();
 					ws.setSuppressWarnings(true);
 					Sheet sheet = Workbook.getWorkbook(
@@ -779,38 +929,38 @@ public class PdfScreen extends JDialog {
 					Window.tel = sheet.getCell(1, 2).getContents();
 					Window.fax = sheet.getCell(1, 3).getContents();
 					Window.email = sheet.getCell(1, 4).getContents();
-					jTextField12.setEditable(false);
-					jTextField12.setText(Window.salesman);
-					jTextField13.setEditable(false);
-					jTextField13.setText(Window.gsm);
-					jTextField14.setEditable(false);
-					jTextField14.setText(Window.tel);
-					jTextField15.setEditable(false);
-					jTextField15.setText(Window.fax);
-					jTextField16.setEditable(false);
-					jTextField16.setText(Window.email);
+					jTf_firstName.setEditable(false);
+					jTf_firstName.setText(Window.salesman);
+					jTf_tel.setEditable(false);
+					jTf_tel.setText(Window.gsm);
+					jTf_lastName.setEditable(false);
+					jTf_lastName.setText(Window.tel);
+					jTf_fax.setEditable(false);
+					jTf_fax.setText(Window.fax);
+					jTf_mail.setEditable(false);
+					jTf_mail.setText(Window.email);
 				} else {
 					Window.salesman = "";
 					Window.gsm = "";
 					Window.tel = "";
 					Window.fax = "";
 					Window.email = "";
-					jTextField12.setEditable(true);
-					jTextField12.setText(Window.salesman);
-					jTextField13.setEditable(true);
-					jTextField13.setText(Window.gsm);
-					jTextField14.setEditable(true);
-					jTextField14.setText(Window.tel);
-					jTextField15.setEditable(true);
-					jTextField15.setText(Window.fax);
-					jTextField16.setEditable(true);
-					jTextField16.setText(Window.email);
+					jTf_firstName.setEditable(true);
+					jTf_firstName.setText(Window.salesman);
+					jTf_tel.setEditable(true);
+					jTf_tel.setText(Window.gsm);
+					jTf_lastName.setEditable(true);
+					jTf_lastName.setText(Window.tel);
+					jTf_fax.setEditable(true);
+					jTf_fax.setText(Window.fax);
+					jTf_mail.setEditable(true);
+					jTf_mail.setText(Window.email);
 				}
 			}
 		});
 
 		// Button Print
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
+		jBt_print.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					jButton1ActionPerformed(evt);
@@ -825,7 +975,7 @@ public class PdfScreen extends JDialog {
 			}
 		});
 
-		jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jBt_print, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -853,85 +1003,85 @@ public class PdfScreen extends JDialog {
 			@Override
 			public void focusLost(FocusEvent e) {
 
-				if (e.getSource().equals(jTextField1)) {
-					Window.date = jTextField1.getText();
+				if (e.getSource().equals(jTf_date)) {
+					Window.date = jTf_date.getText();
 				}
-				if (e.getSource().equals(jTextField2)) {
-					Window.from = jTextField2.getText();
+				if (e.getSource().equals(jTf_from)) {
+					Window.from = jTf_from.getText();
 				}
-				if (e.getSource().equals(jTextField3)) {
-					Window.to = jTextField3.getText();
+				if (e.getSource().equals(jTf_to)) {
+					Window.to = jTf_to.getText();
 				}
-				if (e.getSource().equals(jTextField8)) {
-					Window.object = jTextField8.getText();
+				if (e.getSource().equals(jTf_object)) {
+					Window.object = jTf_object.getText();
 				}
-				if (e.getSource().equals(jTextField9)) {
-					Window.recipientname = jTextField9.getText();
+				if (e.getSource().equals(jTf_recName)) {
+					Window.recipientname = jTf_recName.getText();
 				}
-				if (e.getSource().equals(jTextField10)) {
-					Window.payment = jTextField10.getText();
+				if (e.getSource().equals(jTf_payment)) {
+					Window.payment = jTf_payment.getText();
 				}
-				if (e.getSource().equals(jTextField11)) {
-					Window.incoterm = jTextField11.getText();
+				if (e.getSource().equals(jTf_incoterm)) {
+					Window.incoterm = jTf_incoterm.getText();
 				}
-				if (e.getSource().equals(jTextField12)) {
-					Window.salesman = jTextField12.getText();
+				if (e.getSource().equals(jTf_firstName)) {
+					Window.salesman = jTf_firstName.getText();
 				}
-				if (e.getSource().equals(jTextField13)) {
-					Window.gsm = jTextField13.getText();
+				if (e.getSource().equals(jTf_tel)) {
+					Window.gsm = jTf_tel.getText();
 				}
-				if (e.getSource().equals(jTextField14)) {
-					Window.tel = jTextField14.getText();
+				if (e.getSource().equals(jTf_lastName)) {
+					Window.tel = jTf_lastName.getText();
 				}
-				if (e.getSource().equals(jTextField15)) {
-					Window.fax = jTextField15.getText();
+				if (e.getSource().equals(jTf_fax)) {
+					Window.fax = jTf_fax.getText();
 				}
-				if (e.getSource().equals(jTextField16)) {
-					Window.email = jTextField16.getText();
+				if (e.getSource().equals(jTf_mail)) {
+					Window.email = jTf_mail.getText();
 				}
-				if (e.getSource().equals(jTextField17)) {
-					Window.referencequot = jTextField17.getText();
+				if (e.getSource().equals(jTf_ref)) {
+					Window.referencequot = jTf_ref.getText();
 				}
-				if (e.getSource().equals(jTextField18)) {
-					Window.deliveryaddress = jTextField18.getText();
+				if (e.getSource().equals(jTf_delAddress)) {
+					Window.deliveryaddress = jTf_delAddress.getText();
 				}
-				if (e.getSource().equals(jTextField19)) {
-					Window.deliverypostcode = jTextField19.getText();
+				if (e.getSource().equals(jTf_delPostcode)) {
+					Window.deliverypostcode = jTf_delPostcode.getText();
 				}
-				if (e.getSource().equals(jTextField20)) {
-					Window.deliverylocation = jTextField20.getText();
+				if (e.getSource().equals(jTf_devTown)) {
+					Window.deliverylocation = jTf_devTown.getText();
 				}
-				if (e.getSource().equals(jTextField21)) {
-					Window.address = jTextField21.getText();
+				if (e.getSource().equals(jTf_invAddress)) {
+					Window.address = jTf_invAddress.getText();
 				}
-				if (e.getSource().equals(jTextField22)) {
-					Window.postcode = jTextField22.getText();
+				if (e.getSource().equals(jTf_invPostcode)) {
+					Window.postcode = jTf_invPostcode.getText();
 				}
-				if (e.getSource().equals(jTextField23)) {
-					Window.location = jTextField23.getText();
+				if (e.getSource().equals(jTf_invTown)) {
+					Window.location = jTf_invTown.getText();
 				}
 			}
 		};
 
-		jTextField1.addFocusListener(focuslistener);
-		jTextField2.addFocusListener(focuslistener);
-		jTextField3.addFocusListener(focuslistener);
-		jTextField8.addFocusListener(focuslistener);
-		jTextField9.addFocusListener(focuslistener);
-		jTextField10.addFocusListener(focuslistener);
-		jTextField11.addFocusListener(focuslistener);
-		jTextField12.addFocusListener(focuslistener);
-		jTextField13.addFocusListener(focuslistener);
-		jTextField14.addFocusListener(focuslistener);
-		jTextField15.addFocusListener(focuslistener);
-		jTextField16.addFocusListener(focuslistener);
-		jTextField17.addFocusListener(focuslistener);
-		jTextField18.addFocusListener(focuslistener);
-		jTextField19.addFocusListener(focuslistener);
-		jTextField20.addFocusListener(focuslistener);
-		jTextField21.addFocusListener(focuslistener);
-		jTextField22.addFocusListener(focuslistener);
-		jTextField23.addFocusListener(focuslistener);
+		jTf_date.addFocusListener(focuslistener);
+		jTf_from.addFocusListener(focuslistener);
+		jTf_to.addFocusListener(focuslistener);
+		jTf_object.addFocusListener(focuslistener);
+		jTf_recName.addFocusListener(focuslistener);
+		jTf_payment.addFocusListener(focuslistener);
+		jTf_incoterm.addFocusListener(focuslistener);
+		jTf_firstName.addFocusListener(focuslistener);
+		jTf_tel.addFocusListener(focuslistener);
+		jTf_lastName.addFocusListener(focuslistener);
+		jTf_fax.addFocusListener(focuslistener);
+		jTf_mail.addFocusListener(focuslistener);
+		jTf_ref.addFocusListener(focuslistener);
+		jTf_delAddress.addFocusListener(focuslistener);
+		jTf_delPostcode.addFocusListener(focuslistener);
+		jTf_devTown.addFocusListener(focuslistener);
+		jTf_invAddress.addFocusListener(focuslistener);
+		jTf_invPostcode.addFocusListener(focuslistener);
+		jTf_invTown.addFocusListener(focuslistener);
 
 		/* Ouverture de fichier de bdd client */
 		try {
@@ -958,14 +1108,11 @@ public class PdfScreen extends JDialog {
 				sheet1.addCell(label);
 				workbook1.write();
 				workbook1.close();
-				// jLb_notif.setText("<html><font color=blue>File: " + name);
 
-				jTfSearch.setText("");
-				jTfSearch.setEnabled(true);
+				jTf_search.setText("");
+				jTf_search.setEnabled(true);
 
 			} else {
-				// jLb_notif.setText("No loaded file");
-
 				javax.swing.JOptionPane.showMessageDialog(null,
 						"The file is not in expected format");
 			}
@@ -976,7 +1123,7 @@ public class PdfScreen extends JDialog {
 					+ pathnameDatabase + " was not found");
 		}
 
-		btnLoad.addActionListener(new java.awt.event.ActionListener() {
+		jBt_load.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					JFileChooser chooser;
@@ -1028,8 +1175,8 @@ public class PdfScreen extends JDialog {
 							workbook1.write();
 							workbook1.close();
 
-							jTfSearch.setEnabled(true);
-							jTfSearch.setText("");
+							jTf_search.setEnabled(true);
+							jTf_search.setText("");
 
 							javax.swing.JOptionPane
 									.showMessageDialog(null, "The file \""
@@ -1051,7 +1198,7 @@ public class PdfScreen extends JDialog {
 		});
 
 		/* Action sur la zone de texte Search Product */
-		jTfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+		jTf_search.addKeyListener(new java.awt.event.KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				jTextField1ActionPerformed(evt);
 			}
@@ -1061,12 +1208,12 @@ public class PdfScreen extends JDialog {
 				if (file == null) {
 					System.out.println("WARNING ! No loaded file");
 				} else if (file != null) {
-					if (jTfSearch.getText().equals("")) {
+					if (jTf_search.getText().equals("")) {
 						if (Character.isJavaLetter(evt.getKeyChar())
 								|| evt.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD
 								|| evt.getKeyCode() == Event.ENTER) {
-							listName.setModel(databaseName.readSearch(jTfSearch
-									.getText()));
+							listName.setModel(databaseName
+									.readSearch(jTf_search.getText()));
 							listName.setEnabled(true);
 						}
 					} else {
@@ -1074,8 +1221,8 @@ public class PdfScreen extends JDialog {
 								|| evt.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD
 								|| evt.getKeyCode() == Event.ENTER
 								|| evt.getKeyCode() == 8) {
-							listName.setModel(databaseName.readSearch(jTfSearch
-									.getText()));
+							listName.setModel(databaseName
+									.readSearch(jTf_search.getText()));
 							listName.setEnabled(true);
 						}
 					}
@@ -1085,7 +1232,7 @@ public class PdfScreen extends JDialog {
 		listName.setFocusable(true);
 
 		/* Action clavier sur la zone de texte Search Product */
-		jTfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+		jTf_search.addKeyListener(new java.awt.event.KeyAdapter() {
 			public void keyPressed(java.awt.event.KeyEvent evt) {
 				jTextField1KeyPressed(evt);
 			}
@@ -1135,20 +1282,55 @@ public class PdfScreen extends JDialog {
 				test.addElement(listName.getSelectedValue().toString());
 				listName.setModel(test);
 				listName.setSelectedIndex(0);
-				jTfSearch.setText(listName.getSelectedValue().toString());
+				jTf_search.setText(listName.getSelectedValue().toString());
 
 				/* To */
 				Window.to = databaseName.readCompany(listName
 						.getSelectedValue().toString());
-				jTextField3.setText(Window.to);
+				jTf_to.setText(Window.to);
 
 				/* Payment */
-				// TO DO
+				String statePayment = null;
+				switch (Integer.parseInt(databaseName
+						.readPaymentReglement(listName.getSelectedValue()
+								.toString()))) {
+				case 32:
+					statePayment = "ANTICIPATED";
+					break;
+
+				case 3:
+					statePayment = "CHECK";
+					break;
+
+				case 4:
+					statePayment = "SWIFT";
+					break;
+
+				case 9:
+					statePayment = "AGAINST DOCUMENTS";
+					break;
+
+				case 37:
+					statePayment = "LETTER OF CREDIT";
+					break;
+
+				default:
+					statePayment = "UNKNOW";
+					break;
+				}
+
+				/* Day payment */
+				statePayment += " "
+						+ databaseName.readPaymentEcheance(listName
+								.getSelectedValue().toString()) + " days";
+				Window.payment = statePayment;
+
+				jTf_payment.setText(Window.payment);
 
 				/* Incoterm */
 				Window.incoterm = databaseName.readIncoterm(listName
 						.getSelectedValue().toString());
-				jTextField11.setText(Window.incoterm);
+				jTf_incoterm.setText(Window.incoterm);
 
 				/* Delivery Address */
 				Window.deliveryaddress = databaseName.readDelAddress(listName
@@ -1156,12 +1338,12 @@ public class PdfScreen extends JDialog {
 						+ "  "
 						+ databaseName.readDelAddress2(listName
 								.getSelectedValue().toString());
-				jTextField18.setText(Window.deliveryaddress);
+				jTf_delAddress.setText(Window.deliveryaddress);
 
 				/* Delivery Postcode */
 				Window.deliverypostcode = databaseName.readDelPostcode(listName
 						.getSelectedValue().toString());
-				jTextField19.setText(Window.deliverypostcode);
+				jTf_delPostcode.setText(Window.deliverypostcode);
 
 				/* Delivery Town/Country */
 				Window.deliverylocation = databaseName.readDelTown(listName
@@ -1169,7 +1351,7 @@ public class PdfScreen extends JDialog {
 						+ " - "
 						+ databaseName.readDelCountry(listName
 								.getSelectedValue().toString());
-				jTextField20.setText(Window.deliverylocation);
+				jTf_devTown.setText(Window.deliverylocation);
 
 				/* Invoicing Address */
 				Window.address = databaseName.readInvAddress(listName
@@ -1177,12 +1359,12 @@ public class PdfScreen extends JDialog {
 						+ "  "
 						+ databaseName.readInvAddress2(listName
 								.getSelectedValue().toString());
-				jTextField21.setText(Window.address);
+				jTf_invAddress.setText(Window.address);
 
 				/* Invoicing Postcode */
 				Window.postcode = databaseName.readInvPostcode(listName
 						.getSelectedValue().toString());
-				jTextField22.setText(Window.postcode);
+				jTf_invPostcode.setText(Window.postcode);
 
 				/* Invoicing Town/Country */
 				Window.location = databaseName.readInvTown(listName
@@ -1190,140 +1372,499 @@ public class PdfScreen extends JDialog {
 						+ " - "
 						+ databaseName.readInvCountry(listName
 								.getSelectedValue().toString());
-				jTextField23.setText(Window.location);
+				jTf_invTown.setText(Window.location);
 			}
-
 		});
 
-		jTextField1.addActionListener(new java.awt.event.ActionListener() {
+		jBt_addCustomer.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				
+				if(jTf_payment.getText().isEmpty()){
+					jTf_payment.setText("UNKNOW 000");
+				}
+				
+				String[] textPayment = jTf_payment.getText().split(" ");
+			    int lenght = textPayment.length;
+			    
+				String fiche = jTf_recName.getText() + "\n\n"
+
+				+ "<html><u><b><font color=red>Delivery Address:\n"
+						+ jTf_delAddress.getText() + "\n"
+						+ jTf_delPostcode.getText() + " "
+						+ jTf_devTown.getText() + "\n\n"
+
+						+ "<html><u><b><font color=red>Invoicing Address:\n"
+						+ jTf_invAddress.getText() + "\n"
+						+ jTf_invPostcode.getText() + " "
+						+ jTf_invTown.getText() + "\n\n"
+
+						+ "<html><u><i><b>Payment</b></i></u>:</html>\n"
+						+ "     Mode of payment: " + textPayment[0].toUpperCase() + "\n" 
+						+ "     Term: " + textPayment[1] + " days" + "\n"
+						
+						+ "<html><u><i><b>Incoterm</b></i></u>: "
+						+ jTf_incoterm.getText() + "\n\n";
+
+				int alert = javax.swing.JOptionPane
+						.showConfirmDialog(new javax.swing.JFrame(), fiche,
+								"Please check it before adding !",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+
+				WritableSheet sheet;
+				Workbook workbook;
+				WritableWorkbook wwork;
+				WritableCell cell;
+
+				if (alert == JOptionPane.YES_OPTION) {
+
+					try {
+
+						if (!new File(pathnameDBtestcreate).exists()) {
+							System.out.println("Don't exist...");
+
+							WritableWorkbook wworkbook = Workbook
+									.createWorkbook(new File(
+											pathnameDBtestcreate));
+							WritableSheet wsheet = wworkbook.createSheet(
+									"Page 1", 0);
+							WritableFont titrefont = new WritableFont(
+									WritableFont.ARIAL, 10,
+									WritableFont.NO_BOLD);
+
+							// Size Column 20
+							for (int c = 0; c < 30; c++) {
+								wsheet.setColumnView(c, 20);
+							}
+
+							// Format cell
+							WritableCellFormat format = new WritableCellFormat(
+									titrefont);
+							format.setBackground(Colour.WHITE);
+							format.setAlignment(Alignment.CENTRE);
+							format.setVerticalAlignment(VerticalAlignment.CENTRE);
+							format.setOrientation(Orientation.HORIZONTAL);
+							format.setBorder(Border.ALL, BorderLineStyle.THIN,
+									Colour.BLACK);
+							format.setShrinkToFit(true);
+							format.setWrap(true);
+
+							// Column Tiltle
+							Label label = new Label(0, 0, "Compte", format);
+							wsheet.addCell(label);
+
+							Label label1 = new Label(1, 0, "Abrege", format);
+							wsheet.addCell(label1);
+
+							Label label2 = new Label(2, 0, "Nom", format);
+							wsheet.addCell(label2);
+
+							Label label3 = new Label(3, 0, "Rue1", format);
+							wsheet.addCell(label3);
+
+							Label label4 = new Label(4, 0, "Rue2", format);
+							wsheet.addCell(label4);
+
+							Label label5 = new Label(5, 0, "Boite P", format);
+							wsheet.addCell(label5);
+
+							Label label6 = new Label(6, 0, "Code Post.", format);
+							wsheet.addCell(label6);
+
+							Label label7 = new Label(7, 0, "Ville", format);
+							wsheet.addCell(label7);
+
+							Label label8 = new Label(8, 0, "Pays", format);
+							wsheet.addCell(label8);
+
+							Label label9 = new Label(9, 0, "Code Pays", format);
+							wsheet.addCell(label9);
+
+							Label label10 = new Label(10, 0, "Nom Livr.",
+									format);
+							wsheet.addCell(label10);
+
+							Label label11 = new Label(11, 0, "Rue1 Livr.",
+									format);
+							wsheet.addCell(label11);
+
+							Label label12 = new Label(12, 0, "Rue2 Livr",
+									format);
+							wsheet.addCell(label12);
+
+							Label label13 = new Label(13, 0, "C. P. Livr",
+									format);
+							wsheet.addCell(label13);
+
+							Label label14 = new Label(14, 0, "Ville Livr",
+									format);
+							wsheet.addCell(label14);
+
+							Label label15 = new Label(15, 0, "Pays Livr.",
+									format);
+							wsheet.addCell(label15);
+
+							Label label16 = new Label(16, 0, "C. Pays L",
+									format);
+							wsheet.addCell(label16);
+
+							Label label17 = new Label(17, 0, "Teleph. 1",
+									format);
+							wsheet.addCell(label17);
+
+							Label label18 = new Label(18, 0, "Etablist", format);
+							wsheet.addCell(label18);
+
+							Label label19 = new Label(19, 0, "Base Echea",
+									format);
+							wsheet.addCell(label19);
+
+							Label label20 = new Label(20, 0, "Code Port",
+									format);
+							wsheet.addCell(label20);
+
+							Label label21 = new Label(21, 0, "Code Echea",
+									format);
+							wsheet.addCell(label21);
+
+							Label label22 = new Label(22, 0, "Teleph 2", format);
+							wsheet.addCell(label22);
+
+							Label label23 = new Label(23, 0, "Contact 2",
+									format);
+							wsheet.addCell(label23);
+
+							Label label24 = new Label(24, 0, "No TVA CEE",
+									format);
+							wsheet.addCell(label24);
+
+							Label label25 = new Label(25, 0, "Contact1", format);
+							wsheet.addCell(label25);
+
+							Label label26 = new Label(26, 0, "Represt.", format);
+							wsheet.addCell(label26);
+
+							Label label27 = new Label(27, 0, "Nom Rep 1",
+									format);
+							wsheet.addCell(label27);
+
+							Label label28 = new Label(28, 0, "Code Rglt",
+									format);
+							wsheet.addCell(label28);
+
+							Label label29 = new Label(29, 0, "Type Rglt",
+									format);
+							wsheet.addCell(label29);
+
+							SheetSettings Worksheet_settings = wsheet
+									.getSettings();
+
+							wworkbook.write(); /* Write in Workbook */
+							wworkbook.close(); /* Close Workbook */
+
+							System.out.println("The file was created");
+						} else {
+							System.out.println("The file exist");
+						}
+
+						workbook = Workbook.getWorkbook(new File(
+								pathnameDBtestcreate));
+						wwork = Workbook.createWorkbook(new File(
+								pathnameDBtestcreate), workbook);
+
+						sheet = wwork.getSheet(0);
+						isExist = false;
+
+						for (int k = 0; k <= sheet.getRows() - 1; k++) {
+							if (sheet.getCell(0, k).getContents()
+									.equals(jTf_recName.getText())) {
+								isExist = true;
+								javax.swing.JOptionPane.showMessageDialog(null,
+										"This element already exist.");
+							}
+						}
+
+						if (!isExist) {
+							// Label label0, label1, label2, label3 = null;
+							Label label28 = null, label21 = null;
+							int row = sheet.getRows();
+
+							System.out.println("Nombre de ligne : " + row);
+
+							for (int i = 0; i <= 29; i++) {
+								cell = sheet.getWritableCell(i, sheet.getRows());
+
+								Label label0 = new Label(0, row, "");
+								sheet.addCell(label0);
+
+								Label label1 = new Label(1, row, "");
+								sheet.addCell(label1);
+
+								Label label2 = new Label(2, row, jTf_to
+										.getText());
+								sheet.addCell(label2);
+
+								Label label3 = new Label(3, row, jTf_invAddress
+										.getText());
+								sheet.addCell(label3);
+
+								Label label4 = new Label(4, row, "");
+								sheet.addCell(label4);
+
+								Label label5 = new Label(5, row, "");
+								sheet.addCell(label5);
+
+								Label label6 = new Label(6, row,
+										jTf_invPostcode.getText());
+								sheet.addCell(label6);
+
+								Label label7 = new Label(7, row, jTf_invTown
+										.getText());
+								sheet.addCell(label7);
+
+								Label label8 = new Label(8, row, "");
+								sheet.addCell(label8);
+
+								Label label9 = new Label(9, row, "");
+								sheet.addCell(label9);
+
+								Label label10 = new Label(10, row, jTf_to
+										.getText());
+								sheet.addCell(label10);
+
+								Label label11 = new Label(11, row,
+										jTf_delAddress.getText());
+								sheet.addCell(label11);
+
+								Label label12 = new Label(12, row, "");
+								sheet.addCell(label12);
+
+								Label label13 = new Label(13, row,
+										jTf_delPostcode.getText());
+								sheet.addCell(label13);
+
+								Label label14 = new Label(14, row, jTf_devTown
+										.getText());
+								sheet.addCell(label14);
+
+								Label label15 = new Label(15, row, "");
+								sheet.addCell(label15);
+
+								Label label16 = new Label(16, row, "");
+								sheet.addCell(label16);
+
+								Label label17 = new Label(17, row, "");
+								sheet.addCell(label17);
+
+								Label label18 = new Label(18, row, "");
+								sheet.addCell(label18);
+
+								Label label19 = new Label(19, row, "");
+								sheet.addCell(label19);
+
+								Label label20 = new Label(20, row, jTf_incoterm
+										.getText());
+								sheet.addCell(label20);
+
+								if(textPayment[1].isEmpty()){
+									label21 = new Label(21, row, "000");
+								}
+								else{
+									label21 = new Label(21, row, textPayment[1]);
+								}
+								sheet.addCell(label21);
+
+								Label label22 = new Label(22, row, "");
+								sheet.addCell(label22);
+
+								Label label23 = new Label(23, row, "");
+								sheet.addCell(label23);
+
+								Label label24 = new Label(24, row, "");
+								sheet.addCell(label24);
+
+								Label label25 = new Label(25, row, "");
+								sheet.addCell(label25);
+
+								Label label26 = new Label(26, row, "P");
+								sheet.addCell(label26);
+
+								Label label27 = new Label(27, row, jTf_from
+										.getText());
+								sheet.addCell(label27);
+
+								if (textPayment[0].contains(
+										"ANTICIPATED")) {
+									label28 = new Label(28, row, "32");
+								} else if (textPayment[0].contains(
+										"CHECK")) {
+									label28 = new Label(28, row, "3");
+								} else if (textPayment[0].contains(
+										"SWIFT")) {
+									label28 = new Label(28, row, "4");
+								} else if (textPayment[0].contains(
+										"AGAINST DOCUMENTS")) {
+									label28 = new Label(28, row, "9");
+								} else if (textPayment[0].contains(
+										"LETTER OF CREDIT")) {
+									label28 = new Label(28, row, "37");
+								} else {
+									label28 = new Label(28, row, "0");
+								}
+								sheet.addCell(label28);
+
+								Label label29 = new Label(29, row, "");
+								sheet.addCell(label29);
+							}
+						}
+
+						wwork.write();
+						wwork.close();
+
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("ERROR for write in xls file: " + e);
+						javax.swing.JOptionPane
+								.showMessageDialog(
+										null,
+										"ERROR: Le processus ne peut pas accéder "
+												+ "au fichier car ce fichier est utilisé par "
+												+ "un autre processus.");
+					}
+				} else if (alert == JOptionPane.NO_OPTION) {
+				}
+			}
+		});
+
+		jTf_date.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField1ActionPerformed(evt);
 			}
 
 			private void jTextField1ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.date = jTextField1.getText();
+				Window.date = jTf_date.getText();
 			}
 		});
 
-		jTextField2.addActionListener(new java.awt.event.ActionListener() {
+		jTf_from.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField2ActionPerformed(evt);
 			}
 
 			private void jTextField2ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.from = jTextField2.getText();
+				Window.from = jTf_from.getText();
 			}
 		});
 
-		jTextField3.addActionListener(new java.awt.event.ActionListener() {
+		jTf_to.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField3ActionPerformed(evt);
 			}
 
 			private void jTextField3ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.to = jTextField3.getText();
+				Window.to = jTf_to.getText();
 			}
 		});
 
-		jTextField8.addActionListener(new java.awt.event.ActionListener() {
+		jTf_object.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField8ActionPerformed(evt);
 			}
 
 			private void jTextField8ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.object = jTextField8.getText();
+				Window.object = jTf_object.getText();
 			}
 		});
 
-		jTextField10.addActionListener(new java.awt.event.ActionListener() {
+		jTf_payment.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField10ActionPerformed(evt);
 			}
 
 			private void jTextField10ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.payment = jTextField10.getText();
+				Window.payment = jTf_payment.getText();
 			}
 		});
 
-		jTextField11.addActionListener(new java.awt.event.ActionListener() {
+		jTf_incoterm.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField11ActionPerformed(evt);
 			}
 
 			private void jTextField11ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.incoterm = jTextField11.getText();
+				Window.incoterm = jTf_incoterm.getText();
 			}
 		});
 
-		jTextField12.addActionListener(new java.awt.event.ActionListener() {
+		jTf_firstName.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField12ActionPerformed(evt);
 			}
 
 			private void jTextField12ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.salesman = jTextField12.getText();
+				Window.salesman = jTf_firstName.getText();
 			}
 		});
 
-		jTextField13.addActionListener(new java.awt.event.ActionListener() {
+		jTf_tel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField13ActionPerformed(evt);
 			}
 
 			private void jTextField13ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.gsm = jTextField13.getText();
+				Window.gsm = jTf_tel.getText();
 			}
 		});
 
-		jTextField14.addActionListener(new java.awt.event.ActionListener() {
+		jTf_lastName.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField14ActionPerformed(evt);
 			}
 
 			private void jTextField14ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.tel = jTextField14.getText();
+				Window.tel = jTf_lastName.getText();
 			}
 		});
 
-		jTextField15.addActionListener(new java.awt.event.ActionListener() {
+		jTf_fax.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField15ActionPerformed(evt);
 			}
 
 			private void jTextField15ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.fax = jTextField15.getText();
+				Window.fax = jTf_fax.getText();
 			}
 		});
 
-		jTextField16.addActionListener(new java.awt.event.ActionListener() {
+		jTf_mail.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField16ActionPerformed(evt);
 			}
 
 			private void jTextField16ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.email = jTextField16.getText();
+				Window.email = jTf_mail.getText();
 			}
 		});
 
-		jTextField17.addActionListener(new java.awt.event.ActionListener() {
+		jTf_ref.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField17ActionPerformed(evt);
 			}
 
 			private void jTextField17ActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				Window.referencequot = jTextField17.getText();
+				Window.referencequot = jTf_ref.getText();
 			}
 		});
 	}
@@ -1332,7 +1873,7 @@ public class PdfScreen extends JDialog {
 			throws DocumentException, IOException {
 
 		try {
-			System.out.println(jTextField9.getText());
+			System.out.println(jTf_recName.getText());
 			JFileChooser chooser = new JFileChooser(Window.parents) {
 
 				private static final long serialVersionUID = 1L;
@@ -1430,7 +1971,7 @@ public class PdfScreen extends JDialog {
 				canvas.beginText(); // BT
 				canvas.moveText(280, 39); // 36 788 Td
 				canvas.setFontAndSize(BaseFont.createFont(), 8); // /F1 12 Tf
-				canvas.showText("Page 1 of " + (reader.getNumberOfPages() + 1)); 
+				canvas.showText("Page 1 of " + (reader.getNumberOfPages() + 1));
 				canvas.endText(); // ET
 				canvas.restoreState();
 
@@ -1464,7 +2005,7 @@ public class PdfScreen extends JDialog {
 				canvas.moveText(59, 638); // 36 788 Td
 				canvas.setFontAndSize(BaseFont.createFont(), 8);
 				canvas.showText(Window.companypostcode + " "
-						+ Window.companytown + " - " + Window.companycountry); 
+						+ Window.companytown + " - " + Window.companycountry);
 				canvas.endText(); // ET
 				canvas.restoreState();
 
@@ -1805,7 +2346,8 @@ public class PdfScreen extends JDialog {
 					if (!Window.object.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(59, 588);
+						//canvas.moveText(59, 588);
+						canvas.moveText(59, 535);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Soggetto : ");
 						canvas.endText();
@@ -1813,7 +2355,8 @@ public class PdfScreen extends JDialog {
 
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(113, 588);
+						//canvas.moveText(113, 588);
+						canvas.moveText(113, 535);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.object);
 						canvas.endText();
@@ -1823,7 +2366,7 @@ public class PdfScreen extends JDialog {
 					if (!Window.payment.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(59, 341);
+						canvas.moveText(59, 311);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Pagamento: " + Window.payment);
 						canvas.endText();
@@ -1832,7 +2375,7 @@ public class PdfScreen extends JDialog {
 
 					canvas.saveState();
 					canvas.beginText();
-					canvas.moveText(59, 304);
+					canvas.moveText(59, 274);
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText("- Termini di consegna: 3/4 settimane dalla data  ricezione ordine");
 					canvas.endText();
@@ -1840,7 +2383,7 @@ public class PdfScreen extends JDialog {
 
 					canvas.saveState();
 					canvas.beginText();
-					canvas.moveText(59, 291);
+					canvas.moveText(59, 261);
 					canvas.setFontAndSize(BaseFont.createFont(), 10);
 					canvas.showText("- Validità dell'offerta: 2 mesi");
 					canvas.endText();
@@ -1850,7 +2393,7 @@ public class PdfScreen extends JDialog {
 					if (!Window.incoterm.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(59, 328);
+						canvas.moveText(59, 298);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Incoterm: " + Window.incoterm);
 						canvas.endText();
@@ -2040,8 +2583,7 @@ public class PdfScreen extends JDialog {
 
 				if (Window.locale.toString().equals("en")) {
 					/* MR OU MS + RECIPIENT NAME */
-					if (jCheckBox2.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_Mr.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
@@ -2050,8 +2592,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox2.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_Mr.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
@@ -2060,8 +2601,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox1.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_Mrs.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
@@ -2070,8 +2610,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox1.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_Mrs.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
@@ -2080,8 +2619,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox6.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_no.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
@@ -2090,8 +2628,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox6.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_no.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
 						canvas.moveText(84, 539);
@@ -2102,61 +2639,55 @@ public class PdfScreen extends JDialog {
 					}
 				} else if (Window.locale.toString().equals("it")) {
 					/* MR OU MS + RECIPIENT NAME */
-					if (jCheckBox2.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_Mr.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(130, 539);
+						canvas.moveText(130, 493);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Mr,");
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox2.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_Mr.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(130, 539);
+						canvas.moveText(130, 493);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Mr " + Window.recipientname + ",");
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox1.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_Mrs.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(130, 539);
+						canvas.moveText(130, 493);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Ms,");
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox1.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_Mrs.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(130, 539);
+						canvas.moveText(130, 493);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText("Ms " + Window.recipientname + ",");
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox6.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_no.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(130, 539);
+						canvas.moveText(130, 493);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(",");
 						canvas.endText();
 						canvas.restoreState();
 					}
-					if (jCheckBox6.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_no.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						canvas.moveText(130, 539);
+						canvas.moveText(130, 493);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.recipientname + ",");
 						canvas.endText();
@@ -2164,8 +2695,7 @@ public class PdfScreen extends JDialog {
 					}
 				} else if (Window.locale.toString().equals("fr")) {
 					/* MR OU MS + RECIPIENT NAME */
-					if (jCheckBox2.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_Mr.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState(); // q
 						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
@@ -2176,8 +2706,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText(); // ET
 						canvas.restoreState();
 					}
-					if (jCheckBox2.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_Mr.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState(); // q
 						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
@@ -2189,8 +2718,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText(); // ET
 						canvas.restoreState();
 					}
-					if (jCheckBox1.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_Mrs.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState(); // q
 						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
@@ -2201,8 +2729,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText(); // ET
 						canvas.restoreState();
 					}
-					if (jCheckBox1.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_Mrs.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState(); // q
 						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
@@ -2214,8 +2741,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText(); // ET
 						canvas.restoreState();
 					}
-					if (jCheckBox6.isSelected()
-							&& Window.recipientname.isEmpty()) {
+					if (jCb_no.isSelected() && Window.recipientname.isEmpty()) {
 						canvas.saveState(); // q
 						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
@@ -2226,8 +2752,7 @@ public class PdfScreen extends JDialog {
 						canvas.endText(); // ET
 						canvas.restoreState();
 					}
-					if (jCheckBox6.isSelected()
-							&& !Window.recipientname.isEmpty()) {
+					if (jCb_no.isSelected() && !Window.recipientname.isEmpty()) {
 						canvas.saveState(); // q
 						canvas.beginText(); // BT
 						canvas.moveText(84, 539);
@@ -3038,8 +3563,8 @@ public class PdfScreen extends JDialog {
 		cell.addElement(table2);
 		table.addCell(cell);
 
-		if (!jTextArea1.getText().contentEquals("")) {
-			cell = new PdfPCell(new Phrase("*NB:\n\n" + jTextArea1.getText(),
+		if (!jTa_comment.getText().contentEquals("")) {
+			cell = new PdfPCell(new Phrase("*NB:\n\n" + jTa_comment.getText(),
 					new Font(FontFamily.HELVETICA, 10, Font.NORMAL)));
 			cell.setColspan(6);
 			cell.setFixedHeight(80f);

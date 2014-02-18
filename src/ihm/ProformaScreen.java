@@ -122,6 +122,7 @@ public class ProformaScreen extends javax.swing.JDialog {
 			jLabel8.setText((String)Window.res.getObject("lb_customer"));
 			jLabel8.setBounds(30, 80, 90, 20);
 			jTextField8.setBounds(110, 80, 200, 20);
+			Window.customer = Window.to;
 			jTextField8.setText(Window.customer);
 	        
 			jCheckBox1.setText((String)Window.res.getObject("cb_PdfFormat"));

@@ -124,8 +124,7 @@ public class GUIHelper {
 				"images/icons/ic_delete.png")); // Delete drawable
 		JMenuItem menuItemChangeSize = new JMenuItem(new ImageIcon(
 				"images/icons/ic_resize.png")); // Change size
-		JMenuItem menuItemPrint = new JMenuItem(new ImageIcon(
-				"images/icons/ic_print.png"));
+		
 		JMenuItem menuItem13 = new JMenuItem(new ImageIcon(
 				"images/icons/ic_save.png")); // Save to PNG file
 
@@ -223,8 +222,6 @@ public class GUIHelper {
 					.getObject("menuitem_delete"));
 			menuItemChangeSize.setText((String) Window.res
 					.getObject("menuitem_changesize"));
-			menuItemPrint.setText((String) Window.res
-					.getObject("menuitem_print"));
 			menuItem13.setText((String) Window.res.getObject("menuitem_save"));
 
 			/* Texte Menu 2 */
@@ -309,8 +306,6 @@ public class GUIHelper {
 					.getObject("menuitem_delete"));
 			menuItemChangeSize.setText((String) Window.res
 					.getObject("menuitem_changesize"));
-			menuItemPrint.setText((String) Window.res
-					.getObject("menuitem_print"));
 			menuItem13.setText((String) Window.res.getObject("menuitem_save"));
 
 			/* Texte Menu 2 */
@@ -395,8 +390,6 @@ public class GUIHelper {
 					.getObject("menuitem_delete"));
 			menuItemChangeSize.setText((String) Window.res
 					.getObject("menuitem_changesize"));
-			menuItemPrint.setText((String) Window.res
-					.getObject("menuitem_print"));
 			menuItem13.setText((String) Window.res.getObject("menuitem_save"));
 
 			/* Texte Menu 2 */
@@ -472,7 +465,6 @@ public class GUIHelper {
 
 		Menu1.add(menuItemDel);
 		Menu1.add(menuItemChangeSize);
-		Menu1.add(menuItemPrint);
 		Menu1.add(menuItem13);
 
 		Menu3.add(menuItem31);
@@ -602,12 +594,6 @@ public class GUIHelper {
 			}
 		});
 
-		menuItemPrint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "En construction...");
-			}
-		});
-
 		menuItem13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConstructScreen.saveAndPrintPNG();
@@ -616,7 +602,8 @@ public class GUIHelper {
 
 		menuItem21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ConstructScreen.addText("EoL");
+				//ConstructScreen.addText("EoL");
+				ConstructScreen.addImg("EoL");
 			}
 		});
 
@@ -634,7 +621,8 @@ public class GUIHelper {
 
 		menuItem24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ConstructScreen.addText("RAL");
+				//ConstructScreen.addText("RAL");
+				ConstructScreen.addImg("RAL");
 			}
 		});
 
