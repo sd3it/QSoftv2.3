@@ -78,8 +78,8 @@ public class PdfScreen extends JDialog {
 	ReadNamelist databaseName;
 	File file = null;
 	private static boolean isList = false;
-	String pathnameDatabase = "\\\\SERVEUR\\Alexandre\\DATABASE Clients QSOFT\\BDD-Clients SD3-TEST-PROTECTED.xls";
-	String pathnameDBtestcreate = "\\\\SERVEUR\\Alexandre\\DATABASE Clients QSOFT\\BDD-Clients SD3-TEST-PROTECTED.xls";
+	String pathnameDatabase = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls";
+	String pathnameDBtestcreate = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls";
 	boolean isExist = false;
 
 	private javax.swing.JButton jBt_print;
@@ -393,7 +393,7 @@ public class PdfScreen extends JDialog {
 			jLb_payment.setBounds(10, 260, 70, 20);
 			jTf_payment.setBounds(70, 260, 320, 20);
 			jLb_indicationPayment.setText("[Mode of Payment] + [Nb days]");
-			jLb_indicationPayment.setBounds(400, 260, 120, 20);
+			jLb_indicationPayment.setBounds(400, 260, 180, 20);
 
 			jLb_incoterm.setText((String) Window.res.getObject("lb_incoterm"));
 			jLb_incoterm.setBounds(10, 290, 47, 20);
@@ -494,7 +494,7 @@ public class PdfScreen extends JDialog {
 			jLb_payment.setBounds(10, 260, 70, 20);
 			jTf_payment.setBounds(70, 260, 320, 20);
 			jLb_indicationPayment.setText("[Mode of Payment] + [Nb days]");
-			jLb_indicationPayment.setBounds(400, 260, 120, 20);
+			jLb_indicationPayment.setBounds(400, 260, 180, 20);
 
 			jLb_incoterm.setText((String) Window.res.getObject("lb_incoterm"));
 			jLb_incoterm.setBounds(10, 290, 47, 20);
@@ -579,11 +579,10 @@ public class PdfScreen extends JDialog {
 		// From
 		jLayeredPane1.add(jLb_from, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTf_from.setBounds(350, 75, 180, 20);
-		if (Window.from.isEmpty()){
-			Window.from=Window.companyname;
+		if (Window.from.isEmpty()) {
+			Window.from = Window.companyname;
 			jTf_from.setText(Window.from);
-		}
-		else {
+		} else {
 			jTf_from.setText(Window.from);
 		}
 		jLayeredPane1.add(jTf_from, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -608,8 +607,9 @@ public class PdfScreen extends JDialog {
 						new File("comercialdata.info"), ws).getSheet(0);
 				username = sheetuser.getCell(1, 0).getContents().charAt(0);
 				userlastname = sheetuser.getCell(1, 1).getContents().charAt(0);
-				
-				Window.referencequot=username + "" + userlastname + Window.date.replace("/", "");
+
+				Window.referencequot = username + "" + userlastname
+						+ Window.date.replace("/", "");
 				jTf_ref.setText(Window.referencequot);
 
 			} catch (IndexOutOfBoundsException e1) {
@@ -747,7 +747,8 @@ public class PdfScreen extends JDialog {
 		jLayeredPane1.add(jLb_payment, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		jTf_payment.setText(Window.payment);
 		jLayeredPane1.add(jTf_payment, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jLayeredPane1.add(jLb_indicationPayment, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jLayeredPane1.add(jLb_indicationPayment,
+				javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Incoterm
 		jLayeredPane1.add(jLb_incoterm, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1378,30 +1379,34 @@ public class PdfScreen extends JDialog {
 
 		jBt_addCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				
-				if(jTf_payment.getText().isEmpty()){
+
+				if (jTf_payment.getText().isEmpty()) {
 					jTf_payment.setText("UNKNOW 000");
 				}
-				
-				String[] textPayment = jTf_payment.getText().split(" ");
-			    int lenght = textPayment.length;
-			    
-				String fiche = jTf_recName.getText() + "\n\n"
 
-				+ "<html><u><b><font color=red>Delivery Address:\n"
+				String[] textPayment = jTf_payment.getText().split(" ");
+				int lenght = textPayment.length;
+
+				String fiche = "<html><b><u>Company:</u></b>"
+						+ jTf_to.getText() + "\n"
+						+ "<html><b><u>Recipient name:</u></b> "
+						+ jTf_recName.getText() + "\n\n"
+
+						+ "<html><b><u>Delivery Address:</u></b>\n"
 						+ jTf_delAddress.getText() + "\n"
 						+ jTf_delPostcode.getText() + " "
 						+ jTf_devTown.getText() + "\n\n"
 
-						+ "<html><u><b><font color=red>Invoicing Address:\n"
+						+ "<html><b><u>Invoicing Address:</u></b>\n"
 						+ jTf_invAddress.getText() + "\n"
 						+ jTf_invPostcode.getText() + " "
 						+ jTf_invTown.getText() + "\n\n"
 
-						+ "<html><u><i><b>Payment</b></i></u>:</html>\n"
-						+ "     Mode of payment: " + textPayment[0].toUpperCase() + "\n" 
-						+ "     Term: " + textPayment[1] + " days" + "\n"
-						
+						+ "<html><b><i><u>Payment</u></i></b>:\n"
+						+ "     Mode of payment: "
+						+ textPayment[0].toUpperCase() + "\n" + "     Term: "
+						+ textPayment[1] + " days" + "\n"
+
 						+ "<html><u><i><b>Incoterm</b></i></u>: "
 						+ jTf_incoterm.getText() + "\n\n";
 
@@ -1577,7 +1582,7 @@ public class PdfScreen extends JDialog {
 
 						for (int k = 0; k <= sheet.getRows() - 1; k++) {
 							if (sheet.getCell(0, k).getContents()
-									.equals(jTf_recName.getText())) {
+									.equals(jTf_to.getText())) {
 								isExist = true;
 								javax.swing.JOptionPane.showMessageDialog(null,
 										"This element already exist.");
@@ -1666,10 +1671,9 @@ public class PdfScreen extends JDialog {
 										.getText());
 								sheet.addCell(label20);
 
-								if(textPayment[1].isEmpty()){
+								if (textPayment[1].isEmpty()) {
 									label21 = new Label(21, row, "000");
-								}
-								else{
+								} else {
 									label21 = new Label(21, row, textPayment[1]);
 								}
 								sheet.addCell(label21);
@@ -1693,20 +1697,17 @@ public class PdfScreen extends JDialog {
 										.getText());
 								sheet.addCell(label27);
 
-								if (textPayment[0].contains(
-										"ANTICIPATED")) {
+								if (textPayment[0].contains("ANTICIPATED")) {
 									label28 = new Label(28, row, "32");
-								} else if (textPayment[0].contains(
-										"CHECK")) {
+								} else if (textPayment[0].contains("CHECK")) {
 									label28 = new Label(28, row, "3");
-								} else if (textPayment[0].contains(
-										"SWIFT")) {
+								} else if (textPayment[0].contains("SWIFT")) {
 									label28 = new Label(28, row, "4");
-								} else if (textPayment[0].contains(
-										"AGAINST DOCUMENTS")) {
+								} else if (textPayment[0]
+										.contains("AGAINST DOCUMENTS")) {
 									label28 = new Label(28, row, "9");
-								} else if (textPayment[0].contains(
-										"LETTER OF CREDIT")) {
+								} else if (textPayment[0]
+										.contains("LETTER OF CREDIT")) {
 									label28 = new Label(28, row, "37");
 								} else {
 									label28 = new Label(28, row, "0");
@@ -1716,6 +1717,8 @@ public class PdfScreen extends JDialog {
 								Label label29 = new Label(29, row, "");
 								sheet.addCell(label29);
 							}
+							javax.swing.JOptionPane.showMessageDialog(null,
+							"The prospect was added to the database.");
 						}
 
 						wwork.write();
@@ -1906,8 +1909,13 @@ public class PdfScreen extends JDialog {
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
 					"Fichier PDF (.pdf)", "pdf");
 			chooser.setFileFilter(filter);
+			/*
+			 * chooser.setSelectedFile(new File("quotation " + new
+			 * SimpleDateFormat("dd.MM.yyyy").format(new
+			 * Date())));//Window.referencequot
+			 */
 			chooser.setSelectedFile(new File("quotation "
-					+ new SimpleDateFormat("dd.MM.yyyy").format(new Date())));
+					+ Window.referencequot));
 
 			int returnVal = chooser.showSaveDialog(null);
 
@@ -2346,7 +2354,7 @@ public class PdfScreen extends JDialog {
 					if (!Window.object.isEmpty()) {
 						canvas.saveState();
 						canvas.beginText();
-						//canvas.moveText(59, 588);
+						// canvas.moveText(59, 588);
 						canvas.moveText(59, 535);
 						canvas.setFontAndSize(font, 10);
 						canvas.showText("Soggetto : ");
@@ -2355,7 +2363,7 @@ public class PdfScreen extends JDialog {
 
 						canvas.saveState();
 						canvas.beginText();
-						//canvas.moveText(113, 588);
+						// canvas.moveText(113, 588);
 						canvas.moveText(113, 535);
 						canvas.setFontAndSize(BaseFont.createFont(), 10);
 						canvas.showText(Window.object);

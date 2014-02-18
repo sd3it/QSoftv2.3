@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "QSoftv2.4"
-#define MyAppVersion "QSoft 2.4"
+#define MyAppVersion "QSoft 2.4.2"
 #define MyAppPublisher "SD3"
 #define MyAppURL "http://www.sd3.fr/"
 #define MyAppExeName "QSoftv2.4.exe"
