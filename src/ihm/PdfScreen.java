@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -46,6 +47,7 @@ import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import other.TextFieldLimit;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -226,8 +228,8 @@ public class PdfScreen extends JDialog {
 		jBt_print = new javax.swing.JButton();
 
 		jLb_delAddress = new javax.swing.JLabel();
-		// jTextField18 = new TextFieldLimit(19);
-		jTf_delAddress = new javax.swing.JTextField();
+		// jTf_delAddress = new javax.swing.JTextField();
+		jTf_delAddress = new TextFieldLimit(40);
 
 		jLb_delPostcode = new javax.swing.JLabel();
 		jTf_delPostcode = new javax.swing.JTextField();
@@ -236,8 +238,8 @@ public class PdfScreen extends JDialog {
 		jTf_devTown = new javax.swing.JTextField();
 
 		jLb_invAddress = new javax.swing.JLabel();
-		// jTextField21 = new TextFieldLimit(19);
-		jTf_invAddress = new javax.swing.JTextField();
+		// jTf_invAddress = new javax.swing.JTextField();
+		jTf_invAddress = new TextFieldLimit(40);
 
 		jLb_invPostcode = new javax.swing.JLabel();
 		jTf_invPostcode = new javax.swing.JTextField();
@@ -260,8 +262,6 @@ public class PdfScreen extends JDialog {
 				"images/icons/addCustomer.png"));
 
 		jBt_reset = new JButton();
-
-		System.out.println("->" + Window.salesman);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -363,7 +363,7 @@ public class PdfScreen extends JDialog {
 			jBt_addCustomer.setBounds(480, 510, 39, 39);
 			jBt_addCustomer.setBackground(new java.awt.Color(255, 255, 255));
 
-			jBt_reset.setText("Reset");
+			jBt_reset.setText((String) Window.res.getObject("bt_reset"));
 			jBt_reset.setBounds(465, 580, 73, 23);
 		}
 		/*********************************** ITALIEN **********************************/
@@ -464,8 +464,8 @@ public class PdfScreen extends JDialog {
 			jBt_addCustomer.setBounds(480, 510, 39, 39);
 			jBt_addCustomer.setBackground(new java.awt.Color(255, 255, 255));
 
-			jBt_reset.setText("Reset");
-			jBt_reset.setBounds(465, 580, 73, 23);
+			jBt_reset.setText((String) Window.res.getObject("bt_reset"));
+			jBt_reset.setBounds(465, 580, 85, 23);
 		}
 		/******************************** FRANCAIS *********************************/
 		else if (Window.locale.toString().equals("fr")) {
@@ -565,7 +565,7 @@ public class PdfScreen extends JDialog {
 			jBt_addCustomer.setBounds(480, 510, 39, 39);
 			jBt_addCustomer.setBackground(new java.awt.Color(255, 255, 255));
 
-			jBt_reset.setText("RàZ");
+			jBt_reset.setText((String) Window.res.getObject("bt_reset"));
 			jBt_reset.setBounds(465, 580, 73, 23);
 		}
 
@@ -1334,11 +1334,33 @@ public class PdfScreen extends JDialog {
 				jTf_incoterm.setText(Window.incoterm);
 
 				/* Delivery Address */
+
+				String chaine2 = "";
 				Window.deliveryaddress = databaseName.readDelAddress(listName
-						.getSelectedValue().toString())
-						+ "  "
-						+ databaseName.readDelAddress2(listName
-								.getSelectedValue().toString());
+						.getSelectedValue().toString());
+				// + "  "
+				// + databaseName.readDelAddress2(listName
+				// .getSelectedValue().toString());
+
+				Pattern patern = Pattern.compile(" ");
+				String[] sousChaines = patern.split(Window.deliveryaddress);
+
+				for (int i = 0; i < sousChaines.length; i++) {
+
+					if (!sousChaines[i].equals("")) {
+						String ch2 = sousChaines[i].substring(0, 1)
+								.toUpperCase()
+								+ sousChaines[i].substring(1).toLowerCase();
+
+						ch2 += " ";
+						chaine2 += ch2;
+					}
+
+				}
+
+				chaine2 = chaine2.trim(); // suppression de l'espace final
+				Window.deliveryaddress = chaine2;
+
 				jTf_delAddress.setText(Window.deliveryaddress);
 
 				/* Delivery Postcode */
@@ -1356,10 +1378,29 @@ public class PdfScreen extends JDialog {
 
 				/* Invoicing Address */
 				Window.address = databaseName.readInvAddress(listName
-						.getSelectedValue().toString())
-						+ "  "
-						+ databaseName.readInvAddress2(listName
-								.getSelectedValue().toString());
+						.getSelectedValue().toString());
+				// + "  "
+				// + databaseName.readInvAddress2(listName
+				// .getSelectedValue().toString());
+
+				chaine2 = ""; // reinit chaine2
+				sousChaines = patern.split(Window.address);
+
+				for (int i = 0; i < sousChaines.length; i++) {
+					{
+						if (!sousChaines[i].equals("")) {
+							String ch2 = sousChaines[i].substring(0, 1)
+									.toUpperCase()
+									+ sousChaines[i].substring(1).toLowerCase();
+
+							ch2 += " ";
+							chaine2 += ch2;
+						}
+					}
+				}
+
+				chaine2 = chaine2.trim();
+				Window.address = chaine2;
 				jTf_invAddress.setText(Window.address);
 
 				/* Invoicing Postcode */
@@ -1718,7 +1759,7 @@ public class PdfScreen extends JDialog {
 								sheet.addCell(label29);
 							}
 							javax.swing.JOptionPane.showMessageDialog(null,
-							"The prospect was added to the database.");
+									"The prospect was added to the database.");
 						}
 
 						wwork.write();

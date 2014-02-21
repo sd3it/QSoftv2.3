@@ -80,18 +80,18 @@ public class ConstructScreen {
 					if (!Window.reference.get(row).isEmpty()) {
 						/*
 						 * Si colonne reference contient un "/" -> on le
-						 * remplace par un ""
+						 * remplace par un "" et suppression de l'espace final si besoin
 						 */
 						if (Window.reference.get(row).contains("/")) {
 							IDrawable img = new ImgDrawable(Color.BLACK,
 									new Point(px, py), dim, Window.reference
-											.get(row).replace("/", ""),
+											.get(row).replace("/", "").trim(),
 									Window.quantity.get(row));
 							jc.addDrawable(img);
 						} else { // Sinon Ok
 							IDrawable img = new ImgDrawable(Color.BLACK,
 									new Point(px, py), dim,
-									Window.reference.get(row),
+									Window.reference.get(row).trim(),
 									Window.quantity.get(row));
 							jc.addDrawable(img);
 						}
