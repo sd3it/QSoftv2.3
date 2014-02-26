@@ -80,10 +80,10 @@ public class PdfScreen extends JDialog {
 	ReadNamelist databaseName;
 	File file = null;
 	private static boolean isList = false;
-	String pathnameDatabase = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls";
-	String pathnameDBtestcreate = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls";
-	//String pathnameDatabase = "./DATABASE Clients QSOFT\\BDD-Clients SD3 Italie.xls";
-	//String pathnameDBtestcreate = "./DATABASE Clients QSOFT\\BDD-Clients SD3 Italie.xls";
+	/*String pathnameDatabase = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls"*/;
+	/*String pathnameDBtestcreate = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls"*/;
+	String pathnameDatabase = "Database";
+	String pathnameDBtestcreate = "Database";
 	boolean isExist = false;
 
 	private javax.swing.JButton jBt_print;
@@ -1088,30 +1088,37 @@ public class PdfScreen extends JDialog {
 
 		/* Ouverture de fichier de bdd client */
 		try {
+			// Recup pathname db
+			WorkbookSettings ws1 = new WorkbookSettings();
+			ws1.setSuppressWarnings(true);
+			Sheet sheetdb = Workbook.getWorkbook(
+					new File("dbdata.info"), ws1).getSheet(0);
+			pathnameDatabase = sheetdb.getCell(0, 0).getContents();
+			
 			WorkbookSettings ws = new WorkbookSettings();
 			ws.setSuppressWarnings(true);
 			Sheet sheet = Workbook.getWorkbook(new File(pathnameDatabase), ws)
 					.getSheet(0);
-
+			
 			databaseName = new ReadNamelist(sheet);
 
 			if (databaseName.isNameList(sheet)) {
 				file = new File(pathnameDatabase);
 				ArrayList<String> productslist = databaseName
 						.readDatabase(sheet);
-
+/*
 				String name = file.getName();
 				WritableWorkbook workbook1 = Workbook.createWorkbook(new File(
-						"filename.info"));
+						"dbdata.info"));
 				WritableSheet sheet1 = workbook1.createSheet(
 						"Premier classeur", 0);
 				workbook1.setProtected(true);
 				sheet1.setProtected(true);
-				Label label = new Label(0, 0, file.getName());
+				Label label = new Label(0, 0, file.getAbsolutePath());//file.getParent()+file.getName()
 				sheet1.addCell(label);
 				workbook1.write();
 				workbook1.close();
-
+*/
 				jTf_search.setText("");
 				jTf_search.setEnabled(true);
 
@@ -1144,7 +1151,7 @@ public class PdfScreen extends JDialog {
 							}
 						}
 					};
-
+					
 					chooser.setAcceptAllFileFilterUsed(false);
 
 					FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -1160,6 +1167,7 @@ public class PdfScreen extends JDialog {
 								chooser.getSelectedFile(), ws).getSheet(0);
 
 						databaseName = new ReadNamelist(sheet);
+						
 
 						if (databaseName.isNameList(sheet)) {
 							file = chooser.getSelectedFile();
@@ -1168,15 +1176,17 @@ public class PdfScreen extends JDialog {
 
 							String name = file.getName();
 							WritableWorkbook workbook1 = Workbook
-									.createWorkbook(new File("filename.info"));
+									.createWorkbook(new File("dbdata.info"));
 							WritableSheet sheet1 = workbook1.createSheet(
 									"Premier classeur", 0);
 							workbook1.setProtected(true);
 							sheet1.setProtected(true);
-							Label label = new Label(0, 0, file.getName());
+							Label label = new Label(0, 0, file.getAbsolutePath());//file.getName()
 							sheet1.addCell(label);
 							workbook1.write();
 							workbook1.close();
+
+							System.out.println("db: "+ parents+file.getName() );
 
 							jTf_search.setEnabled(true);
 							jTf_search.setText("");
@@ -1420,8 +1430,29 @@ public class PdfScreen extends JDialog {
 			}
 		});
 
+		/* Add prospect */
 		jBt_addCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				
+				// Recup pathname db
+				WorkbookSettings ws1 = new WorkbookSettings();
+				ws1.setSuppressWarnings(true);
+				Sheet sheetdb;
+				try {
+					sheetdb = Workbook.getWorkbook(
+							new File("dbdata.info"), ws1).getSheet(0);
+					pathnameDBtestcreate = sheetdb.getCell(0, 0).getContents();
+				} catch (IndexOutOfBoundsException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (BiffException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 
 				if (jTf_payment.getText().isEmpty()) {
 					jTf_payment.setText("UNKNOW 000");

@@ -220,15 +220,16 @@ public class ConstructScreen {
 	 * Méthode d'ajout d'un composant avec choix de la taille de l'image
 	 */
 	public static void addImgComponant(String name, String quantity) {
-		if (FenetreAjoutComposant.getStyle() == 30) {
-			IDrawable img3 = new ImgDrawable3(Color.BLACK, new Point(670, 170),
-					new Dimension(30, 30), name, quantity);
-			jc.addDrawable(img3);
-		} else if (FenetreAjoutComposant.getStyle() == 100) {
+		if (FenetreAjoutComposant.getStyle() == 100) {
 			IDrawable img3 = new ImgDrawable(Color.BLACK, new Point(670, 170),
 					new Dimension(100, 100), name, quantity);
 			jc.addDrawable(img3);
+		} else if (FenetreAjoutComposant.getStyle() == 30) {
+			IDrawable img3 = new ImgDrawable3(Color.BLACK, new Point(670, 170),
+					new Dimension(30, 30), name, quantity);
+			jc.addDrawable(img3);
 		}
+		FenetreAjoutComposant.setStyle(100);
 	}
 
 	/**

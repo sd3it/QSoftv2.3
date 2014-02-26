@@ -273,6 +273,7 @@ public class ComercialDataScreen extends JDialog {
 			workbook.close();
 			
 			System.out.println("-> Modification de " + f );
+			//System.out.println("-> db: " + sheet.getCell(1,5).getContents() );
 		
 			dispose();
 		}
