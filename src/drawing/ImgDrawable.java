@@ -20,8 +20,8 @@ import javax.imageio.ImageIO;
  * @author KoA
  * @version 0.1
  * 
- *          ImgDrawable : classe qui herite de FormDrawableBis pour dessiner une
- *          image
+ *          ImgDrawable : classe qui herite de FormDrawable2 pour dessiner une
+ *          image avec texte en dessous
  */
 
 public class ImgDrawable extends FormDrawable2 {

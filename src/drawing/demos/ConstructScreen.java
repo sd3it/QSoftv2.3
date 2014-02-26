@@ -33,6 +33,7 @@ import drawing.GUIHelper;
 import drawing.IDrawable;
 import drawing.ImgDrawable;
 import drawing.ImgDrawable3;
+import drawing.ImgDrawable4;
 import drawing.JCanvas;
 import drawing.LineDrawable1;
 import drawing.LineDrawable2;
@@ -148,6 +149,9 @@ public class ConstructScreen {
 		IDrawable l1 = new LineDrawable1(c, new Point(
 				NonOverlapMoveAdapter.getEnd()), new Point(
 				NonOverlapMoveAdapter.getStart()), new Dimension(8, 8));
+		/*IDrawable l1 = new LineDrawable1(c, new Point(
+				100,60), new Point(
+				60,60), new Dimension(8, 8));*/
 		jc.addDrawable(l1);
 	}
 
@@ -202,7 +206,16 @@ public class ConstructScreen {
 				new Dimension(200, 200), name, "1");
 		jc.addDrawable(img3);
 	}
-
+	
+	/**
+	 * Méthode d'ajout d'une image sans texte
+	 */
+	public static void addImgNoNamed(String name) {
+		IDrawable img4 = new ImgDrawable4(Color.BLACK, new Point(200, 250),
+				new Dimension(200, 200), name, "1");
+		jc.addDrawable(img4);
+	}
+	
 	/**
 	 * Méthode d'ajout d'un composant avec choix de la taille de l'image
 	 */

@@ -32,10 +32,6 @@ import drawing.demos.ConstructScreen;
 
 public class GUIHelper {
 
-	/*
-	 * State of isStateLine : - 0 : no line - 1 : pleine - 2 : pointille
-	 */
-
 	protected static int stateLine = 0;
 	protected static int colorLine = 0;
 	protected static boolean stateDelete = false;
@@ -124,48 +120,75 @@ public class GUIHelper {
 				"images/icons/ic_delete.png")); // Delete drawable
 		JMenuItem menuItemChangeSize = new JMenuItem(new ImageIcon(
 				"images/icons/ic_resize.png")); // Change size
-		
+
 		JMenuItem menuItem13 = new JMenuItem(new ImageIcon(
 				"images/icons/ic_save.png")); // Save to PNG file
 
-		JMenu Menu111 = new JMenu(); // Ligne Pleine
+		JMenu Menu111 = new JMenu(); // BLACK
 		JMenuItem menuItem1111 = new JMenuItem(new ImageIcon(
-				"images/color/red.gif"));
+				"images/icons/lines/pleinSmallHb.png"));
 		JMenuItem menuItem1112 = new JMenuItem(new ImageIcon(
-				"images/color/green.gif"));
+				"images/icons/lines/pleinLargeHb.png"));
 		JMenuItem menuItem1113 = new JMenuItem(new ImageIcon(
-				"images/color/blue.gif"));
+				"images/icons/lines/pleinSmallVb.png"));
 		JMenuItem menuItem1114 = new JMenuItem(new ImageIcon(
-				"images/color/black.gif"));
+				"images/icons/lines/pleinLargeVb.png"));
+		JMenuItem menuItem1115 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointSmallHb.png"));
+		JMenuItem menuItem1116 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointLargeHb.png"));
+		JMenuItem menuItem1117 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointSmallVb.png"));
+		JMenuItem menuItem1118 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointLargeVb.png"));
+		JMenuItem menuItem1119 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowRb.png"));
+		JMenuItem menuItem11110 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowLb.png"));
+		JMenuItem menuItem11111 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowUb.png"));
+		JMenuItem menuItem11112 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowDb.png"));
 
-		JMenu Menu112 = new JMenu(); // Ligne Pointille
+		JMenu Menu112 = new JMenu(); // RED
 		JMenuItem menuItem1121 = new JMenuItem(new ImageIcon(
-				"images/color/red.gif"));
+				"images/icons/lines/pleinSmallHr.png"));
 		JMenuItem menuItem1122 = new JMenuItem(new ImageIcon(
-				"images/color/green.gif"));
+				"images/icons/lines/pleinLargeHr.png"));
 		JMenuItem menuItem1123 = new JMenuItem(new ImageIcon(
-				"images/color/blue.gif"));
+				"images/icons/lines/pleinSmallVr.png"));
 		JMenuItem menuItem1124 = new JMenuItem(new ImageIcon(
-				"images/color/black.gif"));
+				"images/icons/lines/pleinLargeVr.png"));
+		JMenuItem menuItem1125 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointSmallHr.png"));
+		JMenuItem menuItem1126 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointLargeHr.png"));
+		JMenuItem menuItem1127 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointSmallVr.png"));
+		JMenuItem menuItem1128 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/pointLargeVr.png"));
+		JMenuItem menuItem1129 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowRr.png"));
+		JMenuItem menuItem11210 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowLr.png"));
+		JMenuItem menuItem11211 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowUr.png"));
+		JMenuItem menuItem11212 = new JMenuItem(new ImageIcon(
+				"images/icons/lines/arrowDr.png"));
 
-		/*
-		 * JMenu Menu113 = new JMenu(); // Ligne Fléché JMenuItem menuItem1131 =
-		 * new JMenuItem(new ImageIcon( "images/color/red.gif")); JMenuItem
-		 * menuItem1132 = new JMenuItem(new ImageIcon(
-		 * "images/color/green.gif")); JMenuItem menuItem1133 = new
-		 * JMenuItem(new ImageIcon( "images/color/blue.gif")); JMenuItem
-		 * menuItem1134 = new JMenuItem(new ImageIcon(
-		 * "images/color/black.gif"));
-		 */
 		/* Menu 2 */
 		JMenu Menu2 = new JMenu(); // menu "Add Elements"
 		JMenuItem menuItem21 = new JMenuItem(); // "EoL"
 		JMenuItem menuItem22 = new JMenuItem(); // "+"
 		JMenuItem menuItem23 = new JMenuItem(); // "-"
 		JMenuItem menuItem24 = new JMenuItem(); // "RAL"
+		JMenuItem menuItem25 = new JMenuItem(); // Reflector
+		JMenuItem menuItem26 = new JMenuItem(); // PC
+		JMenuItem menuItem27 = new JMenuItem(); // Printer
+		JMenuItem menuItem28 = new JMenuItem(); // Radio
 
 		/* Menu 3 */
-		JMenu Menu3 = new JMenu(); // ss-menu "Add Synoptique"
+		JMenu Menu3 = new JMenu(); // ss-menu "Add Synoptic"
 		final JMenuItem menuItem31 = new JMenuItem(); // "ALPHA 2"
 		final JMenuItem menuItem32 = new JMenuItem(); // "ALPHA 4/8/12"
 		final JMenuItem menuItem33 = new JMenuItem(); // "ALPHA 16/248"
@@ -178,7 +201,7 @@ public class GUIHelper {
 		final JMenuItem menuItem310 = new JMenuItem(); // "WIRELESS SYSTEM"
 		final JMenuItem menuItem311 = new JMenuItem(); // "DFA05"
 		final JMenuItem menuItem312 = new JMenuItem(); // "DLF"
-		final JMenuItem menuItem313 = new JMenuItem(); // "EX Adressable Interface"
+		final JMenuItem menuItem313 = new JMenuItem(); // "EX Addressable Interface"
 		final JMenuItem menuItem314 = new JMenuItem(); // "EX Gas Detection"
 		final JMenuItem menuItem315 = new JMenuItem(); // "Heat Cable"
 		final JMenuItem menuItem316 = new JMenuItem(); // "Monitoring Software"
@@ -196,27 +219,15 @@ public class GUIHelper {
 			menuItem11.setText((String) Window.res
 					.getObject("menuitem_addtext"));
 			Menu11.setText((String) Window.res.getObject("menu_addline"));
-			Menu111.setText((String) Window.res.getObject("menu_linepleine"));
-			menuItem1111.setText((String) Window.res.getObject("menuitem_red"));
-			menuItem1112.setText((String) Window.res
-					.getObject("menuitem_green"));
-			menuItem1113
-					.setText((String) Window.res.getObject("menuitem_blue"));
-			menuItem1114.setText((String) Window.res
-					.getObject("menuitem_black"));
-			Menu112.setText((String) Window.res.getObject("menu_linepointille"));
-			menuItem1121.setText((String) Window.res.getObject("menuitem_red"));
-			menuItem1122.setText((String) Window.res
-					.getObject("menuitem_green"));
-			menuItem1123
-					.setText((String) Window.res.getObject("menuitem_blue"));
-			menuItem1124.setText((String) Window.res
-					.getObject("menuitem_black"));
-			/*
-			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
-			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
-			 * menuItem1134.setText("Black");
-			 */
+			Menu11.setIcon(new ImageIcon("images/icons/ic_line.png"));
+
+			/* Line Black */
+			Menu111.setText((String) Window.res.getObject("menuitem_black"));
+			Menu111.setIcon(new ImageIcon("images/color/black.gif"));
+
+			/* Line Red */
+			Menu112.setText((String) Window.res.getObject("menuitem_red"));
+			Menu112.setIcon(new ImageIcon("images/color/red.gif"));
 
 			menuItemDel.setText((String) Window.res
 					.getObject("menuitem_delete"));
@@ -230,6 +241,13 @@ public class GUIHelper {
 			menuItem22.setText((String) Window.res.getObject("menuitem_plus"));
 			menuItem23.setText((String) Window.res.getObject("menuitem_egal"));
 			menuItem24.setText((String) Window.res.getObject("menuitem_ral"));
+			menuItem25.setText((String) Window.res
+					.getObject("menuitem_reflect"));
+			menuItem26.setText((String) Window.res.getObject("menuitem_pcImg"));
+			menuItem27.setText((String) Window.res
+					.getObject("menuitem_printerImg"));
+			menuItem28.setText((String) Window.res
+					.getObject("menuitem_radioImg"));
 
 			/* Texte Menu 3 */
 			Menu3.setText((String) Window.res.getObject("menu_addSynop"));
@@ -280,27 +298,15 @@ public class GUIHelper {
 			menuItem11.setText((String) Window.res
 					.getObject("menuitem_addtext"));
 			Menu11.setText((String) Window.res.getObject("menu_addline"));
-			Menu111.setText((String) Window.res.getObject("menu_linepleine"));
-			menuItem1111.setText((String) Window.res.getObject("menuitem_red"));
-			menuItem1112.setText((String) Window.res
-					.getObject("menuitem_green"));
-			menuItem1113
-					.setText((String) Window.res.getObject("menuitem_blue"));
-			menuItem1114.setText((String) Window.res
-					.getObject("menuitem_black"));
-			Menu112.setText((String) Window.res.getObject("menu_linepointille"));
-			menuItem1121.setText((String) Window.res.getObject("menuitem_red"));
-			menuItem1122.setText((String) Window.res
-					.getObject("menuitem_green"));
-			menuItem1123
-					.setText((String) Window.res.getObject("menuitem_blue"));
-			menuItem1124.setText((String) Window.res
-					.getObject("menuitem_black"));
-			/*
-			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
-			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
-			 * menuItem1134.setText("Black");
-			 */
+			Menu11.setIcon(new ImageIcon("images/icons/ic_line.png"));
+
+			/* Line Black */
+			Menu111.setText((String) Window.res.getObject("menuitem_black"));
+			Menu111.setIcon(new ImageIcon("images/color/black.gif"));
+
+			/* Line Red */
+			Menu112.setText((String) Window.res.getObject("menuitem_red"));
+			Menu112.setIcon(new ImageIcon("images/color/red.gif"));
 
 			menuItemDel.setText((String) Window.res
 					.getObject("menuitem_delete"));
@@ -314,6 +320,13 @@ public class GUIHelper {
 			menuItem22.setText((String) Window.res.getObject("menuitem_plus"));
 			menuItem23.setText((String) Window.res.getObject("menuitem_egal"));
 			menuItem24.setText((String) Window.res.getObject("menuitem_ral"));
+			menuItem25.setText((String) Window.res
+					.getObject("menuitem_reflect"));
+			menuItem26.setText((String) Window.res.getObject("menuitem_pcImg"));
+			menuItem27.setText((String) Window.res
+					.getObject("menuitem_printerImg"));
+			menuItem28.setText((String) Window.res
+					.getObject("menuitem_radioImg"));
 
 			/* Texte Menu 3 */
 			Menu3.setText((String) Window.res.getObject("menu_addSynop"));
@@ -364,27 +377,15 @@ public class GUIHelper {
 			menuItem11.setText((String) Window.res
 					.getObject("menuitem_addtext"));
 			Menu11.setText((String) Window.res.getObject("menu_addline"));
-			Menu111.setText((String) Window.res.getObject("menu_linepleine"));
-			menuItem1111.setText((String) Window.res.getObject("menuitem_red"));
-			menuItem1112.setText((String) Window.res
-					.getObject("menuitem_green"));
-			menuItem1113
-					.setText((String) Window.res.getObject("menuitem_blue"));
-			menuItem1114.setText((String) Window.res
-					.getObject("menuitem_black"));
-			Menu112.setText((String) Window.res.getObject("menu_linepointille"));
-			menuItem1121.setText((String) Window.res.getObject("menuitem_red"));
-			menuItem1122.setText((String) Window.res
-					.getObject("menuitem_green"));
-			menuItem1123
-					.setText((String) Window.res.getObject("menuitem_blue"));
-			menuItem1124.setText((String) Window.res
-					.getObject("menuitem_black"));
-			/*
-			 * Menu113.setText("---------->"); menuItem1131.setText("Red");
-			 * menuItem1132.setText("Green"); menuItem1133.setText("Blue");
-			 * menuItem1134.setText("Black");
-			 */
+			Menu11.setIcon(new ImageIcon("images/icons/ic_line.png"));
+
+			/* Line Black */
+			Menu111.setText((String) Window.res.getObject("menuitem_black"));
+			Menu111.setIcon(new ImageIcon("images/color/black.gif"));
+
+			/* Line Red */
+			Menu112.setText((String) Window.res.getObject("menuitem_red"));
+			Menu112.setIcon(new ImageIcon("images/color/red.gif"));
 
 			menuItemDel.setText((String) Window.res
 					.getObject("menuitem_delete"));
@@ -398,6 +399,13 @@ public class GUIHelper {
 			menuItem22.setText((String) Window.res.getObject("menuitem_plus"));
 			menuItem23.setText((String) Window.res.getObject("menuitem_egal"));
 			menuItem24.setText((String) Window.res.getObject("menuitem_ral"));
+			menuItem25.setText((String) Window.res
+					.getObject("menuitem_reflect"));
+			menuItem26.setText((String) Window.res.getObject("menuitem_pcImg"));
+			menuItem27.setText((String) Window.res
+					.getObject("menuitem_printerImg"));
+			menuItem28.setText((String) Window.res
+					.getObject("menuitem_radioImg"));
 
 			/* Texte Menu 3 */
 			Menu3.setText((String) Window.res.getObject("menu_addSynop"));
@@ -445,23 +453,35 @@ public class GUIHelper {
 		Menu1.add(menuItem11);
 		Menu1.add(Menu11);
 
-		Menu11.add(Menu111);
+		/* Black line */
+		Menu11.add(Menu111); // BLACK
 		Menu111.add(menuItem1111);
 		Menu111.add(menuItem1112);
 		Menu111.add(menuItem1113);
 		Menu111.add(menuItem1114);
+		Menu111.add(menuItem1115);
+		Menu111.add(menuItem1116);
+		Menu111.add(menuItem1117);
+		Menu111.add(menuItem1118);
+		Menu111.add(menuItem1119);
+		Menu111.add(menuItem11110);
+		Menu111.add(menuItem11111);
+		Menu111.add(menuItem11112);
 
-		Menu11.add(Menu112);
+		/* Red line */
+		Menu11.add(Menu112); // RED
 		Menu112.add(menuItem1121);
 		Menu112.add(menuItem1122);
 		Menu112.add(menuItem1123);
 		Menu112.add(menuItem1124);
-
-		/*
-		 * Menu11.add(Menu113); Menu113.add(menuItem1131);
-		 * Menu113.add(menuItem1132); Menu113.add(menuItem1133);
-		 * Menu113.add(menuItem1134);
-		 */
+		Menu112.add(menuItem1125);
+		Menu112.add(menuItem1126);
+		Menu112.add(menuItem1127);
+		Menu112.add(menuItem1128);
+		Menu112.add(menuItem1129);
+		Menu112.add(menuItem11210);
+		Menu112.add(menuItem11211);
+		Menu112.add(menuItem11212);
 
 		Menu1.add(menuItemDel);
 		Menu1.add(menuItemChangeSize);
@@ -490,6 +510,10 @@ public class GUIHelper {
 		Menu2.add(menuItem22);
 		Menu2.add(menuItem23);
 		Menu2.add(menuItem24);
+		Menu2.add(menuItem25);
+		Menu2.add(menuItem26);
+		Menu2.add(menuItem27);
+		Menu2.add(menuItem28);
 
 		Menu4.add(menuItem41);
 
@@ -505,95 +529,166 @@ public class GUIHelper {
 			}
 		});
 
-		/*********** Couleur pour ligne pleine ****************/
+		/***********
+		 * Couleur pour ligne pleine ****************
+		 * menuItem1111.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent arg0) { setStateLine(1); setColorLine(1);
+		 * } });
+		 * 
+		 * menuItem1112.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent arg0) { setStateLine(1); setColorLine(4);
+		 * } });
+		 */
+		/***********
+		 * Couleur pour ligne pointille ****************
+		 * menuItem1121.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent arg0) { setStateLine(2); setColorLine(1);
+		 * } }); menuItem1122.addActionListener(new ActionListener() { public
+		 * void actionPerformed(ActionEvent arg0) { setStateLine(2);
+		 * setColorLine(4); } });
+		 */
+
+		/* Black Line Listener */
 		menuItem1111.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(1);
-				setColorLine(1);
+				ConstructScreen.addImgNoNamed("line101b");
 			}
 		});
-
 		menuItem1112.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(1);
-				setColorLine(2);
+				ConstructScreen.addImgNoNamed("line102b");
 			}
 		});
-
 		menuItem1113.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(1);
-				setColorLine(3);
+				ConstructScreen.addImgNoNamed("line103b");
 			}
 		});
-
 		menuItem1114.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(1);
-				setColorLine(4);
+				ConstructScreen.addImgNoNamed("line104b");
+			}
+		});
+		menuItem1115.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line105b");
+			}
+		});
+		menuItem1116.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line106b");
+			}
+		});
+		menuItem1117.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line107b");
+			}
+		});
+		menuItem1118.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line108b");
+			}
+		});
+		menuItem1119.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line109b");
+			}
+		});
+		menuItem11110.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line110b");
+			}
+		});
+		menuItem11111.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line111b");
+			}
+		});
+		menuItem11112.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line112b");
 			}
 		});
 
-		/*********** Couleur pour ligne pointille ****************/
+		/* Red Line Listener */
 		menuItem1121.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(2);
-				setColorLine(1);
+				ConstructScreen.addImgNoNamed("line101r");
 			}
 		});
-
 		menuItem1122.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(2);
-				setColorLine(2);
+				ConstructScreen.addImgNoNamed("line102r");
 			}
 		});
-
 		menuItem1123.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(2);
-				setColorLine(3);
+				ConstructScreen.addImgNoNamed("line103r");
 			}
 		});
 		menuItem1124.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStateLine(2);
-				setColorLine(4);
+				ConstructScreen.addImgNoNamed("line104r");
+			}
+		});
+		menuItem1125.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line105r");
+			}
+		});
+		menuItem1126.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line106r");
+			}
+		});
+		menuItem1127.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line107r");
+			}
+		});
+		menuItem1128.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line108r");
+			}
+		});
+		menuItem1129.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line109r");
+			}
+		});
+		menuItem11210.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line110r");
+			}
+		});
+		menuItem11211.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line111r");
+			}
+		});
+		menuItem11212.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("line112r");
 			}
 		});
 
-		/*********** Couleur pour ligne fléché ****************/
-		/*
-		 * menuItem1131.addActionListener(new ActionListener() { public void
-		 * actionPerformed(ActionEvent arg0) { setStateLine(3); setColorLine(1);
-		 * } }); menuItem1132.addActionListener(new ActionListener() { public
-		 * void actionPerformed(ActionEvent arg0) { setStateLine(3);
-		 * setColorLine(2); } }); menuItem1133.addActionListener(new
-		 * ActionListener() { public void actionPerformed(ActionEvent arg0) {
-		 * setStateLine(3); setColorLine(3); } });
-		 * menuItem1134.addActionListener(new ActionListener() { public void
-		 * actionPerformed(ActionEvent arg0) { setStateLine(3); setColorLine(4);
-		 * } });
-		 */
+		/* Delete elem */
 		menuItemDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setStateDelete(true);
 			}
 		});
 
+		/* Change size img */
 		menuItemChangeSize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * Solution mise de coté le 02/12 :
-				 * 
-				 * setStateChangeSize(true);
-				 */
 				FenetreAjoutComposant fac = new FenetreAjoutComposant();
 				fac.setVisible(true);
 
 			}
 		});
 
+		/* Sauvegarde en PNG */
 		menuItem13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConstructScreen.saveAndPrintPNG();
@@ -602,7 +697,6 @@ public class GUIHelper {
 
 		menuItem21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//ConstructScreen.addText("EoL");
 				ConstructScreen.addImg("EoL");
 			}
 		});
@@ -621,8 +715,27 @@ public class GUIHelper {
 
 		menuItem24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//ConstructScreen.addText("RAL");
 				ConstructScreen.addImg("RAL");
+			}
+		});
+		menuItem25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg("Reflector");
+			}
+		});
+		menuItem26.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg("PC");
+			}
+		});
+		menuItem27.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImg("Printer");
+			}
+		});
+		menuItem28.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConstructScreen.addImgNoNamed("Radio");
 			}
 		});
 

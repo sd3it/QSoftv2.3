@@ -267,6 +267,8 @@ public class ComercialDataScreen extends JDialog {
 			sheet.addCell(label); 
 			label = new Label(1, 4, jTextField5.getText()); 
 			sheet.addCell(label); 
+			//label = new Label(1,5, "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls");
+			//sheet.addCell(label);
 			workbook.write(); 
 			workbook.close();
 			

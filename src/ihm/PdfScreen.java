@@ -82,6 +82,8 @@ public class PdfScreen extends JDialog {
 	private static boolean isList = false;
 	String pathnameDatabase = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls";
 	String pathnameDBtestcreate = "\\\\SERVEUR\\commercial\\CONTACTS\\DATABASE Clients QSOFT\\BDD-Clients SD3 Row.xls";
+	//String pathnameDatabase = "./DATABASE Clients QSOFT\\BDD-Clients SD3 Italie.xls";
+	//String pathnameDBtestcreate = "./DATABASE Clients QSOFT\\BDD-Clients SD3 Italie.xls";
 	boolean isExist = false;
 
 	private javax.swing.JButton jBt_print;
